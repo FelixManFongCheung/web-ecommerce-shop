@@ -1,0 +1,17 @@
+.product-page-wrapper {
+    position: relative;
+    display: flex;
+    .image-wrapper {
+        flex-basis: 400px;
+        position: relative;
+        padding-top: 100%;
+        img {
+            position: absolute;
+            top: 0;
+            width: 100%;
+        }
+    }    
+    .product-info {
+        flex-grow: 1;
+    }
+}
