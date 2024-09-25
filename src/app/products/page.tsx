@@ -1,4 +1,4 @@
-import ProductCard from './components/card';
+import ProductCard from '../components/productCard';
 import styles from './products.module.scss';
 import Stripe from 'stripe';
 

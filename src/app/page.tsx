@@ -1,13 +1,9 @@
 import Image from "next/image";
 import styles from "./page.module.scss"
-import { Children } from "react";
 
-export default function Home({children}: {
-  children: React.ReactNode
-}) {
+export default function Home() {
   return (
     <div className={styles.page}>
-      {children}
     </div>
   );
 }

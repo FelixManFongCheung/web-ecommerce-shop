@@ -32,9 +32,9 @@ export default function Page() {
     </div>
     <div className={styles['pagiantion']}>
       {imageArray.map((url,index) => (
-        <button style={index == imageIndex ? {all: 'unset', scale: '1.5', transition: 'scale 0.5s ease', cursor: 'pointer'} : {all: 'unset', cursor: 'pointer'}} onClick={()=> {
+        <button key={index} style={index == imageIndex ? {all: 'unset', scale: '1.5', transition: 'scale 0.5s ease', cursor: 'pointer'} : {all: 'unset', cursor: 'pointer'}} onClick={()=> {
           setImageIndex(index)
-        }} key={url}>{index}</button>
+        }}>{index}</button>
       ))}
     </div>
     </>
