@@ -1,4 +1,4 @@
-import Product from './product/page';
+import ProductCard from './components/card';
 import styles from './products.module.scss';
 
 export default function Products() {
@@ -8,7 +8,7 @@ export default function Products() {
     <div className={styles['perspective-box']}>
       <div className={styles.container}>
         {productUrls.map(url => (
-          <Product key={url} url={url}/>
+          <ProductCard key={url} url={url}/>
         ))}
       </div>
     </div>

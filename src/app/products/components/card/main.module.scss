@@ -1,0 +1,52 @@
+$width: 50vmin;
+$spine-width: 10vmin;
+
+.image-wrapper {
+    display: block;
+    position: relative;
+    height: 100%;
+    width: 100%;
+    transform-style: preserve-3d;
+}
+
+.product,
+.product img, 
+.product-front,
+.product-back {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.product {
+    padding-top: 150%;
+    height: 0;
+    width: 100%;
+
+    img {
+        object-fit: cover;
+        height: 100%;
+        width: 100%;
+    }
+}
+
+.test-front {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    transform: translateZ($spine-width / 4);
+    .product-front {
+        display: block;
+        position: relative;
+    }
+}
+.test-back {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    transform: rotateY(180deg) translateZ($spine-width / 4);
+    .product-back {
+        display: block;
+        position: relative;
+    }
+}
