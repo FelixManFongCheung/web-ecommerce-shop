@@ -1,7 +1,7 @@
 import ProductCard from './components/card';
 import styles from './products.module.scss';
 
-export default function Products() {
+export default function Page() {
   const productUrls: string[] = Array(1).fill('https://placehold.co/200x300');
 
   return (
