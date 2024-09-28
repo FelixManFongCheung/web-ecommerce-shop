@@ -1,4 +1,18 @@
 .header {
     height: 10vh;
     background-color: red;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    
+    .left {
+        position: relative;
+    }
+
+    .right {
+        position: relative;
+        div {
+            display: inline-block;
+        }
+    }
 }

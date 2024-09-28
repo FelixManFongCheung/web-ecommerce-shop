@@ -1,8 +1,12 @@
+'use client'
+
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-// import styles from '../styles/global.scss';
 import Header from './components/header';
 import Footer from './components/footer';
+import MobileNav from './components/mobileNav';
+import '@/styles/index.scss';
+import { AppContextProvider } from "@/context/AppContext";
 
 
 export default function RootLayout({
@@ -10,12 +14,16 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  
   return (
     <html lang="en">
       <body>
-        <Header />
-        {children}
-        <Footer />
+        <AppContextProvider>
+          <MobileNav />
+          <Header />
+          {children}
+          <Footer />
+        </AppContextProvider>
       </body>
     </html>
   );
