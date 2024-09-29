@@ -3,7 +3,7 @@ import styles from "./page.module.scss"
 
 export default function Home() {
   return (
-    <div className={styles['main-content']}>
+    <div className={styles['homepage']}>
     </div>
   );
 }
