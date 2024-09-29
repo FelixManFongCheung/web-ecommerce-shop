@@ -1,5 +1,6 @@
 $height: 50vmin;
 $width: 50vmin;
+$header-height: 10vh;
 
 .perspective-box {
     perspective: 100vmin;
@@ -8,6 +9,7 @@ $width: 50vmin;
     justify-items: center;
     width: $width;
     height: $height;
+    margin-top: $header-height;
 }
 
 .container {

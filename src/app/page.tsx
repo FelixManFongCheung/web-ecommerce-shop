@@ -3,8 +3,7 @@ import styles from "./page.module.scss"
 
 export default function Home() {
   return (
-    <div className={styles.homepage}>
-      dfvndfbvdfkjnvkjdnkjv
+    <div className={styles['main-content']}>
     </div>
   );
 }

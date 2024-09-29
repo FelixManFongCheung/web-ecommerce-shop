@@ -1,3 +1,6 @@
-.homepage {
+$header-height: 10vh;
+
+.main-content {
+    margin-top: $header-height;
     height: 80vh;
 }
