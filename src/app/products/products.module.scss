@@ -5,6 +5,7 @@ $header-height: 10vh;
 .perspective-box {
     perspective: 100vmin;
     display: flex;
+    padding: 10vmin;
     align-items: center;
     justify-items: center;
     width: $width;
