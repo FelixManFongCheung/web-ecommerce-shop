@@ -9,8 +9,8 @@ export default function Header() {
   const {dispatch} = useAppContext();
   return (
     <div className={styles.header}>
-        <div>
-          <button onClick={() => {dispatch({type: ActionTypes.TOGGLE_OPEN, payload: false})}}>vbjdfvhbdfbjv</button>
+        <div className='mobile-only'>
+          <button onClick={() => {dispatch({type: ActionTypes.TOGGLE_OPEN})}}>vbjdfvhbdfbjv</button>
         </div>
         <div className={styles.left}>
             <Link href='/'>home</Link>

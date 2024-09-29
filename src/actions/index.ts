@@ -4,7 +4,6 @@ export enum ActionTypes {
 
 export type ToggleOpenAction = {
     type: ActionTypes.TOGGLE_OPEN,
-    payload: boolean;
 }
 
 export type Actions = ToggleOpenAction;

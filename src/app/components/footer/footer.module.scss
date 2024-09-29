@@ -1,4 +1,9 @@
+$footer-height: 10vh;
+
 .footer {
-    height: 10vh;
+    position: fixed;
+    bottom: 0;
+    height: $footer-height;
+    width: 100%;
     background-color: red;
 }
