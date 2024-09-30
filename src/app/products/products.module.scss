@@ -19,12 +19,18 @@ $header-height: 10vh;
     height: 100%;
     transform-style: preserve-3d;
     animation: rotation 5s linear infinite;
+
+    &:hover {
+        animation: none;
+    }
 }
 
 @keyframes rotation {
     0% {
-        transform: rotateY(0deg)}
+        transform: rotateY(0deg)
+    }
 
     100% {
-        transform: rotateY(1turn)}
+        transform: rotateY(1turn)
+    }
 }
