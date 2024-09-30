@@ -2,7 +2,7 @@
 
 import styles from './products.module.scss';
 import { clsx } from 'clsx'
-import { CSSProperties, useState } from 'react';
+import { useState } from 'react';
 
 export default function Page() {
   const [imageIndex, setImageIndex] = useState(0);
