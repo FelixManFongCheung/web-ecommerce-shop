@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import Stripe from 'stripe';
 import styles from './product.module.scss';
 
@@ -16,6 +17,7 @@ export default async function Page({ params }: { params: { product: string } }) 
       <div className={styles['product-info']}>
         <div className={styles['product-title']}>{product.name}</div>
         <div className={styles['product-desc']}>{product.description}</div>
+        <Link href={{ pathname: '/checkout',query: { product: product.id }}} className={styles["buy-now"]}>buy now</Link>
       </div>
     </div>
   )
