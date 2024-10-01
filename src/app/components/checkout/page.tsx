@@ -37,7 +37,7 @@ export default function Checkout({priceID}: {priceID: string}) {
         buy now
       </button>
       {state.isCheckoutOpen &&
-        <ModalWrapper open={state.isCheckoutOpen}>
+        <ModalWrapper>
           <div id="checkout">
             <EmbeddedCheckoutProvider
               stripe={stripePromise}
