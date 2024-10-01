@@ -8,11 +8,14 @@ import {
   EmbeddedCheckoutProvider,
   EmbeddedCheckout
 } from '@stripe/react-stripe-js';
+import ModalWrapper from '../modalWrapper';
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY as string);
 
 export default function Checkout({priceID}: {priceID: string}) {  
   const {state, dispatch} = useAppContext();  
+  console.log(state);
+  
 
   const fetchClientSecret = useCallback(() => {
     return fetch("/api/embeded-checkout", {
@@ -33,16 +36,18 @@ export default function Checkout({priceID}: {priceID: string}) {
       <button onClick={()=>{dispatch({type: ActionTypes.TOGGLE_CHECKOUT_DIALOG})}}>
         buy now
       </button>
-      {state.isCheckoutOpen && 
+      {state.isCheckoutOpen &&
+        <ModalWrapper open={state.isCheckoutOpen}>
           <div id="checkout">
-          <EmbeddedCheckoutProvider
-            stripe={stripePromise}
-            options={options}
-          >
-            {state.isCheckoutOpen}
-            <EmbeddedCheckout />
-          </EmbeddedCheckoutProvider>
-        </div>
+            <EmbeddedCheckoutProvider
+              stripe={stripePromise}
+              options={options}
+            >
+              {state.isCheckoutOpen}
+              <EmbeddedCheckout />
+            </EmbeddedCheckoutProvider>
+          </div>
+        </ModalWrapper>
       }
     </>
   )

@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { redirect } from 'next/navigation';
+import styles from './return.module.scss'
 
 export default function Return() {
   const [status, setStatus] = useState(null);
@@ -30,7 +31,7 @@ export default function Return() {
 
   if (status === 'complete') {
     return (
-      <section id="success">
+      <section id={styles.success}>
         <p>
           We appreciate your business! A confirmation email will be sent to {customerEmail}.
 
