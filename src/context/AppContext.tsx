@@ -1,6 +1,6 @@
 'use client'
 
-import {createContext, ReactNode, useReducer, useContext} from 'react';
+import {createContext, useReducer, useContext} from 'react';
 import { Actions } from '../actions';
 import { initialState, State, reducer } from '../reducer';
 
@@ -12,11 +12,12 @@ type AppContextType = {
 export const AppContext = createContext<AppContextType | null>(null);
 
 
-type ContextProviderProps = {
-    children: ReactNode,
-}
 
-export function AppContextProvider({children}: ContextProviderProps) {
+export function AppContextProvider({
+  children,
+}: {
+  children: React.ReactNode
+}) {
     const [state, dispatch] = useReducer(reducer, initialState);
 
     return (

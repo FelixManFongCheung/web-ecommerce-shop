@@ -18,4 +18,13 @@ $header-height: 10vh;
     .product-info {
         flex-grow: 1;
     }
+    .buy-now {
+        all: unset;
+        width: 100px;
+        height: 50px;
+        border-radius: 10px;
+        background-color: rgb(255, 197, 7);
+        border: 1px solid #000;
+        cursor: pointer;
+    }
 }
