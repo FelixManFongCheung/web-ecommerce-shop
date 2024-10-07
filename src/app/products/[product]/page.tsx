@@ -1,6 +1,6 @@
 import Stripe from 'stripe';
 import styles from './product.module.scss';
-import Checkout from '@/app/components/checkout/page';
+import Checkout from '@/app/components/checkout';
 
 export default async function Page({ params }: { params: { product: string } }) {
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
@@ -11,6 +11,9 @@ export default async function Page({ params }: { params: { product: string } }) 
   });
 
   const priceID = prices.data[0].id  
+
+  console.log(priceID)
+  console.log(typeof priceID)
   
   return (
     <div className={styles['product-page-wrapper']}>
