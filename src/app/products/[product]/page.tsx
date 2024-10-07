@@ -11,9 +11,6 @@ export default async function Page({ params }: { params: { product: string } }) 
   });
 
   const priceID = prices.data[0].id  
-
-  console.log(priceID)
-  console.log(typeof priceID)
   
   return (
     <div className={styles['product-page-wrapper']}>
