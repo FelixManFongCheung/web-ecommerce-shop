@@ -9,14 +9,18 @@ export default function ProductCard({product}: {product: Stripe.Product}) {
   
 
   return (
-    <Link scroll={true} className={styles['image-wrapper']} href={`/products/${product.id}`}>
-      {imageUrls.map((url, index) => (
-        <div key={index} className={index === 0 ? styles['test-front'] : styles['test-back']}>
-          <div className={clsx(styles.product, index === 0 ? styles['product-front'] : styles['product-back'])}>
-            <img src={url} alt="" />
-          </div>
-        </div>
-      ))}
-    </Link>
+    <div className={styles['perspective-box']}>
+      <div className={styles.container}>
+        <Link scroll={true} className={styles['image-wrapper']} href={`/products/${product.id}`}>
+          {imageUrls.map((url, index) => (
+            <div key={index} className={index === 0 ? styles['test-front'] : styles['test-back']}>
+              <div className={clsx(styles.product, index === 0 ? styles['product-front'] : styles['product-back'])}>
+                <img src={url} alt="" />
+              </div>
+            </div>
+          ))}
+        </Link>
+      </div>
+    </div>
   )
 };

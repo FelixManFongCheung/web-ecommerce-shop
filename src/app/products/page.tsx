@@ -8,12 +8,10 @@ export default async function Page() {
   const productList: Stripe.Product[] = products.data;
     
   return (
-    <div className={styles['perspective-box']}>
-      <div className={styles.container}>
-        {productList.map((product, index) => (
-          <ProductCard key={index} product={product}/>
-        ))}
-      </div>
+    <div className={styles['products-container']}>
+      {productList.map((product, index) => (
+        <ProductCard key={index} product={product}/>
+      ))}
     </div>
   )
 };
