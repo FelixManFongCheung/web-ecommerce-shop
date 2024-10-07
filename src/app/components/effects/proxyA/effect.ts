@@ -33,10 +33,7 @@ export default function effect(canv1: HTMLCanvasElement, canv2: HTMLCanvasElemen
     Point.prototype.draw = function(canvas: CanvasRenderingContext2D){
 
         this.value = charArr[randomInt(0,charArr.length-1)];
-        this.speed = randomFloat(1,5);
-        // console.log(this.x);
-        
-    
+        this.speed = randomFloat(1,5);        
     
         canvas2!.fillStyle = "rgba(255,255,255,0.8)";
         canvas2!.font = fontSize+"px san-serif";
@@ -57,9 +54,7 @@ export default function effect(canv1: HTMLCanvasElement, canv2: HTMLCanvasElemen
     }
     
 
-    for(let i = 0; i < maxColumns ; i++) {      
-        console.log(i*fontSize);
-                  
+    for(let i = 0; i < maxColumns ; i++) {                        
         const pointer = new Point(i*fontSize,randomFloat(-500,0))
         fallingCharArr.push(pointer);
     }
