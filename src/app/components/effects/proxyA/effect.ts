@@ -1,15 +1,15 @@
 export default function effect(canv1: HTMLCanvasElement, canv2: HTMLCanvasElement)
 {
-    let canvas1 = canv1.getContext('2d');
-    let canvas2 = canv2.getContext('2d');
-    let width: number = 50;
-    let height: number = window.innerHeight;
-    // let charArr: string[] = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
-    let charArr: string[] = ['1','0'];
+    const canvas1 = canv1.getContext('2d');
+    const canvas2 = canv2.getContext('2d');
+    const width: number = 50;
+    const height: number = window.innerHeight;
+    // const charArr: string[] = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
+    const charArr: string[] = ['1','0'];
     // maxCharCount = 100;
-    let fallingCharArr: PointType[] = [];
-    let fontSize = 20;
-    let maxColumns = width/fontSize;
+    const fallingCharArr: PointType[] = [];
+    const fontSize = 20;
+    const maxColumns = width/fontSize;
     canv1!.width = canv2!.width = width;
     canv1!.height = canv2!.height = height;
 

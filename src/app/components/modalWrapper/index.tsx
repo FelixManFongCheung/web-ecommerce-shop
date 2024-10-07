@@ -1,5 +1,5 @@
 import styles from './modal.module.scss';
-import { AppContext, useAppContext } from '@/context/AppContext';
+import { useAppContext } from '@/context/AppContext';
 import { ActionTypes } from '@/actions';
 
 export default function ModalWrapper({children}: {children: React.ReactNode}) {
