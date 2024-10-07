@@ -12,7 +12,11 @@ import ModalWrapper from '../modalWrapper';
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY as string);
 
-export default function Checkout({priceID}: {priceID: string}) {    
+type CheckoutType = {
+  priceID: string
+}
+
+export default function Checkout({priceID}: CheckoutType) {    
   const {state, dispatch} = useAppContext();    
 
   const fetchClientSecret = useCallback(() => {
