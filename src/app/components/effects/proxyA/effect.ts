@@ -60,11 +60,11 @@ export default function effect(canv1: HTMLCanvasElement, canv2: HTMLCanvasElemen
     for(let i = 0; i < maxColumns ; i++) {      
         console.log(i*fontSize);
                   
-        let pointer = new Point(i*fontSize,randomFloat(-500,0))
+        const pointer = new Point(i*fontSize,randomFloat(-500,0))
         fallingCharArr.push(pointer);
     }
 
-    let update = function() {
+    const update = function() {
 
         canvas1!.fillStyle = "rgba(255,255,255,0.05)";
         canvas1!.fillRect(0,0,width,height);
