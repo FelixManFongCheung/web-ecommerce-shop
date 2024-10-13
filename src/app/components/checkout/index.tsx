@@ -27,8 +27,8 @@ export default function Checkout({priceID}: CheckoutType) {
       },
       body: JSON.stringify({priceId: priceID})
     })
-      .then((res) => res.json())
-      .then((data) => data.clientSecret)
+    .then((res) => res.json())
+    .then((data) => data.clientSecret)
   }, []);
 
   const options = {fetchClientSecret};

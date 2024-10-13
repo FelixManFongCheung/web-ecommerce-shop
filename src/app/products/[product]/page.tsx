@@ -1,6 +1,7 @@
 import Stripe from 'stripe';
 import styles from './product.module.scss';
 import Checkout from '@/app/components/checkout';
+import ATC from '@/app/components/atc';
 
 export default async function Page({ params }: { params: { product: string } }) {
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
@@ -20,6 +21,7 @@ export default async function Page({ params }: { params: { product: string } }) 
       <div className={styles['product-info']}>
         <div className={styles['product-title']}>{product.name}</div>
         <div className={styles['product-desc']}>{product.description}</div>
+        <ATC product={product}/>
         <Checkout priceID={priceID}/>
       </div>
     </div>
