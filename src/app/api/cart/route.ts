@@ -3,8 +3,9 @@ import { MongoClient } from "mongodb";
 import { NextResponse } from 'next/server';
 import { cookies } from 'next/headers'
 
+const client = new MongoClient(process.env.MONGODB_URI!);
+
 export async function GET(req: Request) {
-    const client = new MongoClient(process.env.MONGODB_URI!);
     try {        
         await client.connect();
         const database = client.db("e-commerce");
@@ -18,8 +19,6 @@ export async function GET(req: Request) {
 }
 
 export async function POST(req: Request) {
-    const client = new MongoClient(process.env.MONGODB_URI!);
-
     try {
         await client.connect();
         const database = client.db("e-commerce");
