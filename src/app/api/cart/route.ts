@@ -1,4 +1,3 @@
-import Stripe from 'stripe';
 import { MongoClient } from "mongodb";
 import { NextResponse } from 'next/server';
 import { cookies } from 'next/headers'
