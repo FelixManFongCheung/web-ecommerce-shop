@@ -5,7 +5,7 @@ import { cookies } from 'next/headers'
 
 const client = new MongoClient(process.env.MONGODB_URI!);
 
-export async function GET(req: Request) {
+export async function GET() {
     try {        
         await client.connect();
         const database = client.db("e-commerce");

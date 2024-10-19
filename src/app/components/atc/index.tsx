@@ -15,7 +15,9 @@ export default function ATC({product}: {product: Stripe.Response<Stripe.Product>
             try {
                 const response = await fetch(`/api/cart/${product.id}`);
                 const {isProductInCart} = await response.json();
-                isProductInCart && setAtcBtn(!atcBtn);
+                if (isProductInCart) {
+                    setAtcBtn(true);
+                }
             } catch (error) {
                 console.error('Failed to fetch cart:', error);
             }
