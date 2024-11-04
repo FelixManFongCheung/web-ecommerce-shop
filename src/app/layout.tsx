@@ -1,7 +1,7 @@
-import Header from './components/header';
-import Footer from './components/footer';
-import MobileNav from './components/mobileNav';
-import Effect from './components/effects/proxyA';
+import Header from '../components/header';
+import Footer from '../components/footer';
+import MobileNav from '../components/mobileNav';
+import Effect from '../components/effects/proxyA';
 import '@/styles/index.scss';
 import { AppContextProvider } from "@/context/AppContext";
 

@@ -1,7 +1,7 @@
 import Stripe from 'stripe';
 import styles from './product.module.scss';
-import Checkout from '@/app/components/checkout';
-import ATC from '@/app/components/atc';
+import Checkout from '@/components/checkout';
+import ATC from '@/components/atc';
 
 export default async function Page({ params }: { params: { product: string } }) {
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);

@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,OAAO,CAAC;EACJ,OAAO,EAAE,KAAK;EACd,QAAQ,EAAC,QAAQ;EACjB,GAAG,EAAC,CAAC;EACL,IAAI,EAAC,CAAC;EACN,OAAO,EAAE,EAAE;CACd",
+    "sources": [
+        "../../src/components/effects/proxyA/effect.module.scss"
+    ],
+    "names": [],
+    "file": "effect.module.css"
+}

@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,QAAQ,CAAC;EACL,OAAO,EAAE,KAAK;CAEjB",
+    "sources": [
+        "../../src/components/atc/atc.module.scss"
+    ],
+    "names": [],
+    "file": "atc.module.css"
+}
