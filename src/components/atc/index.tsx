@@ -1,19 +1,22 @@
 'use client'
 
 import { v7 as uuidv7 } from 'uuid';
-import Stripe from 'stripe';
 import { getCookie } from 'cookies-next';
 import styles from './atc.module.scss';
 import {useState, useEffect} from 'react';
 
-export default function ATC({product}: {product: Stripe.Response<Stripe.Product>}) {    
+interface ATCProp {
+    productId: string;
+}
+
+export default function ATC({productId}: ATCProp) {    
     const cartCookies = getCookie('cart');
     const [atcBtn, setAtcBtn] = useState(false);
   
     useEffect(() => {
         const fetchCart = async () => {
             try {
-                const response = await fetch(`/api/cart/${product.id}`);
+                const response = await fetch(`/api/cart/${productId}`);
                 const {isProductInCart} = await response.json();
                 if (isProductInCart) {
                     setAtcBtn(true);
@@ -24,7 +27,7 @@ export default function ATC({product}: {product: Stripe.Response<Stripe.Product>
         };
 
         fetchCart();
-    }, [product]);
+    }, [productId]);
 
 
     const addToCart = async () => {
@@ -45,7 +48,7 @@ export default function ATC({product}: {product: Stripe.Response<Stripe.Product>
             },
             body: JSON.stringify({ 
                 identifier: identifier, 
-                products: product
+                products: productId
             }), 
         })
     }

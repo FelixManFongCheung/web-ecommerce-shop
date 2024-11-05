@@ -3,6 +3,7 @@
 import styles from './products.module.scss';
 import { clsx } from 'clsx'
 import { useState } from 'react';
+import Image from 'next/image'
 
 export default function Page() {
   const [imageIndex, setImageIndex] = useState(0);
@@ -23,7 +24,7 @@ export default function Page() {
     <>
     <div className={styles['products-page']}>
       {imageArray.map((url) => (
-        <img key={url} src={url} className={styles['image']} alt="" style={{
+        <Image fill key={url} src={url} className={styles['image']} alt="" style={{
           translate: `${imageIndex*-100}%`,
         }} />
       ))}

@@ -14,7 +14,7 @@ export default function Return() {
     const sessionId = urlParams.get('session_id');
 
     fetch(`/api/embeded-checkout?session_id=${sessionId}`, {
-      method: "GET",
+      method: 'GET',
     })
       .then((res) => res.json())
       .then((data) => {

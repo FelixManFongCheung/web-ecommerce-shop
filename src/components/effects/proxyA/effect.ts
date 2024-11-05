@@ -10,7 +10,7 @@ export default function matrix(canvas: HTMLCanvasElement) {
     const fontSize = 15; // Font size for the characters
     const columns = Math.floor(canvas.width / fontSize); // Number of columns for the text
     
-    let drops: number[] = [];
+    const drops: number[] = [];
     for (let x=0; x<columns; x++) {
         drops[x] = 1;
     }    
@@ -50,8 +50,4 @@ export default function matrix(canvas: HTMLCanvasElement) {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
     });
-
-    function randomFloat(min: number, max: number) {
-        return Math.random() * (max-min) + min
-    }
 }

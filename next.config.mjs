@@ -4,6 +4,10 @@ const nextConfig = {
     serverComponentsExternalPackages: ['@tensorflow/tfjs-node'],
   },
 
+  images: {
+    domains: ['files.stripe.com'], // Add any other domains you need here
+  },
+
   webpack: (config, { isServer }) => {
     if (isServer) {
       config.externals.push({

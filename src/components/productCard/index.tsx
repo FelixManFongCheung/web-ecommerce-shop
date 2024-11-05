@@ -2,6 +2,7 @@ import clsx from 'clsx';
 import Link from 'next/link';
 import styles from './card.module.scss';
 import Stripe from 'stripe';
+import Image from 'next/image'
 
 export default function ProductCard({product}: {product: Stripe.Product}) {  
   let imageUrls = product.images;
@@ -15,7 +16,7 @@ export default function ProductCard({product}: {product: Stripe.Product}) {
           {imageUrls.map((url, index) => (
             <div key={index} className={index === 0 ? styles['test-front'] : styles['test-back']}>
               <div className={clsx(styles.product, index === 0 ? styles['product-front'] : styles['product-back'])}>
-                <img src={url} alt="" />
+                <Image fill src={url} alt="" />
               </div>
             </div>
           ))}

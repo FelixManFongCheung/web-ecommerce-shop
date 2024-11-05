@@ -19,17 +19,17 @@ type CheckoutType = {
 export default function Checkout({priceID}: CheckoutType) {    
   const {state, dispatch} = useAppContext();    
 
-  const fetchClientSecret = useCallback(() => {
-    return fetch("/api/embeded-checkout", {
-      method: "POST",
+  const fetchClientSecret = useCallback(async () => {
+    const response = await fetch("/api/embeded-checkout", {
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({priceId: priceID})
     })
-    .then((res) => res.json())
-    .then((data) => data.clientSecret)
-  }, []);
+    const data = await response.json();
+    return data.clientSecret;
+}, [priceID]);
 
   const options = {fetchClientSecret};
 
