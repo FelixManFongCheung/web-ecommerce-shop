@@ -23,7 +23,7 @@ export default function RemoveItem({ cartID, productId, children }: RemoveItemPr
         .single();
 
       if (currentCart?.products) {
-        const updatedProducts = currentCart.products.filter(id => id !== productId);
+        const updatedProducts = currentCart.products.filter((id: string) => id !== productId);
         
         await supabase
           .from('sessions')
