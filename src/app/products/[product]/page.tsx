@@ -4,17 +4,20 @@ import Checkout from '@/components/checkout';
 import ATC from '@/components/atc';
 import Image from 'next/image';
 import { cookies } from 'next/headers';
-import { getCart } from '@/lib/mongodb';
+import { getCart } from '@/app/utils/getCart';
 
 export default async function Page({ params }: { params: { product: string } }) {
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
   const userCookies = cookies().get('cart')?.value;
-  const cartItems: string[] = await getCart(userCookies);
-  
-  let isATC: boolean;
-  if (userCookies && cartItems) {
-    isATC = cartItems.includes(params.product);    
+  let isATC: boolean = false;
+  if (userCookies) {
+    const cartItems = await getCart(userCookies);
+    console.log(cartItems);
+    isATC = cartItems.products?.includes(params.product) || false;
   }
+  console.log(isATC);
+  
+  
   const productResponse = await stripe.products.retrieve(params.product);  
   const product = {
     id: productResponse.id,

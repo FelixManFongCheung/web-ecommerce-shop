@@ -11,19 +11,16 @@ export type Database = {
     Tables: {
       sessions: {
         Row: {
-          cartID: number
-          created_at: string
-          products: Json | null
+          cartID: string
+          products: string[] | null
         }
         Insert: {
-          cartID?: number
-          created_at?: string
-          products?: Json | null
+          cartID: string
+          products?: string[] | null
         }
         Update: {
-          cartID?: number
-          created_at?: string
-          products?: Json | null
+          cartID?: string
+          products?: string[] | null
         }
         Relationships: []
       }
