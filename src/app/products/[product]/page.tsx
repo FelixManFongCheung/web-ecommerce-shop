@@ -3,9 +3,18 @@ import styles from './product.module.scss';
 import Checkout from '@/components/checkout';
 import ATC from '@/components/atc';
 import Image from 'next/image';
+import { cookies } from 'next/headers';
+import { getCart } from '@/lib/mongodb';
 
 export default async function Page({ params }: { params: { product: string } }) {
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
+  const userCookies = cookies().get('cart')?.value;
+  const cartItems: string[] = await getCart(userCookies);
+  
+  let isATC: boolean;
+  if (userCookies && cartItems) {
+    isATC = cartItems.includes(params.product);    
+  }
   const productResponse = await stripe.products.retrieve(params.product);  
   const product = {
     id: productResponse.id,
@@ -30,7 +39,7 @@ export default async function Page({ params }: { params: { product: string } }) 
       <div className={styles['product-info']}>
         <div className={styles['product-title']}>{product.name}</div>
         <div className={styles['product-desc']}>{product.description}</div>
-        <ATC productId={product.id}/>
+        <ATC isATC={isATC} productId={product.id}/>
         <Checkout priceID={priceID}/>
       </div>
     </div>

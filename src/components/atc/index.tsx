@@ -3,38 +3,20 @@
 import { v7 as uuidv7 } from 'uuid';
 import { getCookie } from 'cookies-next';
 import styles from './atc.module.scss';
-import {useState, useEffect} from 'react';
+import {useState} from 'react';
 
 interface ATCProp {
     productId: string;
+    isATC: boolean
 }
 
-export default function ATC({productId}: ATCProp) {    
+export default function ATC({productId, isATC}: ATCProp) {  
+    const [ATCState, setATCState] = useState(isATC)
     const cartCookies = getCookie('cart');
-    const [atcBtn, setAtcBtn] = useState(false);
-  
-    useEffect(() => {
-        const fetchCart = async () => {
-            try {
-                const response = await fetch(`/api/cart/${productId}`);
-                const {isProductInCart} = await response.json();
-                if (isProductInCart) {
-                    setAtcBtn(true);
-                }
-            } catch (error) {
-                console.error('Failed to fetch cart:', error);
-            }
-        };
-
-        fetchCart();
-    }, [productId]);
-
 
     const addToCart = async () => {
         let identifier: string;
-
-        setAtcBtn(!atcBtn);
-
+        setATCState(true);
         if (getCookie('cart')) {
             identifier = cartCookies as string;
         } else {
@@ -53,6 +35,6 @@ export default function ATC({productId}: ATCProp) {
         })
     }
     return (
-        <button disabled={atcBtn ? true : false} className={styles['atc-btn']} onClick={addToCart}>Add to cart</button>
+        <button disabled={ATCState} className={styles['atc-btn']} onClick={addToCart}>Add to cart</button>
     )
 };
