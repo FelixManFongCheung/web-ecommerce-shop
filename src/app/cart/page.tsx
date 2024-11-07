@@ -7,9 +7,11 @@ export default async function Cart() {
   
   return (
     <div>
-      {cartItems.map((item, index) => (
+      {cartItems && cartItems.length > 0 ? 
+      (cartItems.map((item, index) => (
         <div key={index}>{item}</div>
-      ))}
+      ))) : 
+      (<div>empty cart</div>)}
     </div>
   )
 };

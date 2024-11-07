@@ -3,8 +3,7 @@ import { MongoClient } from "mongodb";
 
 export const getCart = async (cookies: string | undefined) => {
     try {        
-        const client = new MongoClient(process.env.MONGODB_URI!);
-        console.log('trying to get');
+        const client = new MongoClient(process.env.MONGODB_URI as string)
         await client.connect();        
         const database = client.db("e-commerce");
         const collection = database.collection("cart");
