@@ -19,8 +19,8 @@ export default function Header() {
             <Link href='/products'>Link 3</Link>
         </div>
         <div className={styles.right}>
-            <div>search</div>
-            <Link href='/cart'>cart</Link>
+          <Link href="/search">search</Link>
+          <Link href='/cart'>cart</Link>
         </div>
     </div>
   )

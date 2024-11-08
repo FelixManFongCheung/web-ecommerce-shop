@@ -3,7 +3,7 @@ import styles from './return.module.scss'
 import { completeOrder, cancelOrder } from '@/app/utils/order';
 
 
-export default async function Return({
+export default async function Page({
   searchParams,
 }: {
   searchParams: { session_id: string }
