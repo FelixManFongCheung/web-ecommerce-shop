@@ -13,7 +13,7 @@ export async function POST(req: Request) {
 
     // Common session parameters
     const baseSessionParams = {
-      ui_mode: 'embedded' as Stripe.Checkout.SessionCreateParams.UiMode,
+      ui_mode: 'embedded' as const, // to satisfy union type 
       line_items: [
         {
           price: priceId,
