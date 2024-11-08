@@ -25,12 +25,7 @@ export async function searchProducts(query: string) {
       return { products: uniqueProducts };
     }
 
-    // If no query, just return active products
-    const products = await stripe.products.search({
-      query: "active:'true'",
-    });
-
-    return { products: products.data };
+    return {};
   } catch (error) {
     console.error('Stripe search error:', error);
     throw new Error('Search failed');

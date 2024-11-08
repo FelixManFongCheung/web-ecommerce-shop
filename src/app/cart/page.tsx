@@ -18,7 +18,7 @@ export default async function Cart() {
 
   if (cartData.products) {
     activeProductsArray = activeProducts.map((product) => product.id);
-    cartDataArray = cartData.products.filter((item) => activeProductsArray.includes(item));
+    cartDataArray = cartData.products.filter((item: string) => activeProductsArray.includes(item));
   }
 
   

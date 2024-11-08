@@ -11,7 +11,6 @@ export default function Page() {
   const [search, setSearch] = useState(searchParams.get('q') || '');
   const [debouncedValue] = useDebounce(search, 500);
   const [products, setProducts] = useState<Stripe.Product[]>([]);
-  const [loading, setLoading] = useState(false);
 
   // Handle input change
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -22,7 +21,6 @@ export default function Page() {
   // Debounced search effect
   useEffect(() => {
     const performSearch = async () => {
-      setLoading(true);
       try {
         // Update URL
         const params = new URLSearchParams(searchParams);
@@ -35,11 +33,9 @@ export default function Page() {
 
         // Use server action directly
         const { products: searchResults } = await searchProducts(debouncedValue);        
-        setProducts(searchResults);
+        setProducts(searchResults || []);
       } catch (error) {
         console.error('Search failed:', error);
-      } finally {
-        setLoading(false);
       }
     };
 
@@ -49,21 +45,20 @@ export default function Page() {
   return (
     <div className={styles.search}>
       <input
+        className={styles['search-input']}
         type="text"
         value={search}
         onChange={handleSearch}
-        placeholder="Search products..."
+        placeholder="Search..."
       />
 
-      {loading && <div>Loading...</div>}
-      
       <div>
-        {products.map((product) => (
+        {products ? (products.map((product) => (
           <div key={product.id}>
             <h3>{product.name}</h3>
             <p>{product.description}</p>
           </div>
-        ))}
+        ))) : (<div></div>)}
       </div>
     </div>
   );
