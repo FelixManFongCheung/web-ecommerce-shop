@@ -1,44 +1,43 @@
-'use client'
-
-import React, { useEffect, useState } from 'react';
 import { redirect } from 'next/navigation';
 import styles from './return.module.scss'
+import { completeOrder, cancelOrder } from '@/app/utils/order';
 
-export default function Return() {
-  const [status, setStatus] = useState(null);
-  const [customerEmail, setCustomerEmail] = useState('');
 
-  useEffect(() => {
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    const sessionId = urlParams.get('session_id');
+export default async function Return({
+  searchParams,
+}: {
+  searchParams: { session_id: string }
+}) {
+  if (!searchParams.session_id) {
+    redirect('/');
+  }  
 
-    fetch(`/api/embeded-checkout?session_id=${sessionId}`, {
-      method: 'GET',
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setStatus(data.status);
-        setCustomerEmail(data.customer_email);
-      });
-  }, []);
+  // Server-side session check
+  const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/embeded-checkout?session_id=${searchParams.session_id}`);
+  const session = await response.json();
 
-  if (status === 'open') {
-    return (
-      redirect('/')
-    )
+  // Handle different session statuses
+  if (session.status === 'open') {
+    redirect('/');
   }
 
-  if (status === 'complete') {
+  if (session.status === 'complete') {
+    // Handle successful payment server-side
+    await completeOrder(searchParams.session_id);
     return (
       <section id={styles.success}>
         <p>
-          We appreciate your business! A confirmation email will be sent to {customerEmail}.
-
+          We appreciate your business! A confirmation email will be sent to {session.customer_email}.
           If you have any questions, please email <a href="mailto:orders@example.com">orders@example.com</a>.
         </p>
       </section>
-    )
+    );
+  }
+
+  if (session.status === 'expired') {
+    // Handle cancelled payment server-side
+    await cancelOrder(searchParams.session_id);
+    redirect('/cart');
   }
 
   return null;

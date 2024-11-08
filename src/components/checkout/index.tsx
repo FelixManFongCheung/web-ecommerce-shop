@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
 import { useAppContext } from '@/context/AppContext';
 import { ActionTypes } from '@/actions';
@@ -18,26 +18,76 @@ type CheckoutType = {
 
 export default function Checkout({priceID}: CheckoutType) {    
   const {state, dispatch} = useAppContext();    
+  const [error, setError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+
+  console.log(stripePromise);
+  
 
   const fetchClientSecret = useCallback(async () => {
-    const response = await fetch("/api/embeded-checkout", {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({priceId: priceID})
-    })
-    const data = await response.json();
-    return data.clientSecret;
+    setError(null);
+    setIsLoading(true);
+    try {
+      if (!priceID) {
+        throw new Error('Price ID is required');
+      }
+
+      const response = await fetch("/api/embeded-checkout", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          priceId: priceID,
+          timestamp: Date.now(),
+          // userId: user?.id,
+        })
+      })
+
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.message);
+      }
+
+      const data = await response.json();
+      return data.clientSecret;
+
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'An error occurred');
+      throw err;
+    } finally {
+      setIsLoading(false);
+    }
 }, [priceID]);
 
-  const options = {fetchClientSecret};
+  const handleCheckoutClick = () => {
+    if (!isLoading) {
+      dispatch({type: ActionTypes.TOGGLE_CHECKOUT_DIALOG});
+    }
+  }
+
+  const options = {
+    fetchClientSecret,
+    onComplete: () => {
+      dispatch({type: ActionTypes.TOGGLE_CHECKOUT_DIALOG});
+    }
+  };
 
   return (
     <>
-      <button onClick={()=>{dispatch({type: ActionTypes.TOGGLE_CHECKOUT_DIALOG})}}>
-        buy now
+      <button 
+        onClick={handleCheckoutClick}
+        disabled={isLoading}
+      >
+        {isLoading ? 'Loading...' : 'Buy Now'}
       </button>
+
+      {error && (
+        <div className="text-red-500 mt-2">
+          {error}
+        </div>
+      )}
+      
       {state.isCheckoutOpen &&
         <ModalWrapper>
           <div id="checkout">
@@ -45,7 +95,6 @@ export default function Checkout({priceID}: CheckoutType) {
               stripe={stripePromise}
               options={options}
             >
-              {state.isCheckoutOpen}
               <EmbeddedCheckout />
             </EmbeddedCheckoutProvider>
           </div>
