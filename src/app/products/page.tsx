@@ -1,13 +1,9 @@
 import ProductCard from '../../components/productCard';
 import styles from './products.module.scss';
-import Stripe from 'stripe';
+import { getActiveProducts } from '@/app/utils/getActiveProducts';
 
 export default async function Page() {
-  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
-  const products = await stripe.products.list({
-    active: true
-  });
-  const productList: Stripe.Product[] = products.data;  
+  const productList = await getActiveProducts();
     
   return (
     <div className={styles['products-container']}>

@@ -1,30 +1,33 @@
-import { createClient } from '@/lib/supabase/server';
 import { cookies } from 'next/headers';
+import { getCart } from '@/app/utils/getCart';
+import { getActiveProducts } from '@/app/utils/getActiveProducts';
 import styles from './cart.module.scss';
 import RemoveItem from '@/components/removeItem';
 
 
 export default async function Cart() {  
-  const supabase = createClient();
   const cookieStore = cookies();
   const cartID = cookieStore.get('cart')?.value;
   if (!cartID) return null;
   // Get products array from sessions where cartID matches
-  const { data: cartData, error } = await supabase
-    .from('sessions')
-    .select('products')  // Assuming 'products' is your column name
-    .eq('cartID', cartID)
-    .single();
+  const cartData = await getCart(cartID);
+  const activeProducts = await getActiveProducts();  
 
-  if (error) {
-    console.error('Error fetching cart:', error);
-    return <div>Error loading cart</div>;
+  let activeProductsArray: string[] = [];
+  let cartDataArray: string[] = [];
+
+  if (cartData.products) {
+    activeProductsArray = activeProducts.map((product) => product.id);
+    cartDataArray = cartData.products.filter((item) => activeProductsArray.includes(item));
   }
+
+  
+
 
   return (
     <div className={styles.cart}>
-      {cartData && cartData.products && cartData.products.length > 0 ? 
-      (cartData.products.map((item: string) => (
+      {cartDataArray && cartDataArray.length > 0 ? 
+      (cartDataArray.map((item: string) => (
         <RemoveItem key={item} cartID={cartID} productId={item}>
           <div>{item}</div>
         </RemoveItem>
