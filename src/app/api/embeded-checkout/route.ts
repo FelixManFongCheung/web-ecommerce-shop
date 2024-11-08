@@ -13,13 +13,16 @@ export async function POST(req: Request) {
 
     // Common session parameters
     const baseSessionParams = {
-      ui_mode: 'embedded',
+      ui_mode: 'embedded' as Stripe.Checkout.SessionCreateParams.UiMode,
       line_items: [
         {
           price: priceId,
           quantity: 1,
         },
       ],
+      invoice_creation: {
+        enabled: true,
+      },
       return_url: `${origin}/return?session_id={CHECKOUT_SESSION_ID}`,
       expires_at: Math.floor(Date.now() / 1000) + (3600 * 2),
     };
