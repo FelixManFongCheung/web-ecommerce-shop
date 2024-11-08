@@ -19,10 +19,7 @@ type CheckoutType = {
 export default function Checkout({priceID}: CheckoutType) {    
   const {state, dispatch} = useAppContext();    
   const [error, setError] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
-
-  console.log(stripePromise);
-  
+  const [isLoading, setIsLoading] = useState(false);  
 
   const fetchClientSecret = useCallback(async () => {
     setError(null);
@@ -50,6 +47,7 @@ export default function Checkout({priceID}: CheckoutType) {
       }
 
       const data = await response.json();
+      
       return data.clientSecret;
 
     } catch (err) {
