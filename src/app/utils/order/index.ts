@@ -16,11 +16,7 @@ export async function completeOrder(sessionId: string) {
     // 1. Retrieve the session with line items
     const session = await stripe.checkout.sessions.retrieve(sessionId, {
       expand: ['line_items.data.price.product']
-    });
-
-    console.log(session);
-    
-
+    });    
 
     const { data: currentCart } = await supabase
         .from('sessions')
@@ -35,12 +31,9 @@ export async function completeOrder(sessionId: string) {
           ? item.price.product 
           : item.price?.product.id
       ));
-      console.log(priceIds);
       
       const updatedProducts = currentCart.products.filter((id: string) => !priceIds!.includes(id));
-      console.log(updatedProducts);
-      
-      
+
       await supabase
         .from('sessions')
         .update({ products: updatedProducts })
