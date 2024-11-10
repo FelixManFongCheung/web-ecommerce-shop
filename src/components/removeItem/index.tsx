@@ -1,6 +1,6 @@
 'use client';
 
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
+import { createClient } from '@/lib/supabase/client';
 import { useState } from 'react';
 import styles from './removeItem.module.scss';
 
@@ -11,7 +11,7 @@ interface RemoveItemProps {
 }
 
 export default function RemoveItem({ cartID, productId, children }: RemoveItemProps) {
-  const supabase = createClientComponentClient();
+  const supabase = createClient();
   const [isVisible, setIsVisible] = useState(true);
 
   const removeFromCart = async () => {

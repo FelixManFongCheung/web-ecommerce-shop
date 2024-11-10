@@ -28,6 +28,7 @@ export default async function Page({
       <section id={styles.success}>
         <p>
           We appreciate your business! A confirmation email will be sent to {session.customer_email}.
+          The order will be processed and shipped to {session.shipping_details} within 24 hours.
           If you have any questions, please email <a href="mailto:orders@example.com">orders@example.com</a>.
         </p>
       </section>

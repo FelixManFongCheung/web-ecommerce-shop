@@ -1,4 +1,4 @@
-import Stripe from 'stripe';
+import {Stripe} from 'stripe';
 import { NextResponse } from "next/server";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
@@ -7,6 +7,8 @@ export async function POST(req: Request) {
   try {
     const { priceId } = await req.json(); 
     const { origin } = new URL(req.url);
+    console.log(priceId);
+    
 
     // Retrieve price details to check its type
     const price = await stripe.prices.retrieve(priceId);
@@ -20,7 +22,7 @@ export async function POST(req: Request) {
           quantity: 1,
         },
       ],
-      invoice_creation: {
+      phone_number_collection: {
         enabled: true,
       },
       return_url: `${origin}/return?session_id={CHECKOUT_SESSION_ID}`,
@@ -31,19 +33,39 @@ export async function POST(req: Request) {
     const session = await stripe.checkout.sessions.create({
       ...baseSessionParams,
       mode: price.type === 'recurring' ? 'subscription' : 'payment',
-      ...(price.type === 'recurring' ? {
-        // Subscription-specific options
-        subscription_data: {
-          trial_period_days: 7, // Optional: if you want to offer a trial
-          // metadata: { ... } // Optional: add custom metadata
-        },
-        payment_method_types: ['card'], // Restrict to cards for subscriptions
-      } : {
-        // One-time payment specific options
-        payment_method_types: ['card'], // Can include more payment methods
-        // payment_intent_data: { ... } // Optional: customize payment intent
-      })
+      ...(price.type === 'recurring' 
+        ? {
+            // Subscription-specific options
+            subscription_data: {
+              trial_period_days: 7,
+            },
+            payment_method_types: ['card'],
+          }
+        : {
+          // One-time payment specific options
+          payment_method_types: ['card'],
+          invoice_creation: {
+            enabled: true,
+          },
+          billing_address_collection: 'required' as const,
+          shipping_address_collection: 
+            {
+              allowed_countries: ['DK'] as Stripe.Checkout.SessionCreateParams.ShippingAddressCollection.AllowedCountry[],
+            },
+          shipping_options: [
+            { 
+              shipping_rate: 'shr_1QJKVjEn8tbdxcgB9WpQyRVl' 
+            }, 
+            { 
+              shipping_rate: 'shr_1QJKV1En8tbdxcgBsfS7JWNT' 
+            }
+          ]
+        }
+      )
     });
+
+    console.log(session);
+    
 
     return NextResponse.json({
       id: session.id, 
@@ -51,6 +73,8 @@ export async function POST(req: Request) {
       mode: price.type === 'recurring' ? 'subscription' : 'payment'
     });
   } catch (err) {
+    console.log('the invalid object is on top');
+    
     if (err instanceof Error) return NextResponse.json(err.message, { status: 500 });
   }
 }

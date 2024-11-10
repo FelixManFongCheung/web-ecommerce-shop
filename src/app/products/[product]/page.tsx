@@ -12,10 +12,8 @@ export default async function Page({ params }: { params: { product: string } }) 
   let isATC: boolean = false;
   if (userCookies) {
     const cartItems = await getCart(userCookies);
-    console.log(cartItems);
     isATC = cartItems.products?.includes(params.product) || false;
   }
-  console.log(isATC);
   
   
   const productResponse = await stripe.products.retrieve(params.product);  
