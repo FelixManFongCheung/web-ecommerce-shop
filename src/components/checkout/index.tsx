@@ -29,7 +29,7 @@ export default function Checkout({priceID}: CheckoutType) {
         throw new Error('Price ID is required');
       }
 
-      const response = await fetch("/api/embeded-checkout", {
+      const response = await fetch("/api/embedded-checkout", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -56,7 +56,7 @@ export default function Checkout({priceID}: CheckoutType) {
     } finally {
       setIsLoading(false);
     }
-}, [priceID]);
+  }, [priceID]);
 
   const handleCheckoutClick = () => {
     if (!isLoading) {

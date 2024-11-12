@@ -5,6 +5,7 @@ import ATC from '@/components/atc';
 import Image from 'next/image';
 import { cookies } from 'next/headers';
 import { getCart } from '@/app/utils/getCart';
+import { getPriceId } from '@/app/utils/getPriceId';
 
 export default async function Page({ params }: { params: { product: string } }) {
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
@@ -24,13 +25,7 @@ export default async function Page({ params }: { params: { product: string } }) 
     description: productResponse.description
   };
 
-
-
-  const prices = await stripe.prices.list({
-    product: product.id,
-  });
-
-  const priceID = prices.data[0].id  
+  const priceID = await getPriceId(stripe, product.id);
   
   return (
     <div className={styles['product-page-wrapper']}>

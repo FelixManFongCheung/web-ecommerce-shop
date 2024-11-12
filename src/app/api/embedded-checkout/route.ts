@@ -6,9 +6,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
 export async function POST(req: Request) {
   try {
     const { priceId } = await req.json(); 
-    const { origin } = new URL(req.url);
-    console.log(priceId);
-    
+    const { origin } = new URL(req.url);    
 
     // Retrieve price details to check its type
     const price = await stripe.prices.retrieve(priceId);
@@ -62,10 +60,7 @@ export async function POST(req: Request) {
           ]
         }
       )
-    });
-
-    console.log(session);
-    
+    });    
 
     return NextResponse.json({
       id: session.id, 

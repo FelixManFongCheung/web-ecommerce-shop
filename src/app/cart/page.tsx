@@ -3,6 +3,7 @@ import { getCart } from '@/app/utils/getCart';
 import { getActiveProducts } from '@/app/utils/getActiveProducts';
 import styles from './cart.module.scss';
 import RemoveItem from '@/components/removeItem';
+import CheckoutButton from '@/components/checkout/checkoutButton';
 
 
 export default async function Cart() {  
@@ -21,9 +22,6 @@ export default async function Cart() {
     cartDataArray = cartData.products.filter((item: string) => activeProductsArray.includes(item));
   }
 
-  
-
-
   return (
     <div className={styles.cart}>
       {cartDataArray && cartDataArray.length > 0 ? 
@@ -33,6 +31,7 @@ export default async function Cart() {
         </RemoveItem>
       ))) : 
       (<div>empty cart</div>)}
+      <CheckoutButton cartID={cartID} />
     </div>
   )
 }
