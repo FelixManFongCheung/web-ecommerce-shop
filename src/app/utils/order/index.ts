@@ -55,6 +55,13 @@ export async function completeOrder(sessionId: string) {
           session_id: sessionId
         }
       });
+      // for future use
+      // await stripe.products.del(productId as string, {
+        // metadata: { 
+        //   sold: 'true',
+        //   sold_at: new Date().toISOString(),
+        //   session_id: sessionId
+        // }});
     }
 
     return { success: true };
