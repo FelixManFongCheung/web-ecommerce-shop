@@ -58,7 +58,7 @@ export default function Page() {
             <h3>{product.name}</h3>
             <p>{product.description}</p>
           </div>
-        ))) : (<div></div>)}
+        ))) : (<div>No products found</div>)}
       </div>
     </section>
   );
