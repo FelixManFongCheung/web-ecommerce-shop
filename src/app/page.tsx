@@ -2,7 +2,7 @@ import styles from "./page.module.scss"
 
 export default function Home() {
   return (
-    <div className={styles['homepage']}>
-    </div>
+    <section className={styles['homepage']}>
+    </section>
   );
 }

@@ -6,10 +6,10 @@ export default async function Page() {
   const productList = await getActiveProducts();
     
   return (
-    <div className={styles['products-container']}>
+    <section className={styles['products-container']}>
       {productList.map((product, index) => (
         <ProductCard key={index} product={product}/>
       ))}
-    </div>
+    </section>
   )
 };

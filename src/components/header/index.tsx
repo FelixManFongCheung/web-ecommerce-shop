@@ -14,13 +14,13 @@ export default function Header() {
         </div>
         <div className={styles.left}>
             <Link href='/'>Home</Link>
-            <Link href='/products'>Link 1</Link>
-            <Link href='/products'>Link 2</Link>
-            <Link href='/products'>Link 3</Link>
+            <Link href='/products'>Products</Link>
+            <Link href='/about'>About</Link>
+            <Link href='/contact'>Contact</Link>
         </div>
         <div className={styles.right}>
-          <Link href="/search">search</Link>
-          <Link href='/cart'>cart</Link>
+          <Link href="/search">Search</Link>
+          <Link href='/cart'>Cart</Link>
         </div>
     </div>
   )

@@ -9,13 +9,13 @@ $header-height: 10vh;
     z-index: 1;
     width: 100%;
     justify-content: space-between;
+    padding: 0 10px;
     
     .left {
         position: relative;
         display: flex;
         align-items: center;
         gap: 5px;
-        padding-left: 5px;
     }
 
     .right {
@@ -23,7 +23,6 @@ $header-height: 10vh;
         display: flex;
         align-items: center;
         gap: 5px;
-        padding-right: 5px;
         div {
             display: inline-block;
         }

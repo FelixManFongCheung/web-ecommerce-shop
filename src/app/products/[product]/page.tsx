@@ -33,7 +33,7 @@ export default async function Page({ params }: { params: { product: string } }) 
   const priceID = prices.data[0].id  
   
   return (
-    <div className={styles['product-page-wrapper']}>
+    <section className={styles['product-page-wrapper']}>
       <div className={styles['image-wrapper']}>
         <Image fill src={product.images[0]} alt="" />
       </div>
@@ -43,6 +43,6 @@ export default async function Page({ params }: { params: { product: string } }) 
         <ATC isATC={isATC} productId={product.id}/>
         <Checkout priceID={priceID}/>
       </div>
-    </div>
+    </section>
   )
 };

@@ -43,7 +43,7 @@ export default function Page() {
   }, [debouncedValue]);
 
   return (
-    <div className={styles.search}>
+    <section className={styles.search}>
       <input
         className={styles['search-input']}
         type="text"
@@ -60,6 +60,6 @@ export default function Page() {
           </div>
         ))) : (<div></div>)}
       </div>
-    </div>
+    </section>
   );
 }

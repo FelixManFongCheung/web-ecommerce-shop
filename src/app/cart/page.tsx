@@ -5,7 +5,7 @@ import styles from './cart.module.scss';
 import RemoveItem from '@/components/removeItem';
 
 
-export default async function Cart() {  
+export default async function Page() {  
   const cookieStore = cookies();
   const cartID = cookieStore.get('cart')?.value;
   if (!cartID) return null;
@@ -25,7 +25,7 @@ export default async function Cart() {
 
 
   return (
-    <div className={styles.cart}>
+    <section className={styles.cart}>
       {cartDataArray && cartDataArray.length > 0 ? 
       (cartDataArray.map((item: string) => (
         <RemoveItem key={item} cartID={cartID} productId={item}>
@@ -33,6 +33,6 @@ export default async function Cart() {
         </RemoveItem>
       ))) : 
       (<div>empty cart</div>)}
-    </div>
+    </section>
   )
 }
