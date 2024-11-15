@@ -7,7 +7,7 @@
     overflow: scroll;
     border: #787777 1px solid;
     transform: translate(-50%, -80%);
-    z-index: 2;
+    z-index: 9999;
 }
 
 .backdrop {
@@ -17,5 +17,5 @@
     width: 100vw;
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1;
+    z-index: 9998;
 }

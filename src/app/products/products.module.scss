@@ -1,8 +1,5 @@
-$header-height: 10vh;
-
 .products-container {
     position: relative;
-    margin-top: $header-height;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-auto-rows: row;

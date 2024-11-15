@@ -9,6 +9,8 @@ import {
   EmbeddedCheckout
 } from '@stripe/react-stripe-js';
 import ModalWrapper from '../modalWrapper';
+import styles from './checkout.module.scss';
+import clsx from 'clsx';
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY as string);
 
@@ -20,6 +22,7 @@ export default function Checkout({priceID}: CheckoutType) {
   const {state, dispatch} = useAppContext();    
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);  
+  const [isMouseOver, setIsMouseOver] = useState(false);
 
   const fetchClientSecret = useCallback(async () => {
     setError(null);
@@ -56,7 +59,15 @@ export default function Checkout({priceID}: CheckoutType) {
     } finally {
       setIsLoading(false);
     }
-}, [priceID]);
+  }, [priceID]);
+
+  const handleMouseEnter = () => {
+    setIsMouseOver(true);
+  }
+
+  const handleMouseLeave = () => {
+    setIsMouseOver(false);
+  }
 
   const handleCheckoutClick = () => {
     if (!isLoading) {
@@ -73,9 +84,13 @@ export default function Checkout({priceID}: CheckoutType) {
 
   return (
     <>
+      <div className={clsx(styles['smoke-screen'], isMouseOver && styles.blur)}></div>
       <button 
         onClick={handleCheckoutClick}
         disabled={isLoading}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        className={styles['buy-now-button']}
       >
         {isLoading ? 'Loading...' : 'Buy Now'}
       </button>
