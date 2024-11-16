@@ -5,6 +5,7 @@ import { useDebounce } from 'use-debounce';
 import { searchProducts } from '../utils/getProducts';
 import Stripe from 'stripe';
 import styles from './page.module.scss';
+
 export default function Page() {
   const router = useRouter();
   const searchParams = useSearchParams();

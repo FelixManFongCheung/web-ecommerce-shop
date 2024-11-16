@@ -1,12 +1,14 @@
 import { redirect } from 'next/navigation';
 import styles from './return.module.scss'
 import { completeOrder, cancelOrder } from '@/app/utils/order';
+import Stripe from 'stripe';
 
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
 
 export default async function Page({
   searchParams,
 }: {
-  searchParams: { session_id: string }
+  searchParams: { session_id: string, no_embed?: boolean }
 }) {
   if (!searchParams.session_id) {
     redirect('/');
@@ -14,7 +16,14 @@ export default async function Page({
 
   // Server-side session check
   const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/embeded-checkout?session_id=${searchParams.session_id}`);
-  const session = await response.json();
+
+  let session;
+
+  if (!searchParams.no_embed) {
+    session = await response.json();
+  } else {
+    session = await stripe.checkout.sessions.retrieve(searchParams.session_id);
+  }
 
   // Handle different session statuses
   if (session.status === 'open') {
@@ -28,7 +37,7 @@ export default async function Page({
       <section id={styles.success}>
         <p>
           We appreciate your business! A confirmation email will be sent to {session.customer_email}.
-          The order will be processed and shipped to {session.shipping_details} within 24 hours.
+          The order will be processed and shipped to you within 24 hours.
           If you have any questions, please email <a href="mailto:orders@example.com">orders@example.com</a>.
         </p>
       </section>
