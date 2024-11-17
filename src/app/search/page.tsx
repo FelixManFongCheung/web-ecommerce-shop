@@ -1,6 +1,6 @@
 'use client';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useDebounce } from 'use-debounce';
 import { searchProducts } from '../utils/getProducts';
 import Stripe from 'stripe';
@@ -52,15 +52,16 @@ export default function Page() {
         onChange={handleSearch}
         placeholder="Search..."
       />
-
-      <div>
+      <Suspense fallback={<div>Loading products...</div>}>
+        <div>
         {products ? (products.map((product) => (
           <div key={product.id}>
             <h3>{product.name}</h3>
             <p>{product.description}</p>
           </div>
-        ))) : (<div>No products found</div>)}
-      </div>
+          ))) : (<div>No products found</div>)}
+        </div>
+      </Suspense>
     </section>
   );
 }
