@@ -2,8 +2,7 @@
 
 import React, { useCallback, useState } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
-import { useAppContext } from '@/context/AppContext';
-import { ActionTypes } from '@/actions';
+import useAppStore from '@/stores';
 import {
   EmbeddedCheckoutProvider,
   EmbeddedCheckout
@@ -18,8 +17,8 @@ type CheckoutType = {
   priceID: string
 }
 
-export default function Checkout({priceID}: CheckoutType) {    
-  const {state, dispatch} = useAppContext();    
+export default function Checkout({priceID}: CheckoutType) {   
+  const store = useAppStore();
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);  
   const [isMouseOver, setIsMouseOver] = useState(false);
@@ -69,24 +68,16 @@ export default function Checkout({priceID}: CheckoutType) {
     setIsMouseOver(false);
   }
 
-  const handleCheckoutClick = () => {
-    if (!isLoading) {
-      dispatch({type: ActionTypes.TOGGLE_CHECKOUT_DIALOG});
-    }
-  }
-
   const options = {
     fetchClientSecret,
-    onComplete: () => {
-      dispatch({type: ActionTypes.TOGGLE_CHECKOUT_DIALOG});
-    }
+    onComplete: () => store.toggleCheckoutDialog()
   };
 
   return (
     <>
       <div className={clsx(styles['smoke-screen'], isMouseOver && styles.blur)}></div>
       <button 
-        onClick={handleCheckoutClick}
+        onClick={store.toggleCheckoutDialog}
         disabled={isLoading}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
@@ -101,7 +92,7 @@ export default function Checkout({priceID}: CheckoutType) {
         </div>
       )}
       
-      {state.isCheckoutOpen &&
+      {store.isCheckoutOpen &&
         <ModalWrapper>
           <div id="checkout">
             <EmbeddedCheckoutProvider

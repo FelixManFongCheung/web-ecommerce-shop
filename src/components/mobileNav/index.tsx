@@ -2,16 +2,15 @@
 
 import styles from './mobilenav.module.scss';
 import Link from 'next/link';
-import { ActionTypes } from '@/actions';
 import clsx from 'clsx';
-import { useAppContext } from '@/context/AppContext';
+import useAppStore from '@/stores';
 
 export default function MobileNav() {
-  const {state, dispatch} = useAppContext();
+  const store = useAppStore();
 
   return (
-    <div className={clsx(styles['mobile-nav-wrapper'], state?.isOpen && styles.open)}>
-      <div className={styles['mobile-nav-backdrop']} onClick={()=>dispatch({type: ActionTypes.TOGGLE_OPEN})}></div>
+    <div className={clsx(styles['mobile-nav-wrapper'], store.isOpen && styles.open)}>
+      <div className={styles['mobile-nav-backdrop']} onClick={store.toggleOpen}></div>
       <div className={styles['mobile-nav-content']}>
         <ul>
             <li>

@@ -1,13 +1,11 @@
 import styles from './modal.module.scss';
-import { useAppContext } from '@/context/AppContext';
-import { ActionTypes } from '@/actions';
+import useAppStore from '@/stores';
 
 export default function ModalWrapper({children}: {children: React.ReactNode}) {
-  const {dispatch} = useAppContext();
-
+  const store = useAppStore();
   return (
     <>
-      <div onClick={()=>{dispatch({type: ActionTypes.TOGGLE_CHECKOUT_DIALOG})}} className={styles.backdrop}/>
+      <div onClick={store.toggleCheckoutDialog} className={styles.backdrop}/>
       <dialog className={styles['modal-wrapper']} open>{children}</dialog>
     </>
   )

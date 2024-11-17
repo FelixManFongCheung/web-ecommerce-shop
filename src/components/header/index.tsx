@@ -2,15 +2,14 @@
 
 import Link from 'next/link';
 import styles from './header.module.scss';
-import { ActionTypes } from '@/actions';
-import { useAppContext } from '@/context/AppContext';
+import useAppStore from '@/stores';
 
 export default function Header() {
-  const {dispatch} = useAppContext();
+  const store = useAppStore();
   return (
     <div className={styles.header}>
         <div className='mobile-only'>
-          <button onClick={() => {dispatch({type: ActionTypes.TOGGLE_OPEN})}}>vbjdfvhbdfbjv</button>
+          <button onClick={store.toggleOpen}>vbjdfvhbdfbjv</button>
         </div>
         <div className={styles.left}>
             <Link href='/'>Home</Link>

@@ -3,8 +3,6 @@ import Footer from '../components/footer';
 import MobileNav from '../components/mobileNav';
 import Effect from '../components/effects/proxyA';
 import '../styles/index.scss';
-import { AppContextProvider } from "@/context/AppContext";
-
 
 export default function RootLayout({
   children,
@@ -15,13 +13,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <AppContextProvider>
-          <Effect />
-          <MobileNav />
-          <Header />
-          {children}
-          <Footer />
-        </AppContextProvider>
+        <Effect />
+        <MobileNav />
+        <Header />
+        {children}
+        <Footer />
       </body>
     </html>
   );
