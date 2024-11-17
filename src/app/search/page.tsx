@@ -6,18 +6,11 @@ import { searchProducts } from '../utils/getProducts';
 import Stripe from 'stripe';
 import styles from './page.module.scss';
 
-export default function Page() {
+const SearchResults = ({search}: {search: string}) => {
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const [search, setSearch] = useState(searchParams.get('q') || '');
   const [debouncedValue] = useDebounce(search, 500);
+  const searchParams = useSearchParams();
   const [products, setProducts] = useState<Stripe.Product[]>([]);
-
-  // Handle input change
-  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setSearch(value);
-  };
 
   // Debounced search effect
   useEffect(() => {
@@ -44,6 +37,29 @@ export default function Page() {
   }, [debouncedValue, router, searchParams]);
 
   return (
+    <div>
+    {products ? (products.map((product) => (
+      <div key={product.id}>
+        <h3>{product.name}</h3>
+        <p>{product.description}</p>
+      </div>
+      ))) : (<div>No products found</div>)}
+    </div>
+  )
+}
+
+export default function Page() {
+  const [search, setSearch] = useState('');
+
+
+  // Handle input change
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setSearch(value);
+  };
+
+
+  return (
     <section className={styles.search}>
       <input
         className={styles['search-input']}
@@ -53,14 +69,7 @@ export default function Page() {
         placeholder="Search..."
       />
       <Suspense fallback={<div>Loading products...</div>}>
-        <div>
-        {products ? (products.map((product) => (
-          <div key={product.id}>
-            <h3>{product.name}</h3>
-            <p>{product.description}</p>
-          </div>
-          ))) : (<div>No products found</div>)}
-        </div>
+        <SearchResults search={search} />
       </Suspense>
     </section>
   );
