@@ -6,7 +6,7 @@ import { getPriceId } from '@/app/utils/getPriceId';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
 
-export async function POST(req: NextResponse) {
+export async function POST(req: Request) {
     try {
       const { cartID } = await req.json(); 
       const cart = await getCart(cartID);

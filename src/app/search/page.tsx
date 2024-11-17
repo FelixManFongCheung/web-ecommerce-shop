@@ -41,7 +41,7 @@ export default function Page() {
     };
 
     performSearch();
-  }, [debouncedValue]);
+  }, [debouncedValue, router, searchParams]);
 
   return (
     <section className={styles.search}>
