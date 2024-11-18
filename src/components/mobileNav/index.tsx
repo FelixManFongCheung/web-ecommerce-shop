@@ -14,13 +14,13 @@ export default function MobileNav() {
       <div className={styles['mobile-nav-content']}>
         <ul>
             <li>
-              <Link href='/product'>Products</Link>
+              <Link href='/products'>Products</Link>
             </li>
             <li>
-              <Link href='/product'>Products</Link>
+              <Link href='/products'>Products</Link>
             </li>
             <li>
-              <Link href='/product'>Products</Link>
+              <Link href='/products'>Products</Link>
             </li>
         </ul>
       </div>
