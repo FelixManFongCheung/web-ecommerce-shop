@@ -21,7 +21,7 @@ export async function POST(req: Request) {
       const activeProducts = await getActiveProducts();
       const activeProductsArray = activeProducts.map((product) => product.id);
       const cartDataArray = cart.products!.filter((item: string) => activeProductsArray.includes(item));
-      const lineItems = await Promise.all(cartDataArray.map(async (id)=>({
+      const lineItems = await Promise.all(cartDataArray.map(async (id: string)=>({
         price: await getPriceId(stripe, id),
         quantity: 1,    
       })));
