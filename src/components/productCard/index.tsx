@@ -1,5 +1,4 @@
 import React from 'react';
-import clsx from 'clsx';
 import styles from './card.module.scss';
 import Link from 'next/link';
 import Image from 'next/image';
