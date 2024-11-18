@@ -26,7 +26,12 @@ const nextConfig = {
   },
 
   images: {
-    domains: ['files.stripe.com'], // Add any other domains you need here
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'files.stripe.com'
+      },
+    ],
   },
 
   webpack: (config, { isServer }) => {
