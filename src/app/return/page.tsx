@@ -20,14 +20,15 @@ export default async function Page({
   let session;
 
   if (!searchParams.no_embed) {
-    session = await response.json();
+    session = await response.json();    
   } else {
     session = await stripe.checkout.sessions.retrieve(searchParams.session_id);
+    console.log(session.status);
   }
 
   // Handle different session statuses
   if (session.status === 'open') {
-    redirect('/');
+    redirect('/cart');
   }
 
   if (session.status === 'complete') {
