@@ -2,6 +2,8 @@
     position: relative;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    width: 100%;
     grid-auto-rows: row;
     justify-items: center;
     align-items: center;
