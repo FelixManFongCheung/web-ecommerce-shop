@@ -14,12 +14,11 @@ export default async function Page({
     redirect('/');
   }  
 
-  // Server-side session check
-  const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/embeded-checkout?session_id=${searchParams.session_id}`);
-
   let session;
-
+  
   if (!searchParams.no_embed) {
+    // Server-side session check
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/embedded-checkout?session_id=${searchParams.session_id}`);
     session = await response.json();    
   } else {
     session = await stripe.checkout.sessions.retrieve(searchParams.session_id);

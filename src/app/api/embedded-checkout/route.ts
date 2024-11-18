@@ -80,12 +80,14 @@ export async function GET(req: Request) {
 
     const session_id = searchParams.get('session_id');
 
-    const session =
-      await stripe.checkout.sessions.retrieve(session_id!);
+    const session = await stripe.checkout.sessions.retrieve(session_id!);
+    const customer = await stripe.customers.retrieve(session.customer as string);
+
 
     return NextResponse.json({
       status: session.status,
-      customer_email: session.customer_details?.email
+      payment_status: session.payment_status,
+      customer_email: (customer as Stripe.Customer).email
     });
   } catch (err) {
     if (err instanceof Error) return NextResponse.json(err.message, { status:  500 });

@@ -1,10 +1,6 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
-
 export default function CheckoutButton({ cartID }: { cartID: string }) {
-
-  const router = useRouter();
 
   const handleCheckout = async () => {
     try {
@@ -20,7 +16,7 @@ export default function CheckoutButton({ cartID }: { cartID: string }) {
       
       const { url } = await response.json();
       if (url) {
-        router.push(url)
+        window.location.href = url;
       }
     } catch (error) {
       console.error('Checkout error:', error);
