@@ -7,7 +7,7 @@ import { cookies } from 'next/headers';
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
 
 export async function completeOrder(sessionId: string) {
-  const supabase = createClient();
+  const supabase = await createClient();
   const cookieStore = cookies();
   const cartID = cookieStore.get('cart')?.value;
 

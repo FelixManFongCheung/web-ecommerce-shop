@@ -1,7 +1,7 @@
 import { createClient } from '@/lib/supabase/server';
 
 export async function getCart(cookies: string) {
-    const supabase = createClient();
+    const supabase = await createClient();
     const { data: cartData, error } = await supabase
         .from('sessions')
         .select('products')
