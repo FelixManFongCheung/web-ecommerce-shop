@@ -4,7 +4,7 @@ import Stripe from 'stripe';
 import { createClient } from '@/lib/supabase/server';
 import { cookies } from 'next/headers';
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
+const stripe = new Stripe(process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY as string);
 
 export async function completeOrder(sessionId: string) {
   const supabase = await createClient();

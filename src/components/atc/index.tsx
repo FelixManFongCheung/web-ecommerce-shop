@@ -14,6 +14,8 @@ interface ATCProp {
 export default function ATC({productId, isATC}: ATCProp) {  
     const [ATCState, setATCState] = useState(isATC)
     const cartCookies = getCookie('cart');
+
+    console.log('cartCookies', getCookie('cart'));
     const openCart = useAppStore((state: AppState) => state.openCart)
 
     const addToCart = async () => {

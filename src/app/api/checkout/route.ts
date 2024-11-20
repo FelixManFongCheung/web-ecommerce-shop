@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 import { getCartServer, getCartProductsServer } from '@/app/utils/getCart/server';
 import { getPriceId } from '@/app/utils/getPriceId';
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
+const stripe = new Stripe(process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY as string);
 
 export async function POST(req: Request) {
     try {

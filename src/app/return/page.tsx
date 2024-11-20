@@ -3,7 +3,7 @@ import styles from './return.module.scss'
 import { completeOrder, cancelOrder } from '@/app/utils/order';
 import Stripe from 'stripe';
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
+const stripe = new Stripe(process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY as string);
 
 export default async function Page({
   searchParams,

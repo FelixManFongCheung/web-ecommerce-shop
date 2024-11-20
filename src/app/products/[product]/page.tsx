@@ -8,7 +8,7 @@ import { getCartServer } from '@/app/utils/getCart/server';
 import { getPriceId } from '@/app/utils/getPriceId';
 
 export default async function Page({ params }: { params: { product: string } }) {
-  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
+  const stripe = new Stripe(process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY as string);
   const userCookies = cookies().get('cart')?.value;
   let isATC: boolean = false;
   if (userCookies) {
