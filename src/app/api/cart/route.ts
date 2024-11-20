@@ -31,12 +31,14 @@ export async function POST(req: Request) {
 
             if (updateError) throw updateError;
         } else {
+            const ONE_MONTH = 60 * 60 * 24 * 30; // 30 days
             // Create new cart
             const { error: insertError } = await supabase
                 .from('sessions')
                 .insert({
                     cartID: identifier,
-                    products: [products]
+                    products: [products],
+                    expires_in: new Date(Date.now() + (ONE_MONTH * 1000)).toISOString(),
                 });
 
             if (insertError) {
@@ -55,7 +57,8 @@ export async function POST(req: Request) {
             response.cookies.set('cart', identifier, {
                 secure: process.env.NODE_ENV === 'production',
                 sameSite: 'lax',
-                path: '/'
+                path: '/',
+                maxAge: ONE_MONTH
             });
 
             return response;
