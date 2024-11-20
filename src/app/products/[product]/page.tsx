@@ -12,7 +12,7 @@ export default async function Page({ params }: { params: { product: string } }) 
   const userCookies = cookies().get('cart')?.value;
   let isATC: boolean = false;
   if (userCookies) {
-    const cartItems = await getCart(userCookies);
+    const cartItems = await getCart(userCookies, false);
     isATC = cartItems.products?.includes(params.product) || false;
   }
   

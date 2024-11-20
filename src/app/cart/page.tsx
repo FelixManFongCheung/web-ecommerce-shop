@@ -11,7 +11,7 @@ export default async function Page() {
   const cartID = cookieStore.get('cart')?.value;
   if (!cartID) return null;
   // Get products array from sessions where cartID matches
-  const cartData = await getCart(cartID);
+  const cartData = await getCart(cartID, false);
   const activeProducts = await getActiveProducts();  
 
   let activeProductsArray: string[] = [];

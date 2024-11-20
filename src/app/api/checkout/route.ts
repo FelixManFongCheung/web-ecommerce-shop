@@ -9,7 +9,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
 export async function POST(req: Request) {
     try {
       const { cartID } = await req.json(); 
-      const cart = await getCart(cartID);
+      const cart = await getCart(cartID, false);
       const { origin } = new URL(req.url);
 
       if (!cart) {
