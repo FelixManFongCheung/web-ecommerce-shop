@@ -1,6 +1,6 @@
 import ProductCard from '../../components/productCard';
 import styles from './products.module.scss';
-import { getActiveProducts } from '@/app/utils/getActiveProducts';
+import { getActiveProducts } from '../utils/stripe';
 
 export default async function Page() {
   const productList = await getActiveProducts();

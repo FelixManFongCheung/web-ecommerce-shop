@@ -1,10 +1,8 @@
 'use server'
 
-import Stripe from 'stripe';
 import { createClient } from '@/lib/supabase/server';
 import { cookies } from 'next/headers';
-
-const stripe = new Stripe(process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY as string);
+import { retrieveSession, updateProduct } from '../stripe';
 
 export async function completeOrder(sessionId: string) {
   const supabase = await createClient();
@@ -14,7 +12,7 @@ export async function completeOrder(sessionId: string) {
 
   try {
     // 1. Retrieve the session with line items
-    const session = await stripe.checkout.sessions.retrieve(sessionId, {
+    const session = await retrieveSession(sessionId, {
       expand: ['line_items.data.price.product']
     });    
 
@@ -47,7 +45,7 @@ export async function completeOrder(sessionId: string) {
         : item.price?.product.id;
 
       // Deactivate the product after purchase
-      await stripe.products.update(productId as string, {
+      await updateProduct(productId as string, {
         active: false,
         metadata: { 
           sold: 'true',

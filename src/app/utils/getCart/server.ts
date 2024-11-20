@@ -1,5 +1,5 @@
 import { createClient as createServerClient } from '@/lib/supabase/server';
-import { getActiveProducts } from '@/app/utils/getActiveProducts';
+import { getActiveProducts } from '../stripe';
 
 export async function getCartServer(cookies: string) {
     const supabase = await createServerClient();

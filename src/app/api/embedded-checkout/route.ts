@@ -1,7 +1,6 @@
-import {Stripe} from 'stripe';
+import Stripe from 'stripe';
 import { NextResponse } from "next/server";
-
-const stripe = new Stripe(process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY as string);
+import { retrievePrice, retrieveSession, retrieveCustomer, createCheckoutSession } from '@/app/utils/stripe';
 
 export async function POST(req: Request) {
   try {
@@ -9,7 +8,7 @@ export async function POST(req: Request) {
     const { origin } = new URL(req.url);    
 
     // Retrieve price details to check its type
-    const price = await stripe.prices.retrieve(priceId);
+    const price = await retrievePrice(priceId);
 
     // Common session parameters
     const baseSessionParams = {
@@ -28,7 +27,7 @@ export async function POST(req: Request) {
     };
 
     // Create different session based on price type
-    const session = await stripe.checkout.sessions.create({
+    const session = await createCheckoutSession({
       ...baseSessionParams,
       mode: price.type === 'recurring' ? 'subscription' : 'payment',
       ...(price.type === 'recurring' 
@@ -80,8 +79,8 @@ export async function GET(req: Request) {
 
     const session_id = searchParams.get('session_id');
 
-    const session = await stripe.checkout.sessions.retrieve(session_id!);
-    const customer = await stripe.customers.retrieve(session.customer as string);
+    const session = await retrieveSession(session_id!);
+    const customer = await retrieveCustomer(session.customer as string);
 
 
     return NextResponse.json({

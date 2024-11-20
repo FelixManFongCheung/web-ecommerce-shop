@@ -1,5 +1,6 @@
 import { createClient as createBrowserClient } from '@/lib/supabase/client';
-import { getActiveProducts } from '@/app/utils/getActiveProducts';
+import { getActiveProducts } from '../stripe';
+
 
 export async function getCartClient(cookies: string) {
     const supabase = createBrowserClient();

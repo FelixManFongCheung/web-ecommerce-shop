@@ -1,9 +1,7 @@
 import { redirect } from 'next/navigation';
 import styles from './return.module.scss'
 import { completeOrder, cancelOrder } from '@/app/utils/order';
-import Stripe from 'stripe';
-
-const stripe = new Stripe(process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY as string);
+import { retrieveSession } from '../utils/stripe';
 
 export default async function Page({
   searchParams,
@@ -21,7 +19,7 @@ export default async function Page({
     const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/embedded-checkout?session_id=${searchParams.session_id}`);
     session = await response.json();    
   } else {
-    session = await stripe.checkout.sessions.retrieve(searchParams.session_id);
+    session = await retrieveSession(searchParams.session_id);
     console.log(session.status);
   }
 

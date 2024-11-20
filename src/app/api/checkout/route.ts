@@ -1,9 +1,7 @@
-import { Stripe } from 'stripe';
+import { createCheckoutSession, retrievePrice, getPriceId } from '@/app/utils/stripe';
+import Stripe from 'stripe';
 import { NextResponse } from "next/server";
 import { getCartServer, getCartProductsServer } from '@/app/utils/getCart/server';
-import { getPriceId } from '@/app/utils/getPriceId';
-
-const stripe = new Stripe(process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY as string);
 
 export async function POST(req: Request) {
     try {
@@ -19,13 +17,13 @@ export async function POST(req: Request) {
       
       const cartDataArray = await getCartProductsServer(cartID);
       const lineItems = await Promise.all(cartDataArray.map(async (id: string)=>({
-        price: await getPriceId(stripe, id),
+        price: await getPriceId(id),
         quantity: 1,    
       })));
 
       const paymentArray = await Promise.all(
         lineItems.map(async (item) => {
-          const price = await stripe.prices.retrieve(item.price);
+          const price = await retrievePrice(item.price);
           return price.type !== 'recurring' ? item : null;
         })
       ).then(results => results.filter(item => item !== null));
@@ -36,7 +34,7 @@ export async function POST(req: Request) {
         expires_at: Math.floor(Date.now() / 1000) + (3600 * 2)
       }
 
-      const session = await stripe.checkout.sessions.create({
+      const session = await createCheckoutSession({
         ...baseSessionParams,
         mode: 'payment',
         line_items: paymentArray,

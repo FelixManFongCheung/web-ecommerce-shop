@@ -1,14 +1,12 @@
-import Stripe from 'stripe';
 import styles from './product.module.scss';
 import Checkout from '@/components/checkout';
 import ATC from '@/components/atc';
 import Image from 'next/image';
 import { cookies } from 'next/headers';
 import { getCartServer } from '@/app/utils/getCart/server';
-import { getPriceId } from '@/app/utils/getPriceId';
+import { getProduct, getPriceId } from '@/app/utils/stripe';
 
 export default async function Page({ params }: { params: { product: string } }) {
-  const stripe = new Stripe(process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY as string);
   const userCookies = cookies().get('cart')?.value;
   let isATC: boolean = false;
   if (userCookies) {
@@ -17,7 +15,7 @@ export default async function Page({ params }: { params: { product: string } }) 
   }
   
   
-  const productResponse = await stripe.products.retrieve(params.product);  
+  const productResponse = await getProduct(params.product);  
   const product = {
     id: productResponse.id,
     images: productResponse.images,
@@ -25,7 +23,7 @@ export default async function Page({ params }: { params: { product: string } }) 
     description: productResponse.description
   };
 
-  const priceID = await getPriceId(stripe, product.id);
+  const priceID = await getPriceId(product.id);
   
   return (
     <section className={styles['product-page-wrapper']}>
