@@ -1,0 +1,58 @@
+$header-height: 10vh;
+
+html, body, * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    // font-family: "Monsieur La Doulaise", serif;
+    font-size: 20px;
+    word-spacing: 0.3em;
+}
+
+a, button {
+    all: unset;
+    color: inherit;
+    text-decoration: none;
+    will-change: filter;
+    cursor: pointer;
+}
+
+a:hover, button:hover {
+    text-shadow: 1px 1px 2px rgb(195, 195, 195);
+}
+
+textarea, input { 
+    outline: none; 
+}
+
+section {
+    padding: 0 10px;
+    margin-top: $header-height;
+}
+
+.mobile-only {
+    display: none;
+}
+
+.desktop-only {
+    display: none;
+}
+
+@media (max-width: 768px) { 
+    .mobile-only {
+        display: block;
+    }
+}
+
+@media (min-width: 769px) {
+    .desktop-only {
+        display: block;
+    }
+}
+
+@font-face {
+    src: url('https://fonts.googleapis.com/css2?family=Monsieur+La+Doulaise&display=swap');
+    font-family: "Monsieur La Doulaise", serif;
+    font-weight: 500;
+    font-style: normal;
+}
