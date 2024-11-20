@@ -1,6 +1,5 @@
 import { cookies } from 'next/headers';
-import { getCart } from '@/app/utils/getCart';
-import { getActiveProducts } from '@/app/utils/getActiveProducts';
+import { getCartProducts } from '@/app/utils/getCart';
 import styles from './cart.module.scss';
 import RemoveItem from '@/components/removeItem';
 import CheckoutButton from '@/components/checkout/checkoutButton';
@@ -11,16 +10,7 @@ export default async function Page() {
   const cartID = cookieStore.get('cart')?.value;
   if (!cartID) return null;
   // Get products array from sessions where cartID matches
-  const cartData = await getCart(cartID, false);
-  const activeProducts = await getActiveProducts();  
-
-  let activeProductsArray: string[] = [];
-  let cartDataArray: string[] = [];
-
-  if (cartData.products) {
-    activeProductsArray = activeProducts.map((product) => product.id);
-    cartDataArray = cartData.products.filter((item: string) => activeProductsArray.includes(item));
-  }
+  const cartDataArray = await getCartProducts(cartID, false);
 
   return (
     <section className={styles.cart}>

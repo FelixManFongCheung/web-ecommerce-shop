@@ -1,7 +1,6 @@
 import { Stripe } from 'stripe';
 import { NextResponse } from "next/server";
-import { getCart } from '@/app/utils/getCart';
-import { getActiveProducts } from '@/app/utils/getActiveProducts';
+import { getCart, getCartProducts } from '@/app/utils/getCart';
 import { getPriceId } from '@/app/utils/getPriceId';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
@@ -18,9 +17,7 @@ export async function POST(req: Request) {
         throw new Error('Cart is empty');
       }
       
-      const activeProducts = await getActiveProducts();
-      const activeProductsArray = activeProducts.map((product) => product.id);
-      const cartDataArray = cart.products!.filter((item: string) => activeProductsArray.includes(item));
+      const cartDataArray = await getCartProducts(cartID, false);
       const lineItems = await Promise.all(cartDataArray.map(async (id: string)=>({
         price: await getPriceId(stripe, id),
         quantity: 1,    
