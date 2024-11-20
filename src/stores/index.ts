@@ -1,23 +1,29 @@
 import { create } from 'zustand'
 
-interface AppState {
+export interface AppState {
   // State
   isOpen: boolean
   isCheckoutOpen: boolean
+  isCartOpen: boolean
 
   // Actions
   toggleOpen: () => void
   toggleCheckoutDialog: () => void
+  toggleCart: () => void
+  openCart: () => void
 }
 
 const useAppStore = create<AppState>((set) => ({
   // Initial state
   isOpen: false,
   isCheckoutOpen: false,
-  // Actions
-  toggleOpen: () => set((state) => ({isOpen: !state.isOpen})),
+  isCartOpen: false,
 
-  toggleCheckoutDialog: () => set((state) => ({isCheckoutOpen: !state.isCheckoutOpen}))
+  // Actions
+  toggleOpen: () => set((state) => ({ isOpen: !state.isOpen })),
+  toggleCheckoutDialog: () => set((state) => ({ isCheckoutOpen: !state.isCheckoutOpen })),
+  toggleCart: () => set((state) => ({ isCartOpen: !state.isCartOpen })),
+  openCart: () => set({ isCartOpen: true }),
 }))
 
 export default useAppStore

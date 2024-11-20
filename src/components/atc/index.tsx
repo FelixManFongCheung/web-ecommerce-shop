@@ -5,7 +5,7 @@ import { getCookie } from 'cookies-next';
 import styles from './atc.module.scss';
 import {useState} from 'react';
 import { clsx } from 'clsx';
-
+import useAppStore, { AppState } from '@/stores';
 interface ATCProp {
     productId: string;
     isATC: boolean
@@ -14,11 +14,14 @@ interface ATCProp {
 export default function ATC({productId, isATC}: ATCProp) {  
     const [ATCState, setATCState] = useState(isATC)
     const cartCookies = getCookie('cart');
+    const openCart = useAppStore((state: AppState) => state.openCart)
 
     const addToCart = async () => {
         let identifier: string;
+        openCart();
+        
         setATCState(true);
-        if (getCookie('cart')) {
+        if (cartCookies) {
             identifier = cartCookies as string;
         } else {
             identifier = uuidv7();

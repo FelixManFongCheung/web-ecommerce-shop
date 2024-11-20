@@ -4,7 +4,7 @@ import Checkout from '@/components/checkout';
 import ATC from '@/components/atc';
 import Image from 'next/image';
 import { cookies } from 'next/headers';
-import { getCart } from '@/app/utils/getCart';
+import { getCartServer } from '@/app/utils/getCart/server';
 import { getPriceId } from '@/app/utils/getPriceId';
 
 export default async function Page({ params }: { params: { product: string } }) {
@@ -12,7 +12,7 @@ export default async function Page({ params }: { params: { product: string } }) 
   const userCookies = cookies().get('cart')?.value;
   let isATC: boolean = false;
   if (userCookies) {
-    const cartItems = await getCart(userCookies, false);
+    const cartItems = await getCartServer(userCookies);
     isATC = cartItems.products?.includes(params.product) || false;
   }
   

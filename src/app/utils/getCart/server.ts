@@ -1,14 +1,8 @@
 import { createClient as createServerClient } from '@/lib/supabase/server';
-import { createClient as createBrowserClient } from '@/lib/supabase/client';
 import { getActiveProducts } from '@/app/utils/getActiveProducts';
 
-
-export async function getCart(cookies: string, isClient: boolean = false) {
-    // Choose the appropriate client based on context
-    const supabase = isClient 
-        ? createBrowserClient()
-        : await createServerClient();
-
+export async function getCartServer(cookies: string) {
+    const supabase = await createServerClient();
     const { data: cartData, error } = await supabase
         .from('sessions')
         .select('products')
@@ -19,8 +13,8 @@ export async function getCart(cookies: string, isClient: boolean = false) {
     return cartData;
 }
 
-export async function getCartProducts(cartID: string, isClient: boolean = false) {
-    const cartData = await getCart(cartID, isClient);
+export async function getCartProductsServer(cookies: string) {
+    const cartData = await getCartServer(cookies);
     const activeProducts = await getActiveProducts();
 
     let activeProductsArray: string[] = [];
@@ -33,4 +27,3 @@ export async function getCartProducts(cartID: string, isClient: boolean = false)
 
     return cartDataArray;
 }
-

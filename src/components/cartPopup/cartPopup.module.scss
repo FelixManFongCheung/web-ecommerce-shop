@@ -1,0 +1,28 @@
+.cart-popup {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+  
+    &__overlay {
+      position: absolute;
+      inset: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+  
+    &__content {
+      position: absolute;
+      right: 0;
+      top: 0;
+      height: 100%;
+      width: 100%;
+      max-width: 28rem; // 448px (md)
+      background-color: white;
+      padding: 1.5rem; // 24px
+    }
+  
+    &__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+}
