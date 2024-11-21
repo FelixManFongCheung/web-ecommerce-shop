@@ -1,15 +1,14 @@
-import ProductCard from '../../components/productCard';
-import styles from './products.module.scss';
 import { getActiveProducts } from '../utils/stripe';
+import { ClientProductSection } from '@/components/productSection';
+import { Suspense } from 'react';
 
 export default async function Page() {
-  const productList = await getActiveProducts();
+  // Server-side data fetching
+  const products = await getActiveProducts();
     
   return (
-    <section className={styles['products-container']}>
-      {productList.map((product, index) => (
-        <ProductCard key={index} product={product}/>
-      ))}
-    </section>
+    <Suspense fallback={<div>Loading...</div>}>
+      <ClientProductSection initialProducts={products} />
+    </Suspense>
   )
-};
+}
