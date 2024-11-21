@@ -5,6 +5,7 @@ import { useProductStore } from '@/stores/productStore';
 import ProductCard from '@/components/productCard';
 import styles from './productSection.module.scss';
 import type Stripe from 'stripe';
+import clsx from 'clsx';
 
 interface ClientProductSectionProps {
   initialProducts: Stripe.Product[];
@@ -55,22 +56,17 @@ export function ClientProductSection({ initialProducts }: ClientProductSectionPr
               </span>
             </button>
             
-            {openAccordions[key] && (
-              <div className={styles['accordion-content']}>
-                {values.map((value) => (
-                  <label key={value} className={styles['filter-option']}>
-                    <input
-                      type="checkbox"
-                      checked={selectedFilters[key] === value}
-                      onChange={() => updateFilter(key, 
-                        selectedFilters[key] === value ? 'all' : value
-                      )}
-                    />
-                    <span>{value}</span>
-                  </label>
-                ))}
-              </div>
-            )}
+            <div className={clsx(styles['accordion-content'], openAccordions[key] && styles.open)}>
+            {values.map((value) => (
+                <label 
+                onClick={() => updateFilter(key,  selectedFilters[key] === value ? 'all' : value)}
+                key={value} 
+                className={styles['filter-option']}
+                >
+                <span>{value}</span>
+                </label>
+            ))}
+            </div>
           </div>
         ))}
       </div>
