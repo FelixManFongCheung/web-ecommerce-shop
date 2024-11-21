@@ -27,6 +27,8 @@ export default function ATC({productId, isATC}: ATCProp) {
             identifier = uuidv7();
         }
 
+        openCart();
+
         await fetch('/api/cart', {
             method: 'POST',
             headers: {
@@ -37,8 +39,6 @@ export default function ATC({productId, isATC}: ATCProp) {
                 products: productId
             }), 
         })
-
-        openCart();
     }
     return (
         <button disabled={ATCState} className={clsx(styles['atc-btn'], ATCState && styles['atc-btn-disabled'])} onClick={addToCart}>Add to cart</button>
