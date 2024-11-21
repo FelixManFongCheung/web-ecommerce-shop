@@ -19,9 +19,7 @@ export default function ATC({productId, isATC}: ATCProp) {
     const openCart = useAppStore((state: AppState) => state.openCart)
 
     const addToCart = async () => {
-        let identifier: string;
-        openCart();
-        
+        let identifier: string;        
         setATCState(true);
         if (cartCookies) {
             identifier = cartCookies as string;
@@ -39,6 +37,8 @@ export default function ATC({productId, isATC}: ATCProp) {
                 products: productId
             }), 
         })
+
+        openCart();
     }
     return (
         <button disabled={ATCState} className={clsx(styles['atc-btn'], ATCState && styles['atc-btn-disabled'])} onClick={addToCart}>Add to cart</button>
