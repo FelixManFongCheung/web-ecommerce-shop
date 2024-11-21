@@ -40,7 +40,6 @@ export function ClientProductSection({ initialProducts }: ClientProductSectionPr
         const element = accordionRefs.current[key];        
         if (value && element) {
             const fullHeight = element.scrollHeight;
-            // Reset back and start transition from current height
             element.style.cssText = `height: ${fullHeight}px; overflow: hidden;`;
         } else if (element) {
             element.style.cssText = `height: 0; overflow: hidden;`;
