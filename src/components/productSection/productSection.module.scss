@@ -1,8 +1,8 @@
 $header-height: 10vh;
 
-.productsContainer {
+.products-container {
     display: grid;
-    grid-template-columns: 250px 1fr;
+    grid-template-columns: 200px 1fr;
     gap: 2rem;
     max-width: 1400px;
     margin: $header-height auto 0;
@@ -18,7 +18,7 @@ $header-height: 10vh;
     height: fit-content;
 }
   
-.resetButton {
+.reset-button {
     padding: 0.5rem 1rem;
     background: white;
     cursor: pointer;
@@ -38,7 +38,7 @@ $header-height: 10vh;
     }
 }
   
-.accordionHeader {
+.accordion-header {
     width: 100%;
     padding: 1rem 0;
     display: flex;
@@ -56,14 +56,14 @@ $header-height: 10vh;
     }
 }
   
-.accordionContent {
+.accordion-content {
     padding: 0.5rem 0 1rem;
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
 }
   
-.filterOption {
+.filter-option {
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -85,7 +85,7 @@ $header-height: 10vh;
     }
 }
   
-.productsGrid {
+.products-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 2rem;

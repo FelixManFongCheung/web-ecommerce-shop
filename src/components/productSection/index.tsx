@@ -33,11 +33,11 @@ export function ClientProductSection({ initialProducts }: ClientProductSectionPr
   };
 
   return (
-    <section className={styles.productsContainer}>
+    <section className={styles['products-container']}>
       <div className={styles.filters}>
         <button 
         onClick={resetFilters} 
-        className={styles.resetButton}
+        className={styles['reset-button']}
         >
         Reset All
         </button>
@@ -45,7 +45,7 @@ export function ClientProductSection({ initialProducts }: ClientProductSectionPr
         {Object.entries(filterOptions).map(([key, values]) => (
           <div key={key} className={styles.accordion}>
             <button
-              className={styles.accordionHeader}
+              className={styles['accordion-header']}
               onClick={() => toggleAccordion(key)}
               aria-expanded={openAccordions[key]}
             >
@@ -56,9 +56,9 @@ export function ClientProductSection({ initialProducts }: ClientProductSectionPr
             </button>
             
             {openAccordions[key] && (
-              <div className={styles.accordionContent}>
+              <div className={styles['accordion-content']}>
                 {values.map((value) => (
-                  <label key={value} className={styles.filterOption}>
+                  <label key={value} className={styles['filter-option']}>
                     <input
                       type="checkbox"
                       checked={selectedFilters[key] === value}
@@ -75,7 +75,7 @@ export function ClientProductSection({ initialProducts }: ClientProductSectionPr
         ))}
       </div>
 
-      <div className={styles.productsGrid}>
+      <div className={styles['products-grid']}>
         {filteredProducts.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}
