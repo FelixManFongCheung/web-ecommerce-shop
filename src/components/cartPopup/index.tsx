@@ -4,13 +4,14 @@ import useAppStore, { AppState } from '@/stores';
 import { getCartProductsClient } from '@/app/utils/getCart/client';
 import { getCookie } from 'cookies-next';
 import { useEffect, useState } from 'react';
-import styles from './cartPopup.module.scss'
+import styles from './cartPopup.module.scss';
+import Stripe from 'stripe';
 
 export function CartPopup() {
   const isCartOpen = useAppStore((state: AppState) => state.isCartOpen);
   const toggleCart = useAppStore((state: AppState) => state.toggleCart);
   const cartCookies = getCookie('cart');
-  const [cartProducts, setCartProducts] = useState<string[]>([]);
+  const [cartProducts, setCartProducts] = useState<Stripe.Product[]>([]);
 
   useEffect(() => {
     const showCartProducts = async () => {
@@ -34,8 +35,8 @@ export function CartPopup() {
           <h2>Your Cart</h2>
           <button onClick={toggleCart}>×</button>
         </div>
-        {cartProducts.map((productId) => (
-          <div key={productId}>{productId}</div>
+        {cartProducts.map((product) => (
+          <div key={product.id}>{product.name}</div>
         ))}
       </div>
     </div>

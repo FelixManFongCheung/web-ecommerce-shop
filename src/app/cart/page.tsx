@@ -3,6 +3,7 @@ import { getCartProductsServer } from '@/app/utils/getCart/server';
 import styles from './cart.module.scss';
 import RemoveItem from '@/components/removeItem';
 import CheckoutButton from '@/components/checkout/checkoutButton';
+import Stripe from 'stripe';
 
 
 export default async function Page() {  
@@ -15,9 +16,9 @@ export default async function Page() {
   return (
     <section className={styles.cart}>
       {cartDataArray && cartDataArray.length > 0 ? 
-      (cartDataArray.map((item: string) => (
-        <RemoveItem key={item} cartID={cartID} productId={item}>
-          <div>{item}</div>
+      (cartDataArray.map((product: Stripe.Product) => (
+        <RemoveItem key={product.id} cartID={cartID} productId={product.id}>
+          <div>{product.name}</div>
         </RemoveItem>
       ))) : 
       (<div>empty cart</div>)}

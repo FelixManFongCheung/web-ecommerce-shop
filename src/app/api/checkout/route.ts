@@ -16,8 +16,8 @@ export async function POST(req: Request) {
       }
       
       const cartDataArray = await getCartProductsServer(cartID);
-      const lineItems = await Promise.all(cartDataArray.map(async (id: string)=>({
-        price: await getPriceId(id),
+      const lineItems = await Promise.all(cartDataArray.map(async (product: Stripe.Product)=>({
+        price: await getPriceId(product.id),
         quantity: 1,    
       })));
 

@@ -1,5 +1,6 @@
 import { createClient as createBrowserClient } from '@/lib/supabase/client';
 import { getActiveProducts } from '../stripe';
+import Stripe from 'stripe';
 
 
 export async function getCartClient(cookies: string) {
@@ -18,13 +19,11 @@ export async function getCartProductsClient(cookies: string) {
     const cartData = await getCartClient(cookies);
     const activeProducts = await getActiveProducts();
 
-    let activeProductsArray: string[] = [];
-    let cartDataArray: string[] = [];
+    let activeProductsArray: Stripe.Product[] = [];
   
     if (cartData.products) {
-      activeProductsArray = activeProducts.map((product) => product.id);
-      cartDataArray = cartData.products.filter((item: string) => activeProductsArray.includes(item));
+      activeProductsArray = activeProducts.filter((product) => cartData.products.includes(product.id));
     }
 
-    return cartDataArray;
+    return activeProductsArray;
 }
