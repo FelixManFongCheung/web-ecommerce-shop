@@ -13,7 +13,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Effect />
+        {/* <Effect /> */}
         <MobileNav />
         <Header />
         {children}

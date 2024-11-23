@@ -1,0 +1,23 @@
+.hero {
+    position: relative;
+    background-color: #000;
+
+    .snake {
+        display: block;
+        position: absolute;
+        width: 250px;
+        height: calc(250px * 4/3);
+        background-color: #3c10e9;
+    }
+}
+
+@keyframes blink {
+    to {
+        visibility: hidden;
+    }
+}
+
+.blinking {
+    animation: blink 0.7s steps(5, start) 3;
+    -webkit-animation: blink 0.5s steps(5, start) 3;
+}
