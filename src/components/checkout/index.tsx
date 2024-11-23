@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
 import useAppStore from '@/stores';
 import {
@@ -10,6 +10,7 @@ import {
 import ModalWrapper from '../modalWrapper';
 import styles from './checkout.module.scss';
 import clsx from 'clsx';
+import { createEmbeddedCheckout } from '@/app/utils/checkout';
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY as string);
 
@@ -22,6 +23,7 @@ export default function Checkout({priceID}: CheckoutType) {
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);  
   const [isMouseOver, setIsMouseOver] = useState(false);
+  const [clientSecret, setClientSecret] = useState<string | null>(null);
 
   const fetchClientSecret = useCallback(async () => {
     setError(null);
@@ -31,26 +33,16 @@ export default function Checkout({priceID}: CheckoutType) {
         throw new Error('Price ID is required');
       }
 
-      const response = await fetch("/api/embedded-checkout", {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          priceId: priceID,
-          timestamp: Date.now(),
-          // userId: user?.id,
-        })
-      })
+      const response = await createEmbeddedCheckout(priceID);
 
-      if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.message);
+      if (!response.success) {
+        const error = response.error;
+        throw new Error(error);
       }
 
-      const data = await response.json();
+      const data = response.data;
       
-      return data.clientSecret;
+      return data!.clientSecret;
 
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred');
@@ -59,6 +51,12 @@ export default function Checkout({priceID}: CheckoutType) {
       setIsLoading(false);
     }
   }, [priceID]);
+
+  useEffect(() => {
+    fetchClientSecret()
+      .then(secret => setClientSecret(secret))
+      .catch(() => {}); // Error is already handled in fetchClientSecret
+  }, [fetchClientSecret]);
 
   const handleMouseEnter = () => {
     setIsMouseOver(true);
@@ -69,7 +67,7 @@ export default function Checkout({priceID}: CheckoutType) {
   }
 
   const options = {
-    fetchClientSecret,
+    clientSecret,
     onComplete: () => store.toggleCheckoutDialog()
   };
 
@@ -92,7 +90,7 @@ export default function Checkout({priceID}: CheckoutType) {
         </div>
       )}
       
-      {store.isCheckoutOpen &&
+      {store.isCheckoutOpen && clientSecret && (
         <ModalWrapper>
           <div id="checkout">
             <EmbeddedCheckoutProvider
@@ -103,7 +101,7 @@ export default function Checkout({priceID}: CheckoutType) {
             </EmbeddedCheckoutProvider>
           </div>
         </ModalWrapper>
-      }
+      )}
     </>
   )
 }

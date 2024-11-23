@@ -33,7 +33,7 @@ export default async function Page({ params }: { params: { product: string } }) 
       <div className={styles['product-info']}>
         <div className={styles['product-title']}>{product.name}</div>
         <div className={styles['product-desc']}>{product.description}</div>
-        <ATC isATC={isATC} productId={product.id}/>
+        <ATC isATC={isATC} product={productResponse}/>
         <Checkout priceID={priceID}/>
       </div>
     </section>
