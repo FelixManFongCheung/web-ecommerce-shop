@@ -20,7 +20,7 @@ export default async function Page() {
       (cartDataArray.map((product: Stripe.Product) => (
         <RemoveItem key={product.id} cartID={cartID} productId={product.id}>
           <div className={styles['image-wrapper']}>
-            <Image src={product.images[0]} alt={product.name} width={100} height={100} />
+            <Image src={product.images[0]} alt={product.name} fill/>
           </div>
         </RemoveItem>
       ))) : 
