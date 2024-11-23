@@ -21,7 +21,6 @@ export function CartPopup() {
         if (cartCookies) {
           const cartProducts = await getCartProductsClient(cartCookies as string);
           setCartProducts(cartProducts);
-          console.log('cartProducts state changed with', cartProducts);
         }
       } catch (error) {
         console.error('Error fetching cart products:', error);

@@ -6,15 +6,14 @@ import styles from './atc.module.scss';
 import {useState} from 'react';
 import { clsx } from 'clsx';
 import useAppStore, { AppState } from '@/stores';
-import Stripe from 'stripe';
-
-interface ATCProp {
-    product: Stripe.Product;
-    isATC: boolean
-}
 import { addToCart } from '@/app/utils/cart';
 
-export default function ATC({product, isATC}: ATCProp) {  
+interface ATCProp {
+    productId: string,
+    isATC: boolean
+}
+
+export default function ATC({productId, isATC}: ATCProp) {  
     const [ATCState, setATCState] = useState(isATC)
     const cartCookies = getCookie('cart');
 
@@ -29,7 +28,7 @@ export default function ATC({product, isATC}: ATCProp) {
             identifier = uuidv7();
         }
 
-        await addToCart(identifier, product);
+        await addToCart(identifier, productId);
         
         openCart();
     }

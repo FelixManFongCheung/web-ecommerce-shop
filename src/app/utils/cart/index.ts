@@ -3,6 +3,7 @@
 
 import { createClient } from '@/lib/supabase/server';
 import { cookies } from 'next/headers';
+import { revalidatePath } from 'next/cache';
 import Stripe from 'stripe';
 
 type CartResponse = {
@@ -12,7 +13,7 @@ type CartResponse = {
   cartID?: string
 }
 
-export async function addToCart(identifier: string, product: Stripe.Product): Promise<CartResponse> {
+export async function addToCart(identifier: string, productId: string): Promise<CartResponse> {
   try {
     const supabase = await createClient()
     const cookieStore = cookies()
@@ -33,8 +34,8 @@ export async function addToCart(identifier: string, product: Stripe.Product): Pr
 
       // Combine existing and new products
       const updatedProducts = existingData?.products 
-        ? [...existingData.products, product].flat()
-        : [product]
+        ? [...existingData.products, productId].flat()
+        : [productId]
 
       // Update cart
       const { error: updateError } = await supabase
@@ -47,6 +48,9 @@ export async function addToCart(identifier: string, product: Stripe.Product): Pr
         })
 
       if (updateError) throw updateError
+
+      // Revalidate after successful update
+      revalidatePath('/cart')
 
       return {
         success: true,
@@ -61,7 +65,7 @@ export async function addToCart(identifier: string, product: Stripe.Product): Pr
       .from('sessions')
       .insert({
         cartID: identifier,
-        products: [product],
+        products: [productId],
         expires_in: new Date(Date.now() + (ONE_MONTH * 1000)).toISOString(),
       })
 
@@ -77,6 +81,9 @@ export async function addToCart(identifier: string, product: Stripe.Product): Pr
       path: '/',
       maxAge: ONE_MONTH
     })
+
+    // Revalidate after successful creation
+    revalidatePath('/cart')
 
     return {
       success: true,
