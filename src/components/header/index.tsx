@@ -18,6 +18,9 @@ export default function Header() {
               <Link href='/about'>about</Link>
               <Link href='/visit'>visit us</Link>
           </div>
+          <div className={styles.middle}>
+            <Link href='/'>logo</Link>
+          </div>
           <div className={styles.right}>
             <Link href="/contact">contact</Link>
             <Link href="/search">Search</Link>

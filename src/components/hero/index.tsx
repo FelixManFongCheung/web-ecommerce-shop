@@ -15,64 +15,56 @@ export default function Hero() {
     let startX: number;
 
     type pointType = {
-    currentX: number,
-    currentY: number,
-      targetX: number,
-      targetY: number,
-      incrementX: number
+      currentX: number,
+      currentY: number,
+      incrementX: number,
+      amplitude: number,
+      frequency: number,
+      maxAmplitude: number 
     }
-    let apex: number;
-    let nadirY: number;
-    let nadirX: number;
     let point: pointType;
 
     if (heroRef && canvasWidth && canvasHeight) {
-      apex = 0.4 * canvasWidth;
-      nadirY = 200;
-      nadirX = 0.6 * canvasWidth;
-      startY = canvasHeight/2-(250*4/3)/2;
-      startX = canvasWidth*0.1;      
+      startX = canvasWidth * 0.05;
+      startY = canvasHeight / 2 - (250 * 4/3/2);
 
-    point = {
-      currentX: startX,
-      currentY: startY,
-      targetX: apex,
-      targetY: 12,
-      incrementX: 10
+      point = {
+        currentX: startX,
+        currentY: startY,
+        incrementX: 7,
+        amplitude: 50,
+        frequency: 1,
+        maxAmplitude: startY - 5
       };
     }
 
     const setupImage = async () => {
-      const image = document.createElement('div');
-      image.className = styles.snake;
-      return image;
+        const image = document.createElement('div');
+        image.className = styles.snake;
+        return image;
     };
 
-    const imagePosSineUp = (image: HTMLDivElement, xIncrement: number) => {
+    const imagePosWave = (image: HTMLDivElement, xIncrement: number) => {        
         image.style.left = `${point.currentX}px`;
         image.style.top = `${point.currentY}px`;
-        const progress = (point.currentX - startX) / (point.targetX - startX);
-        point.currentY = startY - (point.targetY * Math.sin(progress * Math.PI/2) * 5); // multiply by 3
-        point.currentX += xIncrement;
-    }
-
-    const imagePosExpDown = (image: HTMLDivElement, xIncrement: number) => {
-        image.style.left = `${point.currentX}px`;
-        image.style.top = `${point.currentY}px`;
-        const progress = (point.currentX - apex) / (nadirX - apex);
-        const decay = Math.exp(-progress);
-        point.currentY = point.targetY + (nadirY - point.targetY) * (1-decay);
-        console.log(decay);
+        const progress = (point.currentX - startX) / ((canvasWidth ?? 0) * 0.4);
+        const angle = progress * (3 * Math.PI / 2);
         
+        const sineValue = Math.sin(angle * point.frequency);
+        const clampedAmplitude = Math.min(point.amplitude * Math.abs(sineValue), point.maxAmplitude);
+        point.currentY = startY - (clampedAmplitude * Math.sign(sineValue));
         point.currentX += xIncrement;
     }
 
-    const animation = async () => {        
-        while (point.currentX <= point.targetX) {
+    const animation = async () => {
+        const endX = startX + ((canvasWidth ?? 0) * 0.4);
+        console.log(endX);
+        
+        while (point.currentX <= endX) {
             const image = await setupImage();
-            imagePosSineUp(image, point.incrementX);
+            imagePosWave(image, point.incrementX);
+            
             if (heroRef.current && heroRef.current.childNodes.length === 0) {
-                // Add to DOM
                 await new Promise(resolve => setTimeout(resolve, 100));
                 wrapper?.appendChild(image);
                 image.classList.add(styles.blinking);
@@ -81,13 +73,6 @@ export default function Hero() {
                 await new Promise(resolve => setTimeout(resolve, 100));
                 wrapper?.appendChild(image);
             }
-        }
-        
-        while (point.currentX > point.targetX && point.currentX <= nadirX) {
-            const image = await setupImage();
-            imagePosExpDown(image, point.incrementX);
-            await new Promise(resolve => setTimeout(resolve, 100));
-            wrapper?.appendChild(image);
         }
     }
 

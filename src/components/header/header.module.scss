@@ -19,6 +19,12 @@ $gap: 20px;
         gap: $gap;
     }
 
+    .middle {
+        position: relative;
+        display: flex;
+        align-items: center;
+    }
+
     .right {
         position: relative;
         display: flex;
