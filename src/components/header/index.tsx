@@ -23,8 +23,8 @@ export default function Header() {
           </div>
           <div className={styles.right}>
             <Link href="/contact">contact</Link>
-            <Link href="/search">Search</Link>
-            <Link href='/cart'>Cart</Link>
+            <Link href="/search">search</Link>
+            <Link href='/cart'>cart</Link>
           </div>
       </div>
       <CartPopup />

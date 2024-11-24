@@ -2,7 +2,7 @@ import styles from './visit.module.scss';
 
 export default function Visit() {
   return (
-    <section className={styles['visit']}>
+    <section className='text-page'>
         <p>Proxy Archive is an online vintage archive with a showroom available by appointment only. To
         schedule a visit, contact us at info@proxyarchive.com.</p>
         <br />
