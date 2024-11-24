@@ -1,7 +1,6 @@
 'use client';
 
 import styles from './hero.module.scss';
-import Snake from '../effects/snake';
 import { useRef, useEffect } from 'react';
 
 export default function Hero() {

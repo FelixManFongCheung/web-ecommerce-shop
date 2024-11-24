@@ -1,5 +1,3 @@
-import styles from './visit.module.scss';
-
 export default function Visit() {
   return (
     <section className='text-page'>
