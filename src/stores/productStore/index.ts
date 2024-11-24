@@ -18,11 +18,13 @@ export const useProductStore = create<ProductState>((set) => ({
   selectedFilters: {},
 
   setProducts: (products) => {
-    // Extract unique metadata values
+    const relevantFilters = ['categories', 'designers'];
     const filters = products.reduce((acc, product) => {
       Object.entries(product.metadata).forEach(([key, value]) => {
-        if (!acc[key]) acc[key] = new Set();
-        acc[key].add(value);
+        if (relevantFilters.includes(key)) {
+          if (!acc[key]) acc[key] = new Set();
+          acc[key].add(value);
+        }
       });
       return acc;
     }, {} as Record<string, Set<string>>);

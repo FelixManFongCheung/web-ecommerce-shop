@@ -47,6 +47,11 @@ export async function getActiveProducts() {
     return products.data;  
 }
 
+export async function getProductsAll() {
+    const products = await stripe.products.list();
+    return products.data;
+}
+
 export async function getProduct(productId: string) {
     const product = await stripe.products.retrieve(productId);
     return product;

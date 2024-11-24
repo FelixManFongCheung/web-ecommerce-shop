@@ -20,7 +20,6 @@ export default async function Page({
     session = await response.json();    
   } else {
     session = await retrieveSession(searchParams.session_id);
-    console.log(session.status);
   }
 
   // Handle different session statuses

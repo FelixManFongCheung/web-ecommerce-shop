@@ -19,7 +19,7 @@ export default function Header() {
               <Link href='/visit'>visit us</Link>
           </div>
           <div className={styles.middle}>
-            <Link href='/'>logo</Link>
+            <Link href='/'><strong>proxy archive</strong></Link>
           </div>
           <div className={styles.right}>
             <Link href="/contact">contact</Link>

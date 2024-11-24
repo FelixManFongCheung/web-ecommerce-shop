@@ -2,10 +2,8 @@ $header-height: 10vh;
 
 .products-container {
     display: grid;
-    grid-template-columns: 200px 1fr;
+    grid-template-columns: 100px 1fr;
     gap: 2rem;
-    max-width: 1400px;
-    margin: $header-height auto 0;
   
     @media (max-width: 768px) {
       grid-template-columns: 1fr;
@@ -79,6 +77,15 @@ $header-height: 10vh;
   
 .products-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    grid-template-columns: repeat(1, 1fr);
     gap: 2rem;
+    padding: 0 5rem;
+    // Tablet (768px and up)
+    @media (min-width: 768px) {
+        grid-template-columns: repeat(2, minmax(100px, 1fr));
+    }
+     // Desktop (1024px and up)
+     @media (min-width: 1024px) {
+        grid-template-columns: repeat(3, minmax(100px, 1fr));
+    }
 }

@@ -23,6 +23,17 @@ $gap: 20px;
         position: relative;
         display: flex;
         align-items: center;
+        strong {
+            font-size: 18px;
+
+            &::after {
+                content: '*';
+                font-size: 10px;
+                align-self: first baseline;
+                position: relative;
+                top: -3px;
+            }
+        }
     }
 
     .right {
