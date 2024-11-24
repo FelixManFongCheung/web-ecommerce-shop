@@ -68,7 +68,7 @@ export default function Hero() {
                 await new Promise(resolve => setTimeout(resolve, 100));
                 wrapper?.appendChild(image);
                 image.classList.add(styles.blinking);
-                await new Promise(resolve => setTimeout(resolve, 2100));
+                await new Promise(resolve => setTimeout(resolve, 1300));
             } else {
                 await new Promise(resolve => setTimeout(resolve, 100));
                 wrapper?.appendChild(image);

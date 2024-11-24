@@ -7,17 +7,19 @@
         position: absolute;
         width: 250px;
         height: calc(250px * 4/3);
-        background-color: #3c10e9;
+        background-image: url('/image/resource.JPG');  // Add this line
+        background-size: cover;  // Optional: helps with image fitting
+        background-repeat: no-repeat;  // Optional: prevents repeating
     }
 }
 
 @keyframes blink {
-    to {
-        visibility: hidden;
+    50% {
+        opacity: 0;
     }
 }
 
 .blinking {
-    animation: blink 0.7s steps(5, start) 3;
-    -webkit-animation: blink 0.5s steps(5, start) 3;
+    animation: blink 0.5s linear 1.5;
+    -webkit-animation: blink 0.5s linear 1.5;
 }
