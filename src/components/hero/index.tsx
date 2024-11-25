@@ -30,7 +30,7 @@ export default function Hero() {
       point = {
         currentX: startX,
         currentY: startY,
-        incrementX: 7,
+        incrementX: 15,
         amplitude: 50,
         frequency: 1,
         maxAmplitude: startY - 5
@@ -57,7 +57,6 @@ export default function Hero() {
 
     const animation = async () => {
         const endX = startX + ((canvasWidth ?? 0) * 0.4);
-        console.log(endX);
         
         while (point.currentX <= endX) {
             const image = await setupImage();
