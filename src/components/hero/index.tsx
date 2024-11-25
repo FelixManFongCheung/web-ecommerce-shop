@@ -79,7 +79,6 @@ export default function Hero() {
 
   return (
     <div ref={heroRef} className={styles.hero}>
-      {/* <Snake /> */}
     </div>
   )
 }
