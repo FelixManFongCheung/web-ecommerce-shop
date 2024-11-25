@@ -5,7 +5,10 @@ import Image from 'next/image';
 import Stripe from 'stripe';
 import { getPriceId, retrievePrice } from '@/app/utils/stripe';
 
-async function ProductCard({product}: {product: Stripe.Product}) {
+async function ProductCard({product, collection}: {
+  product: Stripe.Product;
+  collection?: string;
+}) {
   const priceId = await getPriceId(product.id);
   const price = await retrievePrice(priceId);
 
@@ -14,7 +17,10 @@ async function ProductCard({product}: {product: Stripe.Product}) {
   
   return (
     <div className={styles.container}>
-        <Link className={styles.link} href={`/products/${product.id}`}>
+        <Link 
+          className={styles.link} 
+          href={`/collections/${collection || 'all'}/products/${product.id}`}
+        >
             <Image 
               className={styles.image} 
               src={imageUrls[0]} 
