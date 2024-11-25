@@ -2,7 +2,6 @@ import styles from './styles.module.css';
 
 export default function Filter({ filters }: { filters: Record<string, Set<string>> }) {
 
-  const addToQuery = (key: string, value: string) => {
   return <div className={styles.filter}>
     {Object.entries(filters).map(([key, values]) => (
       <div key={key}>
