@@ -1,4 +1,4 @@
-import styles from './styles.module.css';
+import styles from './filter.module.scss';
 
 export default function Filter({ filters }: { filters: Record<string, Set<string>> }) {
 

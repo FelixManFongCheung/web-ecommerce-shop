@@ -13,7 +13,7 @@ export default function Header() {
             <button onClick={store.toggleOpen}>vbjdfvhbdfbjv</button>
           </div>
           <div className={styles.left}>
-              <Link href='/collections'>shop</Link>
+              <Link href='/collections/all'>shop</Link>
               <Link href='/'>archive</Link>
               <Link href='/about'>about</Link>
               <Link href='/visit'>visit us</Link>
