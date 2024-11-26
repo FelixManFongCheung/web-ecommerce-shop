@@ -30,6 +30,8 @@ export default async function Page() {
   if (!cartID) return null;
   // Get products array from sessions where cartID matches
   const cartDataArray = await getCartProductsServer(cartID);
+  console.log('cart page');
+  
 
   return (
     <section className={styles.cart}>
