@@ -1,27 +1,29 @@
 .product-page-wrapper {
-    position: relative;
+    padding: 6rem 7rem;
     display: flex;
-    
-    .image-wrapper {
-        flex-basis: 400px;
+    gap: 4rem;
+    width: 100%;
+
+    .image-container {
         position: relative;
-        padding-top: 100%;
+        flex: 1;
+
+        .image-wrapper {
+            position: relative;
+            aspect-ratio: 3/4;
+            width: 100%;
+            margin-bottom: 2rem;
+        }
         img {
             position: absolute;
             top: 0;
+            left: 0;
             width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
     }    
     .product-info {
-        flex-grow: 1;
-    }
-    .buy-now {
-        all: unset;
-        width: 100px;
-        height: 50px;
-        border-radius: 10px;
-        background-color: rgb(255, 197, 7);
-        border: 1px solid #000;
-        cursor: pointer;
+        flex: 1;
     }
 }
