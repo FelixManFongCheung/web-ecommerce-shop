@@ -27,11 +27,12 @@ function CartItems({cartDataArray, cartID}: {cartDataArray: Stripe.Product[], ca
 export default async function Page() {  
   const cookieStore = cookies();
   const cartID = cookieStore.get('cart')?.value;
-  if (!cartID) return null;
-  // Get products array from sessions where cartID matches
+  if (!cartID) return <div>empty cart</div>;
+
   const cartDataArray = await getCartProductsServer(cartID);
-  console.log('cart page');
+  if (!cartDataArray) return <div>empty cart</div>;
   
+  console.log('cart page');
 
   return (
     <section className={styles.cart}>
