@@ -6,6 +6,23 @@ import CheckoutButton from '@/components/checkout/checkoutButton';
 import Stripe from 'stripe';
 import Image from 'next/image';
 
+function CartItems({cartDataArray, cartID}: {cartDataArray: Stripe.Product[], cartID: string}) {
+  return (
+    cartDataArray.map((product: Stripe.Product) => (
+      <RemoveItem key={product.id} cartID={cartID} productId={product.id}>
+        <div className={styles['image-wrapper']}>
+          <Image 
+            src={product.images[0]} 
+            alt={product.name} 
+            fill
+            sizes="(max-width: 768px) 60vw, (max-width: 1200px) 50vw, 33vw"
+          />
+        </div>
+      </RemoveItem>
+    ))
+  )
+}
+
 
 export default async function Page() {  
   const cookieStore = cookies();
@@ -17,20 +34,11 @@ export default async function Page() {
   return (
     <section className={styles.cart}>
       {cartDataArray && cartDataArray.length > 0 ? 
-      (cartDataArray.map((product: Stripe.Product) => (
-        <RemoveItem key={product.id} cartID={cartID} productId={product.id}>
-          <div className={styles['image-wrapper']}>
-            <Image 
-              src={product.images[0]} 
-              alt={product.name} 
-              fill
-              sizes="(max-width: 768px) 60vw, (max-width: 1200px) 50vw, 33vw"
-            />
-          </div>
-        </RemoveItem>
-      ))) : 
-      (<div>empty cart</div>)}
-      <CheckoutButton cartID={cartID} />
+        (<>
+          <CartItems cartDataArray={cartDataArray} cartID={cartID} />
+          <CheckoutButton cartID={cartID} />
+        </>)
+      : (<div>empty cart</div>)}
     </section>
   )
 }
