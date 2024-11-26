@@ -1,10 +1,10 @@
 import styles from './product.module.scss';
-import Checkout from '@/components/checkout';
+// import Checkout from '@/components/checkout';
 import ATC from '@/components/atc';
 import Image from 'next/image';
 import { cookies } from 'next/headers';
 import { getCartServer } from '@/app/utils/getCart/server';
-import { getProduct, getPriceId } from '@/app/utils/stripe';
+import { getProduct } from '@/app/utils/stripe';
 
 export default async function Page({ params }: { params: { product: string } }) {
   const userCookies = cookies().get('cart')?.value;
@@ -23,7 +23,7 @@ export default async function Page({ params }: { params: { product: string } }) 
     description: productResponse.description
   };
 
-  const priceID = await getPriceId(product.id);
+  // const priceID = await getPriceId(product.id);
   
   return (
     <section className={styles['product-page-wrapper']}>
@@ -34,7 +34,7 @@ export default async function Page({ params }: { params: { product: string } }) 
         <div className={styles['product-title']}>{product.name}</div>
         <div className={styles['product-desc']}>{product.description}</div>
         <ATC isATC={isATC} productId={product.id}/>
-        <Checkout priceID={priceID}/>
+        {/* <Checkout priceID={priceID}/> */}
       </div>
     </section>
   )
