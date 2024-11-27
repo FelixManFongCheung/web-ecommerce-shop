@@ -32,8 +32,6 @@ export default async function Page() {
   const cartDataArray = await getCartProductsServer(cartID);
   if (!cartDataArray) return <div>empty cart</div>;
   
-  console.log('cart page');
-
   return (
     <section className={styles.cart}>
       {cartDataArray && cartDataArray.length > 0 ? 
