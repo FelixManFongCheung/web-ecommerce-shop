@@ -4,27 +4,37 @@ import useAppStore, { AppState } from '@/stores';
 import { getCartProductsClient } from '@/app/utils/getCart/client';
 import { getCookie } from 'cookies-next';
 import { useEffect, useState } from 'react';
-import styles from './cartPopup.module.scss'
+import styles from './cartPopup.module.scss';
+import Stripe from 'stripe';
 
 export function CartPopup() {
   const isCartOpen = useAppStore((state: AppState) => state.isCartOpen);
   const toggleCart = useAppStore((state: AppState) => state.toggleCart);
   const cartCookies = getCookie('cart');
-  const [cartProducts, setCartProducts] = useState<string[]>([]);
+  const [cartProducts, setCartProducts] = useState<Stripe.Product[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const showCartProducts = async () => {
-        console.log('cartCookies', cartCookies);
-        
+      setIsLoading(true);
+      try {
         if (cartCookies) {
           const cartProducts = await getCartProductsClient(cartCookies as string);
           setCartProducts(cartProducts);
         }
+      } catch (error) {
+        console.error('Error fetching cart products:', error);
+      } finally {
+        setIsLoading(false);
+      }
     }
-    showCartProducts();
-  }, [cartCookies]);
+    
+    if (isCartOpen) {
+      showCartProducts();
+    }
+  }, [cartCookies, isCartOpen]);
 
-  if (!isCartOpen) return null
+  if (!isCartOpen) return null;
 
   return (
     <div className={styles['cart-popup']}>
@@ -34,9 +44,13 @@ export function CartPopup() {
           <h2>Your Cart</h2>
           <button onClick={toggleCart}>×</button>
         </div>
-        {cartProducts.map((productId) => (
-          <div key={productId}>{productId}</div>
-        ))}
+        {isLoading ? (
+          <div>Loading...</div>
+        ) : (
+          cartProducts.map((product) => (
+            <div key={product.id}>{product.name}</div>
+          ))
+        )}
       </div>
     </div>
   )

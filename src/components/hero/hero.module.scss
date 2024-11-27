@@ -1,0 +1,25 @@
+.hero {
+    position: relative;
+    background-color: #000;
+
+    .snake {
+        display: block;
+        position: absolute;
+        width: 250px;
+        height: calc(250px * 4/3);
+        background-image: url('/image/resource.JPG');  // Add this line
+        background-size: cover;  // Optional: helps with image fitting
+        background-repeat: no-repeat;  // Optional: prevents repeating
+    }
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}
+
+.blinking {
+    animation: blink 0.5s linear 1.5;
+    -webkit-animation: blink 0.5s linear 1.5;
+}

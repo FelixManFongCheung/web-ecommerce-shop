@@ -10,13 +10,30 @@ $gap: 20px;
     z-index: 1;
     width: 100%;
     justify-content: space-between;
-    padding: 0 10px;
+    padding: 0 20px;
     
     .left {
         position: relative;
         display: flex;
         align-items: center;
         gap: $gap;
+    }
+
+    .middle {
+        position: relative;
+        display: flex;
+        align-items: center;
+        strong {
+            font-size: 18px;
+
+            &::after {
+                content: '*';
+                font-size: 10px;
+                align-self: first baseline;
+                position: relative;
+                top: -3px;
+            }
+        }
     }
 
     .right {

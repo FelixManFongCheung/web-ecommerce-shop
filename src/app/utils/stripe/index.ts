@@ -10,16 +10,21 @@ export async function getPriceId(productId: string) {
     return prices.data[0].id;
 }
 
-export async function searchProducts(query: string) {
+type collectionType = {
+  metadataName?: string;
+  metadataQuery: string;
+}
+
+export async function searchProducts(query: string, collection?: collectionType) {
     try {
       // Create two separate searches for name and description
       if (query) {
         const [nameSearch, descriptionSearch] = await Promise.all([
           stripe.products.search({
-            query: `active:'true' AND name~'${query}'`,
+            query: `name~'${query}'`,
           }),
           stripe.products.search({
-            query: `active:'true' AND description~'${query}'`,
+            query: `description~'${query}'`,
           })
         ]);
   
@@ -30,8 +35,19 @@ export async function searchProducts(query: string) {
         );
   
         return { products: uniqueProducts };
+      } else if (collection) {
+        let products;
+        if (collection.metadataName) {
+          products = await stripe.products.search({
+            query: `metadata['${collection.metadataName}']:'${collection.metadataQuery}'`,
+          });
+        } else {
+          products = await stripe.products.search({
+            query: `metadata['categories']:'${collection.metadataQuery}'`,
+          });
+        }
+        return { products: products.data };
       }
-  
       return {};
     } catch (error) {
       console.error('Stripe search error:', error);
@@ -45,6 +61,11 @@ export async function getActiveProducts() {
       active: true
     });
     return products.data;  
+}
+
+export async function getProductsAll() {
+    const products = await stripe.products.list();
+    return products.data;
 }
 
 export async function getProduct(productId: string) {

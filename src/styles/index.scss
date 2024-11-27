@@ -5,7 +5,7 @@ html, body, * {
     padding: 0;
     box-sizing: border-box;
     // font-family: "Monsieur La Doulaise", serif;
-    font-size: 20px;
+    font-size: 14px;
     word-spacing: 0.3em;
 }
 
@@ -26,8 +26,10 @@ textarea, input {
 }
 
 section {
-    padding: 0 10px;
+    padding: 0 20px;
     margin-top: $header-height;
+    margin-bottom: 10rem;
+    min-height: 90vh;
 }
 
 .mobile-only {
@@ -36,6 +38,11 @@ section {
 
 .desktop-only {
     display: none;
+}
+
+.text-page {
+    text-align: left;
+    padding: 100px 200px;    
 }
 
 @media (max-width: 768px) { 

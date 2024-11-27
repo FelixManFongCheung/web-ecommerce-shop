@@ -13,14 +13,18 @@ export default function Header() {
             <button onClick={store.toggleOpen}>vbjdfvhbdfbjv</button>
           </div>
           <div className={styles.left}>
-              <Link href='/'>Home</Link>
-              <Link href='/products'>Products</Link>
-              <Link href='/about'>About</Link>
-              <Link href='/contact'>Contact</Link>
+              <Link href='/collections/all'>shop</Link>
+              <Link href='/'>archive</Link>
+              <Link href='/about'>about</Link>
+              <Link href='/visit'>visit us</Link>
+          </div>
+          <div className={styles.middle}>
+            <Link href='/'><strong>proxy archive</strong></Link>
           </div>
           <div className={styles.right}>
-            <Link href="/search">Search</Link>
-            <Link href='/cart'>Cart</Link>
+            <Link href="/contact">contact</Link>
+            <Link href="/search">search</Link>
+            <Link href='/cart'>cart</Link>
           </div>
       </div>
       <CartPopup />

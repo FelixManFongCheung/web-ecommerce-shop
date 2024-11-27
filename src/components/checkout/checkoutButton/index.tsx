@@ -1,20 +1,15 @@
 'use client';
 
-export default function CheckoutButton({ cartID }: { cartID: string }) {
+import { createCheckout } from '@/app/utils/checkout';
 
+export default function CheckoutButton({ cartID }: { cartID: string }) {
   const handleCheckout = async () => {
     try {
-      const response = await fetch('/api/checkout', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ cartID }),
-      });
+      const response = await createCheckout(cartID);
       
-      if (!response.ok) throw new Error('Checkout failed');
+      if (!response.success) throw new Error('Checkout failed');
       
-      const { url } = await response.json();
+      const { url } = response;
       if (url) {
         window.location.href = url;
       }
