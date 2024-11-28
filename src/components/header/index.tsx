@@ -14,7 +14,7 @@ export default function Header() {
           </div>
           <div className={styles.left}>
               <Link href='/collections/all'>shop</Link>
-              <Link href='/'>archive</Link>
+              <Link href='/archive'>archive</Link>
               <Link href='/about'>about</Link>
               <Link href='/visit'>visit us</Link>
           </div>
