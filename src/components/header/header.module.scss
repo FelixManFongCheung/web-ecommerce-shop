@@ -1,5 +1,4 @@
 $header-height: 10vh;
-$gap: 20px;
 
 .header {
     position: fixed;
@@ -12,12 +11,6 @@ $gap: 20px;
     justify-content: space-between;
     padding: 0 20px;
     
-    .left {
-        position: relative;
-        display: flex;
-        align-items: center;
-        gap: $gap;
-    }
 
     .middle {
         position: relative;
@@ -36,13 +29,9 @@ $gap: 20px;
         }
     }
 
-    .right {
-        position: relative;
-        display: flex;
-        align-items: center;
-        gap: $gap;
-        div {
-            display: inline-block;
+    .left, .right {
+        @media (max-width: 768px) {
+            display: none;
         }
     }
 }
