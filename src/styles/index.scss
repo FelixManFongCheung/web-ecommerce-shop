@@ -1,10 +1,24 @@
 $header-height: 10vh;
 
+@font-face {
+    src: url('../../public/fonts/FontsFree-Net-Athelas-BoldItalic.ttf');
+    font-family: "Athelas Bold Italic";
+    font-weight: 600;
+    font-style: italic;
+}
+
+@font-face {
+    src: url('../../public/fonts/FontsFree-Net-Athelas-Italic.ttf');
+    font-family: "Athelas Regular";
+    font-weight: 400;
+    font-style: normal;
+}
+
 html, body, * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    // font-family: "Monsieur La Doulaise", serif;
+    font-family: "Athelas Regular", serif;
     font-size: 14px;
     word-spacing: 0.3em;
 }
@@ -55,11 +69,4 @@ section {
     .desktop-only {
         display: block;
     }
-}
-
-@font-face {
-    src: url('https://fonts.googleapis.com/css2?family=Monsieur+La+Doulaise&display=swap');
-    font-family: "Monsieur La Doulaise", serif;
-    font-weight: 500;
-    font-style: normal;
 }
