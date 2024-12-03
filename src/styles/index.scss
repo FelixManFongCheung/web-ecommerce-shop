@@ -1,10 +1,24 @@
 $header-height: 10vh;
 
+@font-face {
+    src: url('../../public/fonts/FontsFree-Net-Athelas-BoldItalic.ttf');
+    font-family: "Athelas bold italic", serif;
+    font-weight: 500;
+    font-style: normal;
+}   
+
+@font-face {
+    src: url('../../public/fonts/FontsFree-Net-Athelas-Italic.ttf');
+    font-family: "Athelas italic", serif;
+    font-weight: 400;
+    font-style: normal;
+}   
+
 html, body, * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    // font-family: "Monsieur La Doulaise", serif;
+    font-family: "Athelas italic", serif;
     font-size: 14px;
     word-spacing: 0.3em;
 }
