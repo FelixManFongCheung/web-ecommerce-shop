@@ -15,6 +15,22 @@ $gap: 20px;
     div {
         display: inline-block;
     }
+    .search {
+        display: flex;
+        align-items: center;
+        gap: 0.2em;
+        svg {
+            vertical-align: -0.2em;
+        }
+    }
+    .cart {
+        display: flex;
+        align-items: center;
+        gap: 0.2em;
+        svg {
+            vertical-align: -0.2em;
+        }
+    }
 }
 
 .left, .right {

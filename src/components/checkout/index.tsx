@@ -10,7 +10,7 @@ import {
 import ModalWrapper from '../modalWrapper';
 import styles from './checkout.module.scss';
 import clsx from 'clsx';
-import { createEmbeddedCheckout } from '@/app/utils/checkout';
+import { createEmbeddedCheckout } from '@/utils/checkout';
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY as string);
 

@@ -1,7 +1,7 @@
 'use client'
 
 import useAppStore, { AppState } from '@/stores';
-import { getCartProductsClient } from '@/app/utils/getCart/client';
+import { getCartProductsClient } from '@/utils/getCart/client';
 import { getCookie } from 'cookies-next';
 import { useEffect, useState } from 'react';
 import styles from './cartPopup.module.scss';

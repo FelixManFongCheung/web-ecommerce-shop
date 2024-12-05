@@ -3,7 +3,7 @@ import styles from './card.module.scss';
 import Link from 'next/link';
 import Image from 'next/image';
 import Stripe from 'stripe';
-import { getPriceId, retrievePrice } from '@/app/utils/stripe';
+import { getPriceId, retrievePrice } from '@/utils/stripe';
 
 async function ProductCard({product, collection}: {
   product: Stripe.Product;

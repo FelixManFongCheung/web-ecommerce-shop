@@ -1,6 +1,6 @@
 import Stripe from 'stripe';
 import { NextResponse } from "next/server";
-import { retrieveSession, retrieveCustomer } from '@/app/utils/stripe';
+import { retrieveSession, retrieveCustomer } from '@/utils/stripe';
 
 export async function GET(req: Request) {
   try {

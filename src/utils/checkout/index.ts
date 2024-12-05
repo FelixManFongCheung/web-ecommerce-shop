@@ -1,9 +1,9 @@
 // app/actions/checkout.ts
 'use server'
 
-import { createCheckoutSession, retrievePrice, getPriceId } from '@/app/utils/stripe'
+import { createCheckoutSession, retrievePrice, getPriceId } from '@/utils/stripe'
 import Stripe from 'stripe'
-import { getCartServer, getCartProductsServer } from '@/app/utils/getCart/server'
+import { getCartServer, getCartProductsServer } from '@/utils/getCart/server'
 import { headers } from 'next/headers'
 
 export async function createCheckout(cartID: string) {

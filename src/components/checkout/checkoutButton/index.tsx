@@ -1,6 +1,6 @@
 'use client';
 
-import { createCheckout } from '@/app/utils/checkout';
+import { createCheckout } from '@/utils/checkout';
 
 export default function CheckoutButton({ cartID }: { cartID: string }) {
   const handleCheckout = async () => {
