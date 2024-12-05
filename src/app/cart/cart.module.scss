@@ -4,6 +4,10 @@
     gap: 1rem;
     align-items: flex-end;
 
+    @media (max-width: 768px) {
+        align-items: start;
+    }
+
     .image-wrapper {
         width: 100px;
         aspect-ratio: 3/4;

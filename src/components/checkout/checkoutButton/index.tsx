@@ -1,6 +1,7 @@
 'use client';
 
-import { createCheckout } from '@/app/utils/checkout';
+import { createCheckout } from '@/utils/checkout';
+import styles from './checkoutButton.module.scss';
 
 export default function CheckoutButton({ cartID }: { cartID: string }) {
   const handleCheckout = async () => {
@@ -19,7 +20,7 @@ export default function CheckoutButton({ cartID }: { cartID: string }) {
   };
 
   return (
-    <button onClick={handleCheckout}>
+    <button className={styles.checkoutButton} onClick={handleCheckout}>
       Checkout
     </button>
   );

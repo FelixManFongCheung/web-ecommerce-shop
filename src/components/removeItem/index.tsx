@@ -3,6 +3,7 @@
 import { createClient } from '@/lib/supabase/client';
 import { useState } from 'react';
 import styles from './removeItem.module.scss';
+import { revalidateProductPage } from '@/utils/revalidateProductPage';
 
 interface RemoveItemProps {
   cartID: string;
@@ -31,6 +32,7 @@ export default function RemoveItem({ cartID, productId, children }: RemoveItemPr
           .eq('cartID', cartID);
 
         setIsVisible(false);
+        await revalidateProductPage('/collections/[collection]/products/[product]')
       }
     } catch (error) {
       console.error('Error removing item:', error);

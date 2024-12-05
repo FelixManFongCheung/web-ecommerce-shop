@@ -2,7 +2,7 @@
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useState, useEffect, Suspense } from 'react';
 import { useDebounce } from 'use-debounce';
-import { searchProducts } from '../utils/stripe';
+import { searchProducts } from '@/utils/stripe';
 import Stripe from 'stripe';
 import styles from './page.module.scss';
 
