@@ -1,5 +1,4 @@
 import { redirect } from 'next/navigation';
-import styles from './return.module.scss'
 import { completeOrder, cancelOrder } from '@/utils/order';
 import { retrieveSession } from '@/utils/stripe';
 
@@ -31,7 +30,7 @@ export default async function Page({
     // Handle successful payment server-side
     await completeOrder(searchParams.session_id);
     return (
-      <section id={styles.success}>
+      <section>
         <p>
           We appreciate your business! A confirmation email will be sent to {session.customer_email}.
           The order will be processed and shipped to you within 24 hours.
