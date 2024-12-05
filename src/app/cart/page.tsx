@@ -5,6 +5,7 @@ import RemoveItem from '@/components/removeItem';
 import CheckoutButton from '@/components/checkout/checkoutButton';
 import Stripe from 'stripe';
 import Image from 'next/image';
+import Link from 'next/link';
 
 function CartItems({cartDataArray, cartID}: {cartDataArray: Stripe.Product[], cartID: string}) {
   return (
@@ -27,10 +28,20 @@ function CartItems({cartDataArray, cartID}: {cartDataArray: Stripe.Product[], ca
 export default async function Page() {  
   const cookieStore = cookies();
   const cartID = cookieStore.get('cart')?.value;
-  if (!cartID) return <section>empty cart</section>;
+  if (!cartID) return (
+    <section className={styles.cart}>
+      <div>empty cart</div>
+      <Link href="/collections/all">Find Products</Link>
+    </section>
+  );
 
   const cartDataArray = await getCartProductsServer(cartID);
-  if (!cartDataArray) return <section>empty cart</section>;
+  if (!cartDataArray) return (
+    <section className={styles.cart}>
+      <div>empty cart</div>
+      <Link href="/collections/all">Find Products</Link>
+    </section>
+  );
   
   return (
     <section className={styles.cart}>
@@ -39,7 +50,12 @@ export default async function Page() {
           <CartItems cartDataArray={cartDataArray} cartID={cartID} />
           <CheckoutButton cartID={cartID} />
         </>)
-      : (<div>empty cart</div>)}
+      : (
+        <section className={styles.cart}>
+          <div>empty cart</div>
+          <Link href="/collections/all">Find Products</Link>
+        </section>
+      )}
     </section>
   )
 }
