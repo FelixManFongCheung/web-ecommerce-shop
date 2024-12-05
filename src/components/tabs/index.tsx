@@ -3,6 +3,7 @@ import styles from './tabs.module.scss';
 import Link from 'next/link';
 import clsx from 'clsx';
 import useAppStore from '@/stores';
+import { CiSearch, CiShoppingCart } from "react-icons/ci";
 
 export default function TabsWrapper({children, isMobile}: {children?: React.ReactNode, isMobile?: boolean}) {    
     const store = useAppStore();
@@ -26,8 +27,8 @@ export default function TabsWrapper({children, isMobile}: {children?: React.Reac
 
             <div className={clsx(styles.right, isMobile && styles.mobile)}>
                 <Link href="/contact" onClick={handleLinkClick}>contact</Link>
-                <Link href="/search" onClick={handleLinkClick}>search</Link>
-                <Link href='/cart' onClick={handleLinkClick}>cart</Link>
+                <Link className={styles.search} href="/search" onClick={handleLinkClick}>search<CiSearch /></Link>
+                <Link className={styles.cart} href='/cart' onClick={handleLinkClick}>cart<CiShoppingCart /></Link>
             </div>
         </>
     );

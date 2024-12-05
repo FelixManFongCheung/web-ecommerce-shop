@@ -5,6 +5,7 @@ import styles from './header.module.scss';
 import useAppStore from '@/stores';
 import { CartPopup } from '../cartPopup';
 import TabsWrapper from '../tabs';
+import { CiMenuBurger } from "react-icons/ci";
 
 export default function Header() {
   const store = useAppStore();
@@ -12,7 +13,9 @@ export default function Header() {
     <>
       <div className={styles.header}>
           <div className='mobile-only'>
-            <button onClick={store.toggleOpen}>vbjdfvhbdfbjv</button>
+            <button className={styles.menu} onClick={store.toggleOpen}>
+              <CiMenuBurger />
+            </button>
           </div>
 
           <TabsWrapper>
