@@ -1,7 +1,7 @@
 .mobile-nav-wrapper {
     display: block;
     opacity: 0;
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -18,14 +18,15 @@
 
     ul {
         all: unset;
+        list-style: none;
     }
 
     .mobile-nav-content {
-        position: relative;
+        position: fixed;
         background-color: white;
         padding: 1rem;
         width: 40%;
-        height: 100%;
+        height: 100vh;
         display: flex;
         flex-direction: column;
         gap: 20px;
@@ -42,9 +43,9 @@
         top: 0;
         left: 0;
         width: 100%;
-        height: 100%;
+        height: 100vh;
         background-color: rgba(0,0,0,0);
-        transition: background-color 1s ease-in-out;
+        transition: background-color 0.5s ease-in-out;
     }
 
     &.open .mobile-nav-backdrop {
