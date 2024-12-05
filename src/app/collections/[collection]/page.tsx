@@ -8,7 +8,6 @@ import ProductCardSkeleton from '@/components/productSkeleton';
 import styles from './page.module.scss';
 
 export default async function Page({ params }: { params: { collection: string } }) {
-  // Server-side data fetching
   let products: Stripe.Product[] | undefined = await getProductsAll();
   let filterName;
   const relevantFilters = ['categories', 'designers'];
@@ -33,12 +32,25 @@ export default async function Page({ params }: { params: { collection: string } 
       
   return (
     <section className={styles.collection}>
+      <input 
+        type="checkbox" 
+        id="filter-toggle" 
+        className={styles.filterToggle}
+        aria-label="Toggle filter menu"
+      />
+      <label htmlFor="filter-toggle" className={styles.filterButton}>
+        Filter
+      </label>
       <div className={styles.filter}>
         {Object.entries(filters).map(([key, values]) => (
           <div className={styles['filter-group']} key={key}>
             <Link href={'/collections/all'}>all</Link>
             <h3 className={styles.category}>{key}</h3>
-            {Array.from(values).map(value => <Link href={`/collections/${value}`} className={styles['filter-name']} key={value}>{value}</Link>)}
+            {Array.from(values).map(value => (
+              <Link href={`/collections/${value}`} className={styles['filter-name']} key={value}>
+                {value}
+              </Link>
+            ))}
           </div>
         ))}
       </div>
