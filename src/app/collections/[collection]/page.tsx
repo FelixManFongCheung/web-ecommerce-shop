@@ -1,6 +1,6 @@
-import { getProductsAll } from '@/app/utils/stripe';
+import { getProductsAll } from '@/utils/stripe';
 import { Suspense } from 'react';
-import { searchProducts } from '@/app/utils/stripe';
+import { searchProducts } from '@/utils/stripe';
 import Stripe from 'stripe';
 import Link from 'next/dist/client/link';
 import ProductCard from '@/components/productCard';

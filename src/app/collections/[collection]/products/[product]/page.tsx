@@ -3,8 +3,8 @@ import styles from './product.module.scss';
 import ATC from '@/components/atc';
 import Image from 'next/image';
 import { cookies } from 'next/headers';
-import { getCartServer } from '@/app/utils/getCart/server';
-import { getPriceId, getProduct, retrievePrice } from '@/app/utils/stripe';
+import { getCartServer } from '@/utils/getCart/server';
+import { getPriceId, getProduct, retrievePrice } from '@/utils/stripe';
 
 export default async function Page({ params }: { params: { product: string } }) {
   const userCookies = cookies().get('cart')?.value;

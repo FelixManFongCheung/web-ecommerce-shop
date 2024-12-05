@@ -1,7 +1,7 @@
 import { redirect } from 'next/navigation';
 import styles from './return.module.scss'
-import { completeOrder, cancelOrder } from '@/app/utils/order';
-import { retrieveSession } from '../utils/stripe';
+import { completeOrder, cancelOrder } from '@/utils/order';
+import { retrieveSession } from '@/utils/stripe';
 
 export default async function Page({
   searchParams,

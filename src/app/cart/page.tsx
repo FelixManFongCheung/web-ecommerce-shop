@@ -1,5 +1,5 @@
 import { cookies } from 'next/headers';
-import { getCartProductsServer } from '@/app/utils/getCart/server';
+import { getCartProductsServer } from '@/utils/getCart/server';
 import styles from './cart.module.scss';
 import RemoveItem from '@/components/removeItem';
 import CheckoutButton from '@/components/checkout/checkoutButton';

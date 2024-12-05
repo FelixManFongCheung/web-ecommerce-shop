@@ -6,7 +6,7 @@ import styles from './atc.module.scss';
 import {useState} from 'react';
 import { clsx } from 'clsx';
 import useAppStore, { AppState } from '@/stores';
-import { addToCart } from '@/app/utils/cart';
+import { addToCart } from '@/utils/cart';
 
 interface ATCProp {
     productId: string,
