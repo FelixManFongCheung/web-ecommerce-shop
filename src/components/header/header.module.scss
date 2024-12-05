@@ -4,7 +4,7 @@ $header-height: 10vh;
     position: fixed;
     top: 0;
     height: $header-height;
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+    background: solid white;
     display: flex;
     z-index: 1;
     width: 100%;
