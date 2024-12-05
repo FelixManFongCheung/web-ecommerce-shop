@@ -57,6 +57,10 @@ section {
 .text-page {
     text-align: left;
     padding: 100px 200px;    
+
+    @media (max-width: 768px) { 
+        padding: 2rem 2rem;
+    }
 }
 
 @media (max-width: 768px) { 
