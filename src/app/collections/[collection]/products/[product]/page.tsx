@@ -5,6 +5,23 @@ import Image from 'next/image';
 import { cookies } from 'next/headers';
 import { getCartServer } from '@/utils/getCart/server';
 import { getPriceId, getProduct, retrievePrice } from '@/utils/stripe';
+import { Metadata } from 'next';
+
+export async function generateMetadata({ 
+  params 
+}: { 
+  params: { product: string } 
+}): Promise<Metadata> {
+  const product = await getProduct(params.product);
+
+  return {
+    title: product.name,
+    description: product.description,
+    openGraph: {
+      title: product.name,
+    },
+  }
+}
 
 export default async function Page({ params }: { params: { product: string } }) {
   const userCookies = cookies().get('cart')?.value;
