@@ -1,14 +1,13 @@
-import Header from '../components/header';
-import Footer from '../components/footer';
-import MobileNav from '../components/mobileNav';
-import '../styles/index.scss';
+import Footer from "../components/footer";
+import Header from "../components/header";
+import MobileNav from "../components/mobileNav";
+import "../styles/index.scss";
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  
   return (
     <html lang="en">
       <body>
