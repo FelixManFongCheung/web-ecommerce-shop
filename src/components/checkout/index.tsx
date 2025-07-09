@@ -1,27 +1,30 @@
-'use client'
+"use client";
 
-import React, { useCallback, useState, useEffect } from 'react';
-import { loadStripe } from '@stripe/stripe-js';
-import useAppStore from '@/stores';
+import { useAppActions, useIsCheckoutOpen } from "@/stores";
+import { createEmbeddedCheckout } from "@/utils/checkout";
 import {
+  EmbeddedCheckout,
   EmbeddedCheckoutProvider,
-  EmbeddedCheckout
-} from '@stripe/react-stripe-js';
-import ModalWrapper from '../modalWrapper';
-import styles from './checkout.module.scss';
-import clsx from 'clsx';
-import { createEmbeddedCheckout } from '@/utils/checkout';
+} from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+import clsx from "clsx";
+import { useCallback, useEffect, useState } from "react";
+import ModalWrapper from "../modalWrapper";
+import styles from "./checkout.module.scss";
 
-const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY as string);
+const stripePromise = loadStripe(
+  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY as string
+);
 
 type CheckoutType = {
-  priceID: string
-}
+  priceID: string;
+};
 
-export default function Checkout({priceID}: CheckoutType) {   
-  const store = useAppStore();
+export default function Checkout({ priceID }: CheckoutType) {
+  const { toggleCheckoutDialog } = useAppActions();
+  const isCheckoutOpen = useIsCheckoutOpen();
   const [error, setError] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState(false);  
+  const [isLoading, setIsLoading] = useState(false);
   const [isMouseOver, setIsMouseOver] = useState(false);
   const [clientSecret, setClientSecret] = useState<string | null>(null);
 
@@ -30,7 +33,7 @@ export default function Checkout({priceID}: CheckoutType) {
     setIsLoading(true);
     try {
       if (!priceID) {
-        throw new Error('Price ID is required');
+        throw new Error("Price ID is required");
       }
 
       const response = await createEmbeddedCheckout(priceID);
@@ -41,11 +44,10 @@ export default function Checkout({priceID}: CheckoutType) {
       }
 
       const data = response.data;
-      
-      return data!.clientSecret;
 
+      return data!.clientSecret;
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'An error occurred');
+      setError(err instanceof Error ? err.message : "An error occurred");
       throw err;
     } finally {
       setIsLoading(false);
@@ -54,54 +56,49 @@ export default function Checkout({priceID}: CheckoutType) {
 
   useEffect(() => {
     fetchClientSecret()
-      .then(secret => setClientSecret(secret))
+      .then((secret) => setClientSecret(secret))
       .catch(() => {}); // Error is already handled in fetchClientSecret
   }, [fetchClientSecret]);
 
   const handleMouseEnter = () => {
     setIsMouseOver(true);
-  }
+  };
 
   const handleMouseLeave = () => {
     setIsMouseOver(false);
-  }
+  };
 
   const options = {
     clientSecret,
-    onComplete: () => store.toggleCheckoutDialog()
+    onComplete: toggleCheckoutDialog,
   };
 
   return (
     <>
-      <div className={clsx(styles['smoke-screen'], isMouseOver && styles.blur)}></div>
-      <button 
-        onClick={store.toggleCheckoutDialog}
+      <div
+        className={clsx(styles["smoke-screen"], isMouseOver && styles.blur)}
+      ></div>
+      <button
+        onClick={toggleCheckoutDialog}
         disabled={isLoading}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        className={styles['buy-now-button']}
+        className={styles["buy-now-button"]}
       >
-        {isLoading ? 'Loading...' : 'Buy Now'}
+        {isLoading ? "Loading..." : "Buy Now"}
       </button>
 
-      {error && (
-        <div className="text-red-500 mt-2">
-          {error}
-        </div>
-      )}
-      
-      {store.isCheckoutOpen && clientSecret && (
+      {error && <div className="text-red-500 mt-2">{error}</div>}
+
+      {isCheckoutOpen && clientSecret && (
         <ModalWrapper>
           <div id="checkout">
-            <EmbeddedCheckoutProvider
-              stripe={stripePromise}
-              options={options}
-            >
+            <EmbeddedCheckoutProvider stripe={stripePromise} options={options}>
               <EmbeddedCheckout />
             </EmbeddedCheckoutProvider>
           </div>
         </ModalWrapper>
       )}
     </>
-  )
+  );
 }

@@ -1,38 +1,47 @@
-'use client'
+"use client";
 
-import { v7 as uuidv7 } from 'uuid';
-import { getCookie } from 'cookies-next';
-import styles from './atc.module.scss';
-import {useState} from 'react';
-import { clsx } from 'clsx';
-import useAppStore, { AppState } from '@/stores';
-import { addToCart } from '@/utils/cart';
+import { useAppActions } from "@/stores";
+import { addToCart } from "@/utils/cart";
+import { clsx } from "clsx";
+import { getCookie } from "cookies-next";
+import { useState } from "react";
+import { v7 as uuidv7 } from "uuid";
+import styles from "./atc.module.scss";
 
 interface ATCProp {
-    productId: string,
-    isATC: boolean
+  productId: string;
+  isATC: boolean;
 }
 
-export default function ATC({productId, isATC}: ATCProp) {  
-    const [ATCState, setATCState] = useState(isATC)
-    const cartCookies = getCookie('cart');
+export default function ATC({ productId, isATC }: ATCProp) {
+  const [ATCState, setATCState] = useState(isATC);
+  const cartCookies = getCookie("cart");
 
-    const openCart = useAppStore((state: AppState) => state.openCart)
+  const { openCart } = useAppActions();
 
-    const addToCartAction = async () => {
-        let identifier: string;        
-        setATCState(true);
-        if (cartCookies) {
-            identifier = cartCookies as string;
-        } else {
-            identifier = uuidv7();
-        }
-
-        await addToCart(identifier, productId);
-        
-        openCart();
+  const addToCartAction = async () => {
+    let identifier: string;
+    setATCState(true);
+    if (cartCookies) {
+      identifier = cartCookies as string;
+    } else {
+      identifier = uuidv7();
     }
-    return (
-        <button disabled={ATCState} className={clsx(styles['atc-btn'], ATCState && styles['atc-btn-disabled'])} onClick={addToCartAction}>Add to cart</button>
-    )
-};
+
+    await addToCart(identifier, productId);
+
+    openCart();
+  };
+  return (
+    <button
+      disabled={ATCState}
+      className={clsx(
+        styles["atc-btn"],
+        ATCState && styles["atc-btn-disabled"]
+      )}
+      onClick={addToCartAction}
+    >
+      Add to cart
+    </button>
+  );
+}
