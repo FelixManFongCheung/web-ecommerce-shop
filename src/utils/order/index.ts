@@ -6,7 +6,7 @@ import { retrieveSession, updateProduct } from '../stripe';
 
 export async function completeOrder(sessionId: string) {
   const supabase = await createClient();
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
   const cartID = cookieStore.get('cart')?.value;
 
 

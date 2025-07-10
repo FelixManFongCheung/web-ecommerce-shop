@@ -1,27 +1,28 @@
 "use client";
 
 import { useAppActions } from "@/stores";
+import { Menu } from "lucide-react";
 import Link from "next/link";
-import { CiMenuBurger } from "react-icons/ci";
 import { CartPopup } from "../cartPopup";
 import TabsWrapper from "../tabs";
-import styles from "./header.module.scss";
 
 export default function Header() {
   const { toggleOpen } = useAppActions();
   return (
     <>
-      <div className={styles.header}>
-        <div className="mobile-only">
-          <button className={styles.menu} onClick={toggleOpen}>
-            <CiMenuBurger />
+      <div className="fixed top-0 h-[10vh] bg-white flex z-10 w-full justify-between px-5">
+        <div className="block md:hidden">
+          <button className="h-full" onClick={toggleOpen}>
+            <Menu />
           </button>
         </div>
 
         <TabsWrapper>
-          <div className={styles.middle}>
+          <div className="relative flex items-center">
             <Link href="/">
-              <strong>proxy archive</strong>
+              <strong className="text-lg after:content-['*'] after:text-xs after:relative after:-top-1">
+                proxy archive
+              </strong>
             </Link>
           </div>
         </TabsWrapper>

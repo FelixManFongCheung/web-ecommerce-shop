@@ -6,7 +6,6 @@ import { clsx } from "clsx";
 import { getCookie } from "cookies-next";
 import { useState } from "react";
 import { v7 as uuidv7 } from "uuid";
-import styles from "./atc.module.scss";
 
 interface ATCProp {
   productId: string;
@@ -35,10 +34,7 @@ export default function ATC({ productId, isATC }: ATCProp) {
   return (
     <button
       disabled={ATCState}
-      className={clsx(
-        styles["atc-btn"],
-        ATCState && styles["atc-btn-disabled"]
-      )}
+      className={clsx("block", ATCState && "opacity-50 cursor-not-allowed")}
       onClick={addToCartAction}
     >
       Add to cart

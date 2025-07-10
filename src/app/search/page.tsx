@@ -1,76 +1,36 @@
-'use client';
-import { useRouter, useSearchParams } from 'next/navigation';
-import { useState, useEffect, Suspense } from 'react';
-import { useDebounce } from 'use-debounce';
-import { searchProducts } from '@/utils/stripe';
-import Stripe from 'stripe';
-import styles from './page.module.scss';
+import Filter from "@/components/filter";
+import ProductCard from "@/components/productCard";
+import ProductCardSkeleton from "@/components/productSkeleton";
+import { searchProducts } from "@/utils/stripe";
+import { Suspense } from "react";
 
-const SearchResults = ({search}: {search: string}) => {
-  const router = useRouter();
-  const [debouncedValue] = useDebounce(search, 500);
-  const searchParams = useSearchParams();
-  const [products, setProducts] = useState<Stripe.Product[]>([]);
+export default async function Page(
+  props: {
+    searchParams: Promise<{ [key: string]: string | undefined }>;
+  }
+) {
+  const searchParams = await props.searchParams;
+  const search = searchParams.search || "";
 
-  // Debounced search effect
-  useEffect(() => {
-    const performSearch = async () => {
-      try {
-        // Update URL
-        const params = new URLSearchParams(searchParams);
-        if (debouncedValue) {
-          params.set('q', debouncedValue);
-        } else {
-          params.delete('q');
-        }
-        router.replace(`?${params.toString()}`);
-
-        // Use server action directly
-        const { products: searchResults } = await searchProducts(debouncedValue);        
-        setProducts(searchResults || []);
-      } catch (error) {
-        console.error('Search failed:', error);
-      }
-    };
-
-    performSearch();
-  }, [debouncedValue, router, searchParams]);
+  const products = await searchProducts(search);
 
   return (
-    <div>
-    {products ? (products.map((product) => (
-      <div key={product.id}>
-        <h3>{product.name}</h3>
-        <p>{product.description}</p>
+    <section className="text-left py-2 px-2 md:py-[100px] md:px-[200px]">
+      <h1>Search Results for &ldquo;{search}&rdquo;</h1>
+      <br />
+      <Filter filters={{}} />
+      <br />
+      <div className="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-8 auto-rows-max">
+        {products.products && products.products.length > 0 ? (
+          products.products.map((product) => (
+            <Suspense key={product.id} fallback={<ProductCardSkeleton />}>
+              <ProductCard product={product} />
+            </Suspense>
+          ))
+        ) : (
+          <div>No products found</div>
+        )}
       </div>
-      ))) : (<div>No products found</div>)}
-    </div>
-  )
-}
-
-export default function Page() {
-  const [search, setSearch] = useState('');
-
-
-  // Handle input change
-  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setSearch(value);
-  };
-
-
-  return (
-    <section className={styles.search}>
-      <input
-        className={styles['search-input']}
-        type="text"
-        value={search}
-        onChange={handleSearch}
-        placeholder="Search..."
-      />
-      <Suspense fallback={<div>Loading products...</div>}>
-        <SearchResults search={search} />
-      </Suspense>
     </section>
   );
 }

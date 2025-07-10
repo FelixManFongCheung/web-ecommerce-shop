@@ -8,7 +8,7 @@ import { headers } from 'next/headers'
 
 export async function createCheckout(cartID: string) {
   try {
-    const headersList = headers()
+    const headersList = await headers()
     const origin = headersList.get('origin') || ''
 
     // Get cart data
@@ -90,7 +90,7 @@ type EmbeddedCheckoutResponse = {
 
 export async function createEmbeddedCheckout(priceId: string): Promise<EmbeddedCheckoutResponse> {
   try {
-    const headersList = headers()
+    const headersList = await headers()
     const origin = headersList.get('origin') || ''
 
     // Retrieve price details

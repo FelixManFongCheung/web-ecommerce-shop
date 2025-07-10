@@ -1,4 +1,3 @@
-import styles from './product.module.scss';
 // import Checkout from '@/components/checkout';
 import ATC from '@/components/atc';
 import Image from 'next/image';
@@ -6,16 +5,17 @@ import { cookies } from 'next/headers';
 import { getCartServer } from '@/utils/getCart/server';
 import { getPriceId, getProduct, retrievePrice } from '@/utils/stripe';
 
-export default async function Page({ params }: { params: { product: string } }) {
-  const userCookies = cookies().get('cart')?.value;
+export default async function Page(props: { params: Promise<{ product: string }> }) {
+  const params = await props.params;
+  const userCookies = (await cookies()).get('cart')?.value;
   let isATC: boolean = false;
   if (userCookies) {
     const cartItems = await getCartServer(userCookies);
     isATC = cartItems.products?.includes(params.product) || false;
   }
-  
-  
-  const product = await getProduct(params.product);  
+
+
+  const product = await getProduct(params.product);
   const priceID = await getPriceId(product.id);
   const price = await retrievePrice(priceID);
 

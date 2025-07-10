@@ -1,6 +1,5 @@
 'use client'
 
-import styles from './products.module.scss';
 import { clsx } from 'clsx'
 import { useState } from 'react';
 import Image from 'next/image'
@@ -28,8 +27,8 @@ export default function Page() {
           translate: `${imageIndex*-100}%`,
         }} />
       ))}
-      <button onClick={prev} className={clsx(styles.arrow, styles.prev)}></button>
-      <button onClick={next} className={clsx(styles.arrow, styles.next)}></button>
+      <button onClick={prev} className={""}></button>
+      <button onClick={next} className={""}></button>
     </div>
     <div className={styles['pagiantion']}>
       {imageArray.map((url,index) => (

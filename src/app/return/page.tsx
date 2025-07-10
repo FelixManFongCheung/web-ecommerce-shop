@@ -2,17 +2,18 @@ import { redirect } from 'next/navigation';
 import { completeOrder, cancelOrder } from '@/utils/order';
 import { retrieveSession } from '@/utils/stripe';
 
-export default async function Page({
-  searchParams,
-}: {
-  searchParams: { session_id: string, no_embed?: boolean }
-}) {
+export default async function Page(
+  props: {
+    searchParams: Promise<{ session_id: string, no_embed?: boolean }>
+  }
+) {
+  const searchParams = await props.searchParams;
   if (!searchParams.session_id) {
     redirect('/');
-  }  
+  }
 
   let session;
-  
+
   if (!searchParams.no_embed) {
     // Server-side session check
     const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/embedded-checkout?session_id=${searchParams.session_id}`);

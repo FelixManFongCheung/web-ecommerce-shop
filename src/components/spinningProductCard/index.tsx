@@ -1,6 +1,5 @@
 import clsx from 'clsx';
 import Link from 'next/link';
-import styles from './card.module.scss';
 import Stripe from 'stripe';
 import Image from 'next/image'
 
@@ -11,11 +10,11 @@ export default function SpinningProductCard({product}: {product: Stripe.Product}
 
   return (
     <div className={styles['perspective-box']}>
-      <div className={styles.container}>
+      <div className={""}>
         <Link scroll={true} className={styles['image-wrapper']} href={`/products/${product.id}`}>
           {imageUrls.map((url, index) => (
             <div key={index} className={index === 0 ? styles['test-front'] : styles['test-back']}>
-              <div className={clsx(styles.product, index === 0 ? styles['product-front'] : styles['product-back'])}>
+              <div className={""}>
                 <Image fill src={url} alt="" />
               </div>
             </div>

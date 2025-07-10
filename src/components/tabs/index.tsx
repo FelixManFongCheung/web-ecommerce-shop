@@ -1,9 +1,8 @@
 import { useAppActions } from "@/stores";
 import clsx from "clsx";
+import { Search, ShoppingCart } from "lucide-react";
 import Link from "next/link";
 import React from "react";
-import { CiSearch, CiShoppingCart } from "react-icons/ci";
-import styles from "./tabs.module.scss";
 
 export default function TabsWrapper({
   children,
@@ -22,7 +21,12 @@ export default function TabsWrapper({
 
   return (
     <>
-      <div className={clsx(styles.left, isMobile && styles.mobile)}>
+      <div
+        className={clsx(
+          "relative flex items-center gap-5 md:hidden",
+          isMobile && "md:flex md:flex-col md:items-start"
+        )}
+      >
         <Link href="/collections/all" onClick={handleLinkClick}>
           shop
         </Link>
@@ -39,21 +43,30 @@ export default function TabsWrapper({
 
       {children}
 
-      <div className={clsx(styles.right, isMobile && styles.mobile)}>
+      <div
+        className={clsx(
+          "relative flex items-center gap-5 md:hidden",
+          isMobile && "md:flex md:flex-col md:items-start"
+        )}
+      >
         <Link href="/contact" onClick={handleLinkClick}>
           contact
         </Link>
         <Link
-          className={styles.search}
+          className="flex items-center gap-1"
           href="/search"
           onClick={handleLinkClick}
         >
           search
-          <CiSearch />
+          <Search className="align-[-0.2em]" />
         </Link>
-        <Link className={styles.cart} href="/cart" onClick={handleLinkClick}>
+        <Link
+          className="flex items-center gap-1"
+          href="/cart"
+          onClick={handleLinkClick}
+        >
           cart
-          <CiShoppingCart />
+          <ShoppingCart className="align-[-0.2em]" />
         </Link>
       </div>
     </>

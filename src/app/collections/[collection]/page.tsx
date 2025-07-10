@@ -1,72 +1,55 @@
-import { getProductsAll } from '@/utils/stripe';
-import { Suspense } from 'react';
-import { searchProducts } from '@/utils/stripe';
-import Stripe from 'stripe';
-import Link from 'next/dist/client/link';
-import ProductCard from '@/components/productCard';
-import ProductCardSkeleton from '@/components/productSkeleton';
-import styles from './page.module.scss';
+import Filter from "@/components/filter";
+import ProductCard from "@/components/productCard";
+import ProductCardSkeleton from "@/components/productSkeleton";
+import { getProductsAll, searchProducts } from "@/utils/stripe";
+import { Suspense } from "react";
+import Stripe from "stripe";
 
-export default async function Page({ params }: { params: { collection: string } }) {
-  let products: Stripe.Product[] | undefined = await getProductsAll();
-  let filterName;
-  const relevantFilters = ['categories', 'designers'];
-  const filters = products.reduce((acc, product) => {
-    Object.entries(product.metadata).forEach(([key, value]) => {
-      if (relevantFilters.includes(key)) {
-        if (!acc[key]) acc[key] = new Set();
-        acc[key].add(value);        
-        if (value === decodeURIComponent(params.collection)) filterName = key;
-      }
-    });
-    return acc;
-  }, {} as Record<string, Set<string>>);
-
-  if (params.collection !== 'all') {
-    const searchResult = await searchProducts('', { 
-      metadataName: filterName, 
-      metadataQuery: decodeURIComponent(params.collection) 
-    });
-    products = searchResult.products;
+export default async function Page(
+  props: {
+    searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
   }
-      
-  return (
-    <section className={styles.collection}>
-      <input 
-        type="checkbox" 
-        id="filter-toggle" 
-        className={styles.filterToggle}
-        aria-label="Toggle filter menu"
-      />
-      <label htmlFor="filter-toggle" className={styles.filterButton}>
-        Filter
-      </label>
-      <div className={styles.filter}>
-        {Object.entries(filters).map(([key, values]) => (
-          <div className={styles['filter-group']} key={key}>
-            <Link href={'/collections/all'}>all</Link>
-            <h3 className={styles.category}>{key}</h3>
-            {Array.from(values).map(value => (
-              <Link href={`/collections/${value}`} className={styles['filter-name']} key={value}>
-                {value}
-              </Link>
-            ))}
-          </div>
-        ))}
-      </div>
-      <div className={styles['products-grid']}>
-        {products ? 
-          products.map(product => (
-            <Suspense 
-              key={product.id} 
-              fallback={<ProductCardSkeleton />}
-            >
-              <ProductCard product={product} />
-            </Suspense>
-          ))
-          : <div>No products found</div>
+) {
+  const searchParams = await props.searchParams;
+  let products: Stripe.Product[] | undefined = await getProductsAll();
+
+  if (products) {
+    const filters = products.reduce((acc, product) => {
+      Object.entries(product.metadata).forEach(([key, value]) => {
+        if (!acc[key]) {
+          acc[key] = new Set();
         }
-      </div>
-    </section>
-  )
+        acc[key].add(value);
+      });
+      return acc;
+    }, {} as Record<string, Set<string>>);
+
+    const cleanedFilters: Record<string, string[]> = {};
+    Object.keys(filters).forEach((key) => {
+      cleanedFilters[key] = Array.from(filters[key]);
+    });
+
+    if (searchParams) {
+      const searchResult = await searchProducts("", searchParams);
+      products = searchResult.products;
+    }
+
+    return (
+      <section className="text-left py-2 px-2 md:py-[100px] md:px-[200px]">
+        <Filter filters={cleanedFilters} />
+        <br />
+        <div className="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-8 auto-rows-max">
+          {products ? (
+            products.map((product) => (
+              <Suspense key={product.id} fallback={<ProductCardSkeleton />}>
+                <ProductCard product={product} />
+              </Suspense>
+            ))
+          ) : (
+            <div>No products found</div>
+          )}
+        </div>
+      </section>
+    );
+  }
 }

@@ -2,7 +2,6 @@
 
 import { createClient } from '@/lib/supabase/client';
 import { useState } from 'react';
-import styles from './removeItem.module.scss';
 import { revalidateProductPage } from '@/utils/revalidateProductPage';
 
 interface RemoveItemProps {
@@ -42,7 +41,7 @@ export default function RemoveItem({ cartID, productId, children }: RemoveItemPr
   if (!isVisible) return null;
 
   return (
-    <div className={isVisible ? styles.removeItem : styles.hidden}>
+    <div className={isVisible ? "" : ""}>
       {children}
       <button onClick={removeFromCart} className="cursor-pointer ml-2">
         remove this

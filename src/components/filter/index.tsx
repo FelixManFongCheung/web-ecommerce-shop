@@ -1,8 +1,7 @@
-import styles from './filter.module.scss';
 
 export default function Filter({ filters }: { filters: Record<string, Set<string>> }) {
 
-  return <div className={styles.filter}>
+  return <div className={""}>
     {Object.entries(filters).map(([key, values]) => (
       <div key={key}>
         <h3>{key}</h3>

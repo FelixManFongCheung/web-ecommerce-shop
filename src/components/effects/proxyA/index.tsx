@@ -2,7 +2,6 @@
 
 import {useEffect, useRef} from 'react';
 import matrix from './effect';
-import styles from './effect.module.scss';
 
 export default function Effect() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -15,6 +14,6 @@ export default function Effect() {
   }, [])
   
   return (
-    <canvas className={styles.canvas} ref={canvasRef}></canvas>
+    <canvas className={""} ref={canvasRef}></canvas>
   )
 };

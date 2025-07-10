@@ -10,7 +10,6 @@ import { loadStripe } from "@stripe/stripe-js";
 import clsx from "clsx";
 import { useCallback, useEffect, useState } from "react";
 import ModalWrapper from "../modalWrapper";
-import styles from "./checkout.module.scss";
 
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY as string
@@ -76,7 +75,7 @@ export default function Checkout({ priceID }: CheckoutType) {
   return (
     <>
       <div
-        className={clsx(styles["smoke-screen"], isMouseOver && styles.blur)}
+        className={clsx(styles["smoke-screen"], isMouseOver && "")}
       ></div>
       <button
         onClick={toggleCheckoutDialog}

@@ -1,5 +1,4 @@
 import { useAppActions } from "@/stores";
-import styles from "./modal.module.scss";
 
 export default function ModalWrapper({
   children,
@@ -9,8 +8,14 @@ export default function ModalWrapper({
   const { toggleCheckoutDialog } = useAppActions();
   return (
     <>
-      <div onClick={toggleCheckoutDialog} className={styles.backdrop} />
-      <dialog className={styles["modal-wrapper"]} open>
+      <div
+        onClick={toggleCheckoutDialog}
+        className="fixed top-0 left-0 w-screen h-screen bg-black/50 z-[9998]"
+      />
+      <dialog
+        className="absolute top-1/2 left-1/2 w-fit h-[80vh] overflow-scroll border border-gray-500 transform -translate-x-1/2 -translate-y-[80%] z-[9999]"
+        open
+      >
         {children}
       </dialog>
     </>

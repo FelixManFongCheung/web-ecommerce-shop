@@ -5,7 +5,6 @@ import { getCartProductsClient } from "@/utils/getCart/client";
 import { getCookie } from "cookies-next";
 import { useEffect, useState } from "react";
 import Stripe from "stripe";
-import styles from "./cartPopup.module.scss";
 
 export function CartPopup() {
   const isCartOpen = useIsCartOpen();
@@ -39,10 +38,10 @@ export function CartPopup() {
   if (!isCartOpen) return null;
 
   return (
-    <div className={styles["cart-popup"]}>
-      <div className={styles["cart-popup__overlay"]} onClick={toggleCart} />
-      <div className={styles["cart-popup__content"]}>
-        <div className={styles["cart-popup__header"]}>
+    <div className="fixed inset-0 z-50">
+      <div className="absolute inset-0 bg-black/50" onClick={toggleCart} />
+      <div className="absolute right-0 top-0 h-full w-full max-w-md bg-white p-6">
+        <div className="flex justify-between items-center">
           <h2>Your Cart</h2>
           <button onClick={toggleCart}>×</button>
         </div>

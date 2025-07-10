@@ -15,7 +15,7 @@ type CartResponse = {
 export async function addToCart(identifier: string, productId: string): Promise<CartResponse> {
   try {
     const supabase = await createClient()
-    const cookieStore = cookies()
+    const cookieStore = await cookies()
     const cartCookie = cookieStore.get('cart')
 
     // If cart exists, update it
@@ -74,7 +74,7 @@ export async function addToCart(identifier: string, productId: string): Promise<
     }
 
     // Set cookie
-    cookies().set('cart', identifier, {
+    (await cookies()).set('cart', identifier, {
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'lax',
       path: '/',
