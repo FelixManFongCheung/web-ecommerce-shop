@@ -1,5 +1,6 @@
 "use client";
 
+import { cn } from "@/lib/utils";
 import { useAppActions } from "@/stores";
 import { Menu } from "lucide-react";
 import Link from "next/link";
@@ -17,7 +18,7 @@ export default function Header() {
           </button>
         </div>
 
-        <TabsWrapper>
+        <TabsWrapper className={cn("hidden md:flex")}>
           <div className="relative flex items-center">
             <Link href="/">
               <strong className="text-lg after:content-['*'] after:text-xs after:relative after:-top-1">

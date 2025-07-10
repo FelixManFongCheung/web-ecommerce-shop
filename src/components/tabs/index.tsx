@@ -7,9 +7,11 @@ import React from "react";
 export default function TabsWrapper({
   children,
   isMobile,
+  className,
 }: {
   children?: React.ReactNode;
   isMobile?: boolean;
+  className?: string;
 }) {
   const { toggleOpen } = useAppActions();
 
@@ -23,8 +25,9 @@ export default function TabsWrapper({
     <>
       <div
         className={cn(
-          "relative flex items-center gap-5 md:hidden",
-          isMobile && "md:flex md:flex-col md:items-start"
+          "relative flex items-center gap-5",
+          isMobile && "md:flex md:flex-col md:items-start",
+          className
         )}
       >
         <Link href="/collections/all" onClick={handleLinkClick}>
@@ -46,7 +49,8 @@ export default function TabsWrapper({
       <div
         className={cn(
           "relative flex items-center gap-5 md:hidden",
-          isMobile && "md:flex md:flex-col md:items-start"
+          isMobile && "md:flex md:flex-col md:items-start",
+          className
         )}
       >
         <Link href="/contact" onClick={handleLinkClick}>
