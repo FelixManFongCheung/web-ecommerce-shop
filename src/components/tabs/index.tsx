@@ -1,5 +1,5 @@
+import { cn } from "@/lib/utils";
 import { useAppActions } from "@/stores";
-import clsx from "clsx";
 import { Search, ShoppingCart } from "lucide-react";
 import Link from "next/link";
 import React from "react";
@@ -22,7 +22,7 @@ export default function TabsWrapper({
   return (
     <>
       <div
-        className={clsx(
+        className={cn(
           "relative flex items-center gap-5 md:hidden",
           isMobile && "md:flex md:flex-col md:items-start"
         )}
@@ -44,7 +44,7 @@ export default function TabsWrapper({
       {children}
 
       <div
-        className={clsx(
+        className={cn(
           "relative flex items-center gap-5 md:hidden",
           isMobile && "md:flex md:flex-col md:items-start"
         )}

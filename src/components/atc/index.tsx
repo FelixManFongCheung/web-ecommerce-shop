@@ -1,8 +1,8 @@
 "use client";
 
+import { cn } from "@/lib/utils";
 import { useAppActions } from "@/stores";
 import { addToCart } from "@/utils/cart";
-import { clsx } from "clsx";
 import { getCookie } from "cookies-next";
 import { useState } from "react";
 import { v7 as uuidv7 } from "uuid";
@@ -34,7 +34,7 @@ export default function ATC({ productId, isATC }: ATCProp) {
   return (
     <button
       disabled={ATCState}
-      className={clsx("block", ATCState && "opacity-50 cursor-not-allowed")}
+      className={cn("block", ATCState && "opacity-50 cursor-not-allowed")}
       onClick={addToCartAction}
     >
       Add to cart

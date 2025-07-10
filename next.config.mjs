@@ -21,9 +21,8 @@ const nextConfig = {
       },
     ];
   },
-  experimental: {
-    serverComponentsExternalPackages: ['@tensorflow/tfjs-node'],
-  },
+
+  serverExternalPackages: ['@tensorflow/tfjs-node'],
 
   images: {
     remotePatterns: [

@@ -1,5 +1,6 @@
 "use client";
 
+import { cn } from "@/lib/utils";
 import { useAppActions, useIsCheckoutOpen } from "@/stores";
 import { createEmbeddedCheckout } from "@/utils/checkout";
 import {
@@ -7,7 +8,6 @@ import {
   EmbeddedCheckoutProvider,
 } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
-import clsx from "clsx";
 import { useCallback, useEffect, useState } from "react";
 import ModalWrapper from "../modalWrapper";
 
@@ -74,15 +74,13 @@ export default function Checkout({ priceID }: CheckoutType) {
 
   return (
     <>
-      <div
-        className={clsx(styles["smoke-screen"], isMouseOver && "")}
-      ></div>
+      <div className={cn("smoke-screen", isMouseOver && "")}></div>
       <button
         onClick={toggleCheckoutDialog}
         disabled={isLoading}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        className={styles["buy-now-button"]}
+        className={"buy-now-button"}
       >
         {isLoading ? "Loading..." : "Buy Now"}
       </button>
