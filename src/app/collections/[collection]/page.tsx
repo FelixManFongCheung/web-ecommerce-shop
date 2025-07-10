@@ -1,15 +1,14 @@
 import Filter from "@/components/filter";
 import ProductCard from "@/components/productCard";
 import ProductCardSkeleton from "@/components/productSkeleton";
+import type { collectionType } from "@/utils/stripe";
 import { getProductsAll, searchProducts } from "@/utils/stripe";
 import { Suspense } from "react";
 import Stripe from "stripe";
 
-export default async function Page(
-  props: {
-    searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
-  }
-) {
+export default async function Page(props: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}) {
   const searchParams = await props.searchParams;
   let products: Stripe.Product[] | undefined = await getProductsAll();
 
@@ -30,7 +29,11 @@ export default async function Page(
     });
 
     if (searchParams) {
-      const searchResult = await searchProducts("", searchParams);
+      const collection: collectionType = {
+        metadataName: "collection",
+        metadataQuery: searchParams.collection as string,
+      };
+      const searchResult = await searchProducts("", collection);
       products = searchResult.products;
     }
 
