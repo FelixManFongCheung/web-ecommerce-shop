@@ -1,4 +1,4 @@
-import ModalProductCard from "@/components/modalProductCard";
+import { ModalProductCard } from "@/components";
 import { getProductsAll } from "@/utils/stripe";
 
 export default async function Home() {

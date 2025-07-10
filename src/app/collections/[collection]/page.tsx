@@ -1,6 +1,4 @@
-import Filter from "@/components/filter";
-import ProductCard from "@/components/productCard";
-import ProductCardSkeleton from "@/components/productSkeleton";
+import { Filter, ProductCard, ProductCardSkeleton } from "@/components";
 import type { collectionType } from "@/utils/stripe";
 import { getProductsAll, searchProducts } from "@/utils/stripe";
 import { Suspense } from "react";

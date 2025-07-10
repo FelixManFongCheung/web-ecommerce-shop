@@ -1,11 +1,10 @@
 "use client";
 
+import { CartPopup, TabsWrapper } from "@/components";
 import { cn } from "@/lib/utils";
 import { useAppActions } from "@/stores";
 import { Menu } from "lucide-react";
 import Link from "next/link";
-import { CartPopup } from "../cartPopup";
-import TabsWrapper from "../tabs";
 
 export default function Header() {
   const { toggleOpen } = useAppActions();

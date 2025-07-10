@@ -1,5 +1,5 @@
 // import Checkout from '@/components/checkout';
-import ATC from "@/components/atc";
+import { ATC } from "@/components";
 import { getCartServer } from "@/utils/getCart/server";
 import { getPriceId, getProduct, retrievePrice } from "@/utils/stripe";
 import { cookies } from "next/headers";

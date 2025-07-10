@@ -1,14 +1,10 @@
-import Filter from "@/components/filter";
-import ProductCard from "@/components/productCard";
-import ProductCardSkeleton from "@/components/productSkeleton";
+import { Filter, ProductCard, ProductCardSkeleton } from "@/components";
 import { searchProducts } from "@/utils/stripe";
 import { Suspense } from "react";
 
-export default async function Page(
-  props: {
-    searchParams: Promise<{ [key: string]: string | undefined }>;
-  }
-) {
+export default async function Page(props: {
+  searchParams: Promise<{ [key: string]: string | undefined }>;
+}) {
   const searchParams = await props.searchParams;
   const search = searchParams.search || "";
 

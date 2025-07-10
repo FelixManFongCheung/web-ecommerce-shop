@@ -1,5 +1,4 @@
-import CheckoutButton from "@/components/checkout/checkoutButton";
-import RemoveItem from "@/components/removeItem";
+import { CheckoutButton, RemoveItem } from "@/components";
 import { getCartProductsServer } from "@/utils/getCart/server";
 import { cookies } from "next/headers";
 import Image from "next/image";

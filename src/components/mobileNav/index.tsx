@@ -1,8 +1,8 @@
 "use client";
 
+import { TabsWrapper } from "@/components";
 import { cn } from "@/lib/utils";
 import { useAppActions, useIsOpen } from "@/stores";
-import TabsWrapper from "../tabs";
 
 export default function MobileNav() {
   const isOpen = useIsOpen();

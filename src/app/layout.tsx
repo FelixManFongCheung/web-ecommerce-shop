@@ -1,6 +1,4 @@
-import Footer from "../components/footer";
-import Header from "../components/header";
-import MobileNav from "../components/mobileNav";
+import { Footer, Header, MobileNav } from "@/components";
 import "../styles/globals.css";
 
 export default function RootLayout({

@@ -1,5 +1,6 @@
 "use client";
 
+import { ModalWrapper } from "@/components";
 import { cn } from "@/lib/utils";
 import { useAppActions, useIsCheckoutOpen } from "@/stores";
 import { createEmbeddedCheckout } from "@/utils/checkout";
@@ -9,7 +10,7 @@ import {
 } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { useCallback, useEffect, useState } from "react";
-import ModalWrapper from "../modalWrapper";
+import CheckoutButton from "./checkoutButton";
 
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY as string
@@ -19,7 +20,7 @@ type CheckoutType = {
   priceID: string;
 };
 
-export default function Checkout({ priceID }: CheckoutType) {
+export function Checkout({ priceID }: CheckoutType) {
   const { toggleCheckoutDialog } = useAppActions();
   const isCheckoutOpen = useIsCheckoutOpen();
   const [error, setError] = useState<string | null>(null);
@@ -99,3 +100,5 @@ export default function Checkout({ priceID }: CheckoutType) {
     </>
   );
 }
+
+export { CheckoutButton };

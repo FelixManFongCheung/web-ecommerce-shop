@@ -6,7 +6,7 @@ import { getCookie } from "cookies-next";
 import { useEffect, useState } from "react";
 import Stripe from "stripe";
 
-export function CartPopup() {
+export default function CartPopup() {
   const isCartOpen = useIsCartOpen();
   const { toggleCart } = useAppActions();
   const cartCookies = getCookie("cart");
