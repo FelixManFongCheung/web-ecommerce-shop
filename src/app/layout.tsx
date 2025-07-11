@@ -1,4 +1,4 @@
-import { Footer, Header, MobileNav } from "@/components";
+import { Footer, Header, Hero, MobileNav } from "@/components";
 import "../styles/globals.css";
 
 export default function RootLayout({
@@ -14,6 +14,7 @@ export default function RootLayout({
         {/* <Effect /> */}
         <MobileNav />
         <Header />
+        <Hero />
         {children}
         {modal}
         <Footer />

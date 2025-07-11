@@ -27,6 +27,7 @@ export default function Header() {
           </div>
         </TabsWrapper>
       </div>
+      <div className="h-[10vh] w-full"></div>
       <CartPopup />
     </>
   );

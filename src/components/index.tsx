@@ -1,6 +1,7 @@
 import ATC from "./atc";
 import CartPopup from "./cartPopup";
 import { Checkout, CheckoutButton } from "./checkout";
+import DecoratorLines from "./decoratorLines";
 import Filter from "./filter";
 import Footer from "./footer";
 import Header from "./header";
@@ -19,6 +20,7 @@ export {
   CartPopup,
   Checkout,
   CheckoutButton,
+  DecoratorLines,
   Filter,
   Footer,
   Header,
