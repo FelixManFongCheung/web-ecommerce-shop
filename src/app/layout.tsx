@@ -12,10 +12,9 @@ export default function RootLayout({
     <html lang="en">
       <body>
         {/* <Effect /> */}
-        <div className="h-screen w-screen bg-gray-100 min-h-screen"></div>
+        <Hero />
         <MobileNav />
         <Header />
-        <Hero />
         {children}
         {modal}
         <Footer />

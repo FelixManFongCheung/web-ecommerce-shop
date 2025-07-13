@@ -23,28 +23,28 @@ export default function DecoratorLines({
   }
   if (variant === "medium") {
     return (
-      <svg width="400" height="200">
+      <svg width="100%" height="100%">
         <line
-          x1="50"
-          y1="50"
-          x2="350"
-          y2="150"
+          x1={alignment === "horizontal" ? "0" : "50%"}
+          y1={alignment === "horizontal" ? "50%" : "0"}
+          x2={alignment === "horizontal" ? "100%" : "50%"}
+          y2={alignment === "horizontal" ? "50%" : "100%"}
           stroke="black"
-          strokeWidth="2"
+          strokeWidth="4"
         />
       </svg>
     );
   }
   if (variant === "thick") {
     return (
-      <svg width="400" height="200">
+      <svg width="100%" height="100%">
         <line
-          x1="50"
-          y1="50"
-          x2="350"
-          y2="150"
+          x1={alignment === "horizontal" ? "0" : "50%"}
+          y1={alignment === "horizontal" ? "50%" : "0"}
+          x2={alignment === "horizontal" ? "100%" : "50%"}
+          y2={alignment === "horizontal" ? "50%" : "100%"}
           stroke="black"
-          stroke-width="2"
+          strokeWidth="8"
         />
       </svg>
     );
