@@ -16,7 +16,7 @@ export default function DecoratorLines({
           x2={alignment === "horizontal" ? "100%" : "50%"}
           y2={alignment === "horizontal" ? "50%" : "100%"}
           stroke="black"
-          stroke-width="2"
+          strokeWidth="2"
         />
       </svg>
     );
@@ -30,7 +30,7 @@ export default function DecoratorLines({
           x2="350"
           y2="150"
           stroke="black"
-          stroke-width="2"
+          strokeWidth="2"
         />
       </svg>
     );
