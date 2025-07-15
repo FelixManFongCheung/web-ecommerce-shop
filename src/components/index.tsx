@@ -6,6 +6,7 @@ import Filter from "./filter";
 import Footer from "./footer";
 import Header from "./header";
 import Hero from "./hero";
+import Icon from "./icon";
 import MobileNav from "./mobileNav";
 import ModalProductCard from "./modalProductCard";
 import ModalWrapper from "./modalWrapper";
@@ -25,6 +26,7 @@ export {
   Footer,
   Header,
   Hero,
+  Icon,
   MobileNav,
   ModalProductCard,
   ModalWrapper,

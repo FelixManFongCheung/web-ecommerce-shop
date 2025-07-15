@@ -1,17 +1,16 @@
 "use client";
 
-import { CartPopup, TabsWrapper } from "@/components";
+import { CartPopup, Icon, TabsWrapper } from "@/components";
 import { cn } from "@/lib/utils";
 import { useAppActions } from "@/stores";
 import { Menu } from "lucide-react";
-import Link from "next/link";
 
 export default function Header() {
   const { toggleOpen } = useAppActions();
 
   return (
     <>
-      <div className="fixed top-0 h-[10vh] bg-white flex z-10 w-full justify-between px-5">
+      <div className="fixed top-0 h-header-height bg-white flex z-10 w-full justify-between px-5">
         <div className="block md:hidden">
           <button className="h-full" onClick={toggleOpen}>
             <Menu />
@@ -19,13 +18,7 @@ export default function Header() {
         </div>
 
         <TabsWrapper className={cn("hidden md:flex")}>
-          <div className="relative flex items-center">
-            <Link href="/">
-              <strong className="text-lg after:content-['*'] after:text-xs after:relative after:-top-1">
-                proxy archive
-              </strong>
-            </Link>
-          </div>
+          <Icon />
         </TabsWrapper>
       </div>
       <div className="h-[10vh] w-full hidden"></div>

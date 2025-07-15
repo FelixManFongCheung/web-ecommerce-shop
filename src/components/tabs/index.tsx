@@ -1,3 +1,4 @@
+import { Icon } from "@/components";
 import { cn } from "@/lib/utils";
 import { useAppActions } from "@/stores";
 import { Search, ShoppingCart } from "lucide-react";
@@ -26,10 +27,11 @@ export default function TabsWrapper({
       <div
         className={cn(
           "relative flex items-center gap-5",
-          isMobile && "md:flex md:flex-col md:items-start",
+          isMobile && "flex flex-col items-start",
           className
         )}
       >
+        <Icon className="h-header-height mx-auto" />
         <Link href="/collections/all" onClick={handleLinkClick}>
           shop
         </Link>
@@ -49,7 +51,7 @@ export default function TabsWrapper({
       <div
         className={cn(
           "relative flex items-center gap-5 md:hidden",
-          isMobile && "md:flex md:flex-col md:items-start",
+          isMobile && "flex flex-col items-start",
           className
         )}
       >

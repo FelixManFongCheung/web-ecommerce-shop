@@ -24,8 +24,8 @@ export default function MobileNav() {
       ></div>
       <div
         className={cn(
-          "fixed bg-white p-12 pr-4 w-3/5 h-screen flex flex-col gap-5 transition-all duration-500 ease-in-out",
-          isOpen ? "left-0" : "-left-full"
+          "fixed bg-white mx-auto left-[50%] translate-x-[-50%] px-4 w-1/2 h-screen flex flex-col gap-5 transition-all duration-500 ease-in-out",
+          isOpen ? "block" : "hidden pointer-events-none"
         )}
       >
         <TabsWrapper isMobile={true} />
