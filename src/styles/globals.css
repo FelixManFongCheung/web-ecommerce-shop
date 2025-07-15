@@ -1,5 +1,15 @@
 @import "tailwindcss";
 
+:root {
+  --primary: oklch(0.2407 0.0349 31.44);
+  --secondary: oklch(100% 0 0);
+}
+
+@theme inline {
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+}
+
 @font-face {
   src: url("../../public/fonts/FontsFree-Net-Athelas-BoldItalic.ttf");
   font-family: "Athelas Bold Italic";

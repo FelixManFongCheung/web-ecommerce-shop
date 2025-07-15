@@ -1,10 +1,12 @@
 export default function DecoratorLines({
   alignment,
   variant,
+  strokeColor,
 }: //   className,
 {
   alignment: "horizontal" | "vertical";
   variant: "thin" | "medium" | "thick";
+  strokeColor: string;
   //   className?: string;
 }) {
   if (variant === "thin") {
@@ -15,7 +17,7 @@ export default function DecoratorLines({
           y1={alignment === "horizontal" ? "50%" : "0"}
           x2={alignment === "horizontal" ? "100%" : "50%"}
           y2={alignment === "horizontal" ? "50%" : "100%"}
-          stroke="black"
+          stroke={strokeColor}
           strokeWidth="2"
         />
       </svg>
@@ -29,7 +31,7 @@ export default function DecoratorLines({
           y1={alignment === "horizontal" ? "50%" : "0"}
           x2={alignment === "horizontal" ? "100%" : "50%"}
           y2={alignment === "horizontal" ? "50%" : "100%"}
-          stroke="black"
+          stroke={strokeColor}
           strokeWidth="4"
         />
       </svg>
@@ -43,7 +45,7 @@ export default function DecoratorLines({
           y1={alignment === "horizontal" ? "50%" : "0"}
           x2={alignment === "horizontal" ? "100%" : "50%"}
           y2={alignment === "horizontal" ? "50%" : "100%"}
-          stroke="black"
+          stroke={strokeColor}
           strokeWidth="8"
         />
       </svg>
