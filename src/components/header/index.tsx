@@ -1,6 +1,6 @@
 "use client";
 
-import { CartPopup, Icon, TabsWrapper } from "@/components";
+import { CartPopup, Icon } from "@/components";
 import { cn } from "@/lib/utils";
 import { useAppActions } from "@/stores";
 import { Menu } from "lucide-react";
@@ -17,9 +17,14 @@ export default function Header() {
           </button>
         </div>
 
-        <TabsWrapper className={cn("hidden md:flex")}>
-          <Icon />
-        </TabsWrapper>
+        {/* <TabsWrapper className={cn("hidden md:flex")}> */}
+        <Icon
+          className={cn(
+            "absolute md:hidden top-0 left-1/2 h-full transform -translate-x-1/2 flex items-center justify-center"
+          )}
+        />
+
+        {/* </TabsWrapper> */}
       </div>
       <div className="h-[10vh] w-full hidden"></div>
       <CartPopup />
