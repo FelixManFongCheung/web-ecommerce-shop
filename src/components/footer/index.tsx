@@ -1,18 +1,20 @@
 import { Icon } from "@/components";
-import { Instagram, Mail } from "lucide-react";
+import { cn } from "@/lib/utils";
 import Link from "next/link";
+import { PiInstagramLogoLight } from "react-icons/pi";
+import { TfiEmail } from "react-icons/tfi";
 
 export default function Footer() {
   return (
     <div className="container mx-auto flex justify-between bottom-0 h-fit w-full pb-10 bg-white">
-      <div className="flex flex-col gap-4 w-[200px]">
-        <Icon />
-        <Link className="flex flex-row gap-2" href="/">
-          <Mail />
+      <div className="flex flex-col w-[200px]">
+        <Icon className={cn("w-auto mb-4")} />
+        <Link className="flex flex-row items-center gap-2" href="/">
+          <TfiEmail className="w-4 h-4" />
           <span>info@proxyarchive.com</span>
         </Link>
-        <Link className="flex flex-row gap-2" href="/">
-          <Instagram />
+        <Link className="flex flex-row items-center gap-2" href="/">
+          <PiInstagramLogoLight className="w-4 h-4" />
           <span>@proxy__archive</span>
         </Link>
       </div>
