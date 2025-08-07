@@ -26,6 +26,13 @@
   font-style: normal;
 }
 
+@font-face {
+  src: url("../../public/fonts/happy-times-NG_italic_master_web.ttf");
+  font-family: "Happy Times Italic";
+  font-weight: 400;
+  font-style: italic;
+}
+
 html,
 body,
 * {
@@ -35,7 +42,6 @@ body,
 
 a,
 button {
-  all: unset;
   color: inherit;
   text-decoration: none;
   will-change: filter;
