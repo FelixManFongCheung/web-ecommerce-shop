@@ -8,7 +8,6 @@ import Footer from "./footer";
 import Header from "./header";
 import Hero from "./hero";
 import MobileNav from "./mobileNav";
-import TabsWrapper from "./tabs";
 
 // UI units
 import ModalProductCard from "./modalProductCard";
@@ -40,5 +39,4 @@ export {
   ProductCardSkeleton,
   RemoveItem,
   SpinningProductCard,
-  TabsWrapper,
 };

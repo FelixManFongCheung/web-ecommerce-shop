@@ -1,6 +1,5 @@
 "use client";
 
-import { TabsWrapper } from "@/components";
 import { cn } from "@/lib/utils";
 import { useAppActions, useIsOpen } from "@/stores";
 
@@ -27,9 +26,7 @@ export default function MobileNav() {
           "fixed bg-white mx-auto left-[50%] translate-x-[-50%] px-4 w-1/2 h-screen flex flex-col gap-5 transition-all duration-500 ease-in-out",
           isOpen ? "block" : "hidden pointer-events-none"
         )}
-      >
-        <TabsWrapper isMobile={true} />
-      </div>
+      ></div>
     </div>
   );
 }
