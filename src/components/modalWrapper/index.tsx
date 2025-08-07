@@ -1,4 +1,4 @@
-import { useAppActions } from "@/stores";
+import { useAppActions } from "@/stores/appStore";
 
 export default function ModalWrapper({
   children,

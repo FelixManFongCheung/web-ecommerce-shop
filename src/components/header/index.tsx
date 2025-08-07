@@ -2,7 +2,7 @@
 
 import { CartPopup, Icon } from "@/components";
 import { cn } from "@/lib/utils";
-import { useAppActions } from "@/stores";
+import { useAppActions } from "@/stores/appStore";
 import { Menu } from "lucide-react";
 
 export default function Header() {

@@ -2,7 +2,7 @@
 
 import { Icon } from "@/components";
 import { cn } from "@/lib/utils";
-import { useAppActions, useIsOpen } from "@/stores";
+import { useAppActions, useIsOpen } from "@/stores/appStore";
 
 export default function MobileNav() {
   const isOpen = useIsOpen();

@@ -1,6 +1,6 @@
 "use client";
 
-import { useAppActions, useIsCartOpen } from "@/stores";
+import { useAppActions, useIsCartOpen } from "@/stores/appStore";
 import { getCartProductsClient } from "@/utils/getCart/client";
 import { getCookie } from "cookies-next";
 import { useEffect, useState } from "react";
