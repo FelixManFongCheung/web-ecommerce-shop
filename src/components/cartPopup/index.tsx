@@ -1,12 +1,13 @@
 "use client";
 
+import { cn } from "@/lib/utils";
 import { useAppActions, useIsCartOpen } from "@/stores/appStore";
 import { getCartProductsClient } from "@/utils/getCart/client";
 import { getCookie } from "cookies-next";
 import { useEffect, useState } from "react";
 import Stripe from "stripe";
 
-export default function CartPopup() {
+export default function CartPopup({ className }: { className?: string }) {
   const isCartOpen = useIsCartOpen();
   const { toggleCart } = useAppActions();
   const cartCookies = getCookie("cart");
@@ -38,7 +39,7 @@ export default function CartPopup() {
   if (!isCartOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50">
+    <div className={cn("fixed inset-0 z-50", className)}>
       <div className="absolute inset-0 bg-black/50" onClick={toggleCart} />
       <div className="absolute right-0 top-0 h-full w-full max-w-md bg-white p-6">
         <div className="flex justify-between items-center">

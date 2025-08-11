@@ -11,7 +11,7 @@ export default function Header() {
   return (
     <>
       <div className="fixed top-0 h-header-height bg-white flex z-10 w-full justify-between px-5">
-        <div className="block">
+        <div className="block md:hidden">
           <button className="h-full" onClick={toggleOpen}>
             <Menu />
           </button>
@@ -23,7 +23,7 @@ export default function Header() {
           )}
         />
       </div>
-      <CartPopup />
+      <CartPopup className="md:hidden" />
     </>
   );
 }
