@@ -7,7 +7,7 @@ import Filter from "./filter";
 import Footer from "./footer";
 import Header from "./header";
 import Hero from "./hero";
-import MobileNav from "./mobileNav";
+import Nav from "./nav";
 
 // UI units
 import ModalProductCard from "./modalProductCard";
@@ -32,9 +32,9 @@ export {
   Header,
   Hero,
   Icon,
-  MobileNav,
   ModalProductCard,
   ModalWrapper,
+  Nav,
   ProductCard,
   ProductCardSkeleton,
   RemoveItem,

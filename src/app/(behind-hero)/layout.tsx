@@ -1,4 +1,4 @@
-import { Footer, Header, MobileNav } from "@/components";
+import { Footer, Header, Nav } from "@/components";
 
 export default function BehindHeroLayout({
   children,
@@ -7,7 +7,7 @@ export default function BehindHeroLayout({
 }) {
   return (
     <div className="relative z-10">
-      <MobileNav />
+      <Nav />
       <Header />
       {children}
       <Footer />
