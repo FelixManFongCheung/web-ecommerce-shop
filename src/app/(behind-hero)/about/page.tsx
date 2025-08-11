@@ -1,24 +1,37 @@
+const data = {
+  section_1: {
+    title:
+      "Proxy Archive is your gatewayto rare vintage and archive designer pieces — a bridge between eras, aesthetics, and cultural legacy, created to foster lasting emotional connection.",
+    paragraphs: [
+      "Each item is handpicked for its unique design, exceptional craftsmanship, and cultural relevance — from overlooked rarities to iconic moments in fashion history.",
+      "Our aim is to curate a wardrobe that resonates — one that lingers in your sentimental hard drive for years to come.",
+      "Every garment is authentic and thoroughly inspected, ensuring trusted quality and enduring appeal.",
+    ],
+  },
+  section_2: {
+    title: "Consignment",
+    paragraphs: [
+      "Proxy Archive offers consignment services to help you share your gems with an appreciative audience.",
+      "Simply send us an email at info@proxyarchive.com with images and short descriptions of your items.",
+      "Upon approval, we’ll collaborate on pricing and feature your pieces as part of our curated collection. A commission is agreed upon in advance and deducted from each sale.",
+      "Unsold items can either be returned or remain listed — entirely up to you.",
+    ],
+  },
+};
+
 export default function Page() {
   return (
-    <section className="text-left py-2 px-2 md:py-[100px] md:px-[200px]">
-      <strong>&gt;about</strong>
-      <br />
-      <br />
-      <p>
-        Proxy Archive is your gateway to exceptional vintage garments. We curate
-        timeless rarities that embody style, craftsmanship, and cultural
-        heritage. Each piece is handpicked to preserve stories and memories,
-        aiming to leave an enduring imprint on your sentimental hard drive.
-        Proxy Archive is more than a store; it’s a celebration of history and
-        design, connecting you to the past while inspiring your personal style.
-      </p>
-      <br />
-      <p>The vision</p>
-      <br />
-      <br />
-      <br />
-      <br />
-      <p>xoxo Signe</p>
-    </section>
+    <div className="flex flex-col md:flex-row">
+      {Object.values(data).map((section) => {
+        return (
+          <div key={section.title}>
+            <h2>{section.title}</h2>
+            {section.paragraphs.map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
+          </div>
+        );
+      })}
+    </div>
   );
 }
