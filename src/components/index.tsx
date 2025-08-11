@@ -18,6 +18,8 @@ import RemoveItem from "./removeItem";
 
 // custom UI units
 import DecoratorLines from "./decoratorLines";
+import DesktopLeftNav from "./desktopLeftNav";
+import DesktopRightNav from "./desktopRightNav";
 import Icon from "./icon";
 import SpinningProductCard from "./spinningProductCard";
 
@@ -27,6 +29,8 @@ export {
   Checkout,
   CheckoutButton,
   DecoratorLines,
+  DesktopLeftNav,
+  DesktopRightNav,
   Filter,
   Footer,
   Header,

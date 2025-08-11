@@ -1,4 +1,10 @@
-import { Footer, Header, Nav } from "@/components";
+import {
+  DesktopLeftNav,
+  DesktopRightNav,
+  Footer,
+  Header,
+  Nav,
+} from "@/components";
 
 export default function BehindHeroLayout({
   children,
@@ -8,6 +14,8 @@ export default function BehindHeroLayout({
   return (
     <div className="relative z-10">
       <Nav />
+      <DesktopLeftNav />
+      <DesktopRightNav />
       <Header />
       {children}
       <Footer />

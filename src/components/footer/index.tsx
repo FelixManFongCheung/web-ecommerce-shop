@@ -6,7 +6,12 @@ import { TfiEmail } from "react-icons/tfi";
 
 export default function Footer() {
   return (
-    <div className="container mx-auto flex justify-between bottom-0 h-fit w-full pb-10 bg-white">
+    <div
+      className={cn(
+        "md:fixed md:bottom-0 z-11 relative",
+        "w-full px-14 flex justify-between items-end bottom-0 h-fit pb-10 bg-transparent"
+      )}
+    >
       <div className="flex flex-col w-[200px]">
         <Icon className={cn("w-auto mb-4")} />
         <Link className="flex flex-row items-center gap-2" href="/">
