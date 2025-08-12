@@ -1,5 +1,5 @@
 import { Icon } from "@/components";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/cn/utils";
 import Link from "next/link";
 import { PiInstagramLogoLight } from "react-icons/pi";
 import { TfiEmail } from "react-icons/tfi";

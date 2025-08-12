@@ -1,7 +1,7 @@
 "use client";
 
 import { Icon } from "@/components";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/cn/utils";
 import { useAppActions, useIsOpen } from "@/stores/appStore";
 
 export default function Nav() {

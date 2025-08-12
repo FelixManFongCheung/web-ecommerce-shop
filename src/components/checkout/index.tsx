@@ -2,7 +2,7 @@
 
 import { createEmbeddedCheckout } from "@/actions/checkout";
 import { ModalWrapper } from "@/components";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/cn/utils";
 import { useAppActions, useIsCheckoutOpen } from "@/stores/appStore";
 import {
   EmbeddedCheckout,

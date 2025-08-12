@@ -1,7 +1,7 @@
 "use client";
 
 import { CartPopup, Icon } from "@/components";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/cn/utils";
 import { useAppActions } from "@/stores/appStore";
 import { Menu } from "lucide-react";
 

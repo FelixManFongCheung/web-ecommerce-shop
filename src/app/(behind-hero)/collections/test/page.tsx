@@ -32,8 +32,7 @@ export default function Page() {
             fill
             key={url}
             src={url}
-            className={""}
-            alt=""
+            alt="test"
             style={{
               translate: `${imageIndex * -100}%`,
             }}

@@ -1,7 +1,7 @@
 "use client";
 
 import { addToCart } from "@/actions/cart";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/cn/utils";
 import { useAppActions } from "@/stores/appStore";
 import { getCookie } from "cookies-next";
 import { useState } from "react";

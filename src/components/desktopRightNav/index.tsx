@@ -1,5 +1,5 @@
 import { DecoratorLines } from "@/components";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/cn/utils";
 
 const DESKTOP_RIGHT_NAV_WIDTH = 200;
 

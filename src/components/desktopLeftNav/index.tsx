@@ -1,7 +1,7 @@
 import { getProductsAll } from "@/actions/stripe";
 import { DecoratorLines } from "@/components";
 import { metaDataKey } from "@/data";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/cn/utils";
 
 const DESKTOP_LEFT_NAV_WIDTH = 200;
 
@@ -12,24 +12,54 @@ const VERTICAL_LINE_OFFSET_Y = 2;
 const HORIZONTAL_LINE_WIDTH = 40;
 const HORIZONTAL_LINE_OFFSET_X = 1.5;
 const HORIZONTAL_LINE_OFFSET_Y = 8;
+interface Group {
+  [key: string]: object | Group;
+}
 
 export default async function DesktopLeftNav() {
-  const groups: Record<string, string[]> = {};
+  const groups: Group = {};
   const productsAll = await getProductsAll();
+
+  const placementRecursive = (obj: Group, key: string, value: string[]) => {
+    if (value.length === 0) {
+      if (obj[key]) return;
+      obj[key] = {};
+    } else {
+      obj[key] = { ...obj[key] } as Group;
+      placementRecursive(obj[key] as Group, value[0], value.slice(1));
+    }
+  };
 
   productsAll.forEach((product) => {
     metaDataKey.forEach((key) => {
-      if (!groups[key]) {
-        groups[key] = [];
-      }
       if (/-/.test(product.metadata[key])) {
-        // product.metadata[key].split("-").reduce(())
-        groups[key].push();
+        const linkArray = product.metadata[key].split("-");
+        placementRecursive(groups, key, linkArray);
       } else {
-        groups[key].push(product.metadata[key]);
+        placementRecursive(groups, key, [product.metadata[key]]);
       }
     });
   });
+
+  console.log(groups);
+
+  const renderNestedObject = (obj: Group, level = 0) => {
+    return Object.entries(obj).map(([key, value]) => (
+      <div key={key} className={`ml-${level * 4} ${level !== 0 && "h-0"}`}>
+        <h1
+          className={level === 0 ? "text-lg font-bold" : "text-sm font-medium"}
+        >
+          {key}
+        </h1>
+        {value ? (
+          renderNestedObject(value as Group, level + 1)
+        ) : (
+          <div className="ml-4">{key}</div>
+        )}
+      </div>
+    ));
+  };
+
   return (
     <div
       className={`md:block hidden fixed z-11 left-0 top-0 h-full w-[${DESKTOP_LEFT_NAV_WIDTH}px] bg-white`}
@@ -56,17 +86,7 @@ export default async function DesktopLeftNav() {
           left: `${VERTICAL_LINE_OFFSET_X * 2}rem`,
         }}
       >
-        {Object.entries(groups).map(([key, group]) => (
-          <div
-            key={key + "-" + group}
-            className={cn("flex flex-col justify-center items-start")}
-          >
-            <h1>{key}</h1>
-            {group.map((value) => (
-              <div key={value + "-" + key}>{value}</div>
-            ))}
-          </div>
-        ))}
+        {renderNestedObject(groups)}
       </div>
       {/* vertical line */}
       <DecoratorLines
