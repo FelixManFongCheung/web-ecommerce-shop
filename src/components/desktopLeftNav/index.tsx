@@ -3,15 +3,15 @@ import { DecoratorLines, LeftNestedGroup } from "@/components";
 import { metaDataKey } from "@/data";
 import { cn } from "@/lib/cn/utils";
 
-const DESKTOP_LEFT_NAV_WIDTH = 200;
+export const DESKTOP_LEFT_NAV_WIDTH = 200;
 
-const VERTICAL_LINE_HEIGHT = 50;
-const VERTICAL_LINE_OFFSET_X = 3;
-const VERTICAL_LINE_OFFSET_Y = 2;
+export const VERTICAL_LINE_HEIGHT = 50;
+export const VERTICAL_LINE_OFFSET_X = 3;
+export const VERTICAL_LINE_OFFSET_Y = 2;
 
-const HORIZONTAL_LINE_WIDTH = 40;
-const HORIZONTAL_LINE_OFFSET_X = 1.5;
-const HORIZONTAL_LINE_OFFSET_Y = 8;
+export const HORIZONTAL_LINE_WIDTH = 40;
+export const HORIZONTAL_LINE_OFFSET_X = 1.5;
+export const HORIZONTAL_LINE_OFFSET_Y = 8;
 
 export interface Group {
   [key: string]: object | Group;
