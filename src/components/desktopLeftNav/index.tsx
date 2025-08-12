@@ -44,7 +44,7 @@ export default async function DesktopLeftNav() {
 
   return (
     <div
-      className={`md:block hidden fixed z-11 left-0 top-0 h-full w-[${DESKTOP_LEFT_NAV_WIDTH}px] bg-white`}
+      className={`md:block hidden fixed z-11 left-0 top-0 h-full w-[${DESKTOP_LEFT_NAV_WIDTH}px] bg-transparent`}
     >
       {/* TODO: to be abstracted */}
       {/* Navigation */}

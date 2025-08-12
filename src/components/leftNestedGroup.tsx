@@ -35,7 +35,10 @@ export default function LeftNestedGroup({
   };
 
   return Object.entries(group).map(([key, value]) => (
-    <div key={key}>
+    <div
+      key={key}
+      className={`${level === 0 && metaDataKey.indexOf(key) === 0 && "h-96"}`}
+    >
       {level === 0 && metaDataKey.indexOf(key) !== 0 && (
         <DecoratorLines
           alignment="horizontal"
