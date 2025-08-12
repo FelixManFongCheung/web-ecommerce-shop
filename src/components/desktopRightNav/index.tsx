@@ -8,7 +8,7 @@ const VERTICAL_LINE_OFFSET_X = 3;
 const VERTICAL_LINE_OFFSET_Y = 2;
 
 const HORIZONTAL_LINE_WIDTH = 40;
-const HORIZONTAL_LINE_OFFSET_X = 2;
+const HORIZONTAL_LINE_OFFSET_X = 1.5;
 const HORIZONTAL_LINE_OFFSET_Y = 8;
 
 export default function DesktopRightNav() {

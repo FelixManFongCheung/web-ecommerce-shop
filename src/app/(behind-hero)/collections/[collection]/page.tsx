@@ -1,5 +1,8 @@
 import { Filter, ProductCard, ProductCardSkeleton } from "@/components";
-import { getProductsAll, searchProducts } from "@/utils/stripe";
+import {
+  getProductsAll,
+  retrieveProductsByMetaDataKeyAndValue,
+} from "@/utils/stripe";
 import { Suspense } from "react";
 
 export default async function Page(props: {
@@ -36,10 +39,10 @@ export default async function Page(props: {
   // Get filtered products
   const products = searchParams?.collection
     ? (
-        await searchProducts("", {
-          metadataName: "collection",
-          metadataQuery: searchParams.collection as string,
-        })
+        await retrieveProductsByMetaDataKeyAndValue(
+          "collection",
+          searchParams.collection as string
+        )
       ).products
     : allProducts;
 
