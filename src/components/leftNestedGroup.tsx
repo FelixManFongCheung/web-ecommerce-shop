@@ -35,7 +35,7 @@ export default function LeftNestedGroup({
   };
 
   return Object.entries(group).map(([key, value]) => (
-    <>
+    <div key={key}>
       {level === 0 && metaDataKey.indexOf(key) !== 0 && (
         <DecoratorLines
           alignment="horizontal"
@@ -47,7 +47,7 @@ export default function LeftNestedGroup({
           className={cn("relative")}
         />
       )}
-      <div key={key} style={{ marginLeft: `${level * 1}rem` }}>
+      <div style={{ marginLeft: `${level * 1}rem` }}>
         <h1
           className={level === 0 ? "text-lg font-bold" : "text-sm font-medium"}
           onClick={() => handleClick(key)}
@@ -65,6 +65,6 @@ export default function LeftNestedGroup({
           </div>
         )}
       </div>
-    </>
+    </div>
   ));
 }
