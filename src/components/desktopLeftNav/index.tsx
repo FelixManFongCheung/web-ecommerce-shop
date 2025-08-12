@@ -1,5 +1,5 @@
 import { getProductsAll } from "@/actions/stripe";
-import { DecoratorLines } from "@/components";
+import { DecoratorLines, LeftNestedGroup } from "@/components";
 import { metaDataKey } from "@/data";
 import { cn } from "@/lib/cn/utils";
 
@@ -12,7 +12,8 @@ const VERTICAL_LINE_OFFSET_Y = 2;
 const HORIZONTAL_LINE_WIDTH = 40;
 const HORIZONTAL_LINE_OFFSET_X = 1.5;
 const HORIZONTAL_LINE_OFFSET_Y = 8;
-interface Group {
+
+export interface Group {
   [key: string]: object | Group;
 }
 
@@ -41,25 +42,6 @@ export default async function DesktopLeftNav() {
     });
   });
 
-  console.log(groups);
-
-  const renderNestedObject = (obj: Group, level = 0) => {
-    return Object.entries(obj).map(([key, value]) => (
-      <div key={key} className={`ml-${level * 4} ${level !== 0 && "h-0"}`}>
-        <h1
-          className={level === 0 ? "text-lg font-bold" : "text-sm font-medium"}
-        >
-          {key}
-        </h1>
-        {value ? (
-          renderNestedObject(value as Group, level + 1)
-        ) : (
-          <div className="ml-4">{key}</div>
-        )}
-      </div>
-    ));
-  };
-
   return (
     <div
       className={`md:block hidden fixed z-11 left-0 top-0 h-full w-[${DESKTOP_LEFT_NAV_WIDTH}px] bg-white`}
@@ -86,7 +68,7 @@ export default async function DesktopLeftNav() {
           left: `${VERTICAL_LINE_OFFSET_X * 2}rem`,
         }}
       >
-        {renderNestedObject(groups)}
+        <LeftNestedGroup group={groups} />
       </div>
       {/* vertical line */}
       <DecoratorLines
