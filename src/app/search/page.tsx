@@ -1,5 +1,5 @@
+import { searchProducts } from "@/actions/stripe";
 import { Filter, ProductCard, ProductCardSkeleton } from "@/components";
-import { searchProducts } from "@/utils/stripe";
 import { Suspense } from "react";
 
 export default async function Page(props: {

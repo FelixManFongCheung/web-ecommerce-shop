@@ -1,8 +1,8 @@
 "use client";
 
+import { getCartProductsClient } from "@/actions/getCart/client";
 import { cn } from "@/lib/utils";
 import { useAppActions, useIsCartOpen } from "@/stores/appStore";
-import { getCartProductsClient } from "@/utils/getCart/client";
 import { getCookie } from "cookies-next";
 import { useEffect, useState } from "react";
 import Stripe from "stripe";

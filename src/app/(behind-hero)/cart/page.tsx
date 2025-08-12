@@ -1,5 +1,5 @@
+import { getCartProductsServer } from "@/actions/getCart/server";
 import { CheckoutButton, RemoveItem } from "@/components";
-import { getCartProductsServer } from "@/utils/getCart/server";
 import { cookies } from "next/headers";
 import Image from "next/image";
 import Link from "next/link";

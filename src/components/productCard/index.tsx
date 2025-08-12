@@ -1,4 +1,4 @@
-import { getPriceId, retrievePrice } from "@/utils/stripe";
+import { getPriceId, retrievePrice } from "@/actions/stripe";
 import Image from "next/image";
 import Link from "next/link";
 import Stripe from "stripe";

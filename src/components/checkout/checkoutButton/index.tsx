@@ -1,20 +1,20 @@
-'use client';
+"use client";
 
-import { createCheckout } from '@/utils/checkout';
+import { createCheckout } from "@/actions/checkout";
 
 export default function CheckoutButton({ cartID }: { cartID: string }) {
   const handleCheckout = async () => {
     try {
       const response = await createCheckout(cartID);
-      
-      if (!response.success) throw new Error('Checkout failed');
-      
+
+      if (!response.success) throw new Error("Checkout failed");
+
       const { url } = response;
       if (url) {
         window.location.href = url;
       }
     } catch (error) {
-      console.error('Checkout error:', error);
+      console.error("Checkout error:", error);
     }
   };
 

@@ -1,9 +1,9 @@
 "use client";
 
+import { createEmbeddedCheckout } from "@/actions/checkout";
 import { ModalWrapper } from "@/components";
 import { cn } from "@/lib/utils";
 import { useAppActions, useIsCheckoutOpen } from "@/stores/appStore";
-import { createEmbeddedCheckout } from "@/utils/checkout";
 import {
   EmbeddedCheckout,
   EmbeddedCheckoutProvider,

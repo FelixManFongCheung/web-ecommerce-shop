@@ -9,9 +9,7 @@ export default function Filter({
         <div key={key}>
           <h3>{key}</h3>
           {Array.from(values).map((value) => (
-            <button onClick={() => {}} key={value}>
-              {value}
-            </button>
+            <button key={value}>{value}</button>
           ))}
         </div>
       ))}

@@ -67,3 +67,5 @@ export const dataTerms = {
     ],
   },
 };
+
+export const metaDataKey = ["categories", "designers"];

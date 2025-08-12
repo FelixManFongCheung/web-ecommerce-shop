@@ -50,7 +50,7 @@ export async function getActiveProducts() {
   return products.data;
 }
 
-export async function getProductsAll() {
+export async function getProductsAll(): Promise<Stripe.Product[]> {
   const products = await stripe.products.list();
   return products.data;
 }
