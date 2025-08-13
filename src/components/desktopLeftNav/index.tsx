@@ -3,8 +3,6 @@ import { DecoratorLines, LeftNestedGroup } from "@/components";
 import { metaDataKey } from "@/data";
 import { cn } from "@/lib/cn/utils";
 
-export const DESKTOP_LEFT_NAV_WIDTH = 200;
-
 export const VERTICAL_LINE_HEIGHT = 50;
 export const VERTICAL_LINE_OFFSET_X = 3;
 export const VERTICAL_LINE_OFFSET_Y = 2;
@@ -44,7 +42,7 @@ export default async function DesktopLeftNav() {
 
   return (
     <div
-      className={`md:block hidden fixed z-11 left-0 top-0 h-full w-[${DESKTOP_LEFT_NAV_WIDTH}px] bg-transparent`}
+      className={`md:block hidden fixed z-11 left-0 top-0 h-full w-desktop-left-nav-width bg-transparent`}
     >
       {/* TODO: to be abstracted */}
       {/* Navigation */}
