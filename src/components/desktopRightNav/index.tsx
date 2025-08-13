@@ -14,6 +14,16 @@ export default function DesktopRightNav() {
     <div
       className={`md:block hidden fixed z-11 right-0 top-0 h-full w-desktop-right-nav-width bg-white`}
     >
+      <div
+        className={cn("absolute flex flex-col justify-center items-center")}
+        style={{
+          top: `${VERTICAL_LINE_OFFSET_Y}rem`,
+          right: `${VERTICAL_LINE_OFFSET_X * 2}rem`,
+          height: `${HORIZONTAL_LINE_OFFSET_Y - VERTICAL_LINE_OFFSET_Y}rem`,
+        }}
+      >
+        <h1 className="text-primary text-wrap text-7xl">Cart</h1>
+      </div>
       {/* vertical line */}
       <DecoratorLines
         alignment="vertical"
