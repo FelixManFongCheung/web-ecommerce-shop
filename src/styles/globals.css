@@ -4,12 +4,14 @@
   --primary: oklch(0.2407 0.0349 31.44);
   --secondary: oklch(100% 0 0);
   --header-height: 10vh;
+  --desktop-left-nav-width: 200px;
 }
 
 @theme inline {
   --color-primary: var(--primary);
   --color-secondary: var(--secondary);
   --spacing-header-height: var(--header-height);
+  --spacing-desktop-left-nav-width: var(--desktop-left-nav-width);
 }
 
 @font-face {
