@@ -3,7 +3,6 @@ import CartPopup from "./cartPopup";
 import { Checkout, CheckoutButton } from "./checkout";
 
 // main UI components
-import Filter from "./filter";
 import Footer from "./footer";
 import Header from "./header";
 import Hero from "./hero";
@@ -32,7 +31,6 @@ export {
   DecoratorLines,
   DesktopLeftNav,
   DesktopRightNav,
-  Filter,
   Footer,
   Header,
   Hero,
