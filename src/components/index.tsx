@@ -20,7 +20,6 @@ import DecoratorLines from "./decoratorLines";
 import DesktopLeftNav from "./desktopLeftNav";
 import DesktopRightNav from "./desktopRightNav";
 import Icon from "./icon";
-import LeftNestedGroup from "./leftNestedGroup";
 import SpinningProductCard from "./spinningProductCard";
 
 export {
@@ -35,7 +34,6 @@ export {
   Header,
   Hero,
   Icon,
-  LeftNestedGroup,
   ModalProductCard,
   ModalWrapper,
   Nav,

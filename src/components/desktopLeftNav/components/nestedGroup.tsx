@@ -8,12 +8,9 @@ import {
 import { metaDataKey } from "@/data";
 import { cn } from "@/lib/cn/utils";
 import { useState } from "react";
-import {
-  HORIZONTAL_LINE_OFFSET_X,
-  HORIZONTAL_LINE_WIDTH,
-} from "./desktopLeftNav";
+import { HORIZONTAL_LINE_OFFSET_X, HORIZONTAL_LINE_WIDTH } from "..";
 
-export default function LeftNestedGroup({
+export function NestedGroup({
   group,
   level = 0,
 }: {
@@ -64,7 +61,7 @@ export default function LeftNestedGroup({
               openItems.has(key) ? "max-h-96" : "max-h-0"
             } overflow-hidden transition-all duration-300 ease-in-out`}
           >
-            <LeftNestedGroup group={value as Group} level={level + 1} />
+            <NestedGroup group={value as Group} level={level + 1} />
           </div>
         )}
       </div>

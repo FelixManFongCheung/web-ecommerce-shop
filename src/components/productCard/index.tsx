@@ -30,7 +30,7 @@ async function ProductCard({
           sizes="(max-width: 768px) 60vw, (max-width: 1200px) 50vw, 33vw"
         />
       </Link>
-      <div className="product-info">
+      <div className="product-info text-center mt-2">
         <div className="name">{product.name}</div>
         <div className="brief">{product.metadata.brief}</div>
         {product.active ? (
