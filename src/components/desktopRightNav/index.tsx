@@ -1,7 +1,7 @@
 import { DecoratorLines } from "@/components";
 import { cn } from "@/lib/cn/utils";
 
-export const VERTICAL_LINE_HEIGHT = 50;
+export const VERTICAL_LINE_HEIGHT = 40;
 export const VERTICAL_LINE_OFFSET_X = 3;
 export const VERTICAL_LINE_OFFSET_Y = 2;
 
