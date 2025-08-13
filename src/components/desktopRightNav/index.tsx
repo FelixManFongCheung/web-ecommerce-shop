@@ -5,7 +5,7 @@ export const VERTICAL_LINE_HEIGHT = 50;
 export const VERTICAL_LINE_OFFSET_X = 3;
 export const VERTICAL_LINE_OFFSET_Y = 2;
 
-export const HORIZONTAL_LINE_WIDTH = 40;
+export const HORIZONTAL_LINE_WIDTH = 20;
 export const HORIZONTAL_LINE_OFFSET_X = 1.5;
 export const HORIZONTAL_LINE_OFFSET_Y = 8;
 

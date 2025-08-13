@@ -6,7 +6,7 @@ export const VERTICAL_LINE_HEIGHT = 50;
 export const VERTICAL_LINE_OFFSET_X = 3;
 export const VERTICAL_LINE_OFFSET_Y = 2;
 
-export const HORIZONTAL_LINE_WIDTH = 40;
+export const HORIZONTAL_LINE_WIDTH = 25;
 export const HORIZONTAL_LINE_OFFSET_X = 1.5;
 export const HORIZONTAL_LINE_OFFSET_Y = 8;
 
@@ -22,7 +22,7 @@ export default async function DesktopLeftNav() {
       {/* TODO: to be abstracted */}
       {/* Navigation */}
       <div
-        className={cn("absolute flex flex-col justify-center items-center")}
+        className={cn("absolute flex flex-row justify-end items-center gap-2")}
         style={{
           top: `${VERTICAL_LINE_OFFSET_Y}rem`,
           left: `${VERTICAL_LINE_OFFSET_X * 2}rem`,
@@ -30,6 +30,8 @@ export default async function DesktopLeftNav() {
         }}
       >
         <h1 className="text-primary text-wrap text-7xl">Shop</h1>
+        <span>|</span>
+        <div className="">MENU</div>
       </div>
       {/* Filters */}
       <Filter />

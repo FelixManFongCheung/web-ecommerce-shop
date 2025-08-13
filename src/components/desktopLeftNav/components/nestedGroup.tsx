@@ -40,9 +40,9 @@ export function NestedGroup({
         <DecoratorLines
           alignment="horizontal"
           position="left"
-          variant="thick"
+          variant="medium"
           strokeColor="var(--color-primary)"
-          width={`${HORIZONTAL_LINE_WIDTH}rem`}
+          width={`${HORIZONTAL_LINE_WIDTH / 2}rem`}
           x={-(VERTICAL_LINE_OFFSET_X * 2 - HORIZONTAL_LINE_OFFSET_X)}
           className={cn("relative")}
         />
