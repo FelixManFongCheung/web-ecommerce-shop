@@ -2,7 +2,7 @@ import { getProductsAll } from "@/actions/stripe";
 import { HORIZONTAL_LINE_OFFSET_Y } from "@/components/desktopRightNav";
 import { metaDataKey } from "@/data";
 import { cn } from "@/lib/cn/utils";
-import { Group, VERTICAL_LINE_OFFSET_X } from "..";
+import { Group, VERTICAL_LINE_OFFSET_X } from "../..";
 import { NestedGroup } from "./nestedGroup";
 
 export default async function Filter() {

@@ -8,7 +8,7 @@ import {
 import { metaDataKey } from "@/data";
 import { cn } from "@/lib/cn/utils";
 import { useState } from "react";
-import { HORIZONTAL_LINE_OFFSET_X, HORIZONTAL_LINE_WIDTH } from "..";
+import { HORIZONTAL_LINE_OFFSET_X, HORIZONTAL_LINE_WIDTH } from "../..";
 
 export function NestedGroup({
   group,

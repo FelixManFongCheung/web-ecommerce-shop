@@ -12,7 +12,7 @@ export const HORIZONTAL_LINE_OFFSET_Y = 8;
 export default function DesktopRightNav() {
   return (
     <div
-      className={`md:block hidden fixed z-11 right-0 top-0 h-full w-desktop-right-nav-width bg-white`}
+      className={`md:block hidden fixed z-11 right-0 top-0 h-full w-desktop-right-nav-width bg-transparent`}
     >
       <div
         className={cn("absolute flex flex-col justify-center items-center")}

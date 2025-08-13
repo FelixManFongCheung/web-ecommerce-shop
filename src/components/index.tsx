@@ -6,6 +6,7 @@ import { Checkout, CheckoutButton } from "./checkout";
 import Footer from "./footer";
 import Header from "./header";
 import Hero from "./hero";
+import Menu from "./menu";
 import Nav from "./nav";
 
 // UI units
@@ -34,6 +35,7 @@ export {
   Header,
   Hero,
   Icon,
+  Menu,
   ModalProductCard,
   ModalWrapper,
   Nav,

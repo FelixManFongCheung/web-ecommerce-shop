@@ -1,6 +1,7 @@
-import { DecoratorLines } from "@/components";
+import { DecoratorLines, Menu } from "@/components";
 import { cn } from "@/lib/cn/utils";
 import Filter from "./components/filter";
+import { MenuBtn } from "./components/menuBtn";
 
 export const VERTICAL_LINE_HEIGHT = 40;
 export const VERTICAL_LINE_OFFSET_X = 3;
@@ -17,7 +18,7 @@ export interface Group {
 export default async function DesktopLeftNav() {
   return (
     <div
-      className={`md:block hidden fixed z-11 left-0 top-0 h-full w-desktop-left-nav-width bg-transparent`}
+      className={`md:block hidden fixed z-12 left-0 top-0 h-full w-desktop-left-nav-width bg-transparent`}
     >
       {/* TODO: to be abstracted */}
       {/* Navigation */}
@@ -31,7 +32,7 @@ export default async function DesktopLeftNav() {
       >
         <h1 className="text-primary text-wrap text-7xl">Shop</h1>
         <span>|</span>
-        <div className="">MENU</div>
+        <MenuBtn />
       </div>
       {/* Filters */}
       <Filter />
@@ -57,6 +58,7 @@ export default async function DesktopLeftNav() {
         y={HORIZONTAL_LINE_OFFSET_Y}
         className={cn("absolute")}
       />
+      <Menu style={{ top: `${HORIZONTAL_LINE_OFFSET_Y + 2}rem` }} />
     </div>
   );
 }
