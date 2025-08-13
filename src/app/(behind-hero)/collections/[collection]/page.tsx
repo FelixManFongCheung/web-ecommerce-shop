@@ -2,7 +2,7 @@ import {
   getProductsAll,
   retrieveProductsByMetaDataKeyAndValue,
 } from "@/actions/stripe";
-import { Filter, ProductCard, ProductCardSkeleton } from "@/components";
+import { ProductCard, ProductCardSkeleton } from "@/components";
 import { Suspense } from "react";
 
 export default async function Page(props: {
@@ -19,23 +19,6 @@ export default async function Page(props: {
       </section>
     );
   }
-
-  // Process filters
-  const filters = allProducts.reduce((acc, product) => {
-    Object.entries(product.metadata).forEach(([key, value]) => {
-      if (!acc[key]) {
-        acc[key] = new Set();
-      }
-      acc[key].add(value);
-    });
-    return acc;
-  }, {} as Record<string, Set<string>>);
-
-  const cleanedFilters: Record<string, string[]> = {};
-  Object.keys(filters).forEach((key) => {
-    cleanedFilters[key] = Array.from(filters[key]);
-  });
-
   // Get filtered products
   const products = searchParams?.collection
     ? (
@@ -55,10 +38,10 @@ export default async function Page(props: {
   }
 
   return (
-    <section className="text-left py-2 px-2 md:py-[100px] md:px-[200px]">
-      <Filter filters={cleanedFilters} />
+    <div className="text-left py-2 px-2 mt-header-height md:pl-desktop-left-nav-width md:pr-desktop-right-nav-width md:py-[100px]">
+      {/* <Filter filters={cleanedFilters} /> */}
       <br />
-      <div className="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-8 auto-rows-max">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 auto-rows-max">
         {products.length > 0 ? (
           products.map((product) => (
             <Suspense key={product.id} fallback={<ProductCardSkeleton />}>
@@ -69,6 +52,6 @@ export default async function Page(props: {
           <div>No products found</div>
         )}
       </div>
-    </section>
+    </div>
   );
 }
