@@ -10,7 +10,7 @@ export default function Menu({ style }: { style?: React.CSSProperties }) {
   return (
     <div
       className={cn(
-        "w-screen h-fit bg-primary text-secondary fixed z-12",
+        "w-screen h-96 bg-primary text-secondary fixed z-12 py-4",
         isOpen ? "block" : "hidden"
       )}
       style={style}

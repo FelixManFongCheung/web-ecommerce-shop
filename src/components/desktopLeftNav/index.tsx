@@ -58,7 +58,13 @@ export default async function DesktopLeftNav() {
         y={HORIZONTAL_LINE_OFFSET_Y}
         className={cn("absolute")}
       />
-      <Menu style={{ top: `${HORIZONTAL_LINE_OFFSET_Y + 2}rem` }} />
+      <Menu
+        style={{
+          top: `${HORIZONTAL_LINE_OFFSET_Y + 2}rem`,
+          paddingLeft: `${VERTICAL_LINE_OFFSET_X}rem`,
+          paddingRight: `${VERTICAL_LINE_OFFSET_X}rem`,
+        }}
+      />
     </div>
   );
 }
