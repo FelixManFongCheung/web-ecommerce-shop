@@ -1,5 +1,5 @@
 import { searchProducts } from "@/actions/stripe";
-import { Filter, ProductCard, ProductCardSkeleton } from "@/components";
+import { ProductCard, ProductCardSkeleton } from "@/components";
 import { Suspense } from "react";
 
 export default async function Page(props: {
@@ -13,8 +13,6 @@ export default async function Page(props: {
   return (
     <section className="text-left py-2 px-2 md:py-[100px] md:px-[200px]">
       <h1>Search Results for &ldquo;{search}&rdquo;</h1>
-      <br />
-      <Filter filters={{}} />
       <br />
       <div className="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-8 auto-rows-max">
         {products.products && products.products.length > 0 ? (
