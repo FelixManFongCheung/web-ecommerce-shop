@@ -1,7 +1,6 @@
 "use client";
 
 import { DecoratorLines } from "@/components";
-import { type Group } from "@/components/desktopLeftNav";
 import { metaDataKey } from "@/data";
 import { cn } from "@/lib/cn/utils";
 import {
@@ -10,6 +9,7 @@ import {
   VERTICAL_LINE_OFFSET_X_LEFT,
 } from "@/lib/constants";
 import { useState } from "react";
+import { Group } from ".";
 
 export function NestedGroup({
   group,
