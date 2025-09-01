@@ -1,7 +1,22 @@
-export default function Page() {
+import { retrieveProductsByMetaDataKeyAndValue } from "@/actions/stripe";
+import ProductCard from "@/components/productCard";
+
+export default async function Page() {
+  // category: archive, value: archive
+  const products = await retrieveProductsByMetaDataKeyAndValue(
+    "mode",
+    "archive"
+  );
+  console.log(products);
   return (
     <section>
-      <h1>Archive</h1>
+      <div className="relative h-full overflow-x-auto">
+        <div className="flex flex-row gap-4 w-fit">
+          {products.products.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+        </div>
+      </div>
     </section>
-  )
+  );
 }

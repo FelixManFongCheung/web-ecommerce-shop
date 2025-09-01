@@ -18,9 +18,11 @@ export default function Menu({ style }: { style?: React.CSSProperties }) {
       <div className="relative w-full grid grid-cols-1 md:grid-cols-4">
         {/* format */}
         <div className="flex flex-col gap-2">
-          <div></div>
-          <div></div>
-          <div></div>
+          {menuConfig.shops.map((item) => (
+            <Link key={`menu-${item.label}`} href={item.href}>
+              {item.label}
+            </Link>
+          ))}
         </div>
         {/* panel */}
         <div className="flex flex-col gap-2">

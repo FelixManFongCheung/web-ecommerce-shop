@@ -6,11 +6,11 @@ export const menuConfig = {
     },
     {
       label: "New Arrivals",
-      href: "/collections/new-arrivals",
+      href: "/new-arrivals",
     },
     {
       label: "Archive",
-      href: "/collections/archive",
+      href: "/archive",
     },
   ],
   info: [

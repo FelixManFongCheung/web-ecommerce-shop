@@ -1,13 +1,13 @@
 import { DecoratorLines } from "@/components";
 import { cn } from "@/lib/cn/utils";
-
-export const VERTICAL_LINE_HEIGHT = 40;
-export const VERTICAL_LINE_OFFSET_X = 3;
-export const VERTICAL_LINE_OFFSET_Y = 2;
-
-export const HORIZONTAL_LINE_WIDTH = 20;
-export const HORIZONTAL_LINE_OFFSET_X = 1.5;
-export const HORIZONTAL_LINE_OFFSET_Y = 8;
+import {
+  HORIZONTAL_LINE_OFFSET_X_RIGHT,
+  HORIZONTAL_LINE_OFFSET_Y_RIGHT,
+  HORIZONTAL_LINE_WIDTH_RIGHT,
+  VERTICAL_LINE_HEIGHT_RIGHT,
+  VERTICAL_LINE_OFFSET_X_RIGHT,
+  VERTICAL_LINE_OFFSET_Y_RIGHT,
+} from "@/lib/constants";
 
 export default function DesktopRightNav() {
   return (
@@ -17,9 +17,11 @@ export default function DesktopRightNav() {
       <div
         className={cn("absolute flex flex-col justify-center items-center")}
         style={{
-          top: `${VERTICAL_LINE_OFFSET_Y}rem`,
-          right: `${VERTICAL_LINE_OFFSET_X * 2}rem`,
-          height: `${HORIZONTAL_LINE_OFFSET_Y - VERTICAL_LINE_OFFSET_Y}rem`,
+          top: `${VERTICAL_LINE_OFFSET_Y_RIGHT}rem`,
+          right: `${VERTICAL_LINE_OFFSET_X_RIGHT * 2}rem`,
+          height: `${
+            HORIZONTAL_LINE_OFFSET_Y_RIGHT - VERTICAL_LINE_OFFSET_Y_RIGHT
+          }rem`,
         }}
       >
         <h1 className="text-primary text-wrap text-7xl">Cart</h1>
@@ -30,9 +32,9 @@ export default function DesktopRightNav() {
         variant="thick"
         position="right"
         strokeColor="var(--color-primary)"
-        height={`${VERTICAL_LINE_HEIGHT}rem`}
-        x={VERTICAL_LINE_OFFSET_X}
-        y={VERTICAL_LINE_OFFSET_Y}
+        height={`${VERTICAL_LINE_HEIGHT_RIGHT}rem`}
+        x={VERTICAL_LINE_OFFSET_X_RIGHT}
+        y={VERTICAL_LINE_OFFSET_Y_RIGHT}
         className={cn("absolute")}
       />
       {/* horizontal line */}
@@ -41,9 +43,9 @@ export default function DesktopRightNav() {
         variant="thin"
         position="right"
         strokeColor="var(--color-primary)"
-        width={`${HORIZONTAL_LINE_WIDTH}rem`}
-        x={HORIZONTAL_LINE_OFFSET_X}
-        y={HORIZONTAL_LINE_OFFSET_Y}
+        width={`${HORIZONTAL_LINE_WIDTH_RIGHT}rem`}
+        x={HORIZONTAL_LINE_OFFSET_X_RIGHT}
+        y={HORIZONTAL_LINE_OFFSET_Y_RIGHT}
         className={cn("absolute")}
       />
     </div>

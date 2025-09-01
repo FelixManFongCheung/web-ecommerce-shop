@@ -101,8 +101,8 @@ export async function retrieveProductsByMetaDataKey(key: string) {
 }
 
 export async function retrieveProductsByMetaDataKeyAndValue(
-  key: string,
-  value: string
+  value: string,
+  key?: string
 ) {
   const completeQuery = `metadata['${key}']:'${value}'`;
   const noKeyQuery = `metadata['categories']:${value}`;

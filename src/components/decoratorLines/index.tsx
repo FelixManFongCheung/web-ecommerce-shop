@@ -10,6 +10,7 @@ export default function DecoratorLines({
   width: widthProp,
   x,
   y,
+  styles,
 }: {
   alignment: "horizontal" | "vertical";
   variant: "thin" | "medium" | "thick";
@@ -20,6 +21,7 @@ export default function DecoratorLines({
   width?: string;
   x?: number;
   y?: number;
+  styles?: React.CSSProperties;
 }) {
   const getThickness = (variant: string) => {
     switch (variant) {
@@ -62,6 +64,7 @@ export default function DecoratorLines({
         ...dimensionStyle,
         ...positionStyle,
         backgroundColor: strokeColor,
+        ...styles,
       }}
     />
   );

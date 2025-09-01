@@ -1,15 +1,15 @@
 import { DecoratorLines, Menu } from "@/components";
 import { cn } from "@/lib/cn/utils";
+import {
+  HORIZONTAL_LINE_OFFSET_X_LEFT,
+  HORIZONTAL_LINE_OFFSET_Y_LEFT,
+  HORIZONTAL_LINE_WIDTH_LEFT,
+  VERTICAL_LINE_HEIGHT_LEFT,
+  VERTICAL_LINE_OFFSET_X_LEFT,
+  VERTICAL_LINE_OFFSET_Y_LEFT,
+} from "@/lib/constants";
 import Filter from "./components/filter";
 import { MenuBtn } from "./components/menuBtn";
-
-export const VERTICAL_LINE_HEIGHT = 40;
-export const VERTICAL_LINE_OFFSET_X = 3;
-export const VERTICAL_LINE_OFFSET_Y = 2;
-
-export const HORIZONTAL_LINE_WIDTH = 25;
-export const HORIZONTAL_LINE_OFFSET_X = 1.5;
-export const HORIZONTAL_LINE_OFFSET_Y = 8;
 
 export interface Group {
   [key: string]: object | Group;
@@ -25,9 +25,11 @@ export default async function DesktopLeftNav() {
       <div
         className={cn("absolute flex flex-row justify-end items-center gap-2")}
         style={{
-          top: `${VERTICAL_LINE_OFFSET_Y}rem`,
-          left: `${VERTICAL_LINE_OFFSET_X * 2}rem`,
-          height: `${HORIZONTAL_LINE_OFFSET_Y - VERTICAL_LINE_OFFSET_Y}rem`,
+          top: `${VERTICAL_LINE_OFFSET_Y_LEFT}rem`,
+          left: `${VERTICAL_LINE_OFFSET_X_LEFT * 2}rem`,
+          height: `${
+            HORIZONTAL_LINE_OFFSET_Y_LEFT - VERTICAL_LINE_OFFSET_Y_LEFT
+          }rem`,
         }}
       >
         <h1 className="text-primary text-wrap text-7xl">Shop</h1>
@@ -42,9 +44,9 @@ export default async function DesktopLeftNav() {
         position="left"
         variant="thin"
         strokeColor="var(--color-primary)"
-        height={`${VERTICAL_LINE_HEIGHT}rem`}
-        x={VERTICAL_LINE_OFFSET_X}
-        y={VERTICAL_LINE_OFFSET_Y}
+        height={`${VERTICAL_LINE_HEIGHT_LEFT}rem`}
+        x={VERTICAL_LINE_OFFSET_X_LEFT}
+        y={VERTICAL_LINE_OFFSET_Y_LEFT}
         className={cn("absolute")}
       />
       {/* horizontal line */}
@@ -53,16 +55,16 @@ export default async function DesktopLeftNav() {
         position="left"
         variant="thick"
         strokeColor="var(--color-primary)"
-        width={`${HORIZONTAL_LINE_WIDTH}rem`}
-        x={HORIZONTAL_LINE_OFFSET_X}
-        y={HORIZONTAL_LINE_OFFSET_Y}
+        width={`${HORIZONTAL_LINE_WIDTH_LEFT}rem`}
+        x={HORIZONTAL_LINE_OFFSET_X_LEFT}
+        y={HORIZONTAL_LINE_OFFSET_Y_LEFT}
         className={cn("absolute")}
       />
       <Menu
         style={{
-          top: `${HORIZONTAL_LINE_OFFSET_Y + 2}rem`,
-          paddingLeft: `${VERTICAL_LINE_OFFSET_X}rem`,
-          paddingRight: `${VERTICAL_LINE_OFFSET_X}rem`,
+          top: `${HORIZONTAL_LINE_OFFSET_Y_LEFT + 2}rem`,
+          paddingLeft: `${VERTICAL_LINE_OFFSET_X_LEFT}rem`,
+          paddingRight: `${VERTICAL_LINE_OFFSET_X_LEFT}rem`,
         }}
       />
     </div>

@@ -1,14 +1,15 @@
 "use client";
 
 import { DecoratorLines } from "@/components";
-import {
-  VERTICAL_LINE_OFFSET_X,
-  type Group,
-} from "@/components/desktopLeftNav";
+import { type Group } from "@/components/desktopLeftNav";
 import { metaDataKey } from "@/data";
 import { cn } from "@/lib/cn/utils";
+import {
+  HORIZONTAL_LINE_OFFSET_X_LEFT,
+  HORIZONTAL_LINE_WIDTH_LEFT,
+  VERTICAL_LINE_OFFSET_X_LEFT,
+} from "@/lib/constants";
 import { useState } from "react";
-import { HORIZONTAL_LINE_OFFSET_X, HORIZONTAL_LINE_WIDTH } from "../..";
 
 export function NestedGroup({
   group,
@@ -42,8 +43,8 @@ export function NestedGroup({
           position="left"
           variant="medium"
           strokeColor="var(--color-primary)"
-          width={`${HORIZONTAL_LINE_WIDTH / 2}rem`}
-          x={-(VERTICAL_LINE_OFFSET_X * 2 - HORIZONTAL_LINE_OFFSET_X)}
+          width={`${HORIZONTAL_LINE_WIDTH_LEFT / 2}rem`}
+          x={-(VERTICAL_LINE_OFFSET_X_LEFT * 2 - HORIZONTAL_LINE_OFFSET_X_LEFT)}
           className={cn("relative")}
         />
       )}

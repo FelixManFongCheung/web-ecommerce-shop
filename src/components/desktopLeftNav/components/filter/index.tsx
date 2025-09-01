@@ -1,8 +1,11 @@
 import { getProductsAll } from "@/actions/stripe";
-import { HORIZONTAL_LINE_OFFSET_Y } from "@/components/desktopRightNav";
 import { metaDataKey } from "@/data";
 import { cn } from "@/lib/cn/utils";
-import { Group, VERTICAL_LINE_OFFSET_X } from "../..";
+import {
+  HORIZONTAL_LINE_OFFSET_Y_RIGHT,
+  VERTICAL_LINE_OFFSET_X_RIGHT,
+} from "@/lib/constants";
+import { Group } from "../..";
 import { NestedGroup } from "./nestedGroup";
 
 export default async function Filter() {
@@ -33,8 +36,8 @@ export default async function Filter() {
     <div
       className={cn("absolute flex flex-col justify-center items-start gap-2")}
       style={{
-        top: `${HORIZONTAL_LINE_OFFSET_Y + 1}rem`,
-        left: `${VERTICAL_LINE_OFFSET_X * 2}rem`,
+        top: `${HORIZONTAL_LINE_OFFSET_Y_RIGHT + 1}rem`,
+        left: `${VERTICAL_LINE_OFFSET_X_RIGHT * 2}rem`,
       }}
     >
       <NestedGroup group={groups} />

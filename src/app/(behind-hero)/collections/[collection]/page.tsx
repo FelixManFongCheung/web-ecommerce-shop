@@ -5,13 +5,14 @@ import {
 import { ProductCard, ProductCardSkeleton } from "@/components";
 import { Suspense } from "react";
 
-export default async function Page(props: {
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ collection: string }>;
 }) {
-  const searchParams = await props.searchParams;
+  const { collection } = await params;
   const allProducts = await getProductsAll();
 
-  // Early return if no products
   if (!allProducts) {
     return (
       <section className="text-left py-2 px-2 md:py-[100px] md:px-[200px]">
@@ -19,15 +20,14 @@ export default async function Page(props: {
       </section>
     );
   }
-  // Get filtered products
-  const products = searchParams?.collection
-    ? (
-        await retrieveProductsByMetaDataKeyAndValue(
-          "collection",
-          searchParams.collection as string
-        )
-      ).products
-    : allProducts;
+
+  const products =
+    collection === "all"
+      ? allProducts
+      : collection
+      ? (await retrieveProductsByMetaDataKeyAndValue("collection", collection))
+          .products
+      : allProducts;
 
   if (!products) {
     return (
@@ -36,7 +36,7 @@ export default async function Page(props: {
       </section>
     );
   }
-
+  console.log(products, collection);
   return (
     <div className="text-left py-2 px-2 mt-header-height md:pl-desktop-left-nav-width md:pr-desktop-right-nav-width md:py-[100px]">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 auto-rows-max">
