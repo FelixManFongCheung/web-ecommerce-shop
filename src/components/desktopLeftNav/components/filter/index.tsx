@@ -5,8 +5,11 @@ import {
   HORIZONTAL_LINE_OFFSET_Y_RIGHT,
   VERTICAL_LINE_OFFSET_X_RIGHT,
 } from "@/lib/constants";
-import { Group } from "../..";
 import { NestedGroup } from "./nestedGroup";
+
+export interface Group {
+  [key: string]: object | Group;
+}
 
 export default async function Filter() {
   const groups: Group = {};
@@ -23,15 +26,19 @@ export default async function Filter() {
   };
 
   productsAll.forEach((product) => {
-    metaDataKey.forEach((key) => {
-      if (/-/.test(product.metadata[key])) {
-        const linkArray = product.metadata[key].split("-");
-        placementRecursive(groups, key, linkArray);
-      } else {
-        placementRecursive(groups, key, [product.metadata[key]]);
-      }
-    });
+    if (metaDataKey.every((key) => product.metadata[key])) {
+      metaDataKey.forEach((key) => {
+        if (/-/.test(product.metadata[key])) {
+          const linkArray = product.metadata[key].split("-");
+          placementRecursive(groups, key, linkArray);
+        } else {
+          placementRecursive(groups, key, [product.metadata[key]]);
+        }
+      });
+    }
   });
+
+  console.log(groups);
   return (
     <div
       className={cn("absolute flex flex-col justify-center items-start gap-2")}

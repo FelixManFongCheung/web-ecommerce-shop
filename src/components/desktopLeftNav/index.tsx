@@ -11,10 +11,6 @@ import {
 import Filter from "./components/filter";
 import { MenuBtn } from "./components/menuBtn";
 
-export interface Group {
-  [key: string]: object | Group;
-}
-
 export default async function DesktopLeftNav() {
   return (
     <div
