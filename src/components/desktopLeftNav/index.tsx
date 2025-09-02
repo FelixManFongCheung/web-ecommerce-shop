@@ -14,11 +14,23 @@ import { MenuBtn } from "./components/menuBtn";
 
 const infoLinks = ["/about", "/visit-us", "/terms-and-conditions"];
 
+const headerConfig = {
+  "/about": "About",
+  "/visit-us": "Visit Us",
+  "/terms-and-conditions": "T&C",
+  "/new-arrivals": "New Arrivals",
+  "/archive": "Archive",
+  "/collections": "Shop",
+};
+
 export default async function DesktopLeftNav({
   pathName,
 }: {
   pathName: string;
 }) {
+  if (pathName.split("/").includes("collections")) {
+    pathName = "/collections";
+  }
   return (
     <div
       className={`md:block hidden fixed z-12 left-0 top-0 h-full w-desktop-left-nav-width bg-transparent`}
@@ -35,7 +47,9 @@ export default async function DesktopLeftNav({
           }rem`,
         }}
       >
-        <h1 className="text-primary text-wrap text-7xl">Shop</h1>
+        <h1 className="text-primary text-wrap text-7xl">
+          {headerConfig[pathName as keyof typeof headerConfig]}
+        </h1>
         <span>|</span>
         <MenuBtn />
       </div>
