@@ -13,8 +13,6 @@ async function ProductCard({
 
   return (
     <div className="relative w-auto h-full">
-      {/* <Scaler scrollContainer={scrollContainer}> */}
-      {/* </Scaler> */}
       {children}
       <div className="product-info text-center mt-2">
         <div className="name">{product.name}</div>
