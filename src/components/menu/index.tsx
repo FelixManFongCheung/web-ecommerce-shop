@@ -12,7 +12,7 @@ export default function Menu({ style }: { style?: React.CSSProperties }) {
     <div
       className={cn(
         "w-screen bg-primary text-secondary fixed z-12 py-4 block transition-all duration-300 ease-in-out",
-        isOpen ? "h-96 opacity-100" : "h-0 opacity-0"
+        isOpen ? "h-96 opacity-100" : "h-0 opacity-0 pointer-events-none"
       )}
       style={style}
     >
