@@ -26,7 +26,7 @@ export default function Page() {
 
   return (
     <>
-      <div className={""}>
+      <div>
         {imageArray.map((url) => (
           <Image
             fill
@@ -38,10 +38,10 @@ export default function Page() {
             }}
           />
         ))}
-        <button onClick={prev} className={""}></button>
-        <button onClick={next} className={""}></button>
+        <button onClick={prev}></button>
+        <button onClick={next}></button>
       </div>
-      <div className={""}>
+      <div>
         {imageArray.map((url, index) => (
           <button
             key={index}

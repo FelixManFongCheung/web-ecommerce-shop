@@ -18,11 +18,7 @@ export default function CheckoutButton({ cartID }: { cartID: string }) {
     }
   };
 
-  return (
-    <button className={""} onClick={handleCheckout}>
-      Checkout
-    </button>
-  );
+  return <button onClick={handleCheckout}>Checkout</button>;
 }
 
 // will i need to use embedded checkout or normal checkout from stripe?`

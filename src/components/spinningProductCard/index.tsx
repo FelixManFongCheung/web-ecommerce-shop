@@ -12,7 +12,7 @@ export default function SpinningProductCard({
 
   return (
     <div className={"perspective-box"}>
-      <div className={""}>
+      <div>
         <Link
           scroll={true}
           className={"image-wrapper"}
@@ -23,7 +23,7 @@ export default function SpinningProductCard({
               key={index}
               className={index === 0 ? "test-front" : "test-back"}
             >
-              <div className={""}>
+              <div>
                 <Image fill src={url} alt="" />
               </div>
             </div>
