@@ -1,12 +1,13 @@
 "use client";
 
 import { cn } from "@/lib/cn/utils";
-import { useIsOpen } from "@/stores/appStore";
+import { useAppActions, useIsOpen } from "@/stores/appStore";
 import Link from "next/link";
 import { menuConfig } from "./menuConfig";
 
 export default function Menu({ style }: { style?: React.CSSProperties }) {
   const isOpen = useIsOpen();
+  const { toggleOpen } = useAppActions();
   return (
     <div
       className={cn(
@@ -19,7 +20,11 @@ export default function Menu({ style }: { style?: React.CSSProperties }) {
         {/* format */}
         <div className="flex flex-col gap-2">
           {menuConfig.shops.map((item) => (
-            <Link key={`menu-${item.label}`} href={item.href}>
+            <Link
+              onClick={() => toggleOpen()}
+              key={`menu-${item.label}`}
+              href={item.href}
+            >
               {item.label}
             </Link>
           ))}
@@ -31,7 +36,11 @@ export default function Menu({ style }: { style?: React.CSSProperties }) {
         {/* info */}
         <div className="flex flex-col gap-2">
           {menuConfig.info.map((item) => (
-            <Link key={`menu-${item.label}`} href={item.href}>
+            <Link
+              onClick={() => toggleOpen()}
+              key={`menu-${item.label}`}
+              href={item.href}
+            >
               {item.label}
             </Link>
           ))}

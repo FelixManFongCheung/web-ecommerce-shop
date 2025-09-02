@@ -7,16 +7,13 @@ export default async function Page() {
     "mode",
     "archive"
   );
-  console.log(products);
   return (
-    <section>
-      <div className="relative h-full overflow-x-auto">
-        <div className="flex flex-row gap-4 w-fit">
-          {products.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-        </div>
+    <div className="relative h-screen w-screen overflow-x-auto flex flex-col justify-center items-center">
+      <div className="flex flex-row gap-4 w-fit">
+        {products.map((product) => (
+          <ProductCard key={product.id} product={product} />
+        ))}
       </div>
-    </section>
+    </div>
   );
 }

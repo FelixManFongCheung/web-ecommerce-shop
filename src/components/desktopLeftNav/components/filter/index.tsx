@@ -39,7 +39,6 @@ export default async function Filter() {
     }
   });
 
-  console.log(groups);
   return (
     <div
       className={cn("absolute flex flex-col justify-center items-start gap-2")}

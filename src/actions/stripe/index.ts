@@ -101,17 +101,15 @@ export async function retrieveProductsByMetaDataKey(key: string) {
 }
 
 export async function retrieveProductsByMetaDataKeyAndValue(
-  value: string,
-  key?: string
+  key: string,
+  value: string
 ) {
-  const completeQuery = `metadata['${key}']:'${value}'`;
-  const noKeyQuery = `metadata['categories']:${value}`;
-  const query = key ? completeQuery : noKeyQuery;
-
+  const query = `metadata['${key}']:'${value}'`;
   try {
     const products = await stripe.products.search({
       query: query,
     });
+
     return products.data;
   } catch (error) {
     console.error("Stripe search error:", error);

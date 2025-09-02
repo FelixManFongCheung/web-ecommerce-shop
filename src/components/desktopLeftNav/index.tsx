@@ -8,10 +8,17 @@ import {
   VERTICAL_LINE_OFFSET_X_LEFT,
   VERTICAL_LINE_OFFSET_Y_LEFT,
 } from "@/lib/constants";
+import Link from "next/link";
 import Filter from "./components/filter";
 import { MenuBtn } from "./components/menuBtn";
 
-export default async function DesktopLeftNav() {
+const infoLinks = ["/about", "/visit-us", "/terms-and-conditions"];
+
+export default async function DesktopLeftNav({
+  pathName,
+}: {
+  pathName: string;
+}) {
   return (
     <div
       className={`md:block hidden fixed z-12 left-0 top-0 h-full w-desktop-left-nav-width bg-transparent`}
@@ -33,7 +40,20 @@ export default async function DesktopLeftNav() {
         <MenuBtn />
       </div>
       {/* Filters */}
-      <Filter />
+      {infoLinks.includes(pathName) && (
+        <div className="flex flex-col gap-2">
+          {infoLinks.map((link) => (
+            <Link
+              key={link}
+              href={link}
+              className={cn(pathName === link && "underline")}
+            >
+              {link.split("/").pop()}
+            </Link>
+          ))}
+        </div>
+      )}
+      {pathName.split("/").includes("collections") && <Filter />}
       {/* vertical line */}
       <DecoratorLines
         alignment="vertical"

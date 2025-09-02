@@ -2,7 +2,7 @@ import { retrieveProductsByMetaDataKeyAndValue } from "@/actions/stripe";
 import { ProductCard, ProductCardSkeleton } from "@/components";
 import { Suspense } from "react";
 
-export default async function NewArrivalsPage() {
+export default async function Page() {
   const products = await retrieveProductsByMetaDataKeyAndValue(
     "mode",
     "new-arrivals"
