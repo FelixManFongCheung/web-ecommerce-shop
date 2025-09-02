@@ -25,8 +25,7 @@ export default async function Page({
     collection === "all"
       ? allProducts
       : collection
-      ? (await retrieveProductsByMetaDataKeyAndValue("collection", collection))
-          .products
+      ? await retrieveProductsByMetaDataKeyAndValue("collection", collection)
       : allProducts;
 
   if (!products) {

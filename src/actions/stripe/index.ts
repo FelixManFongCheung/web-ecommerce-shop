@@ -112,7 +112,7 @@ export async function retrieveProductsByMetaDataKeyAndValue(
     const products = await stripe.products.search({
       query: query,
     });
-    return { products: products.data };
+    return products.data;
   } catch (error) {
     console.error("Stripe search error:", error);
     throw new Error("Search failed");

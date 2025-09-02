@@ -12,7 +12,7 @@ export default async function Page() {
     <section>
       <div className="relative h-full overflow-x-auto">
         <div className="flex flex-row gap-4 w-fit">
-          {products.products.map((product) => (
+          {products.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
         </div>
