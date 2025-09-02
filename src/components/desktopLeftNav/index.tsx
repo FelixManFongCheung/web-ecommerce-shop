@@ -8,29 +8,15 @@ import {
   VERTICAL_LINE_OFFSET_X_LEFT,
   VERTICAL_LINE_OFFSET_Y_LEFT,
 } from "@/lib/constants";
-import Link from "next/link";
-import Filter from "./components/filter";
 import { MenuBtn } from "./components/menuBtn";
 
-const infoLinks = ["/about", "/visit-us", "/terms-and-conditions"];
-
-const headerConfig = {
-  "/about": "About",
-  "/visit-us": "Visit Us",
-  "/terms-and-conditions": "T&C",
-  "/new-arrivals": "New Arrivals",
-  "/archive": "Archive",
-  "/collections": "Shop",
-};
-
 export default async function DesktopLeftNav({
-  pathName,
+  headerName,
+  children,
 }: {
-  pathName: string;
+  headerName: string;
+  children?: React.ReactNode;
 }) {
-  if (pathName.split("/").includes("collections")) {
-    pathName = "/collections";
-  }
   return (
     <div
       className={`md:block hidden fixed z-12 left-0 top-0 h-full w-desktop-left-nav-width bg-transparent`}
@@ -47,27 +33,12 @@ export default async function DesktopLeftNav({
           }rem`,
         }}
       >
-        <h1 className="text-primary text-wrap text-7xl">
-          {headerConfig[pathName as keyof typeof headerConfig]}
-        </h1>
+        <h1 className="text-primary text-wrap text-7xl">{headerName}</h1>
         <span>|</span>
         <MenuBtn />
       </div>
       {/* Filters */}
-      {infoLinks.includes(pathName) && (
-        <div className="flex flex-col gap-2">
-          {infoLinks.map((link) => (
-            <Link
-              key={link}
-              href={link}
-              className={cn(pathName === link && "underline")}
-            >
-              {link.split("/").pop()}
-            </Link>
-          ))}
-        </div>
-      )}
-      {pathName.split("/").includes("collections") && <Filter />}
+      {children}
       {/* vertical line */}
       <DecoratorLines
         alignment="vertical"
