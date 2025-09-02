@@ -1,4 +1,5 @@
 import { getPriceId, retrievePrice } from "@/actions/stripe";
+import { cn } from "@/lib/cn/utils";
 import Image from "next/image";
 import Link from "next/link";
 import Stripe from "stripe";
@@ -6,9 +7,11 @@ import Stripe from "stripe";
 async function ProductCard({
   product,
   collection,
+  className,
 }: {
   product: Stripe.Product;
   collection?: string;
+  className?: string;
 }) {
   const priceId = await getPriceId(product.id);
   const price = await retrievePrice(priceId);
@@ -19,11 +22,11 @@ async function ProductCard({
   return (
     <div className="relative w-full h-full">
       <Link
-        className="relative block w-full aspect-[3/4]"
+        className="relative block w-32 aspect-[3/4]"
         href={`/collections/${collection || "all"}/products/${product.id}`}
       >
         <Image
-          className=""
+          className={cn(className)}
           src={imageUrls[0]}
           alt={product.name}
           fill

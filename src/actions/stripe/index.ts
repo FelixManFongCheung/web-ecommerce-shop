@@ -1,21 +1,26 @@
 "use server";
+import { unstable_cache } from "next/cache";
 import Stripe from "stripe";
 
 const stripe = new Stripe(process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY as string);
 
-export async function getPriceId(productId: string) {
-  const prices = await stripe.prices.list({
-    product: productId,
-  });
-  return prices.data[0].id;
-}
+export const getPriceId = unstable_cache(
+  async (productId: string) => {
+    const prices = await stripe.prices.list({
+      product: productId,
+    });
+    return prices.data[0].id;
+  },
+  ["price-id"],
+  { revalidate: 3600 }
+);
 
 export type CollectionType = {
   metadataName: string;
   metadataQuery: string;
 };
 
-export async function searchProducts(query: string) {
+export const searchProducts = async (query: string) => {
   try {
     // Create two separate searches for name and description
     if (query) {
@@ -41,24 +46,36 @@ export async function searchProducts(query: string) {
     console.error("Stripe search error:", error);
     throw new Error("Search failed");
   }
-}
+};
 
-export async function getActiveProducts() {
-  const products = await stripe.products.list({
-    active: true,
-  });
-  return products.data;
-}
+export const getActiveProducts = unstable_cache(
+  async () => {
+    const products = await stripe.products.list({
+      active: true,
+    });
+    return products.data;
+  },
+  ["active-products"],
+  { revalidate: 3600 }
+);
 
-export async function getProductsAll(): Promise<Stripe.Product[]> {
-  const products = await stripe.products.list();
-  return products.data;
-}
+export const getProductsAll = unstable_cache(
+  async () => {
+    const products = await stripe.products.list();
+    return products.data;
+  },
+  ["products-all"],
+  { revalidate: 3600 }
+);
 
-export async function getProduct(productId: string) {
-  const product = await stripe.products.retrieve(productId);
-  return product;
-}
+export const getProduct = unstable_cache(
+  async (productId: string) => {
+    const product = await stripe.products.retrieve(productId);
+    return product;
+  },
+  ["product"],
+  { revalidate: 3600 }
+);
 
 export async function retrieveSession(
   sessionId: string,
@@ -68,10 +85,14 @@ export async function retrieveSession(
   return session;
 }
 
-export async function retrievePrice(priceId: string) {
-  const price = await stripe.prices.retrieve(priceId);
-  return price;
-}
+export const retrievePrice = unstable_cache(
+  async (priceId: string) => {
+    const price = await stripe.prices.retrieve(priceId);
+    return price;
+  },
+  ["price"],
+  { revalidate: 3600 }
+);
 
 export async function updateProduct(
   productId: string,
@@ -88,31 +109,40 @@ export async function createCheckoutSession(params: CheckoutSessionParams) {
   return session;
 }
 
-export async function retrieveCustomer(customerId: string) {
-  const customer = await stripe.customers.retrieve(customerId);
-  return customer;
-}
+export const retrieveCustomer = unstable_cache(
+  async (customerId: string) => {
+    const customer = await stripe.customers.retrieve(customerId);
+    return customer;
+  },
+  ["customer"],
+  { revalidate: 3600 }
+);
 
-export async function retrieveProductsByMetaDataKey(key: string) {
-  const products = await stripe.products.search({
-    query: `metadata['${key}']:null`,
-  });
-  return products.data;
-}
-
-export async function retrieveProductsByMetaDataKeyAndValue(
-  key: string,
-  value: string
-) {
-  const query = `metadata['${key}']:'${value}'`;
-  try {
+export const retrieveProductsByMetaDataKey = unstable_cache(
+  async (key: string) => {
     const products = await stripe.products.search({
-      query: query,
+      query: `metadata['${key}']:null`,
     });
-
     return products.data;
-  } catch (error) {
-    console.error("Stripe search error:", error);
-    throw new Error("Search failed");
-  }
-}
+  },
+  ["products-by-meta-data-key"],
+  { revalidate: 3600 }
+);
+
+export const retrieveProductsByMetaDataKeyAndValue = unstable_cache(
+  async (key: string, value: string) => {
+    const query = `metadata['${key}']:'${value}'`;
+    try {
+      const products = await stripe.products.search({
+        query: query,
+      });
+
+      return products.data;
+    } catch (error) {
+      console.error("Stripe search error:", error);
+      throw new Error("Search failed");
+    }
+  },
+  ["products-by-meta-data-key-and-value"],
+  { revalidate: 3600 }
+);

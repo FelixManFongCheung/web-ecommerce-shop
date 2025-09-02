@@ -7,11 +7,21 @@ export default async function Page() {
     "mode",
     "archive"
   );
+
+  console.log(products);
+
+  const fakeProducts = [...products];
+  fakeProducts.push(...fakeProducts, ...fakeProducts, ...fakeProducts);
+
   return (
     <div className="relative h-screen w-screen overflow-x-auto flex flex-col justify-center items-center">
       <div className="flex flex-row gap-4 w-fit">
-        {products.map((product) => (
-          <ProductCard key={product.id} product={product} />
+        {fakeProducts.map((product) => (
+          <ProductCard
+            key={product.id}
+            product={product}
+            className="md:w-[250px]"
+          />
         ))}
       </div>
     </div>
