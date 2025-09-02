@@ -25,6 +25,7 @@ export default async function Filter() {
     }
   };
 
+  // TODO: rigid structure for metadatakey???? or flexible????
   productsAll.forEach((product) => {
     if (metaDataKey.every((key) => product.metadata[key])) {
       metaDataKey.forEach((key) => {

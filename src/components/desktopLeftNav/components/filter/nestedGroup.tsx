@@ -8,6 +8,7 @@ import {
   HORIZONTAL_LINE_WIDTH_LEFT,
   VERTICAL_LINE_OFFSET_X_LEFT,
 } from "@/lib/constants";
+import { Minus, Plus } from "lucide-react";
 import { useState } from "react";
 import { Group } from ".";
 
@@ -48,15 +49,23 @@ export function NestedGroup({
           className={cn("relative")}
         />
       )}
-      <div style={{ marginLeft: `${level * 1}rem` }}>
+      <div style={{ marginLeft: `${level * 0.2}rem` }}>
         <h1
           className={level === 0 ? "text-lg font-bold" : "text-sm font-medium"}
           onClick={() => handleClick(key)}
           style={{ cursor: "pointer" }}
         >
-          {key}
+          {Object.keys(value).length > 0 ? (
+            openItems.has(key) ? (
+              <Minus className="w-2 h-2 inline-block" />
+            ) : (
+              <Plus className="w-2 h-2 inline-block" />
+            )
+          ) : null}
+
+          <span className="inline-block">{key}</span>
         </h1>
-        {value && (
+        {value && Object.keys(value).length > 0 && (
           <div
             className={`${
               openItems.has(key) ? "max-h-96" : "max-h-0"
