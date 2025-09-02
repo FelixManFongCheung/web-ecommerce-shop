@@ -36,7 +36,7 @@ export function NestedGroup({
   return Object.entries(group).map(([key, value]) => (
     <div
       key={key}
-      className={`${level === 0 && metaDataKey.indexOf(key) === 0 && "h-96"}`}
+      className={`${level === 0 && metaDataKey.indexOf(key) === 0 && "h-64"}`}
     >
       {level === 0 && metaDataKey.indexOf(key) !== 0 && (
         <DecoratorLines
@@ -68,7 +68,7 @@ export function NestedGroup({
         {value && Object.keys(value).length > 0 && (
           <div
             className={`${
-              openItems.has(key) ? "max-h-96" : "max-h-0"
+              openItems.has(key) ? "max-h-64" : "max-h-0"
             } overflow-hidden transition-all duration-300 ease-in-out`}
           >
             <NestedGroup group={value as Group} level={level + 1} />

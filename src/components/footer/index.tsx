@@ -8,8 +8,8 @@ export default function Footer() {
   return (
     <div
       className={cn(
-        "md:fixed md:bottom-0 z-11 relative",
-        "w-full px-14 flex justify-between items-end bottom-0 h-fit pb-10 bg-transparent"
+        "relative",
+        "w-full px-14 flex justify-between items-end h-fit pb-10"
       )}
     >
       <div className="flex flex-col w-[200px]">

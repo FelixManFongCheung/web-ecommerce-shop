@@ -1,5 +1,5 @@
 // Left Nav
-export const VERTICAL_LINE_HEIGHT_LEFT = 25;
+export const VERTICAL_LINE_HEIGHT_LEFT = 30;
 export const VERTICAL_LINE_OFFSET_X_LEFT = 3;
 export const VERTICAL_LINE_OFFSET_Y_LEFT = 2;
 
@@ -8,7 +8,7 @@ export const HORIZONTAL_LINE_OFFSET_X_LEFT = 1.5;
 export const HORIZONTAL_LINE_OFFSET_Y_LEFT = 8;
 
 // Right Nav
-export const VERTICAL_LINE_HEIGHT_RIGHT = 25;
+export const VERTICAL_LINE_HEIGHT_RIGHT = 30;
 export const VERTICAL_LINE_OFFSET_X_RIGHT = 3;
 export const VERTICAL_LINE_OFFSET_Y_RIGHT = 2;
 
