@@ -21,7 +21,6 @@ import DecoratorLines from "./decoratorLines";
 import DesktopLeftNav from "./desktopLeftNav";
 import DesktopRightNav from "./desktopRightNav";
 import Icon from "./icon";
-import SpinningProductCard from "./spinningProductCard";
 
 export {
   ATC,
@@ -42,5 +41,4 @@ export {
   ProductCard,
   ProductCardSkeleton,
   RemoveItem,
-  SpinningProductCard,
 };

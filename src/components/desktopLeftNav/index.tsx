@@ -37,7 +37,7 @@ export default async function DesktopLeftNav({
         <span>|</span>
         <MenuBtn />
       </div>
-      {/* Filters */}
+      {/* Desktop Left Nav displaying content for each page */}
       {children}
       {/* vertical line */}
       <DecoratorLines
