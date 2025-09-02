@@ -12,8 +12,6 @@ export default async function Page() {
     "archive"
   );
 
-  console.log(products);
-
   const fakeProducts = [...products];
   fakeProducts.push(...fakeProducts, ...fakeProducts, ...fakeProducts);
 
