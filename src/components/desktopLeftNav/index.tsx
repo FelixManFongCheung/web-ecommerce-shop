@@ -27,7 +27,7 @@ export default async function DesktopLeftNav({
         className={cn("absolute flex flex-row justify-end items-center gap-2")}
         style={{
           top: `${VERTICAL_LINE_OFFSET_Y_LEFT}rem`,
-          left: `${VERTICAL_LINE_OFFSET_X_LEFT * 2}rem`,
+          left: `${VERTICAL_LINE_OFFSET_X_LEFT * 1.5}rem`,
           height: `${
             HORIZONTAL_LINE_OFFSET_Y_LEFT - VERTICAL_LINE_OFFSET_Y_LEFT
           }rem`,
