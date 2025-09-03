@@ -23,8 +23,10 @@ export default function TermsAndConditionsPage() {
         </div>
         {/* TODO: bold needs to be added for the font of this text */}
         <p className="mb-4">
-          <span className="font-extrabold italic">Please note</span> – Proxy
-          Archive is not responsible for any taxes or duties applied to
+          <span className="font-extrabold italic !font-[Athelas_Bold_Italic]">
+            Please note
+          </span>{" "}
+          – Proxy Archive is not responsible for any taxes or duties applied to
           international shipments. Lost or delayed packages must be addressed
           with the shipping provider, as we cannot be held liable once the order
           has been dispatched.

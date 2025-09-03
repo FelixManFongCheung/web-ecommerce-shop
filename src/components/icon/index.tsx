@@ -5,9 +5,9 @@ export default function Icon({ className }: { className?: string }) {
   return (
     <div className={cn("relative flex items-center", className)}>
       <Link href="/">
-        <strong className="text-lg after:content-['*'] after:text-xs after:relative after:-top-1">
+        <div className="text-3xl after:content-['*'] after:text-xl after:relative after:-top-2 !font-[Athelas_Regular]">
           proxy archive
-        </strong>
+        </div>
       </Link>
     </div>
   );

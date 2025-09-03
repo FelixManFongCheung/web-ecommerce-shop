@@ -3,7 +3,7 @@
 :root {
   --primary: oklch(0.2407 0.0349 31.44);
   --secondary: oklch(100% 0 0);
-  --header-height: 10vh;
+  --header-height: 8rem;
   --desktop-left-nav-width: 300px;
   --desktop-right-nav-width: 200px;
   --desktop-info-pages-padding-left: 500px;
