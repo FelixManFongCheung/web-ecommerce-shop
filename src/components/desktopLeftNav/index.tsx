@@ -33,7 +33,7 @@ export default async function DesktopLeftNav({
           }rem`,
         }}
       >
-        <h1 className="text-primary text-wrap text-7xl">{headerName}</h1>
+        <h1 className="text-primary text-nowrap text-7xl">{headerName}</h1>
         <span>|</span>
         <MenuBtn />
       </div>

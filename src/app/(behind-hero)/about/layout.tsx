@@ -1,4 +1,5 @@
 import DesktopLeftNav from "@/components/desktopLeftNav";
+import { cn } from "@/lib/cn/utils";
 import {
   HORIZONTAL_LINE_OFFSET_Y_LEFT,
   VERTICAL_LINE_OFFSET_X_LEFT,
@@ -10,13 +11,13 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     <div>
       <DesktopLeftNav headerName="About">
         <div
-          className="absolute flex flex-col gap-2"
+          className="absolute flex flex-col text-2xl"
           style={{
             left: `${VERTICAL_LINE_OFFSET_X_LEFT * 2}rem`,
-            top: `${HORIZONTAL_LINE_OFFSET_Y_LEFT * 2}rem`,
+            top: `${HORIZONTAL_LINE_OFFSET_Y_LEFT * 1.5}rem`,
           }}
         >
-          <Link href="/about" className="underline">
+          <Link href="/about" className={cn("underline")}>
             About
           </Link>
           <Link href="/visit-us">Visit Us</Link>

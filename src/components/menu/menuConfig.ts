@@ -24,7 +24,7 @@ export const menuConfig = {
     },
     {
       label: "Terms&Conditions",
-      href: "/terms-and-conditions",
+      href: "/terms&conditions",
     },
   ],
 };

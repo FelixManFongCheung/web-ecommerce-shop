@@ -21,13 +21,15 @@ const data = {
 
 export default function Page() {
   return (
-    <div className="flex flex-col h-screen md:flex-row mt-header-height md:pl-desktop-left-nav-width md:pr-desktop-right-nav-width md:py-[100px]">
+    <div className="flex flex-col gap-4 h-screen md:flex-row mt-header-height md:pl-desktop-info-pages-padding-left md:pr-desktop-info-pages-padding-right md:py-[100px]">
       {Object.values(data).map((section) => {
         return (
-          <div key={section.title}>
-            <h2>{section.title}</h2>
+          <div className="flex-1" key={section.title}>
+            <h2 className="text-2xl mb-4">{section.title}</h2>
             {section.paragraphs.map((paragraph) => (
-              <p key={paragraph}>{paragraph}</p>
+              <p className="mb-4" key={paragraph}>
+                {paragraph}
+              </p>
             ))}
           </div>
         );

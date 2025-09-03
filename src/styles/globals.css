@@ -6,6 +6,8 @@
   --header-height: 10vh;
   --desktop-left-nav-width: 300px;
   --desktop-right-nav-width: 200px;
+  --desktop-info-pages-padding-left: 500px;
+  --desktop-info-pages-padding-right: 150px;
 }
 
 @theme inline {
@@ -14,6 +16,12 @@
   --spacing-header-height: var(--header-height);
   --spacing-desktop-left-nav-width: var(--desktop-left-nav-width);
   --spacing-desktop-right-nav-width: var(--desktop-right-nav-width);
+  --spacing-desktop-info-pages-padding-left: var(
+    --desktop-info-pages-padding-left
+  );
+  --spacing-desktop-info-pages-padding-right: var(
+    --desktop-info-pages-padding-right
+  );
 }
 
 @font-face {
@@ -43,12 +51,12 @@ html,
 body,
 * {
   box-sizing: border-box;
-  font-family: "Athelas Regular", serif;
+  font-family: "Optima", serif;
 }
 
 a,
 button {
-  text-decoration: none;
+  /* text-decoration: none; */
   will-change: filter;
   cursor: pointer;
 }
