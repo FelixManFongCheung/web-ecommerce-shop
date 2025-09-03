@@ -21,7 +21,7 @@ const data = {
 
 export default function Page() {
   return (
-    <div className="flex flex-col md:flex-row">
+    <div className="flex flex-col h-screen md:flex-row mt-header-height md:pl-desktop-left-nav-width md:pr-desktop-right-nav-width md:py-[100px]">
       {Object.values(data).map((section) => {
         return (
           <div key={section.title}>

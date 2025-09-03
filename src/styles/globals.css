@@ -17,24 +17,26 @@
 }
 
 @font-face {
-  src: url("../../public/fonts/FontsFree-Net-Athelas-BoldItalic.ttf");
+  src: url("../../public/fonts/FontsFree-Net-Athelas-BoldItalic.ttf")
+    format("truetype");
   font-family: "Athelas Bold Italic";
   font-weight: 600;
   font-style: italic;
 }
 
 @font-face {
-  src: url("../../public/fonts/FontsFree-Net-Athelas-Italic.ttf");
+  src: url("../../public/fonts/FontsFree-Net-Athelas-Italic.ttf")
+    format("truetype");
   font-family: "Athelas Regular";
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
-  src: url("../../public/fonts/happy-times-NG_italic_master_web.ttf");
-  font-family: "Happy Times Italic";
+  src: url("../../public/fonts/OptimaLTStd.otf") format("opentype");
+  font-family: "Optima";
   font-weight: 400;
-  font-style: italic;
+  font-style: normal;
 }
 
 html,
