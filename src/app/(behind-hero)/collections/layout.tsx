@@ -1,12 +1,9 @@
-import DesktopLeftNav from "@/components/desktopLeftNav";
-import Filter from "@/components/desktopLeftNav/components/filter";
+import { DesktopLeftNav } from "@/components";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div>
-      <DesktopLeftNav headerName="Shop">
-        <Filter />
-      </DesktopLeftNav>
+      <DesktopLeftNav headerName="Shop" hasFilter={true} />
       {children}
     </div>
   );

@@ -1,4 +1,5 @@
-import { DecoratorLines, Menu } from "@/components";
+import { getProductsAll } from "@/actions/stripe";
+import { DecoratorLines, Filter, Menu } from "@/components";
 import { cn } from "@/lib/cn/utils";
 import {
   HORIZONTAL_LINE_OFFSET_X_LEFT,
@@ -9,14 +10,20 @@ import {
   VERTICAL_LINE_OFFSET_Y_LEFT,
 } from "@/lib/constants";
 import { MenuBtn } from "./components/menuBtn";
+import { getRecursiveFolder } from "./hooks";
 
 export default async function DesktopLeftNav({
   headerName,
   children,
+  hasFilter,
 }: {
   headerName: string;
   children?: React.ReactNode;
+  hasFilter?: boolean;
 }) {
+  const productsAll = await getProductsAll();
+  const groups = getRecursiveFolder(productsAll);
+
   return (
     <div
       className={`md:block hidden fixed z-12 left-0 top-0 h-full w-desktop-left-nav-width bg-transparent`}
@@ -39,6 +46,15 @@ export default async function DesktopLeftNav({
       </div>
       {/* Desktop Left Nav displaying content for each page */}
       {children}
+      {hasFilter && (
+        <Filter
+          groups={groups}
+          style={{
+            top: `${HORIZONTAL_LINE_OFFSET_Y_LEFT + 1}rem`,
+            left: `${VERTICAL_LINE_OFFSET_X_LEFT * 2}rem`,
+          }}
+        />
+      )}
       {/* vertical line */}
       <DecoratorLines
         alignment="vertical"
@@ -67,6 +83,7 @@ export default async function DesktopLeftNav({
           paddingLeft: `${VERTICAL_LINE_OFFSET_X_LEFT}rem`,
           paddingRight: `${VERTICAL_LINE_OFFSET_X_LEFT}rem`,
         }}
+        groups={groups}
       />
     </div>
   );

@@ -19,6 +19,7 @@ import RemoveItem from "./removeItem";
 // custom UI units
 import DecoratorLines from "./decoratorLines";
 import DesktopLeftNav from "./desktopLeftNav";
+import Filter from "./desktopLeftNav/components/filter";
 import DesktopRightNav from "./desktopRightNav";
 import Icon from "./icon";
 
@@ -30,6 +31,7 @@ export {
   DecoratorLines,
   DesktopLeftNav,
   DesktopRightNav,
+  Filter,
   Footer,
   Header,
   Hero,

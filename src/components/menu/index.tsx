@@ -1,11 +1,19 @@
 "use client";
 
+import { Filter } from "@/components";
 import { cn } from "@/lib/cn/utils";
 import { useAppActions, useIsOpen } from "@/stores/appStore";
 import Link from "next/link";
+import { Group } from "../desktopLeftNav/components/filter";
 import { menuConfig } from "./menuConfig";
 
-export default function Menu({ style }: { style?: React.CSSProperties }) {
+export default function Menu({
+  style,
+  groups,
+}: {
+  style?: React.CSSProperties;
+  groups: Group;
+}) {
   const isOpen = useIsOpen();
   const { toggleOpen } = useAppActions();
   return (
@@ -31,7 +39,7 @@ export default function Menu({ style }: { style?: React.CSSProperties }) {
         </div>
         {/* panel */}
         <div className="flex flex-col gap-2">
-          <div></div>
+          <Filter groups={groups} />
         </div>
         {/* info */}
         <div className="flex flex-col gap-2">
