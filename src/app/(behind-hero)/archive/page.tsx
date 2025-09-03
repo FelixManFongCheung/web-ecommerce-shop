@@ -22,7 +22,7 @@ export default async function Page() {
       id={scrollContainer}
       className="relative h-screen w-screen overflow-x-auto flex flex-col justify-center items-start"
     >
-      <div className="flex flex-row gap-8">
+      <div className="flex flex-row gap-10">
         <div className="w-[50vw] h-full" />
         {fakeProducts.map((product) => (
           <ProductCard key={product.id} product={product}>
