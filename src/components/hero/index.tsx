@@ -65,11 +65,10 @@ export default function Hero() {
           alignment="vertical"
           position="right"
           variant="medium"
-          className={cn("bg-primary")}
           x={VERTICAL_LINE_OFFSET_X_RIGHT}
           y={VERTICAL_LINE_OFFSET_Y_RIGHT}
           height={`${VERTICAL_LINE_HEIGHT_RIGHT}rem`}
-          className={cn("absolute")}
+          className={cn("absolute bg-primary")}
           styles={{
             height: `${VERTICAL_LINE_HEIGHT_RIGHT}rem`,
           }}
