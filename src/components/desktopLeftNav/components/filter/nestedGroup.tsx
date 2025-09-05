@@ -43,10 +43,9 @@ export function NestedGroup({
           alignment="horizontal"
           position="left"
           variant="medium"
-          strokeColor="var(--color-primary)"
           width={`${HORIZONTAL_LINE_WIDTH_LEFT / 2}rem`}
           x={-(VERTICAL_LINE_OFFSET_X_LEFT * 2 - HORIZONTAL_LINE_OFFSET_X_LEFT)}
-          className={cn("relative")}
+          className={cn("relative bg-primary")}
         />
       )}
       <div style={{ marginLeft: `${level * 0.2}rem` }}>

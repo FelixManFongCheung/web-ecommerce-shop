@@ -60,22 +60,20 @@ export default async function DesktopLeftNav({
         alignment="vertical"
         position="left"
         variant="thin"
-        strokeColor="var(--color-primary)"
         height={`${VERTICAL_LINE_HEIGHT_LEFT}rem`}
         x={VERTICAL_LINE_OFFSET_X_LEFT}
         y={VERTICAL_LINE_OFFSET_Y_LEFT}
-        className={cn("absolute")}
+        className={cn("absolute bg-primary")}
       />
       {/* horizontal line */}
       <DecoratorLines
         alignment="horizontal"
         position="left"
         variant="thick"
-        strokeColor="var(--color-primary)"
         width={`${HORIZONTAL_LINE_WIDTH_LEFT}rem`}
         x={HORIZONTAL_LINE_OFFSET_X_LEFT}
         y={HORIZONTAL_LINE_OFFSET_Y_LEFT}
-        className={cn("absolute")}
+        className={cn("absolute bg-primary")}
       />
       <Menu
         style={{

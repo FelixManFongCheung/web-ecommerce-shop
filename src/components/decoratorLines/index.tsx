@@ -3,7 +3,6 @@ import { cn } from "@/lib/cn/utils";
 export default function DecoratorLines({
   alignment,
   variant,
-  strokeColor,
   className,
   position,
   height: heightProp,
@@ -14,7 +13,6 @@ export default function DecoratorLines({
 }: {
   alignment: "horizontal" | "vertical";
   variant: "thin" | "medium" | "thick";
-  strokeColor: string;
   className?: string;
   position?: "left" | "right";
   height?: string;
@@ -63,7 +61,6 @@ export default function DecoratorLines({
       style={{
         ...dimensionStyle,
         ...positionStyle,
-        backgroundColor: strokeColor,
         ...styles,
       }}
     />

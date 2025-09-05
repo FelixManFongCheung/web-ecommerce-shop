@@ -27,8 +27,7 @@ export default function Hero() {
           x={VERTICAL_LINE_OFFSET_X_LEFT}
           y={VERTICAL_LINE_OFFSET_Y_LEFT}
           height={`${VERTICAL_LINE_HEIGHT_LEFT}rem`}
-          strokeColor="var(--color-secondary)"
-          className={cn("absolute")}
+          className={cn("absolute bg-primary")}
         />
         <div className="absolute top-[12%] left-[3%] block h-[4px] w-[75%]">
           <Link href="/collections/all" className="relative left-[5%]">
@@ -37,7 +36,7 @@ export default function Hero() {
           <DecoratorLines
             alignment="horizontal"
             variant="medium"
-            strokeColor="var(--color-secondary)"
+            className={cn("bg-primary")}
           />
         </div>
         <div className="absolute top-[22%] left-[3%] block h-[4px] w-[22%]">
@@ -47,7 +46,7 @@ export default function Hero() {
           <DecoratorLines
             alignment="horizontal"
             variant="medium"
-            strokeColor="var(--color-secondary)"
+            className={cn("bg-primary")}
           />
         </div>
         <div className="absolute top-[30%] left-[3%] block h-[8px] w-[45%]">
@@ -57,7 +56,7 @@ export default function Hero() {
           <DecoratorLines
             alignment="horizontal"
             variant="thick"
-            strokeColor="var(--color-secondary)"
+            className={cn("bg-primary")}
           />
         </div>
       </div>
@@ -66,7 +65,7 @@ export default function Hero() {
           alignment="vertical"
           position="right"
           variant="medium"
-          strokeColor="var(--color-secondary)"
+          className={cn("bg-primary")}
           x={VERTICAL_LINE_OFFSET_X_RIGHT}
           y={VERTICAL_LINE_OFFSET_Y_RIGHT}
           height={`${VERTICAL_LINE_HEIGHT_RIGHT}rem`}
@@ -82,7 +81,7 @@ export default function Hero() {
           <DecoratorLines
             alignment="horizontal"
             variant="medium"
-            strokeColor="var(--color-secondary)"
+            className={cn("bg-primary")}
           />
         </div>
         <div className="absolute bottom-[8%] right-[3%] block h-[4px] w-[45%]">
@@ -92,7 +91,7 @@ export default function Hero() {
           <DecoratorLines
             alignment="horizontal"
             variant="thin"
-            strokeColor="var(--color-secondary)"
+            className={cn("bg-primary")}
           />
         </div>
       </div>

@@ -2,6 +2,10 @@
 
 import { getCartProductsClient } from "@/actions/getCart/client";
 import { cn } from "@/lib/cn/utils";
+import {
+  HORIZONTAL_LINE_OFFSET_X_RIGHT,
+  HORIZONTAL_LINE_WIDTH_RIGHT,
+} from "@/lib/constants";
 import { useAppActions, useIsCartOpen } from "@/stores/appStore";
 import { getCookie } from "cookies-next";
 import { useEffect, useState } from "react";
@@ -36,16 +40,26 @@ export default function CartPopup({ className }: { className?: string }) {
     }
   }, [cartCookies, isCartOpen]);
 
-  if (!isCartOpen) return null;
-
   return (
-    <div className={cn("fixed inset-0 z-50", className)}>
-      <div className="absolute inset-0 bg-black/50" onClick={toggleCart} />
-      <div className="absolute right-0 top-0 h-full w-full max-w-md bg-white p-6">
-        <div className="flex justify-between items-center">
-          <h2>Your Cart</h2>
-          <button onClick={toggleCart}>×</button>
-        </div>
+    <div className={cn("fixed inset-0", className)} data-cart-open={isCartOpen}>
+      <div className="absolute inset-0" onClick={toggleCart} />
+      <div
+        className={cn(
+          "absolute top-0 h-full bg-primary p-6 transition-all duration-300 ease-in-out"
+        )}
+        style={{
+          width: `${
+            HORIZONTAL_LINE_WIDTH_RIGHT + HORIZONTAL_LINE_OFFSET_X_RIGHT + 1.5
+          }rem`,
+          right: isCartOpen
+            ? "0"
+            : `-${
+                HORIZONTAL_LINE_WIDTH_RIGHT +
+                HORIZONTAL_LINE_OFFSET_X_RIGHT +
+                1.5
+              }rem`,
+        }}
+      >
         {isLoading ? (
           <div>Loading...</div>
         ) : (
