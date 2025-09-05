@@ -41,11 +41,14 @@ export default function CartPopup({ className }: { className?: string }) {
   }, [cartCookies, isCartOpen]);
 
   return (
-    <div className={cn("fixed inset-0", className)} data-cart-open={isCartOpen}>
-      <div className="absolute inset-0" onClick={toggleCart} />
+    <div
+      className={cn("relative h-screen", className)}
+      data-cart-open={isCartOpen}
+    >
+      {isCartOpen && <div className="fixed inset-0" onClick={toggleCart} />}
       <div
         className={cn(
-          "absolute top-0 h-full bg-primary p-6 transition-all duration-300 ease-in-out"
+          "fixed top-0 h-full bg-primary p-6 transition-all duration-300 ease-in-out"
         )}
         style={{
           width: `${
