@@ -12,7 +12,7 @@ export default function Header() {
     <>
       <div
         className={cn(
-          "fixed top-0 h-header-height bg-white flex z-10 w-full justify-between px-5"
+          "fixed top-0 h-header-height flex z-10 w-full justify-between px-5"
         )}
       >
         <div className="block md:hidden">
