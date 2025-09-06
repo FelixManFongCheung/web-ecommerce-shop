@@ -58,7 +58,7 @@ export default async function Page(props: {
           <p>{product.name}</p>
           {product.description && <p>{product.description}</p>}
         </div>
-        <div>
+        <div className="w-full">
           <ATC productId={product.id} isATC={isATC} />
         </div>
         <div>

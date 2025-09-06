@@ -35,7 +35,8 @@ export default function ATC({ productId, isATC }: ATCProp) {
     <button
       disabled={ATCState}
       className={cn(
-        "md:relative fixed bottom-0 left-0 h-header-height-mobile md:h-auto w-full block md:w-auto bg-primary text-secondary"
+        "md:relative fixed bottom-0 left-0 h-header-height-mobile md:h-auto w-full block md:w-full bg-primary text-secondary",
+        ATCState && "border border-primary text-primary bg-secondary"
       )}
       onClick={addToCartAction}
     >
