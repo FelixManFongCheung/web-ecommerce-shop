@@ -4,11 +4,12 @@
   --primary: oklch(0.2407 0.0349 31.44);
   --secondary: oklch(100% 0 0);
   --header-height: 8rem;
+  --header-height-mobile: 3rem;
   --desktop-left-nav-width: 300px;
   --desktop-right-nav-width: 200px;
   --desktop-info-pages-padding-left: 500px;
   --desktop-info-pages-padding-right: 150px;
-  --desktop-product-page-padding-left: 400px;
+  --desktop-product-page-padding-left: 200px;
   --desktop-product-page-padding-right: 300px;
 }
 
@@ -16,6 +17,7 @@
   --color-primary: var(--primary);
   --color-secondary: var(--secondary);
   --spacing-header-height: var(--header-height);
+  --spacing-header-height-mobile: var(--header-height-mobile);
   --spacing-desktop-left-nav-width: var(--desktop-left-nav-width);
   --spacing-desktop-right-nav-width: var(--desktop-right-nav-width);
   --spacing-desktop-info-pages-padding-left: var(

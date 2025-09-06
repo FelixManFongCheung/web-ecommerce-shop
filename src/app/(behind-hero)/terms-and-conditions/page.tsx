@@ -1,6 +1,6 @@
 export default function TermsAndConditionsPage() {
   return (
-    <div className="flex flex-col gap-4 h-screen md:flex-row mt-header-height md:pl-desktop-info-pages-padding-left md:pr-desktop-info-pages-padding-right md:py-[100px]">
+    <div className="flex flex-col gap-4 h-screen md:flex-row md:mt-header-height mt-header-height-mobile md:pl-desktop-info-pages-padding-left md:pr-desktop-info-pages-padding-right md:py-[100px]">
       <div className="flex-1">
         <h2 className="text-2xl mb-4">Shipping</h2>
         <p className="mb-4">

@@ -30,7 +30,11 @@ export default function Nav() {
             isOpen ? "block" : "hidden pointer-events-none"
           )}
         >
-          <Icon className={cn("h-header-height mx-auto justify-center")} />
+          <Icon
+            className={cn(
+              "md:h-header-height h-header-height-mobile mx-auto justify-center"
+            )}
+          />
         </div>
       </div>
       <div className="h-[10vh] w-full hidden"></div>

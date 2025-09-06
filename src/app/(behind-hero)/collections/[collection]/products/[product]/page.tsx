@@ -1,6 +1,7 @@
 // import Checkout from '@/components/checkout';
 import { getCartServer } from "@/actions/getCart/server";
 import { getPriceId, getProduct, retrievePrice } from "@/actions/stripe";
+import ATC from "@/components/atc";
 import { cn } from "@/lib/cn/utils";
 import { cookies } from "next/headers";
 import Image from "next/image";
@@ -34,20 +35,31 @@ export default async function Page(props: {
   return (
     <div
       className={cn(
-        "flex flex-col h-screen md:flex-row mt-header-height md:pl-desktop-product-page-padding-left md:pr-desktop-product-page-padding-right md:py-[100px] items-center justify-center"
+        "flex flex-col gap-4 h-screen md:flex-row md:mt-header-height mt-header-height-mobile md:pl-desktop-product-page-padding-left md:pr-desktop-product-page-padding-right md:py-[100px] items-center justify-center"
       )}
     >
-      <div className={cn("grid grid-cols-6")}>
+      <div className={cn("relative w-full max-w-md aspect-[3/4]")}>
         {product.images.map((image, index) => (
-          <div key={index} className={cn("col-span-2")}>
-            <Image fill={true} objectFit="cover" src={image} alt="" />
+          <div key={index} className={cn("relative w-full h-full")}>
+            <Image
+              fill
+              sizes="(max-width: 768px) 80vw, (max-width: 1200px) 30vw, 25vw"
+              placeholder="blur"
+              blurDataURL={image}
+              src={image}
+              alt="product image"
+              style={{ objectFit: "cover" }}
+            />
           </div>
         ))}
       </div>
-      <div className={cn("flex flex-col gap-4")}>
+      <div className={cn("flex flex-col gap-4 items-start pr-4")}>
         <div>
           <p>{product.name}</p>
           {product.description && <p>{product.description}</p>}
+        </div>
+        <div>
+          <ATC productId={product.id} isATC={isATC} />
         </div>
         <div>
           <p>Measurements</p>
