@@ -34,10 +34,12 @@ export default function ATC({ productId, isATC }: ATCProp) {
   return (
     <button
       disabled={ATCState}
-      className={cn("block", ATCState && "opacity-50 cursor-not-allowed")}
+      className={cn(
+        "md:relative fixed bottom-0 left-0 h-header-height-mobile md:h-auto w-full block md:w-auto bg-primary text-secondary"
+      )}
       onClick={addToCartAction}
     >
-      Add to cart
+      {ATCState ? <p> Sold Out</p> : <p>Add to cart</p>}
     </button>
   );
 }
