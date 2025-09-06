@@ -8,6 +8,8 @@
   --desktop-right-nav-width: 200px;
   --desktop-info-pages-padding-left: 500px;
   --desktop-info-pages-padding-right: 150px;
+  --desktop-product-page-padding-left: 400px;
+  --desktop-product-page-padding-right: 300px;
 }
 
 @theme inline {
@@ -21,6 +23,12 @@
   );
   --spacing-desktop-info-pages-padding-right: var(
     --desktop-info-pages-padding-right
+  );
+  --spacing-desktop-product-page-padding-left: var(
+    --desktop-product-page-padding-left
+  );
+  --spacing-desktop-product-page-padding-right: var(
+    --desktop-product-page-padding-right
   );
 }
 

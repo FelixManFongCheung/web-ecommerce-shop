@@ -1,3 +1,4 @@
+import { Icon } from "@/components";
 import { cn } from "@/lib/cn/utils";
 import {
   VERTICAL_LINE_HEIGHT_LEFT,
@@ -14,9 +15,7 @@ export default function Hero() {
   return (
     <>
       <div className="flex flex-col absolute inset-0 items-center justify-center text-secondary bg-primary">
-        <strong className="text-2xl after:content-['*'] after:text-2xl after:relative after:-top-1">
-          proxy archive
-        </strong>
+        <Icon className="text-2xl" />
         <p className="text-xs">your gateway to an archival wardrobe</p>
       </div>
       <div className="absolute bottom-0 left-0 h-full w-desktop-left-nav-width text-secondary">
@@ -27,7 +26,7 @@ export default function Hero() {
           x={VERTICAL_LINE_OFFSET_X_LEFT}
           y={VERTICAL_LINE_OFFSET_Y_LEFT}
           height={`${VERTICAL_LINE_HEIGHT_LEFT}rem`}
-          className={cn("absolute bg-primary")}
+          className={cn("absolute bg-secondary")}
         />
         <div className="absolute top-[12%] left-[3%] block h-[4px] w-[75%]">
           <Link href="/collections/all" className="relative left-[5%]">
@@ -36,7 +35,7 @@ export default function Hero() {
           <DecoratorLines
             alignment="horizontal"
             variant="medium"
-            className={cn("bg-primary")}
+            className={cn("bg-secondary")}
           />
         </div>
         <div className="absolute top-[22%] left-[3%] block h-[4px] w-[22%]">
@@ -46,7 +45,7 @@ export default function Hero() {
           <DecoratorLines
             alignment="horizontal"
             variant="medium"
-            className={cn("bg-primary")}
+            className={cn("bg-secondary")}
           />
         </div>
         <div className="absolute top-[30%] left-[3%] block h-[8px] w-[45%]">
@@ -56,7 +55,7 @@ export default function Hero() {
           <DecoratorLines
             alignment="horizontal"
             variant="thick"
-            className={cn("bg-primary")}
+            className={cn("bg-secondary")}
           />
         </div>
       </div>
@@ -68,7 +67,7 @@ export default function Hero() {
           x={VERTICAL_LINE_OFFSET_X_RIGHT}
           y={VERTICAL_LINE_OFFSET_Y_RIGHT}
           height={`${VERTICAL_LINE_HEIGHT_RIGHT}rem`}
-          className={cn("absolute bg-primary")}
+          className={cn("absolute bg-secondary")}
           styles={{
             height: `${VERTICAL_LINE_HEIGHT_RIGHT}rem`,
           }}
@@ -80,7 +79,7 @@ export default function Hero() {
           <DecoratorLines
             alignment="horizontal"
             variant="medium"
-            className={cn("bg-primary")}
+            className={cn("bg-secondary")}
           />
         </div>
         <div className="absolute bottom-[8%] right-[3%] block h-[4px] w-[45%]">
@@ -90,7 +89,7 @@ export default function Hero() {
           <DecoratorLines
             alignment="horizontal"
             variant="thin"
-            className={cn("bg-primary")}
+            className={cn("bg-secondary")}
           />
         </div>
       </div>
