@@ -6,7 +6,7 @@ export default async function BehindHeroLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="relative z-10">
+    <div className="relative">
       <Nav />
       <DesktopRightNav />
       <Header />

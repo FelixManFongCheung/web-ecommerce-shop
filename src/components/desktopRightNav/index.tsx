@@ -15,7 +15,7 @@ export default function DesktopRightNav() {
     <div
       className={`md:block hidden fixed z-11 right-0 top-0 h-full w-desktop-right-nav-width bg-transparent`}
     >
-      <CartPopup className="md:block hidden peer" />
+      <CartPopup className="peer" />
       <div
         className={cn(
           "absolute flex flex-col justify-center items-center peer-data-[cart-open=true]:text-secondary"
