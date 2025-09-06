@@ -1,6 +1,6 @@
 // import Checkout from '@/components/checkout';
 import { getCartServer } from "@/actions/getCart/server";
-import { getPriceId, getProduct, retrievePrice } from "@/actions/stripe";
+import { getProduct } from "@/actions/stripe";
 import ATC from "@/components/atc";
 import { cn } from "@/lib/cn/utils";
 import { cookies } from "next/headers";
@@ -19,8 +19,8 @@ export default async function Page(props: {
   }
 
   const product = await getProduct(params.product);
-  const priceID = await getPriceId(product.id);
-  const price = await retrievePrice(priceID);
+  // const priceID = await getPriceId(product.id);
+  // const price = await retrievePrice(priceID);
   const productMetadata: ProductPageMetaData = product.metadata;
   const measurements = [
     { key: "size", value: productMetadata.size },
