@@ -3,7 +3,7 @@ import Stripe from "stripe";
 import { getActiveProducts } from "../stripe";
 
 export async function getCartProductsClient() {
-  const cartData = await getCartFromCookieClient();
+  const cartData = getCartFromCookieClient();
   const activeProducts = await getActiveProducts();
 
   let activeProductsArray: Stripe.Product[] = [];
