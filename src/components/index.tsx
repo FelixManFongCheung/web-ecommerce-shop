@@ -21,6 +21,7 @@ import DecoratorLines from "./decoratorLines";
 import DesktopLeftNav from "./desktopLeftNav";
 import Filter from "./desktopLeftNav/components/filter";
 import DesktopRightNav from "./desktopRightNav";
+import FollowUsDialog from "./followUsDialog";
 import Icon from "./icon";
 
 export {
@@ -32,6 +33,7 @@ export {
   DesktopLeftNav,
   DesktopRightNav,
   Filter,
+  FollowUsDialog,
   Footer,
   Header,
   Hero,
