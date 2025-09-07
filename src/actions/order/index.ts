@@ -1,71 +1,66 @@
-'use server'
+"use server";
 
-import { createClient } from '@/lib/supabase/server';
-import { cookies } from 'next/headers';
-import { retrieveSession, updateProduct } from '../stripe';
+import { getCartFromCookie, setCartCookie } from "@/lib/cart/utils";
+import { cookies } from "next/headers";
+import { retrieveSession, updateProduct } from "../stripe";
 
 export async function completeOrder(sessionId: string) {
-  const supabase = await createClient();
-  const cookieStore = await cookies();
-  const cartID = cookieStore.get('cart')?.value;
-
-
   try {
     // 1. Retrieve the session with line items
     const session = await retrieveSession(sessionId, {
-      expand: ['line_items.data.price.product']
-    });    
+      expand: ["line_items.data.price.product"],
+    });
 
-    const { data: currentCart } = await supabase
-        .from('sessions')
-        .select('products')
-        .eq('cartID', cartID as string)
-        .single();
+    const currentCart = await getCartFromCookie();
 
     if (currentCart?.products) {
-      const lineItems = session.line_items?.data; 
-      const priceIds = lineItems?.map(item => (
-        typeof item.price?.product === 'string' 
-          ? item.price.product 
+      const lineItems = session.line_items?.data;
+      const priceIds = lineItems?.map((item) =>
+        typeof item.price?.product === "string"
+          ? item.price.product
           : item.price?.product.id
-      ));
-      
-      const updatedProducts = currentCart.products.filter((id: string) => !priceIds!.includes(id));
+      );
 
-      await supabase
-        .from('sessions')
-        .update({ products: updatedProducts })
-        .eq('cartID', cartID as string);
+      const updatedProducts = currentCart.products.filter(
+        (id: string) => !priceIds!.includes(id)
+      );
+
+      // Update cart with remaining products
+      if (updatedProducts.length > 0) {
+        const updatedCart = {
+          ...currentCart,
+          products: updatedProducts,
+        };
+        await setCartCookie(updatedCart);
+      } else {
+        // Remove cart if empty
+        const cookieStore = await cookies();
+        cookieStore.delete("cart");
+      }
     }
 
     // 2. Process each purchased item
     for (const item of session.line_items?.data || []) {
-      const productId = typeof item.price?.product === 'string' 
-        ? item.price.product 
-        : item.price?.product.id;
+      const productId =
+        typeof item.price?.product === "string"
+          ? item.price.product
+          : item.price?.product.id;
 
       // Deactivate the product after purchase
       await updateProduct(productId as string, {
         active: false,
-        metadata: { 
-          sold: 'true',
+        metadata: {
+          sold: "true",
           sold_at: new Date().toISOString(),
-          session_id: sessionId
-        }
+          session_id: sessionId,
+        },
       });
-      // for future use
-      // await stripe.products.del(productId as string, {
-        // metadata: { 
-        //   sold: 'true',
-        //   sold_at: new Date().toISOString(),
-        //   session_id: sessionId
-        // }});
     }
 
     return { success: true };
   } catch (error) {
-    console.error('Error processing order:', error);
-    throw new Error('Failed to process order');
+    console.error("Error processing order:", error);
+    throw new Error("Failed to process order");
   }
 }
 

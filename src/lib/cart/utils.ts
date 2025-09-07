@@ -1,0 +1,169 @@
+import { getCookie } from "cookies-next";
+import { cookies } from "next/headers";
+
+export interface CartData {
+  products: string[];
+  createdAt: string;
+  expiresAt: string;
+}
+
+export interface CartResponse {
+  success: boolean;
+  message?: string;
+  error?: string;
+  cartID?: string;
+}
+
+// Server-side cart operations
+export async function getCartFromCookie(): Promise<CartData | null> {
+  try {
+    const cookieStore = await cookies();
+    const cartCookie = cookieStore.get("cart");
+
+    if (!cartCookie) return null;
+
+    const cartData: CartData = JSON.parse(cartCookie.value);
+
+    // Check if cart has expired
+    if (new Date(cartData.expiresAt) < new Date()) {
+      return null;
+    }
+
+    return cartData;
+  } catch (error) {
+    console.error("Error reading cart from cookie:", error);
+    return null;
+  }
+}
+
+export async function setCartCookie(cartData: CartData): Promise<void> {
+  const ONE_MONTH = 60 * 60 * 24 * 30; // 30 days
+
+  const cookieStore = await cookies();
+  cookieStore.set("cart", JSON.stringify(cartData), {
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "lax",
+    path: "/",
+    maxAge: ONE_MONTH,
+    httpOnly: true,
+  });
+}
+
+export async function addProductToCart(
+  productId: string
+): Promise<CartResponse> {
+  try {
+    const existingCart = await getCartFromCookie();
+    const ONE_MONTH = 60 * 60 * 24 * 30; // 30 days
+    const expiresAt = new Date(Date.now() + ONE_MONTH * 1000).toISOString();
+
+    let updatedProducts: string[];
+
+    if (existingCart) {
+      // Add to existing cart
+      updatedProducts = [...existingCart.products, productId];
+    } else {
+      // Create new cart
+      updatedProducts = [productId];
+    }
+
+    const cartData: CartData = {
+      products: updatedProducts,
+      createdAt: existingCart?.createdAt || new Date().toISOString(),
+      expiresAt,
+    };
+
+    await setCartCookie(cartData);
+
+    return {
+      success: true,
+      message: existingCart
+        ? "Cart updated successfully!"
+        : "Cart created successfully!",
+      cartID: "cookie-based-cart", // For compatibility
+    };
+  } catch (error) {
+    console.error("Error adding product to cart:", error);
+    return {
+      success: false,
+      error:
+        error instanceof Error ? error.message : "An unknown error occurred",
+    };
+  }
+}
+
+export async function removeProductFromCart(
+  productId: string
+): Promise<CartResponse> {
+  try {
+    const existingCart = await getCartFromCookie();
+
+    if (!existingCart) {
+      return {
+        success: false,
+        error: "No cart found",
+      };
+    }
+
+    const updatedProducts = existingCart.products.filter(
+      (id) => id !== productId
+    );
+
+    if (updatedProducts.length === 0) {
+      // Remove cart cookie if empty
+      const cookieStore = await cookies();
+      cookieStore.delete("cart");
+    } else {
+      const cartData: CartData = {
+        ...existingCart,
+        products: updatedProducts,
+      };
+      await setCartCookie(cartData);
+    }
+
+    return {
+      success: true,
+      message: "Product removed from cart successfully!",
+    };
+  } catch (error) {
+    console.error("Error removing product from cart:", error);
+    return {
+      success: false,
+      error:
+        error instanceof Error ? error.message : "An unknown error occurred",
+    };
+  }
+}
+
+// Client-side cart operations
+export function getCartFromCookieClient(): CartData | null {
+  try {
+    const cartCookie = getCookie("cart");
+
+    if (!cartCookie) return null;
+
+    const cartData: CartData = JSON.parse(cartCookie as string);
+
+    // Check if cart has expired
+    if (new Date(cartData.expiresAt) < new Date()) {
+      return null;
+    }
+
+    return cartData;
+  } catch (error) {
+    console.error("Error reading cart from cookie:", error);
+    return null;
+  }
+}
+
+export function setCartCookieClient(cartData: CartData): void {
+  const ONE_MONTH = 60 * 60 * 24 * 30; // 30 days
+
+  // Note: This will only work if the cookie was set with httpOnly: false
+  // For security, prefer server-side operations
+  document.cookie = `cart=${JSON.stringify(
+    cartData
+  )}; path=/; max-age=${ONE_MONTH}; secure=${
+    process.env.NODE_ENV === "production"
+  }; samesite=lax`;
+}

@@ -1,29 +1,23 @@
-import { createClient as createBrowserClient } from '@/lib/supabase/client';
-import { getActiveProducts } from '../stripe';
-import Stripe from 'stripe';
-
+import { getCartFromCookieClient } from "@/lib/cart/utils";
+import Stripe from "stripe";
+import { getActiveProducts } from "../stripe";
 
 export async function getCartClient(cookies: string) {
-    const supabase = createBrowserClient();
-    const { data: cartData, error } = await supabase
-        .from('sessions')
-        .select('products')
-        .eq('cartID', cookies)
-        .single();
-        
-    if (error) throw error;
-    return cartData;
+  const cartData = getCartFromCookieClient();
+  return cartData;
 }
 
 export async function getCartProductsClient(cookies: string) {
-    const cartData = await getCartClient(cookies);
-    const activeProducts = await getActiveProducts();
+  const cartData = await getCartClient(cookies);
+  const activeProducts = await getActiveProducts();
 
-    let activeProductsArray: Stripe.Product[] = [];
-  
-    if (cartData.products) {
-      activeProductsArray = activeProducts.filter((product) => cartData.products.includes(product.id));
-    }
+  let activeProductsArray: Stripe.Product[] = [];
 
-    return activeProductsArray;
+  if (cartData?.products) {
+    activeProductsArray = activeProducts.filter((product) =>
+      cartData.products.includes(product.id)
+    );
+  }
+
+  return activeProductsArray;
 }

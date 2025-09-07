@@ -1,7 +1,7 @@
 "use client";
 
 import { revalidateProductPage } from "@/actions/revalidateProductPage";
-import { createClient } from "@/lib/supabase/client";
+import { removeProductFromCart } from "@/lib/cart/utils";
 import { useState } from "react";
 
 interface RemoveItemProps {
@@ -15,31 +15,19 @@ export default function RemoveItem({
   productId,
   children,
 }: RemoveItemProps) {
-  const supabase = createClient();
   const [isVisible, setIsVisible] = useState(true);
 
   const removeFromCart = async () => {
     try {
-      const { data: currentCart } = await supabase
-        .from("sessions")
-        .select("products")
-        .eq("cartID", cartID)
-        .single();
+      const result = await removeProductFromCart(productId);
 
-      if (currentCart?.products) {
-        const updatedProducts = currentCart.products.filter(
-          (id: string) => id !== productId
-        );
-
-        await supabase
-          .from("sessions")
-          .update({ products: updatedProducts })
-          .eq("cartID", cartID);
-
+      if (result.success) {
         setIsVisible(false);
         await revalidateProductPage(
           "/collections/[collection]/products/[product]"
         );
+      } else {
+        console.error("Error removing item:", result.error);
       }
     } catch (error) {
       console.error("Error removing item:", error);
