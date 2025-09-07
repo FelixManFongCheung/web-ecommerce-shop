@@ -1,4 +1,3 @@
-import { DesktopLeftNav } from "@/components";
 import { redirect } from "next/navigation";
 
 export default async function Page(props: {
@@ -27,24 +26,18 @@ export default async function Page(props: {
 
     return (
       <>
-        <DesktopLeftNav headerName="Return">
-          {" "}
+        <div className="flex flex-col gap-4 h-screen md:flex-row md:mt-header-height mt-header-height-mobile md:pl-desktop-info-pages-padding-left md:pr-desktop-info-pages-padding-right md:py-[100px]">
           {session.customer_email ? (
-            <div className="h-screen w-screen">
-              <p>
-                We appreciate your business! A confirmation email will be sent
-                to {session.customer_email}. The order will be processed and
-                shipped to you within 24 hours. If you have any questions,
-                please email{" "}
-                <a href="mailto:orders@example.com">orders@example.com</a>.
-              </p>
-            </div>
+            <p>
+              We appreciate your business! A confirmation email will be sent to{" "}
+              {session.customer_email}. The order will be processed and shipped
+              to you within 24 hours. If you have any questions, please email{" "}
+              <a href="mailto:orders@example.com">orders@example.com</a>.
+            </p>
           ) : (
-            <div className="h-screen w-screen">
-              <p>We appreciate your business!</p>
-            </div>
+            <p>We appreciate your business!</p>
           )}
-        </DesktopLeftNav>
+        </div>
       </>
     );
   }
