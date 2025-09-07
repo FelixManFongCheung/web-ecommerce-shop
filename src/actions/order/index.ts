@@ -1,6 +1,6 @@
 "use server";
 
-import { getCartFromCookie, setCartCookie } from "@/lib/cart/utils";
+import { getCartFromCookie, setCartCookie } from "@/lib/cart/server";
 import { cookies } from "next/headers";
 import { retrieveSession, updateProduct } from "../stripe";
 

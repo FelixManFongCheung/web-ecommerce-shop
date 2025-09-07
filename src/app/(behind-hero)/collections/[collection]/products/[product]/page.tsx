@@ -1,9 +1,8 @@
 // import Checkout from '@/components/checkout';
-import { getCartServer } from "@/actions/getCart/server";
+import { getCartProductsServer } from "@/actions/getCart/server";
 import { getProduct } from "@/actions/stripe";
 import ATC from "@/components/atc";
 import { cn } from "@/lib/cn/utils";
-import { cookies } from "next/headers";
 import Image from "next/image";
 import { ProductPageMetaData } from "./type";
 
@@ -11,12 +10,9 @@ export default async function Page(props: {
   params: Promise<{ product: string }>;
 }) {
   const params = await props.params;
-  const userCookies = (await cookies()).get("cart")?.value;
   let isATC: boolean = false;
-  if (userCookies) {
-    const cartItems = await getCartServer(userCookies);
-    isATC = cartItems.products?.includes(params.product) || false;
-  }
+  const cartItems = await getCartProductsServer();
+  isATC = cartItems.some((item) => item.id === params.product) || false;
 
   const product = await getProduct(params.product);
   // const priceID = await getPriceId(product.id);
