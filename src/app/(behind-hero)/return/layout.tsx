@@ -3,7 +3,7 @@ import DesktopLeftNav from "@/components/desktopLeftNav";
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div>
-      <DesktopLeftNav headerName="Return"></DesktopLeftNav>
+      <DesktopLeftNav headerName=""></DesktopLeftNav>
       {children}
     </div>
   );
