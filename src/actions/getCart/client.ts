@@ -1,18 +1,19 @@
 import { getCartFromCookieClient } from "@/lib/cart/client";
-import Stripe from "stripe";
 import { getActiveProducts } from "../stripe";
 
 export async function getCartProductsClient() {
   const cartData = getCartFromCookieClient();
   const activeProducts = await getActiveProducts();
 
-  let activeProductsArray: Stripe.Product[] = [];
-
-  if (cartData?.products) {
-    activeProductsArray = activeProducts.filter((product) =>
-      cartData.products.includes(product.id)
-    );
+  if (!cartData || !cartData.products) {
+    return [];
   }
 
-  return activeProductsArray;
+  const cartProductIds = cartData.products;
+  const cartProducts = cartProductIds.flatMap((id) => {
+    const product = activeProducts.find((product) => product.id === id);
+    return product ? [product] : [];
+  });
+
+  return cartProducts;
 }

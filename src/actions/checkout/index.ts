@@ -1,7 +1,7 @@
 // app/actions/checkout.ts
 "use server";
 
-import { getCartProductsServer, getCartServer } from "@/actions/getCart/server";
+import { getCartProductsServer } from "@/actions/getCart/server";
 import {
   createCheckoutSession,
   getPriceId,
@@ -10,24 +10,21 @@ import {
 import { headers } from "next/headers";
 import Stripe from "stripe";
 
-export async function createCheckout(cartID: string) {
+export async function createCheckout() {
   try {
     const headersList = await headers();
     const origin = headersList.get("origin") || "";
 
     // Get cart data
-    const cart = await getCartServer(cartID);
+    const cart = await getCartProductsServer();
 
-    if (!cart) {
-      throw new Error("Cart not found");
-    } else if (cart.products && cart.products.length < 1) {
-      throw new Error("Cart is empty");
+    if (!cart || cart.length < 1) {
+      return null;
     }
 
     // Get cart products and create line items
-    const cartDataArray = await getCartProductsServer(cartID);
     const lineItems = await Promise.all(
-      cartDataArray.map(async (product: Stripe.Product) => ({
+      cart.map(async (product: Stripe.Product) => ({
         price: await getPriceId(product.id),
         quantity: 1,
       }))

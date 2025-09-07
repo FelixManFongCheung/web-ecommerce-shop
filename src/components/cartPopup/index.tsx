@@ -4,10 +4,10 @@ import { getCartProductsClient } from "@/actions/getCart/client";
 import { cn } from "@/lib/cn/utils";
 import {
   HORIZONTAL_LINE_OFFSET_X_RIGHT,
+  HORIZONTAL_LINE_OFFSET_Y_RIGHT,
   HORIZONTAL_LINE_WIDTH_RIGHT,
 } from "@/lib/constants";
 import { useAppActions, useIsCartOpen } from "@/stores/appStore";
-import { getCookie } from "cookies-next";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import Stripe from "stripe";
@@ -21,22 +21,40 @@ function CartContent({
   isLoading: boolean;
 }) {
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div
+        className="w-full text-secondary"
+        style={{
+          marginTop: `${HORIZONTAL_LINE_OFFSET_Y_RIGHT}rem`,
+        }}
+      >
+        Loading...
+      </div>
+    );
   }
 
   return (
-    <>
+    <div
+      className="flex flex-col gap-2"
+      style={{
+        marginTop: `${HORIZONTAL_LINE_OFFSET_Y_RIGHT}rem`,
+      }}
+    >
       {cartProducts.map((product) => (
-        <div key={product.id}>{product.name}</div>
+        <div
+          className={cn("flex flex-col gap-2 text-secondary")}
+          key={product.id}
+        >
+          {product.name}
+        </div>
       ))}
-    </>
+    </div>
   );
 }
 
 export default function CartPopup({ className }: { className?: string }) {
   const isCartOpen = useIsCartOpen();
   const { toggleCart } = useAppActions();
-  const cartCookies = getCookie("cart");
   const [cartProducts, setCartProducts] = useState<Stripe.Product[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -44,12 +62,9 @@ export default function CartPopup({ className }: { className?: string }) {
     const showCartProducts = async () => {
       setIsLoading(true);
       try {
-        if (cartCookies) {
-          const cartProducts = await getCartProductsClient(
-            cartCookies as string
-          );
-          setCartProducts(cartProducts);
-        }
+        const cartProducts = await getCartProductsClient();
+        console.log(cartProducts);
+        setCartProducts(cartProducts);
       } catch (error) {
         console.error("Error fetching cart products:", error);
       } finally {
@@ -60,7 +75,7 @@ export default function CartPopup({ className }: { className?: string }) {
     if (isCartOpen) {
       showCartProducts();
     }
-  }, [cartCookies, isCartOpen]);
+  }, [isCartOpen]);
 
   return (
     <>

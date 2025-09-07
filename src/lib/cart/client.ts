@@ -5,7 +5,9 @@ export function getCartFromCookieClient(): CartData | null {
   try {
     const cartCookie = getCookie("cart");
 
-    if (!cartCookie) return null;
+    if (!cartCookie) {
+      return null;
+    }
 
     const cartData: CartData = JSON.parse(cartCookie as string);
 
@@ -35,6 +37,22 @@ export function addProductToCartClient(productId: string): void {
       path: "/",
       maxAge: ONE_MONTH,
     });
+  } else {
+    setCookie(
+      "cart",
+      JSON.stringify({
+        products: [productId],
+        createdAt: new Date().toISOString(),
+        expiresAt: expiresAt,
+      }),
+      {
+        expires: new Date(expiresAt),
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "lax",
+        path: "/",
+        maxAge: ONE_MONTH,
+      }
+    );
   }
 }
 
