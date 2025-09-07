@@ -1,6 +1,7 @@
 "use client";
 
 import { getCartProductsClient } from "@/actions/getCart/client";
+import { getPriceId, retrievePrice } from "@/actions/stripe";
 import { cn } from "@/lib/cn/utils";
 import {
   HORIZONTAL_LINE_OFFSET_X_RIGHT,
@@ -20,18 +21,19 @@ function CartContent({
   cartProducts: Stripe.Product[];
   isLoading: boolean;
 }) {
-  if (isLoading) {
-    return (
-      <div
-        className="w-full text-secondary"
-        style={{
-          marginTop: `${HORIZONTAL_LINE_OFFSET_Y_RIGHT}rem`,
-        }}
-      >
-        Loading...
-      </div>
-    );
-  }
+  const [totalPrice, setTotalPrice] = useState(0);
+  useEffect(() => {
+    const getTotalPrice = async () => {
+      let totalPrice = 0;
+      for (const product of cartProducts) {
+        const priceId = await getPriceId(product.id);
+        const price = await retrievePrice(priceId);
+        totalPrice += price.unit_amount ?? 0;
+      }
+      setTotalPrice(totalPrice);
+    };
+    getTotalPrice();
+  }, [cartProducts]);
 
   return (
     <div
@@ -41,23 +43,34 @@ function CartContent({
         height: `calc(98% - ${HORIZONTAL_LINE_OFFSET_Y_RIGHT}rem)`,
       }}
     >
-      <div className="flex-1">
-        {cartProducts.map((product) => (
-          <div
-            className={cn("flex flex-col gap-2 text-secondary")}
-            key={product.id}
-          >
-            {product.name}
-          </div>
-        ))}
-      </div>
+      {isLoading ? (
+        <div
+          className="flex-1 w-full text-secondary"
+          style={{
+            marginTop: `${HORIZONTAL_LINE_OFFSET_Y_RIGHT}rem`,
+          }}
+        >
+          Loading...
+        </div>
+      ) : (
+        <div className="flex-1">
+          {cartProducts.map((product) => (
+            <div
+              className={cn("flex flex-col gap-2 text-secondary")}
+              key={product.id}
+            >
+              {product.name}
+            </div>
+          ))}
+        </div>
+      )}
       <div>
         {/* TODO: price in total */}
         <p className="text-secondary mb-4">
           shipping and taxes calculated at checkout
         </p>
         <button className="w-full bg-secondary text-primary py-2">
-          Checkout
+          Checkout &mdash; {totalPrice}dkk
         </button>
       </div>
     </div>
