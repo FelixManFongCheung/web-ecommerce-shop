@@ -146,3 +146,14 @@ export const retrieveProductsByMetaDataKeyAndValue = unstable_cache(
   ["products-by-meta-data-key-and-value"],
   { revalidate: 3600 }
 );
+
+export const getShippingRates = unstable_cache(
+  async (): Promise<Stripe.Checkout.SessionCreateParams.ShippingOption[]> => {
+    const shippingRates = await stripe.shippingRates.list();
+    return shippingRates.data.map((rate) => ({
+      shipping_rate: rate.id,
+    }));
+  },
+  ["shipping-rates"],
+  { revalidate: 3600 }
+);

@@ -5,6 +5,7 @@ import { getCartProductsServer } from "@/actions/getCart/server";
 import {
   createCheckoutSession,
   getPriceId,
+  getShippingRates,
   retrievePrice,
 } from "@/actions/stripe";
 import { headers } from "next/headers";
@@ -14,6 +15,8 @@ export async function createCheckout() {
   try {
     const headersList = await headers();
     const origin = headersList.get("origin") || "";
+
+    console.log("origin", origin);
 
     // Get cart data
     const cart = await getCartProductsServer();
@@ -44,6 +47,8 @@ export async function createCheckout() {
       expires_at: Math.floor(Date.now() / 1000) + 3600 * 2,
     };
 
+    const shippingRates = await getShippingRates();
+
     const session = await createCheckoutSession({
       ...baseSessionParams,
       mode: "payment",
@@ -61,10 +66,7 @@ export async function createCheckout() {
           "DK",
         ] as Stripe.Checkout.SessionCreateParams.ShippingAddressCollection.AllowedCountry[],
       },
-      shipping_options: [
-        { shipping_rate: "shr_1QJKVjEn8tbdxcgB9WpQyRVl" },
-        { shipping_rate: "shr_1QJKV1En8tbdxcgBsfS7JWNT" },
-      ],
+      shipping_options: shippingRates,
     });
 
     if (!session.url) {
