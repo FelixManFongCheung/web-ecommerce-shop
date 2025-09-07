@@ -1,14 +1,9 @@
-import { getCartFromCookie } from "@/lib/cart/utils";
+import { getCartFromCookie } from "@/lib/cart/server";
 import Stripe from "stripe";
 import { getActiveProducts } from "../stripe";
 
-export async function getCartServer(cookies: string) {
+export async function getCartProductsServer() {
   const cartData = await getCartFromCookie();
-  return cartData;
-}
-
-export async function getCartProductsServer(cookies: string) {
-  const cartData = await getCartServer(cookies);
   const activeProducts = await getActiveProducts();
 
   let activeProductsArray: Stripe.Product[] = [];

@@ -5,16 +5,11 @@ import { revalidateProductPage } from "@/actions/revalidateProductPage";
 import { useState } from "react";
 
 interface RemoveItemProps {
-  cartID: string;
   productId: string;
   children?: React.ReactNode;
 }
 
-export default function RemoveItem({
-  cartID,
-  productId,
-  children,
-}: RemoveItemProps) {
+export default function RemoveItem({ productId, children }: RemoveItemProps) {
   const [isVisible, setIsVisible] = useState(true);
 
   const handleRemoveFromCart = async () => {
