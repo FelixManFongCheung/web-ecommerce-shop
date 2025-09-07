@@ -12,6 +12,7 @@ import { useAppActions, useIsCartOpen } from "@/stores/appStore";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import Stripe from "stripe";
+import CheckoutButton from "../checkout/checkoutButton";
 
 // Extract cart content as a separate component
 function CartContent({
@@ -22,6 +23,7 @@ function CartContent({
   isLoading: boolean;
 }) {
   const [totalPrice, setTotalPrice] = useState(0);
+  const isEmpty = cartProducts.length === 0;
   useEffect(() => {
     const getTotalPrice = async () => {
       let totalPrice = 0;
@@ -69,9 +71,10 @@ function CartContent({
         <p className="text-secondary mb-4">
           shipping and taxes calculated at checkout
         </p>
-        <button className="w-full bg-secondary text-primary py-2">
-          Checkout &mdash; {totalPrice}dkk
-        </button>
+        <CheckoutButton
+          totalPrice={totalPrice}
+          disabled={isLoading || isEmpty}
+        />
       </div>
     </div>
   );
