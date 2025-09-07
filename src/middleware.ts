@@ -5,7 +5,9 @@ import { NextRequest, NextResponse } from "next/server";
 export async function middleware(request: NextRequest) {
   const { pathname, searchParams } = request.nextUrl;
 
-  // Only handle the return page
+  console.log("pathname", pathname);
+
+  // Only handle the return page - be more specific with the path
   if (pathname === "/return") {
     const sessionId = searchParams.get("session_id");
 
@@ -18,17 +20,19 @@ export async function middleware(request: NextRequest) {
       // Retrieve the session to check its status
       const session = await retrieveSession(sessionId);
 
-      console.log("session", session);
+      console.log("session from middleware", session);
 
       // Handle different session statuses
       if (session.status === "complete") {
         // Process completed order
         await completeOrder(sessionId);
 
-        // Continue to the return page with success status
-        const url = request.nextUrl.clone();
+        // Create a new URL with the status parameter
+        const url = new URL(request.url);
         url.searchParams.set("status", "complete");
-        return NextResponse.next();
+
+        // Return a rewrite to the same path with updated search params
+        return NextResponse.rewrite(url);
       }
 
       if (session.status === "expired") {

@@ -82,7 +82,6 @@ export async function retrieveSession(
   options?: { expand?: string[] }
 ) {
   const session = await stripe.checkout.sessions.retrieve(sessionId, options);
-  console.log(session);
   return session;
 }
 
