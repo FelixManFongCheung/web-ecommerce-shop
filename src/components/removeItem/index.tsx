@@ -1,7 +1,7 @@
 "use client";
 
+import { removeFromCart } from "@/actions/cart";
 import { revalidateProductPage } from "@/actions/revalidateProductPage";
-import { removeProductFromCart } from "@/lib/cart/utils";
 import { useState } from "react";
 
 interface RemoveItemProps {
@@ -17,14 +17,14 @@ export default function RemoveItem({
 }: RemoveItemProps) {
   const [isVisible, setIsVisible] = useState(true);
 
-  const removeFromCart = async () => {
+  const handleRemoveFromCart = async () => {
     try {
-      const result = await removeProductFromCart(productId);
+      const result = removeFromCart(productId);
 
       if (result.success) {
         setIsVisible(false);
         await revalidateProductPage(
-          "/collections/[collection]/products/[product]"
+          `/collections/[collection]/products/[product]/${productId}`
         );
       } else {
         console.error("Error removing item:", result.error);
@@ -39,7 +39,7 @@ export default function RemoveItem({
   return (
     <div className={isVisible ? "" : ""}>
       {children}
-      <button onClick={removeFromCart} className="cursor-pointer ml-2">
+      <button onClick={handleRemoveFromCart} className="cursor-pointer ml-2">
         remove this
       </button>
     </div>

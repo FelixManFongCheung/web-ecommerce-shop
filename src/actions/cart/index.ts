@@ -1,29 +1,38 @@
 // app/actions/cart.ts
 "use server";
 
-import { addProductToCart } from "@/lib/cart/utils";
-import { revalidatePath } from "next/cache";
+import {
+  addProductToCartClient,
+  removeProductFromCartClient,
+} from "@/lib/cart/client";
+import { CartResponse } from "@/lib/cart/type";
 
-type CartResponse = {
-  success: boolean;
-  message?: string;
-  error?: string;
-  cartID?: string;
-};
-
-export async function addToCart(
-  identifier: string,
-  productId: string
-): Promise<CartResponse> {
+export function addToCart(identifier: string, productId: string): CartResponse {
   try {
-    const result = await addProductToCart(productId);
+    addProductToCartClient(productId);
 
-    if (result.success) {
-      // Revalidate after successful update
-      revalidatePath("/cart");
-    }
+    return {
+      success: true,
+      message: "Product added to cart successfully!",
+    };
+  } catch (error) {
+    console.error("Cart action error:", error);
+    return {
+      success: false,
+      error:
+        error instanceof Error ? error.message : "An unknown error occurred",
+    };
+  }
+}
 
-    return result;
+export function removeFromCart(productId: string): CartResponse {
+  try {
+    removeProductFromCartClient(productId);
+
+    return {
+      success: true,
+      message: "Product removed from cart successfully!",
+    };
   } catch (error) {
     console.error("Cart action error:", error);
     return {

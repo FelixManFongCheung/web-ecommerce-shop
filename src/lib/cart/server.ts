@@ -1,20 +1,6 @@
-import { getCookie } from "cookies-next";
 import { cookies } from "next/headers";
+import { CartData, CartResponse } from "./type";
 
-export interface CartData {
-  products: string[];
-  createdAt: string;
-  expiresAt: string;
-}
-
-export interface CartResponse {
-  success: boolean;
-  message?: string;
-  error?: string;
-  cartID?: string;
-}
-
-// Server-side cart operations
 export async function getCartFromCookie(): Promise<CartData | null> {
   try {
     const cookieStore = await cookies();
@@ -54,7 +40,7 @@ export async function addProductToCart(
 ): Promise<CartResponse> {
   try {
     const existingCart = await getCartFromCookie();
-    const ONE_MONTH = 60 * 60 * 24 * 30; // 30 days
+    const ONE_MONTH = 60 * 60 * 24 * 30;
     const expiresAt = new Date(Date.now() + ONE_MONTH * 1000).toISOString();
 
     let updatedProducts: string[];
@@ -133,37 +119,4 @@ export async function removeProductFromCart(
         error instanceof Error ? error.message : "An unknown error occurred",
     };
   }
-}
-
-// Client-side cart operations
-export function getCartFromCookieClient(): CartData | null {
-  try {
-    const cartCookie = getCookie("cart");
-
-    if (!cartCookie) return null;
-
-    const cartData: CartData = JSON.parse(cartCookie as string);
-
-    // Check if cart has expired
-    if (new Date(cartData.expiresAt) < new Date()) {
-      return null;
-    }
-
-    return cartData;
-  } catch (error) {
-    console.error("Error reading cart from cookie:", error);
-    return null;
-  }
-}
-
-export function setCartCookieClient(cartData: CartData): void {
-  const ONE_MONTH = 60 * 60 * 24 * 30; // 30 days
-
-  // Note: This will only work if the cookie was set with httpOnly: false
-  // For security, prefer server-side operations
-  document.cookie = `cart=${JSON.stringify(
-    cartData
-  )}; path=/; max-age=${ONE_MONTH}; secure=${
-    process.env.NODE_ENV === "production"
-  }; samesite=lax`;
 }
