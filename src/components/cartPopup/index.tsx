@@ -35,19 +35,31 @@ function CartContent({
 
   return (
     <div
-      className="flex flex-col gap-2"
+      className="flex flex-col gap-2 h-full"
       style={{
         marginTop: `${HORIZONTAL_LINE_OFFSET_Y_RIGHT}rem`,
+        height: `calc(98% - ${HORIZONTAL_LINE_OFFSET_Y_RIGHT}rem)`,
       }}
     >
-      {cartProducts.map((product) => (
-        <div
-          className={cn("flex flex-col gap-2 text-secondary")}
-          key={product.id}
-        >
-          {product.name}
-        </div>
-      ))}
+      <div className="flex-1">
+        {cartProducts.map((product) => (
+          <div
+            className={cn("flex flex-col gap-2 text-secondary")}
+            key={product.id}
+          >
+            {product.name}
+          </div>
+        ))}
+      </div>
+      <div>
+        {/* TODO: price in total */}
+        <p className="text-secondary mb-4">
+          shipping and taxes calculated at checkout
+        </p>
+        <button className="w-full bg-secondary text-primary py-2">
+          Checkout
+        </button>
+      </div>
     </div>
   );
 }
