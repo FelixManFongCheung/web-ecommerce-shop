@@ -58,6 +58,15 @@ export default async function Page({
                     fill
                     sizes="(max-width: 768px) 60vw, (max-width: 1200px) 50vw, 33vw"
                   />
+                  {!product.active && (
+                    <Image
+                      src="/assets/normal/x.png"
+                      alt={product.name}
+                      fill
+                      sizes="(max-width: 768px) 60vw, (max-width: 1200px) 50vw, 33vw"
+                      className="absolute top-0 left-0"
+                    />
+                  )}
                 </Link>
               </ProductCard>
             </Suspense>
