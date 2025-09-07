@@ -1,46 +1,62 @@
-import { retrieveProductsByMetaDataKeyAndValue } from "@/actions/stripe";
+import { getProductsAll } from "@/actions/stripe";
 import { ProductCard, ProductCardSkeleton } from "@/components";
+import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/cn/utils";
+import dayjs from "dayjs";
 import Image from "next/image";
 import Link from "next/link";
 import { Suspense } from "react";
 
 export default async function Page() {
-  const products = await retrieveProductsByMetaDataKeyAndValue(
-    "mode",
-    "new-arrivals"
-  );
+  const products = await getProductsAll();
+  const newProducts = products.filter((product) => {
+    const recentCutoff = dayjs().subtract(1, "week");
+    const productCreationDate = new Date(product.created * 1000);
+    return dayjs(productCreationDate).isAfter(dayjs(recentCutoff));
+  });
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 auto-rows-max">
-      {products.length > 0 ? (
-        products.map((product) => (
-          <Suspense key={product.id} fallback={<ProductCardSkeleton />}>
-            <ProductCard product={product}>
-              <Link
-                className={cn("relative block w-full aspect-[3/4]")}
-                href={`/collections/all/products/${product.id}`}
-              >
-                <Image
-                  src={product.images[0]}
-                  alt={product.name}
-                  fill
-                  sizes="(max-width: 768px) 60vw, (max-width: 1200px) 50vw, 33vw"
-                />
-                {!product.active && (
+    <div className="md:mt-header-height mt-header-height-mobile md:pl-desktop-left-nav-width md:pr-desktop-right-nav-width md:py-[100px]">
+      {newProducts.length > 0 ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 auto-rows-max">
+          {newProducts.map((product) => (
+            <Suspense key={product.id} fallback={<ProductCardSkeleton />}>
+              <ProductCard product={product}>
+                <Link
+                  className={cn("relative block w-full aspect-[3/4]")}
+                  href={`/collections/all/products/${product.id}`}
+                >
                   <Image
-                    src="/assets/normal/x.png"
+                    src={product.images[0]}
                     alt={product.name}
                     fill
                     sizes="(max-width: 768px) 60vw, (max-width: 1200px) 50vw, 33vw"
-                    className="absolute top-0 left-0"
                   />
-                )}
-              </Link>
-            </ProductCard>
-          </Suspense>
-        ))
+                  {!product.active && (
+                    <Image
+                      src="/assets/normal/x.png"
+                      alt={product.name}
+                      fill
+                      sizes="(max-width: 768px) 60vw, (max-width: 1200px) 50vw, 33vw"
+                      className="absolute top-0 left-0"
+                    />
+                  )}
+                </Link>
+              </ProductCard>
+            </Suspense>
+          ))}
+        </div>
       ) : (
-        <div>No products found</div>
+        <div className="flex flex-col gap-4 justify-center items-center">
+          <div>No new arrivals</div>
+          <Button
+            variant="outline"
+            className={cn(
+              "w-2xs bg-transparent border-primary text-primary rounded-none"
+            )}
+          >
+            <Link href="/collections/all">View all</Link>
+          </Button>
+        </div>
       )}
     </div>
   );
