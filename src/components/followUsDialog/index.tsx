@@ -1,11 +1,11 @@
 "use client";
 
 import { cn } from "@/lib/cn/utils";
-import { Dialog, DialogContent, DialogTitle } from "@radix-ui/react-dialog";
+import { Dialog } from "@radix-ui/react-dialog";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { DialogHeader } from "../ui/dialog";
+import { DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
 
 export default function FollowUsDialog() {
   const [open, setOpen] = useState(false);
@@ -13,15 +13,21 @@ export default function FollowUsDialog() {
     setOpen(true);
   }, []);
   return (
-    <Dialog open={open}>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent
         className={cn(
-          "w-full h-full flex flex-col justify-center items-center text-secondary bg-primary"
+          "w-[500px] aspect-[3/4] px-24 flex flex-col justify-center items-center text-secondary bg-primary rounded-none sm:rounded-none border-none"
         )}
       >
         <DialogHeader>
           <DialogTitle>Follow Us</DialogTitle>
         </DialogHeader>
+        <div>
+          <p>
+            Follow @proxy__archive to get JEAN PAUL GAULTIER the first look at
+            our latest arrivals. MIU MI
+          </p>
+        </div>
         <div className="flex flex-col gap-4">
           <Link href="https://www.instagram.com/proxy__archive">
             <Image

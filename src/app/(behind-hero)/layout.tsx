@@ -1,4 +1,10 @@
-import { DesktopRightNav, Footer, Header, Nav } from "@/components";
+import {
+  DesktopRightNav,
+  FollowUsDialog,
+  Footer,
+  Header,
+  Nav,
+} from "@/components";
 
 export default async function BehindHeroLayout({
   children,
@@ -11,7 +17,7 @@ export default async function BehindHeroLayout({
       <DesktopRightNav />
       <Header />
       {children}
-      {/* <FollowUsDialog /> */}
+      <FollowUsDialog />
       <Footer />
     </div>
   );
