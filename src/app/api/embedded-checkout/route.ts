@@ -1,6 +1,5 @@
-import { retrieveCustomer, retrieveSession } from "@/actions/stripe";
+import { retrieveSession } from "@/actions/stripe";
 import { NextResponse } from "next/server";
-import Stripe from "stripe";
 
 export async function GET(req: Request) {
   try {
@@ -9,12 +8,11 @@ export async function GET(req: Request) {
     const session_id = searchParams.get("session_id");
 
     const session = await retrieveSession(session_id!);
-    const customer = await retrieveCustomer(session.customer as string);
 
     return NextResponse.json({
       status: session.status,
       payment_status: session.payment_status,
-      customer_email: (customer as Stripe.Customer).email,
+      customer_email: session.customer_details?.email,
     });
   } catch (err) {
     if (err instanceof Error)

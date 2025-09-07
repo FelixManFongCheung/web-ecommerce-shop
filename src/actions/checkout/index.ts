@@ -42,8 +42,8 @@ export async function createCheckout() {
     ).then((results) => results.filter((item) => item !== null));
 
     const baseSessionParams = {
-      success_url: `${origin}/return?session_id={CHECKOUT_SESSION_ID}&no_embed=true`,
-      cancel_url: `${origin}/return?session_id={CHECKOUT_SESSION_ID}&no_embed=true`,
+      success_url: `${origin}/return?session_id={CHECKOUT_SESSION_ID}&no_embed=true&status=complete`,
+      cancel_url: `${origin}/return?session_id={CHECKOUT_SESSION_ID}&no_embed=true&status=expired`,
       expires_at: Math.floor(Date.now() / 1000) + 3600 * 2,
     };
 

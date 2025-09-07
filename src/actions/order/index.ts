@@ -47,6 +47,7 @@ export async function completeOrder(sessionId: string) {
           : item.price?.product.id;
 
       // Deactivate the product after purchase
+      // TODO: remember to fetch products based on matadata sold for the cross img on top of image
       await updateProduct(productId as string, {
         active: false,
         metadata: {
