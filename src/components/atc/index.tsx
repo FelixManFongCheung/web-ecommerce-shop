@@ -1,8 +1,8 @@
 "use client";
 
-import { addProductToCartClient } from "@/lib/cart/client";
 import { cn } from "@/lib/cn/utils";
 import { useAppActions } from "@/stores/appStore";
+import { useCartActions } from "@/stores/cartStore";
 import { useState } from "react";
 
 interface ATCProp {
@@ -12,12 +12,13 @@ interface ATCProp {
 
 export default function ATC({ productId, isATC }: ATCProp) {
   const [ATCState, setATCState] = useState(isATC);
+  const { addProduct } = useCartActions();
 
   const { openCart } = useAppActions();
 
   const addToCartAction = async () => {
     setATCState(true);
-    addProductToCartClient(productId);
+    addProduct(productId);
     openCart();
   };
 

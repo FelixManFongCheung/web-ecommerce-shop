@@ -1,13 +1,16 @@
 import { CartData } from "@/lib/cart/type";
+import { setCookie } from "cookies-next";
 import { create } from "zustand";
-import { createJSONStorage, persist } from "zustand/middleware";
-import cookiesStorage from "./cartCookies";
+import { devtools } from "zustand/middleware";
 
 export interface CartState {
   products: string[];
   createdAt: string;
   expiresAt: string;
   isExpired: boolean;
+}
+
+export interface CartActions {
   addProduct: (productId: string) => void;
   removeProduct: (productId: string) => void;
   clearCart: () => void;
@@ -18,30 +21,38 @@ export interface CartState {
 const ONE_MONTH = 60 * 60 * 24 * 30; // 30 days in seconds
 const CART_EXPIRY_TIME = ONE_MONTH * 1000; // Convert to milliseconds
 
-export const useCartStore = create<CartState>()(
-  persist(
-    (set, get) => ({
-      // Initial state
-      products: [],
-      createdAt: new Date().toISOString(),
-      expiresAt: new Date(Date.now() + CART_EXPIRY_TIME).toISOString(),
-      isExpired: false,
+export const useCartStore = create<CartState & { actions: CartActions }>()(
+  devtools((set, get) => ({
+    // Initial state
+    products: [],
+    createdAt: new Date().toISOString(),
+    expiresAt: new Date(Date.now() + CART_EXPIRY_TIME).toISOString(),
+    isExpired: false,
 
+    actions: {
       addProduct: (productId: string) => {
         const state = get();
 
         if (state.isExpired) {
-          set({
+          const newState = {
             products: [productId],
             createdAt: new Date().toISOString(),
             expiresAt: new Date(Date.now() + CART_EXPIRY_TIME).toISOString(),
             isExpired: false,
+          };
+          set(newState);
+          setCookie("cart-storage", JSON.stringify({ state: newState }), {
+            expires: new Date(Date.now() + CART_EXPIRY_TIME),
           });
         } else {
-          set({
+          const newState = {
+            ...state,
             products: [...state.products, productId],
-            // Update expiry time when cart is modified
             expiresAt: new Date(Date.now() + CART_EXPIRY_TIME).toISOString(),
+          };
+          set(newState);
+          setCookie("cart-storage", JSON.stringify({ state: newState }), {
+            expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30),
           });
         }
       },
@@ -53,19 +64,27 @@ export const useCartStore = create<CartState>()(
           return; // Don't modify expired cart
         }
 
-        set({
+        const newState = {
+          ...state,
           products: state.products.filter((id) => id !== productId),
-          // Update expiry time when cart is modified
           expiresAt: new Date(Date.now() + CART_EXPIRY_TIME).toISOString(),
+        };
+        set(newState);
+        setCookie("cart-storage", JSON.stringify({ state: newState }), {
+          expires: new Date(Date.now() + CART_EXPIRY_TIME),
         });
       },
 
       clearCart: () => {
-        set({
+        const newState = {
           products: [],
           createdAt: new Date().toISOString(),
           expiresAt: new Date(Date.now() + CART_EXPIRY_TIME).toISOString(),
           isExpired: false,
+        };
+        set(newState);
+        setCookie("cart-storage", JSON.stringify({ state: newState }), {
+          expires: new Date(Date.now() + CART_EXPIRY_TIME),
         });
       },
 
@@ -76,9 +95,15 @@ export const useCartStore = create<CartState>()(
         const isExpired = now >= expiresAt;
 
         if (isExpired && !state.isExpired) {
-          set({
+          const newState = {
+            ...state,
             products: [],
             isExpired: true,
+          };
+          set(newState);
+
+          setCookie("cart-storage", JSON.stringify({ state: newState }), {
+            expires: new Date(Date.now() + CART_EXPIRY_TIME),
           });
         }
 
@@ -87,8 +112,6 @@ export const useCartStore = create<CartState>()(
 
       getCartData: () => {
         const state = get();
-
-        console.log(state);
 
         if (state.isExpired) {
           return null;
@@ -100,26 +123,10 @@ export const useCartStore = create<CartState>()(
           expiresAt: state.expiresAt,
         };
       },
-    }),
-    {
-      name: "cart-storage",
-      storage: createJSONStorage(() => cookiesStorage),
-      onRehydrateStorage: () => (state) => {
-        if (state) {
-          // Check expiry on rehydration
-          const now = new Date();
-          const expiresAt = new Date(state.expiresAt);
-          const isExpired = now >= expiresAt;
-
-          if (isExpired) {
-            state.products = [];
-            state.isExpired = true;
-          }
-        }
-      },
-    }
-  )
+    },
+  }))
 );
 
 export const useCartProducts = () => useCartStore((state) => state.products);
+export const useCartActions = () => useCartStore((state) => state.actions);
 export const useIsCartExpired = () => useCartStore((state) => state.isExpired);
