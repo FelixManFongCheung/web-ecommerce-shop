@@ -6,11 +6,12 @@ import { useCartActions, useCartProducts } from "@/stores/cartStore";
 
 interface ATCProp {
   productId: string;
+  isSoldOut: boolean;
 }
 
-export default function ATC({ productId }: ATCProp) {
+export default function ATC({ productId, isSoldOut }: ATCProp) {
   const cartProductIds = useCartProducts();
-  const ATCState = cartProductIds.includes(productId);
+  const ATCState = cartProductIds.includes(productId) || isSoldOut;
   const { addProduct } = useCartActions();
 
   const { openCart } = useAppActions();

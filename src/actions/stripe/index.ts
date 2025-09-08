@@ -66,7 +66,9 @@ export const getProductsAll = unstable_cache(
     return products.data;
   },
   ["products-all"],
-  { revalidate: 3600 }
+  {
+    tags: ["products-all"],
+  }
 );
 
 export const getProduct = unstable_cache(

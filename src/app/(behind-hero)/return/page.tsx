@@ -1,4 +1,6 @@
+import { revalidateProductsAll } from "@/actions/revalidate/productAll";
 import { redirect } from "next/navigation";
+import { after } from "next/server";
 
 export default async function Page(props: {
   searchParams: Promise<{
@@ -13,7 +15,6 @@ export default async function Page(props: {
     redirect("/");
   }
 
-  // If middleware already processed the order successfully
   if (searchParams.status === "complete") {
     let session;
 
@@ -22,6 +23,10 @@ export default async function Page(props: {
         `${process.env.BASE_URL}/api/embedded-checkout?session_id=${searchParams.session_id}`
       );
       session = await response.json();
+
+      after(() => {
+        revalidateProductsAll();
+      });
     }
 
     return (
@@ -42,6 +47,5 @@ export default async function Page(props: {
     );
   }
 
-  // This should rarely happen now since middleware handles most cases
   return null;
 }

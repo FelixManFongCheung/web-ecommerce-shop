@@ -57,7 +57,6 @@ export async function completeOrder(sessionId: string) {
         },
       });
     }
-
     return { success: true };
   } catch (error) {
     console.error("Error processing order:", error);
