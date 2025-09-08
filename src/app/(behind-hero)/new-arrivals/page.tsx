@@ -17,10 +17,10 @@ export default async function Page() {
   return (
     <div>
       {newProducts.length > 0 ? (
-        <div className="grid grid-cols-3 lg:grid-cols-3 gap-2 auto-rows-max">
+        <div className="grid grid-col-1 md:grid-cols-3 gap-2 auto-rows-max">
           {newProducts.map((product) => (
             <Suspense key={product.id} fallback={<ProductCardSkeleton />}>
-              <ProductCard product={product}>
+              <ProductCard product={product} className="mb-6">
                 <Link
                   className={cn("relative block w-full aspect-[3/4]")}
                   href={`/collections/all/products/${product.id}`}
