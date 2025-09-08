@@ -40,6 +40,7 @@ export default async function Page({
   }
 
   //TODO: implement infinite scroll with lazy load or virtualisation
+  // TODO: implement filter click to collections/[param]
   return (
     <div className="text-left py-2 px-3 md:mt-header-height mt-header-height-mobile md:pl-desktop-left-nav-width md:pr-desktop-right-nav-width md:py-[100px]">
       <div className="grid grid-cols-2 lg:grid-cols-3 gap-2 auto-rows-max">
