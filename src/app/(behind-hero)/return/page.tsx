@@ -31,7 +31,7 @@ export default async function Page(props: {
 
     return (
       <>
-        <div className="flex flex-col gap-4 h-screen md:flex-row md:mt-header-height mt-header-height-mobile md:pl-desktop-info-pages-padding-left md:pr-desktop-info-pages-padding-right md:py-[100px]">
+        <div>
           {session.customer_email ? (
             <p>
               We appreciate your business! A confirmation email will be sent to{" "}

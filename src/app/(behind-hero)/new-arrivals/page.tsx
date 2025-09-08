@@ -15,9 +15,9 @@ export default async function Page() {
     return dayjs(productCreationDate).isAfter(dayjs(recentCutoff));
   });
   return (
-    <div className="md:mt-header-height mt-header-height-mobile md:pl-desktop-left-nav-width md:pr-desktop-right-nav-width md:py-[100px]">
+    <div>
       {newProducts.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 auto-rows-max">
+        <div className="grid grid-cols-3 lg:grid-cols-3 gap-2 auto-rows-max">
           {newProducts.map((product) => (
             <Suspense key={product.id} fallback={<ProductCardSkeleton />}>
               <ProductCard product={product}>
