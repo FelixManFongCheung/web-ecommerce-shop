@@ -20,7 +20,7 @@ const CART_EXPIRY_TIME = ONE_MONTH * 1000; // Convert to milliseconds
 
 export const useCartStore = create<CartState>()(
   persist(
-    (setItem, getItem) => ({
+    (set, get) => ({
       // Initial state
       products: [],
       createdAt: new Date().toISOString(),
@@ -28,17 +28,17 @@ export const useCartStore = create<CartState>()(
       isExpired: false,
 
       addProduct: (productId: string) => {
-        const state = getItem();
+        const state = get();
 
         if (state.isExpired) {
-          setItem({
+          set({
             products: [productId],
             createdAt: new Date().toISOString(),
             expiresAt: new Date(Date.now() + CART_EXPIRY_TIME).toISOString(),
             isExpired: false,
           });
         } else {
-          setItem({
+          set({
             products: [...state.products, productId],
             // Update expiry time when cart is modified
             expiresAt: new Date(Date.now() + CART_EXPIRY_TIME).toISOString(),
@@ -47,13 +47,13 @@ export const useCartStore = create<CartState>()(
       },
 
       removeProduct: (productId: string) => {
-        const state = getItem();
+        const state = get();
 
         if (state.isExpired) {
           return; // Don't modify expired cart
         }
 
-        setItem({
+        set({
           products: state.products.filter((id) => id !== productId),
           // Update expiry time when cart is modified
           expiresAt: new Date(Date.now() + CART_EXPIRY_TIME).toISOString(),
@@ -61,7 +61,7 @@ export const useCartStore = create<CartState>()(
       },
 
       clearCart: () => {
-        setItem({
+        set({
           products: [],
           createdAt: new Date().toISOString(),
           expiresAt: new Date(Date.now() + CART_EXPIRY_TIME).toISOString(),
@@ -70,13 +70,13 @@ export const useCartStore = create<CartState>()(
       },
 
       checkExpiry: () => {
-        const state = getItem();
+        const state = get();
         const now = new Date();
         const expiresAt = new Date(state.expiresAt);
         const isExpired = now >= expiresAt;
 
         if (isExpired && !state.isExpired) {
-          setItem({
+          set({
             products: [],
             isExpired: true,
           });
@@ -86,7 +86,7 @@ export const useCartStore = create<CartState>()(
       },
 
       getCartData: () => {
-        const state = getItem();
+        const state = get();
 
         console.log(state);
 
