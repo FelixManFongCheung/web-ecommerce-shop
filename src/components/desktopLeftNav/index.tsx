@@ -25,64 +25,72 @@ export default async function DesktopLeftNav({
   const groups = getRecursiveFolder(productsAll);
 
   return (
-    <div
-      className={`md:block hidden fixed z-12 left-0 top-0 h-full w-desktop-left-nav-width bg-transparent`}
-    >
-      {/* TODO: to be abstracted */}
-      {/* Navigation */}
+    <>
       <div
-        className={cn("absolute flex flex-row justify-end items-center gap-2")}
-        style={{
-          top: `${VERTICAL_LINE_OFFSET_Y_LEFT}rem`,
-          left: `${VERTICAL_LINE_OFFSET_X_LEFT * 1.5}rem`,
-          height: `${
-            HORIZONTAL_LINE_OFFSET_Y_LEFT - VERTICAL_LINE_OFFSET_Y_LEFT
-          }rem`,
-        }}
+        className={`md:block hidden fixed z-12 left-0 top-0 h-full w-desktop-left-nav-width bg-transparent`}
       >
-        <h1 className="text-primary text-nowrap text-7xl">{headerName}</h1>
-        <span>|</span>
-        <MenuBtn />
-      </div>
-      {/* Desktop Left Nav displaying content for each page */}
-      {children}
-      {hasFilter && (
-        <Filter
-          groups={groups}
+        {/* TODO: to be abstracted */}
+        {/* Navigation */}
+        <div
+          className={cn(
+            "absolute flex flex-row justify-end items-center gap-2"
+          )}
           style={{
-            top: `${HORIZONTAL_LINE_OFFSET_Y_LEFT + 1}rem`,
-            left: `${VERTICAL_LINE_OFFSET_X_LEFT * 2}rem`,
+            top: `${VERTICAL_LINE_OFFSET_Y_LEFT}rem`,
+            left: `${VERTICAL_LINE_OFFSET_X_LEFT * 1.5}rem`,
+            height: `${
+              HORIZONTAL_LINE_OFFSET_Y_LEFT - VERTICAL_LINE_OFFSET_Y_LEFT
+            }rem`,
           }}
+        >
+          <h1 className="text-primary text-nowrap text-7xl">{headerName}</h1>
+          <span>|</span>
+          <MenuBtn />
+        </div>
+        {/* Desktop Left Nav displaying content for each page */}
+        {children}
+        {hasFilter && (
+          <Filter
+            groups={groups}
+            style={{
+              top: `${HORIZONTAL_LINE_OFFSET_Y_LEFT + 1}rem`,
+              left: `${VERTICAL_LINE_OFFSET_X_LEFT * 2}rem`,
+            }}
+          />
+        )}
+        {/* vertical line */}
+        <DecoratorLines
+          alignment="vertical"
+          position="left"
+          variant="thin"
+          height={`${VERTICAL_LINE_HEIGHT_LEFT}rem`}
+          x={VERTICAL_LINE_OFFSET_X_LEFT}
+          y={VERTICAL_LINE_OFFSET_Y_LEFT}
+          className={cn("absolute bg-primary")}
         />
-      )}
-      {/* vertical line */}
-      <DecoratorLines
-        alignment="vertical"
-        position="left"
-        variant="thin"
-        height={`${VERTICAL_LINE_HEIGHT_LEFT}rem`}
-        x={VERTICAL_LINE_OFFSET_X_LEFT}
-        y={VERTICAL_LINE_OFFSET_Y_LEFT}
-        className={cn("absolute bg-primary")}
-      />
-      {/* horizontal line */}
-      <DecoratorLines
-        alignment="horizontal"
-        position="left"
-        variant="thick"
-        width={`${HORIZONTAL_LINE_WIDTH_LEFT}rem`}
-        x={HORIZONTAL_LINE_OFFSET_X_LEFT}
-        y={HORIZONTAL_LINE_OFFSET_Y_LEFT}
-        className={cn("absolute bg-primary")}
-      />
-      <Menu
-        style={{
-          top: `${HORIZONTAL_LINE_OFFSET_Y_LEFT + 2}rem`,
-          paddingLeft: `${VERTICAL_LINE_OFFSET_X_LEFT}rem`,
-          paddingRight: `${VERTICAL_LINE_OFFSET_X_LEFT}rem`,
-        }}
-        groups={groups}
-      />
-    </div>
+        {/* horizontal line */}
+        <DecoratorLines
+          alignment="horizontal"
+          position="left"
+          variant="thick"
+          width={`${HORIZONTAL_LINE_WIDTH_LEFT}rem`}
+          x={HORIZONTAL_LINE_OFFSET_X_LEFT}
+          y={HORIZONTAL_LINE_OFFSET_Y_LEFT}
+          className={cn("absolute bg-primary")}
+        />
+        <Menu
+          style={{
+            top: `${HORIZONTAL_LINE_OFFSET_Y_LEFT + 2}rem`,
+            paddingLeft: `${VERTICAL_LINE_OFFSET_X_LEFT}rem`,
+            paddingRight: `${VERTICAL_LINE_OFFSET_X_LEFT}rem`,
+          }}
+          groups={groups}
+        />
+      </div>
+      {/* //TODO: implement this to other pages */}
+      <div className="md:hidden block after:content-[''] after:block after:h-1.5 after:w-[75%] after:bg-primary">
+        <h1 className="text-primary text-nowrap text-7xl">{headerName}</h1>
+      </div>
+    </>
   );
 }
