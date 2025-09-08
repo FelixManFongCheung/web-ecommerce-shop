@@ -10,6 +10,7 @@ interface ATCProp {
   isATC: boolean;
 }
 
+// TODO: there is no need to revalidate product page because atc is a client component just use the zustand state instead
 export default function ATC({ productId, isATC }: ATCProp) {
   const [ATCState, setATCState] = useState(isATC);
   const { addProduct } = useCartActions();

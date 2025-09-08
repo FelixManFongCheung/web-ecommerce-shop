@@ -59,7 +59,7 @@ function CartContent({
         </div>
       ) : (
         <div
-          className="flex flex-col min-h-full flex-1 gap-5 w-full text-secondary overflow-y-auto no-scrollbar"
+          className="flex flex-col flex-1 gap-5 w-full text-secondary overflow-y-auto no-scrollbar"
           style={{
             paddingRight: `${VERTICAL_LINE_OFFSET_X_RIGHT + 1}rem`,
           }}
