@@ -1,10 +1,8 @@
 "use client";
 
-import { revalidateProductPage } from "@/actions/revalidateProductPage";
 import { cn } from "@/lib/utils";
 import { useCartActions } from "@/stores/cartStore";
 import { X } from "lucide-react";
-import { usePathname } from "next/navigation";
 
 interface RemoveItemProps {
   productId: string;
@@ -17,12 +15,10 @@ export default function RemoveItem({
   children,
   className,
 }: RemoveItemProps) {
-  const pathname = usePathname();
   const { removeProduct } = useCartActions();
   const handleRemoveFromCart = async () => {
     try {
       removeProduct(productId);
-      await revalidateProductPage(pathname);
     } catch (error) {
       console.error("Error removing item:", error);
     }

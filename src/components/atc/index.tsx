@@ -2,23 +2,20 @@
 
 import { cn } from "@/lib/cn/utils";
 import { useAppActions } from "@/stores/appStore";
-import { useCartActions } from "@/stores/cartStore";
-import { useState } from "react";
+import { useCartActions, useCartProducts } from "@/stores/cartStore";
 
 interface ATCProp {
   productId: string;
-  isATC: boolean;
 }
 
-// TODO: there is no need to revalidate product page because atc is a client component just use the zustand state instead
-export default function ATC({ productId, isATC }: ATCProp) {
-  const [ATCState, setATCState] = useState(isATC);
+export default function ATC({ productId }: ATCProp) {
+  const cartProductIds = useCartProducts();
+  const ATCState = cartProductIds.includes(productId);
   const { addProduct } = useCartActions();
 
   const { openCart } = useAppActions();
 
   const addToCartAction = async () => {
-    setATCState(true);
     addProduct(productId);
     openCart();
   };

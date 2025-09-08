@@ -1,5 +1,4 @@
 // import Checkout from '@/components/checkout';
-import { getCartProductsServer } from "@/actions/getCart/server";
 import { getProduct } from "@/actions/stripe";
 import ATC from "@/components/atc";
 import { cn } from "@/lib/cn/utils";
@@ -10,12 +9,6 @@ export default async function Page(props: {
   params: Promise<{ product: string }>;
 }) {
   const params = await props.params;
-  let isATC: boolean = false;
-  const cartItems = await getCartProductsServer();
-  console.log("cached refreshed from revalidation", cartItems);
-  console.log(cartItems.some((item) => item.id === params.product));
-  isATC = cartItems.some((item) => item.id === params.product) || false;
-
   const product = await getProduct(params.product);
   // const priceID = await getPriceId(product.id);
   // const price = await retrievePrice(priceID);
@@ -57,7 +50,7 @@ export default async function Page(props: {
           {product.description && <p>{product.description}</p>}
         </div>
         <div className="w-full">
-          <ATC productId={product.id} isATC={isATC || !product.active} />
+          <ATC productId={params.product} />
         </div>
         <div>
           <p>Measurements</p>
