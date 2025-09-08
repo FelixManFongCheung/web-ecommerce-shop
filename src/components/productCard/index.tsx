@@ -18,7 +18,7 @@ async function ProductCard({
         <div className="name">{product.name}</div>
         <div className="brief">{product.metadata.brief}</div>
         {product.active ? (
-          <div className="price">{price?.unit_amount}</div>
+          <div className="price">{price?.amount}</div>
         ) : (
           <div className="price">sold out</div>
         )}

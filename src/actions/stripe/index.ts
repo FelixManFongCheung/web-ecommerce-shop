@@ -53,6 +53,7 @@ export const getActiveProducts = unstable_cache(
     const products = await stripe.products.list({
       active: true,
     });
+
     return products.data;
   },
   ["active-products"],
@@ -88,7 +89,11 @@ export async function retrieveSession(
 export const retrievePrice = unstable_cache(
   async (priceId: string) => {
     const price = await stripe.prices.retrieve(priceId);
-    return price;
+    return {
+      amount: price.unit_amount,
+      currency: price.currency,
+      type: price.type,
+    };
   },
   ["price"],
   { revalidate: 3600 }

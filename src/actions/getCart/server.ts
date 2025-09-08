@@ -6,13 +6,18 @@ export async function getCartProductsServer() {
   const cartData = await getCartFromCookie();
   const activeProducts = await getActiveProducts();
 
-  let activeProductsArray: Stripe.Product[] = [];
+  console.log(activeProducts);
+  let cartProducts: Stripe.Product[] = [];
 
-  if (cartData?.products) {
-    activeProductsArray = activeProducts.filter((product) =>
+  if (!cartData) {
+    return [];
+  }
+
+  if (cartData.products) {
+    cartProducts = activeProducts.filter((product) =>
       cartData.products.includes(product.id)
     );
   }
 
-  return activeProductsArray;
+  return cartProducts;
 }

@@ -16,8 +16,6 @@ export async function createCheckout() {
     const headersList = await headers();
     const origin = headersList.get("origin") || "";
 
-    console.log("origin", origin);
-
     // Get cart data
     const cart = await getCartProductsServer();
 

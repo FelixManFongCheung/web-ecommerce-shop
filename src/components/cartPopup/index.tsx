@@ -7,12 +7,14 @@ import {
   HORIZONTAL_LINE_OFFSET_X_RIGHT,
   HORIZONTAL_LINE_OFFSET_Y_RIGHT,
   HORIZONTAL_LINE_WIDTH_RIGHT,
+  VERTICAL_LINE_OFFSET_X_RIGHT,
 } from "@/lib/constants";
 import { useAppActions, useIsCartOpen } from "@/stores/appStore";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import Stripe from "stripe";
 import CheckoutButton from "../checkout/checkoutButton";
+import RemoveItem from "../removeItem";
 
 // Extract cart content as a separate component
 function CartContent({
@@ -30,7 +32,7 @@ function CartContent({
       for (const product of cartProducts) {
         const priceId = await getPriceId(product.id);
         const price = await retrievePrice(priceId);
-        totalPrice += price.unit_amount ?? 0;
+        totalPrice += price.amount ?? 0;
       }
       setTotalPrice(totalPrice);
     };
@@ -39,15 +41,15 @@ function CartContent({
 
   return (
     <div
-      className="flex flex-col gap-2 h-full"
+      className="h-full flex flex-col"
       style={{
         marginTop: `${HORIZONTAL_LINE_OFFSET_Y_RIGHT}rem`,
-        height: `calc(98% - ${HORIZONTAL_LINE_OFFSET_Y_RIGHT}rem)`,
+        height: `calc(100% - ${HORIZONTAL_LINE_OFFSET_Y_RIGHT}rem)`,
       }}
     >
       {isLoading ? (
         <div
-          className="flex-1 w-full text-secondary"
+          className="flex flex-col flex-1 gap-2 w-full text-secondary"
           style={{
             marginTop: `${HORIZONTAL_LINE_OFFSET_Y_RIGHT}rem`,
           }}
@@ -55,13 +57,40 @@ function CartContent({
           Loading...
         </div>
       ) : (
-        <div className="flex-1">
+        <div
+          className="flex flex-col min-h-full flex-1 gap-5 w-full text-secondary overflow-y-auto no-scrollbar"
+          style={{
+            paddingRight: `${VERTICAL_LINE_OFFSET_X_RIGHT + 1}rem`,
+          }}
+        >
           {cartProducts.map((product) => (
-            <div
-              className={cn("flex flex-col gap-2 text-secondary")}
-              key={product.id}
-            >
-              {product.name}
+            <div key={product.id} className="flex flex-row gap-1 w-full">
+              <div
+                className={cn(
+                  "relative flex flex-col gap-2 text-secondary w-[50%] aspect-[3/4]"
+                )}
+              >
+                <Image
+                  src={product.images[0]}
+                  alt={product.name}
+                  fill
+                  sizes="100%"
+                  className="object-cover"
+                />
+                {product.name}
+              </div>
+              <div
+                className={cn(
+                  "relative flex flex-col gap-2 text-secondary flex-1"
+                )}
+              >
+                <RemoveItem
+                  productId={product.id}
+                  className="flex flex-row gap-2 justify-between"
+                >
+                  <p>{product.name}</p>
+                </RemoveItem>
+              </div>
             </div>
           ))}
         </div>
@@ -89,25 +118,15 @@ export default function CartPopup({ className }: { className?: string }) {
   useEffect(() => {
     const showCartProducts = async () => {
       setIsLoading(true);
-      try {
-        const cartProducts = await getCartProductsClient();
-        console.log(cartProducts);
-        setCartProducts(cartProducts);
-      } catch (error) {
-        console.error("Error fetching cart products:", error);
-      } finally {
-        setIsLoading(false);
-      }
+      const cartProducts = await getCartProductsClient();
+      setCartProducts(cartProducts);
+      setIsLoading(false);
     };
-
-    if (isCartOpen) {
-      showCartProducts();
-    }
+    showCartProducts();
   }, [isCartOpen]);
 
   return (
     <>
-      {/* Mobile cart icon - only render on mobile */}
       <div className={cn("block md:hidden", className)}>
         <button className="h-full cursor-pointer" onClick={toggleCart}>
           <Image
@@ -119,7 +138,6 @@ export default function CartPopup({ className }: { className?: string }) {
         </button>
       </div>
 
-      {/* Desktop cart sidebar - only render on desktop */}
       <div
         className={cn("relative h-screen hidden md:block", className)}
         data-cart-open={isCartOpen}
@@ -127,7 +145,7 @@ export default function CartPopup({ className }: { className?: string }) {
         {isCartOpen && <div className="fixed inset-0" onClick={toggleCart} />}
         <div
           className={cn(
-            "fixed top-0 h-full bg-primary p-6 transition-all duration-300 ease-in-out"
+            "fixed top-0 h-full bg-primary p-8 transition-all duration-300 ease-in-out"
           )}
           style={{
             width: `${
@@ -149,5 +167,4 @@ export default function CartPopup({ className }: { className?: string }) {
   );
 }
 
-// Export the CartContent component for reuse
 export { CartContent };

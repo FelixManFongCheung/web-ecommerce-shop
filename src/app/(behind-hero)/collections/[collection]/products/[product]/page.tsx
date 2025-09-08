@@ -12,7 +12,10 @@ export default async function Page(props: {
   const params = await props.params;
   let isATC: boolean = false;
   const cartItems = await getCartProductsServer();
-  isATC = cartItems.some((item) => item.id === params.product) || false;
+  console.log("cached refreshed from revalidation", cartItems);
+  isATC =
+    cartItems.some((item) => item.id === params.product) ||
+    cartItems.length !== 0;
 
   const product = await getProduct(params.product);
   // const priceID = await getPriceId(product.id);

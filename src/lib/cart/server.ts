@@ -1,14 +1,17 @@
+import { CartState } from "@/stores/cartStore";
 import { cookies } from "next/headers";
 import { CartData, CartResponse } from "./type";
 
 export async function getCartFromCookie(): Promise<CartData | null> {
   try {
     const cookieStore = await cookies();
-    const cartCookie = cookieStore.get("cart");
+    const cartCookie = cookieStore.get("cart-storage");
 
     if (!cartCookie) return null;
 
-    const cartData: CartData = JSON.parse(cartCookie.value);
+    const { state: cartData } = JSON.parse(cartCookie.value) as {
+      state: CartState;
+    };
 
     // Check if cart has expired
     if (new Date(cartData.expiresAt) < new Date()) {
@@ -26,7 +29,7 @@ export async function setCartCookie(cartData: CartData): Promise<void> {
   const ONE_MONTH = 60 * 60 * 24 * 30; // 30 days
 
   const cookieStore = await cookies();
-  cookieStore.set("cart", JSON.stringify(cartData), {
+  cookieStore.set("cart-storage", JSON.stringify(cartData), {
     secure: process.env.NODE_ENV === "production",
     sameSite: "lax",
     path: "/",
@@ -98,7 +101,7 @@ export async function removeProductFromCart(
     if (updatedProducts.length === 0) {
       // Remove cart cookie if empty
       const cookieStore = await cookies();
-      cookieStore.delete("cart");
+      cookieStore.delete("cart-storage");
     } else {
       const cartData: CartData = {
         ...existingCart,

@@ -2,35 +2,39 @@
 
 import { revalidateProductPage } from "@/actions/revalidateProductPage";
 import { removeProductFromCartClient } from "@/lib/cart/client";
-import { useState } from "react";
+import { cn } from "@/lib/utils";
+import { X } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 interface RemoveItemProps {
   productId: string;
   children?: React.ReactNode;
+  className?: string;
 }
 
-export default function RemoveItem({ productId, children }: RemoveItemProps) {
-  const [isVisible, setIsVisible] = useState(true);
-
+export default function RemoveItem({
+  productId,
+  children,
+  className,
+}: RemoveItemProps) {
+  const pathname = usePathname();
   const handleRemoveFromCart = async () => {
     try {
-      removeProductFromCartClient(productId);
-      setIsVisible(false);
-      await revalidateProductPage(
-        `/collections/[collection]/products/[product]/${productId}`
-      );
+      setTimeout(() => {
+        removeProductFromCartClient(productId);
+      }, 1000);
+      console.log(pathname);
+      await revalidateProductPage(pathname);
     } catch (error) {
       console.error("Error removing item:", error);
     }
   };
 
-  if (!isVisible) return null;
-
   return (
-    <div className={isVisible ? "" : ""}>
+    <div className={cn(className)}>
       {children}
       <button onClick={handleRemoveFromCart} className="cursor-pointer ml-2">
-        remove this
+        <X className="w-4 h-4" />
       </button>
     </div>
   );

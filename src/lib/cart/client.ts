@@ -1,74 +1,32 @@
-import { getCookie, setCookie } from "cookies-next";
-import { CartData } from "./type";
+"use client";
 
-export function getCartFromCookieClient(): CartData | null {
-  try {
-    const cartCookie = getCookie("cart");
+import { useCartStore } from "@/stores/cartStore";
 
-    if (!cartCookie) {
-      return null;
-    }
-
-    const cartData: CartData = JSON.parse(cartCookie as string);
-
-    // Check if cart has expired
-    if (new Date(cartData.expiresAt) < new Date()) {
-      return null;
-    }
-
-    return cartData;
-  } catch (error) {
-    console.error("Error reading cart from cookie:", error);
-    return null;
-  }
+export function getCartFromCookieClient(): string[] {
+  const state = useCartStore.getState().products;
+  return state;
 }
 
 export function addProductToCartClient(productId: string): void {
-  const cartData = getCartFromCookieClient();
-  const ONE_MONTH = 60 * 60 * 24 * 30;
-  const expiresAt = new Date(Date.now() + ONE_MONTH * 1000).toISOString();
-
-  if (cartData) {
-    cartData.products.push(productId);
-    setCookie("cart", JSON.stringify(cartData), {
-      expires: new Date(expiresAt),
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "lax",
-      path: "/",
-      maxAge: ONE_MONTH,
-    });
-  } else {
-    setCookie(
-      "cart",
-      JSON.stringify({
-        products: [productId],
-        createdAt: new Date().toISOString(),
-        expiresAt: expiresAt,
-      }),
-      {
-        expires: new Date(expiresAt),
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "lax",
-        path: "/",
-        maxAge: ONE_MONTH,
-      }
-    );
-  }
+  useCartStore.getState().addProduct(productId);
 }
 
 export function removeProductFromCartClient(productId: string): void {
-  const cartData = getCartFromCookieClient();
-  const ONE_MONTH = 60 * 60 * 24 * 30;
-  const expiresAt = new Date(Date.now() + ONE_MONTH * 1000).toISOString();
+  const state = useCartStore.getState();
+  console.log(state);
+  useCartStore.getState().removeProduct(productId);
+}
 
-  if (cartData) {
-    cartData.products = cartData.products.filter((id) => id !== productId);
-    setCookie("cart", JSON.stringify(cartData), {
-      expires: new Date(expiresAt),
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "lax",
-      path: "/",
-      maxAge: ONE_MONTH,
-    });
-  }
+export function useCartClient() {
+  const store = useCartStore();
+
+  return {
+    products: store.products,
+    isExpired: store.isExpired,
+    addProduct: store.addProduct,
+    removeProduct: store.removeProduct,
+    clearCart: store.clearCart,
+    checkExpiry: store.checkExpiry,
+    getCartData: store.getCartData,
+  };
 }
