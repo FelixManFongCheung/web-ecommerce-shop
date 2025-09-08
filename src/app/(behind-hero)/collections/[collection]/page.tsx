@@ -41,12 +41,12 @@ export default async function Page({
 
   //TODO: implement infinite scroll with lazy load or virtualisation
   return (
-    <div className="text-left py-2 px-2 md:mt-header-height mt-header-height-mobile md:pl-desktop-left-nav-width md:pr-desktop-right-nav-width md:py-[100px]">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 auto-rows-max">
+    <div className="text-left py-2 px-3 md:mt-header-height mt-header-height-mobile md:pl-desktop-left-nav-width md:pr-desktop-right-nav-width md:py-[100px]">
+      <div className="grid grid-cols-2 lg:grid-cols-3 gap-2 auto-rows-max">
         {products.length > 0 ? (
           products.map((product) => (
             <Suspense key={product.id} fallback={<ProductCardSkeleton />}>
-              <ProductCard product={product}>
+              <ProductCard product={product} className="mb-6">
                 <Link
                   className={cn("relative block w-full aspect-[3/4]")}
                   href={`/collections/${collection || "all"}/products/${

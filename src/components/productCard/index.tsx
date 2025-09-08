@@ -1,18 +1,21 @@
 import { getPriceId, retrievePrice } from "@/actions/stripe";
+import { cn } from "@/lib/cn/utils";
 import Stripe from "stripe";
 
 async function ProductCard({
   product,
   children,
+  className,
 }: {
   product: Stripe.Product;
   children?: React.ReactNode;
+  className?: string;
 }) {
   const priceId = await getPriceId(product.id);
   const price = await retrievePrice(priceId);
 
   return (
-    <div className="relative w-auto h-full">
+    <div className={cn("relative w-auto h-full", className)}>
       {children}
       <div className="product-info text-center mt-2">
         <div className="name">{product.name}</div>
