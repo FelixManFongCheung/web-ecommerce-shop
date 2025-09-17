@@ -9,6 +9,7 @@ import {
   VERTICAL_LINE_OFFSET_X_LEFT,
 } from "@/lib/constants";
 import { Minus, Plus } from "lucide-react";
+import Link from "next/link";
 import { useState } from "react";
 import { Group } from ".";
 
@@ -53,17 +54,25 @@ export function NestedGroup({
         />
       )}
       <div style={{ marginLeft: `${level * 0.2}rem` }}>
-        <h1 onClick={() => handleClick(key)} style={{ cursor: "pointer" }}>
-          {Object.keys(value).length > 0 && level > 0 ? (
-            openItems.has(key) ? (
-              <Minus className="w-2 h-2 inline-block" />
-            ) : (
-              <Plus className="w-2 h-2 inline-block" />
-            )
-          ) : null}
-
-          <span className="inline-block">{key}</span>
-        </h1>
+        {Object.keys(value).length > 0 && level > 0 ? (
+          openItems.has(key) ? (
+            <button className="inline-block" onClick={() => handleClick(key)}>
+              <Minus className="w-2 h-2" />
+            </button>
+          ) : (
+            <button className="inline-block" onClick={() => handleClick(key)}>
+              <Plus className="w-2 h-2" />
+            </button>
+          )
+        ) : null}
+        <Link
+          href={`/collections/${key}`}
+          className={cn(level === 0 && "pointer-events-none", "inline-block")}
+        >
+          <h1 style={{ cursor: "pointer" }}>
+            <span>{key}</span>
+          </h1>
+        </Link>
         {value && Object.keys(value).length > 0 && (
           <div
             className={`${
