@@ -19,7 +19,11 @@ export function NestedGroup({
   group: Group;
   level?: number;
 }) {
-  const [openItems, setOpenItems] = useState<Set<string>>(new Set());
+  const initialOpenItems =
+    level === 0 ? new Set(Object.keys(group)) : new Set([]);
+  const [openItems, setOpenItems] = useState<Set<string>>(initialOpenItems);
+
+  console.log(openItems);
 
   const handleClick = (key: string) => {
     setOpenItems((prev) => {
@@ -49,12 +53,8 @@ export function NestedGroup({
         />
       )}
       <div style={{ marginLeft: `${level * 0.2}rem` }}>
-        <h1
-          className={level === 0 ? "text-lg font-bold" : "text-sm font-medium"}
-          onClick={() => handleClick(key)}
-          style={{ cursor: "pointer" }}
-        >
-          {Object.keys(value).length > 0 ? (
+        <h1 onClick={() => handleClick(key)} style={{ cursor: "pointer" }}>
+          {Object.keys(value).length > 0 && level > 0 ? (
             openItems.has(key) ? (
               <Minus className="w-2 h-2 inline-block" />
             ) : (
