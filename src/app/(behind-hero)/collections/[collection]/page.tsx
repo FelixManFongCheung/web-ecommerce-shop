@@ -1,7 +1,4 @@
-import {
-  getProductsAll,
-  retrieveProductsByMetaDataKeyAndValue,
-} from "@/actions/stripe";
+import { getProductsAll } from "@/actions/stripe";
 import { ProductCard, ProductCardSkeleton } from "@/components";
 import { cn } from "@/lib/cn/utils";
 import Image from "next/image";
@@ -14,7 +11,10 @@ export default async function Page({
   params: Promise<{ collection: string }>;
 }) {
   const { collection } = await params;
+  const decodedCollection = decodeURIComponent(collection);
   const allProducts = await getProductsAll();
+  const collectionMetaKey = decodedCollection.split("-")[0];
+  const collectionMetaValue = decodedCollection.split("-").slice(1).join("-");
 
   if (!allProducts) {
     return (
@@ -24,11 +24,24 @@ export default async function Page({
     );
   }
 
+  const searchProductsByMetaDataKeyAndValue = async (
+    key: string,
+    value: string
+  ) => {
+    return allProducts.filter((product) => {
+      const metadataValue = product.metadata[key];
+      return metadataValue && metadataValue.includes(value);
+    });
+  };
+
   const products =
     collection === "all"
       ? allProducts
       : collection
-      ? await retrieveProductsByMetaDataKeyAndValue("collection", collection)
+      ? await searchProductsByMetaDataKeyAndValue(
+          collectionMetaKey,
+          collectionMetaValue
+        )
       : allProducts;
 
   if (!products) {
