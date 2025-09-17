@@ -48,37 +48,22 @@ export const searchProducts = async (query: string) => {
   }
 };
 
-export const getActiveProducts = unstable_cache(
-  async () => {
-    const products = await stripe.products.list({
-      active: true,
-    });
+export const getActiveProducts = async () => {
+  const products = await stripe.products.list({
+    active: true,
+  });
+  return products.data;
+};
 
-    return products.data;
-  },
-  ["active-products"],
-  { revalidate: 3600 }
-);
+export const getProductsAll = async () => {
+  const products = await stripe.products.list();
+  return products.data;
+};
 
-export const getProductsAll = unstable_cache(
-  async () => {
-    const products = await stripe.products.list();
-    return products.data;
-  },
-  ["products-all"],
-  {
-    tags: ["products-all"],
-  }
-);
-
-export const getProduct = unstable_cache(
-  async (productId: string) => {
-    const product = await stripe.products.retrieve(productId);
-    return product;
-  },
-  ["product"],
-  { revalidate: 3600 }
-);
+export const getProduct = async (productId: string) => {
+  const product = await stripe.products.retrieve(productId);
+  return product;
+};
 
 export async function retrieveSession(
   sessionId: string,
