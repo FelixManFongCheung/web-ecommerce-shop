@@ -1,4 +1,5 @@
 // import Checkout from '@/components/checkout';
+import { getAllProductImages } from "@/actions/getAllProductImages";
 import { getProduct } from "@/actions/stripe";
 import ATC from "@/components/atc";
 import { cn } from "@/lib/cn/utils";
@@ -9,7 +10,10 @@ export default async function Page(props: {
   params: Promise<{ product: string }>;
 }) {
   const params = await props.params;
-  const product = await getProduct(params.product);
+  const productId = params.product;
+  const images = await getAllProductImages(productId);
+  console.log(images);
+  const product = await getProduct(productId);
   // const priceID = await getPriceId(product.id);
   // const price = await retrievePrice(priceID);
   const productMetadata: ProductPageMetaData = product.metadata;
@@ -30,14 +34,14 @@ export default async function Page(props: {
       )}
     >
       <div className={cn("relative w-full max-w-md aspect-[3/4]")}>
-        {product.images.map((image, index) => (
+        {images.map((image, index) => (
           <div key={index} className={cn("relative w-full h-full")}>
             <Image
               fill
               sizes="(max-width: 768px) 80vw, (max-width: 1200px) 30vw, 25vw"
               placeholder="blur"
-              blurDataURL={image}
-              src={image}
+              blurDataURL={image ?? ""}
+              src={image ?? ""}
               alt="product image"
               style={{ objectFit: "cover" }}
             />
@@ -50,7 +54,7 @@ export default async function Page(props: {
           {product.description && <p>{product.description}</p>}
         </div>
         <div className="w-full">
-          <ATC productId={params.product} isSoldOut={!product.active} />
+          <ATC productId={productId} isSoldOut={!product.active} />
         </div>
         <div>
           <p>Measurements</p>

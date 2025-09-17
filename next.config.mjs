@@ -30,6 +30,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'files.stripe.com'
       },
+      {
+        protocol: 'https',
+        hostname: 'fzrfwqlezkhlwztbmubd.supabase.co'
+      },
     ],
   },
 
