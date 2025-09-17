@@ -27,11 +27,11 @@ export async function middleware(request: NextRequest) {
       if (session.status === "expired") {
         await cancelOrder(sessionId);
 
-        return NextResponse.redirect(new URL("/cart", request.url));
+        return NextResponse.redirect(new URL("/collections/all", request.url));
       }
 
       if (session.status === "open") {
-        return NextResponse.redirect(new URL("/cart", request.url));
+        return NextResponse.redirect(new URL("/collections/all", request.url));
       }
     } catch (error) {
       console.error("Error in middleware processing order:", error);

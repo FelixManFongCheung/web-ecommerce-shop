@@ -1,5 +1,5 @@
 import { CartData } from "@/lib/cart/type";
-import { setCookie } from "cookies-next";
+import { getCookie, setCookie } from "cookies-next";
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 
@@ -47,7 +47,7 @@ export const useCartStore = create<CartState & { actions: CartActions }>()(
         } else {
           const newState = {
             ...state,
-            products: [...state.products, productId],
+            products: Array.from(new Set([...state.products, productId])),
             expiresAt: new Date(Date.now() + CART_EXPIRY_TIME).toISOString(),
           };
           set(newState);
@@ -112,16 +112,13 @@ export const useCartStore = create<CartState & { actions: CartActions }>()(
 
       getCartData: () => {
         const state = get();
+        const cookieStorage = getCookie("cart-storage");
 
-        if (state.isExpired) {
+        if (state.isExpired || !cookieStorage) {
           return null;
         }
 
-        return {
-          products: state.products,
-          createdAt: state.createdAt,
-          expiresAt: state.expiresAt,
-        };
+        return JSON.parse(cookieStorage);
       },
     },
   }))

@@ -10,7 +10,7 @@ import {
   VERTICAL_LINE_OFFSET_X_RIGHT,
 } from "@/lib/constants";
 import { useAppActions, useIsCartOpen } from "@/stores/appStore";
-import { useCartProducts } from "@/stores/cartStore";
+import { useCartActions } from "@/stores/cartStore";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import Stripe from "stripe";
@@ -115,17 +115,18 @@ export default function CartPopup({ className }: { className?: string }) {
   const { toggleCart } = useAppActions();
   const [cartProducts, setCartProducts] = useState<Stripe.Product[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const cartProductIds = useCartProducts();
+  const { getCartData } = useCartActions();
 
   useEffect(() => {
     const showCartProducts = async () => {
       setIsLoading(true);
+      const cartProductIds = getCartData()?.products || [];
       const cartProducts = await getCartProductsClient(cartProductIds);
       setCartProducts(cartProducts);
       setIsLoading(false);
     };
     showCartProducts();
-  }, [isCartOpen, cartProductIds]);
+  }, [isCartOpen, getCartData]);
 
   return (
     <>

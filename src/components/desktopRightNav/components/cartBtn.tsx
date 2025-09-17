@@ -2,15 +2,16 @@
 
 import { cn } from "@/lib/cn/utils";
 import { useAppActions } from "@/stores/appStore";
-import { useCartProducts } from "@/stores/cartStore";
+import { useCartActions } from "@/stores/cartStore";
 import { useEffect, useState } from "react";
 export default function CartBtn({ className }: { className?: string }) {
   const [cartCount, setCartCount] = useState(0);
   const { openCart } = useAppActions();
-  const cartProducts = useCartProducts();
+  const { getCartData } = useCartActions();
   useEffect(() => {
+    const cartProducts = getCartData()?.products || [];
     setCartCount(cartProducts.length);
-  }, [cartProducts]);
+  }, [getCartData]);
 
   return (
     <div onClick={openCart} className={cn("cursor-pointer", className)}>

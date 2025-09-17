@@ -2,7 +2,7 @@
 
 import { cn } from "@/lib/cn/utils";
 import { useAppActions } from "@/stores/appStore";
-import { useCartActions, useCartProducts } from "@/stores/cartStore";
+import { useCartActions } from "@/stores/cartStore";
 
 interface ATCProp {
   productId: string;
@@ -10,7 +10,8 @@ interface ATCProp {
 }
 
 export default function ATC({ productId, isSoldOut }: ATCProp) {
-  const cartProductIds = useCartProducts();
+  const { getCartData } = useCartActions();
+  const cartProductIds = getCartData()?.products || [];
   const ATCState = cartProductIds.includes(productId) || isSoldOut;
   const { addProduct } = useCartActions();
 
