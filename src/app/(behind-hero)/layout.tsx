@@ -1,4 +1,5 @@
 import {
+  CookieWrapper,
   DesktopRightNav,
   FollowUsDialog,
   Footer,
@@ -12,13 +13,13 @@ export default async function BehindHeroLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="relative">
+    <CookieWrapper className="relative">
       <Nav />
       <DesktopRightNav />
       <Header />
       {children}
       <FollowUsDialog />
       <Footer />
-    </div>
+    </CookieWrapper>
   );
 }

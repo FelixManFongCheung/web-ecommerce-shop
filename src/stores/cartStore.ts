@@ -113,12 +113,15 @@ export const useCartStore = create<CartState & { actions: CartActions }>()(
       getCartData: () => {
         const state = get();
         const cookieStorage = getCookie("cart-storage");
+        console.log("cookieStorage", cookieStorage);
 
         if (state.isExpired || !cookieStorage) {
           return null;
         }
 
-        return JSON.parse(cookieStorage);
+        const cartData = JSON.parse(cookieStorage);
+        console.log(cartData);
+        return cartData.state;
       },
     },
   }))

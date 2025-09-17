@@ -12,7 +12,6 @@ export default async function Page(props: {
   const params = await props.params;
   const productId = params.product;
   const images = await getAllProductImages(productId);
-  console.log(images);
   const product = await getProduct(productId);
   // const priceID = await getPriceId(product.id);
   // const price = await retrievePrice(priceID);

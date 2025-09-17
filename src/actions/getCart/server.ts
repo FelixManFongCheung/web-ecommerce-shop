@@ -6,7 +6,6 @@ export async function getCartProductsServer() {
   const cartData = await getCartFromCookie();
   const activeProducts = await getActiveProducts();
 
-  console.log(activeProducts);
   let cartProducts: Stripe.Product[] = [];
 
   if (!cartData) {

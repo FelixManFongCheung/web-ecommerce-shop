@@ -2,7 +2,7 @@
 
 import { cn } from "@/lib/cn/utils";
 import { useAppActions } from "@/stores/appStore";
-import { useCartActions } from "@/stores/cartStore";
+import { useCartActions, useCartProducts } from "@/stores/cartStore";
 
 interface ATCProp {
   productId: string;
@@ -10,9 +10,14 @@ interface ATCProp {
 }
 
 export default function ATC({ productId, isSoldOut }: ATCProp) {
-  const { getCartData } = useCartActions();
-  const cartProductIds = getCartData()?.products || [];
-  const ATCState = cartProductIds.includes(productId) || isSoldOut;
+  const cartProducts = useCartProducts();
+  const cartProductIds = cartProducts || [];
+
+  const ATCState = isSoldOut
+    ? "Sold Out"
+    : cartProductIds.includes(productId)
+    ? "Added to cart"
+    : "Add to cart";
   const { addProduct } = useCartActions();
 
   const { openCart } = useAppActions();
@@ -24,15 +29,16 @@ export default function ATC({ productId, isSoldOut }: ATCProp) {
 
   return (
     <button
-      disabled={ATCState}
+      disabled={ATCState !== "Add to cart"}
       className={cn(
         "fixed bottom-0 left-0 h-header-height-mobile w-full block z-10 bg-primary text-secondary",
-        "md:md:relative md:h-auto md:w-full md:z-0",
-        ATCState && "border border-primary text-primary bg-secondary"
+        "md:md:relative md:h-auto md:w-full md:z-0 py-2 px-4",
+        ATCState !== "Add to cart" &&
+          "border border-primary text-primary bg-secondary"
       )}
       onClick={addToCartAction}
     >
-      {ATCState ? <p> Sold Out</p> : <p>Add to cart</p>}
+      <p>{ATCState}</p>
     </button>
   );
 }

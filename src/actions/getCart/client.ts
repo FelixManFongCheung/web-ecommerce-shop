@@ -8,7 +8,5 @@ export async function getCartProductsClient(productIds: string[]) {
     return product ? [product] : [];
   });
 
-  console.log(cartProducts);
-
   return cartProducts;
 }

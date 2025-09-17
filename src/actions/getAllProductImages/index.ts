@@ -7,7 +7,6 @@ export async function getAllProductImages(productId: string) {
     .from("Products")
     .list(productId);
 
-  console.log(data, error);
   if (error) {
     console.error(error);
     return [];

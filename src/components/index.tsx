@@ -3,6 +3,7 @@ import CartPopup from "./cartPopup";
 import { Checkout, CheckoutButton } from "./checkout";
 
 // main UI components
+import CookieWrapper from "./cookieWrapper";
 import Footer from "./footer";
 import Header from "./header";
 import Hero from "./hero";
@@ -29,6 +30,7 @@ export {
   CartPopup,
   Checkout,
   CheckoutButton,
+  CookieWrapper,
   DecoratorLines,
   DesktopLeftNav,
   DesktopRightNav,
