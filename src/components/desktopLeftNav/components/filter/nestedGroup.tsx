@@ -16,15 +16,16 @@ import { Group } from ".";
 export function NestedGroup({
   group,
   level = 0,
+  path = "",
 }: {
   group: Group;
   level?: number;
+  path?: string;
 }) {
+  console.log(path);
   const initialOpenItems =
     level === 0 ? new Set(Object.keys(group)) : new Set([]);
   const [openItems, setOpenItems] = useState<Set<string>>(initialOpenItems);
-
-  console.log(openItems);
 
   const handleClick = (key: string) => {
     setOpenItems((prev) => {
@@ -66,7 +67,7 @@ export function NestedGroup({
           )
         ) : null}
         <Link
-          href={`/collections/${key}`}
+          href={`/collections/${path}${level === 1 ? key : `-${key}`}`}
           className={cn(level === 0 && "pointer-events-none", "inline-block")}
         >
           <h1 style={{ cursor: "pointer" }}>
@@ -79,7 +80,11 @@ export function NestedGroup({
               openItems.has(key) ? "max-h-64" : "max-h-0"
             } overflow-hidden transition-all duration-300 ease-in-out`}
           >
-            <NestedGroup group={value as Group} level={level + 1} />
+            <NestedGroup
+              group={value as Group}
+              level={level + 1}
+              path={level === 0 ? "" : level === 1 ? key : `${path}-${key}`}
+            />
           </div>
         )}
       </div>
