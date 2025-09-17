@@ -67,7 +67,7 @@ export function NestedGroup({
           )
         ) : null}
         <Link
-          href={`/collections/${path}${level === 1 ? key : `-${key}`}`}
+          href={`/collections/${path}-${key}`}
           className={cn(level === 0 && "pointer-events-none", "inline-block")}
         >
           <h1 style={{ cursor: "pointer" }}>
@@ -83,7 +83,7 @@ export function NestedGroup({
             <NestedGroup
               group={value as Group}
               level={level + 1}
-              path={level === 0 ? "" : level === 1 ? key : `${path}-${key}`}
+              path={level === 0 ? key : `${path}-${key}`}
             />
           </div>
         )}
