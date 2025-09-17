@@ -1,40 +1,78 @@
 "use client";
 
-import { Icon } from "@/components";
 import { cn } from "@/lib/cn/utils";
 import { useAppActions, useIsOpen } from "@/stores/appStore";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { menuConfig } from "../menu/menuConfig";
 
 export default function Nav() {
   const isOpen = useIsOpen();
   const { toggleOpen } = useAppActions();
+  const pathname = usePathname();
 
   return (
     <>
       <div
         className={cn(
-          "block opacity-0 fixed inset-0 w-full h-screen overflow-hidden transition-opacity duration-500 ease-in-out z-20 pointer-events-none",
+          "block opacity-0 fixed mt-header-height-mobile inset-0 w-full h-screen overflow-hidden transition-opacity duration-500 ease-in-out z-20 pointer-events-none",
           isOpen && "opacity-100 pointer-events-auto",
           "md:hidden"
         )}
       >
         <div
           className={cn(
-            "fixed inset-0 w-full h-screen transition-colors duration-500 ease-in-out",
-            isOpen ? "bg-black/70" : "bg-black/0"
+            "fixed inset-0 w-full h-screen transition-colors duration-500 ease-in-out"
           )}
           onClick={toggleOpen}
         ></div>
         <div
           className={cn(
-            "fixed bg-white mx-auto left-[50%] translate-x-[-50%] px-4 w-1/2 h-screen flex flex-col gap-5 transition-all duration-500 ease-in-out",
+            "fixed bg-primary left-[50%] translate-x-[-50%] p-8 w-full h-1/2 flex flex-col gap-5 transition-all duration-500 ease-in-out overflow-y-auto",
             isOpen ? "block" : "hidden pointer-events-none"
           )}
         >
-          <Icon
+          {/* <Icon
             className={cn(
-              "md:h-header-height h-header-height-mobile mx-auto justify-center"
+              "md:h-header-height h-header-height-mobile mx-auto justify-center text-secondary"
             )}
-          />
+          /> */}
+          <div className="flex flex-col gap-5 justify-center">
+            <div className="flex flex-col gap-2 mb-8">
+              {menuConfig.shops.map((item) => (
+                <Link
+                  onClick={() => toggleOpen()}
+                  key={`menu-${item.label}`}
+                  href={item.href}
+                  className={cn(
+                    pathname === item.href &&
+                      "underline decoration-secondary decoration-[2px] underline-offset-2"
+                  )}
+                >
+                  <h3 className="text-[4rem] text-secondary truncate">
+                    {item.label}
+                  </h3>
+                </Link>
+              ))}
+            </div>
+            <div className="flex flex-col gap-2">
+              {menuConfig.info.map((item) => (
+                <Link
+                  onClick={() => toggleOpen()}
+                  key={`menu-${item.label}`}
+                  href={item.href}
+                  className={cn(
+                    pathname === item.href &&
+                      "underline decoration-secondary decoration-[2px] underline-offset-2"
+                  )}
+                >
+                  <h3 className="text-[4rem] text-secondary truncate">
+                    {item.label}
+                  </h3>
+                </Link>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
       <div className="h-[10vh] w-full hidden"></div>

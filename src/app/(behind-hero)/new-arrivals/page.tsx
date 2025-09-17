@@ -10,7 +10,8 @@ import { Suspense } from "react";
 export default async function Page() {
   const products = await getProductsAll();
   const newProducts = products.filter((product) => {
-    const recentCutoff = dayjs().subtract(1, "week");
+    // TODO: change to 2 week or more
+    const recentCutoff = dayjs().subtract(2, "week");
     const productCreationDate = new Date(product.created * 1000);
     return dayjs(productCreationDate).isAfter(dayjs(recentCutoff));
   });
