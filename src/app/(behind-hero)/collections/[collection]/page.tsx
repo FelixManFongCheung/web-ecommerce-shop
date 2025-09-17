@@ -40,7 +40,7 @@ export default async function Page({
   }
 
   //TODO: implement infinite scroll with lazy load or virtualisation
-  // TODO: implement filter click to collections/[param]
+  // TODO: implement filter click to collections/[param] by using substring construction with ~ key for substring search with stripe metadata
   return (
     <div>
       <div className="grid grid-cols-2 lg:grid-cols-3 gap-2 auto-rows-max">
