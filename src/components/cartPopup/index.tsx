@@ -21,9 +21,13 @@ import RemoveItem from "../removeItem";
 function CartContent({
   cartProducts,
   isLoading,
+  className,
+  isMobile = false,
 }: {
   cartProducts: Stripe.Product[];
   isLoading: boolean;
+  className?: string;
+  isMobile?: boolean;
 }) {
   const [totalPrice, setTotalPrice] = useState(0);
   const isEmpty = cartProducts.length === 0;
@@ -42,27 +46,33 @@ function CartContent({
 
   return (
     <div
-      className="h-full flex flex-col"
+      className={cn("h-full flex flex-col", className)}
       style={{
-        marginTop: `${HORIZONTAL_LINE_OFFSET_Y_RIGHT}rem`,
-        height: `calc(100% - ${HORIZONTAL_LINE_OFFSET_Y_RIGHT}rem)`,
+        ...(!isMobile && {
+          marginTop: `${HORIZONTAL_LINE_OFFSET_Y_RIGHT}rem`,
+          height: `calc(100% - ${HORIZONTAL_LINE_OFFSET_Y_RIGHT}rem)`,
+        }),
       }}
     >
       {isLoading ? (
         <div
           className="flex flex-col flex-1 gap-2 w-full text-secondary"
-          style={{
-            marginTop: `${HORIZONTAL_LINE_OFFSET_Y_RIGHT}rem`,
-          }}
+          {...(!isMobile && {
+            style: {
+              marginTop: `${HORIZONTAL_LINE_OFFSET_Y_RIGHT}rem`,
+            },
+          })}
         >
           Loading...
         </div>
       ) : (
         <div
           className="flex flex-col flex-1 gap-5 w-full text-secondary overflow-y-auto no-scrollbar"
-          style={{
-            paddingRight: `${VERTICAL_LINE_OFFSET_X_RIGHT + 1}rem`,
-          }}
+          {...(!isMobile && {
+            style: {
+              paddingRight: `${VERTICAL_LINE_OFFSET_X_RIGHT + 1}rem`,
+            },
+          })}
         >
           {cartProducts.map((product) => (
             <div key={product.id} className="flex flex-row gap-1 w-full">
@@ -127,29 +137,54 @@ export default function CartPopup({ className }: { className?: string }) {
     showCartProducts();
   }, [isCartOpen, cartProductIds]);
 
+  console.log("isCartOpen", isCartOpen);
+
   return (
     <>
       <div className={cn("block md:hidden", className)}>
-        <button className="h-full cursor-pointer" onClick={toggleCart}>
-          <Image
-            src="/assets/normal/cart.png"
-            alt="cart"
-            width={24}
-            height={24}
-          />
+        {/* cartpopup z index 12 */}
+        <button
+          className="h-header-height-mobile fixed top-0 right-5 z-12 flex justify-center items-center cursor-pointer"
+          onClick={toggleCart}
+        >
+          {isCartOpen ? (
+            <Image
+              src="/assets/white/cart.png"
+              alt="cart"
+              width={24}
+              height={24}
+            />
+          ) : (
+            <Image
+              src="/assets/normal/cart.png"
+              alt="cart"
+              width={24}
+              height={24}
+            />
+          )}
         </button>
         <div
           className={cn(
-            "fixed top-0 h-full w-screen bg-primary p-8 transition-all duration-300 ease-in-out",
-            isCartOpen ? "right-full" : "right-0"
+            "fixed z-10 top-0 w-screen bg-primary p-8 pt-15 transition-all duration-300 ease-in-out",
+            isCartOpen ? "right-0" : "-right-full",
+            "h-screen flex flex-col"
           )}
         >
-          <CartContent cartProducts={cartProducts} isLoading={isLoading} />
+          <div className="relative mb-10 after:right-0 after:bottom-0 after:absolute md:hidden block after:content-[''] after:block after:h-[3px] after:w-[75%] after:bg-secondary">
+            <h1 className="text-secondary text-nowrap text-7xl text-right">
+              Cart
+            </h1>
+          </div>
+          <CartContent
+            cartProducts={cartProducts}
+            isLoading={isLoading}
+            isMobile={true}
+          />
         </div>
       </div>
 
       <div
-        className={cn("relative h-screen hidden md:block", className)}
+        className={cn("fixed h-screen hidden md:block", className)}
         data-cart-open={isCartOpen}
       >
         {isCartOpen && <div className="fixed inset-0" onClick={toggleCart} />}

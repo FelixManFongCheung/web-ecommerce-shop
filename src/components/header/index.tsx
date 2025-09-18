@@ -1,6 +1,6 @@
 "use client";
 
-import { CartPopup, Icon } from "@/components";
+import { Icon } from "@/components";
 import { cn } from "@/lib/cn/utils";
 import { useAppActions, useIsCartOpen } from "@/stores/appStore";
 import Image from "next/image";
@@ -20,21 +20,31 @@ export default function Header() {
       >
         <div className="block md:hidden">
           <button className="h-full cursor-pointer" onClick={toggleOpen}>
-            <Image
-              src="/assets/normal/menu.png"
-              alt="menu"
-              width={24}
-              height={24}
-            />
+            {isCartOpen ? (
+              <Image
+                src="/assets/white/menu.png"
+                alt="menu"
+                width={24}
+                height={24}
+              />
+            ) : (
+              <Image
+                src="/assets/normal/menu.png"
+                alt="menu"
+                width={24}
+                height={24}
+              />
+            )}
           </button>
         </div>
 
         <Icon
           className={cn(
-            "absolute top-0 left-1/2 h-full transform -translate-x-1/2 flex items-center justify-center"
+            "absolute top-0 left-1/2 h-full transform -translate-x-1/2 flex items-center justify-center",
+            isCartOpen ? "text-secondary md:text-primary" : "text-primary",
+            "transition-all duration-300 ease-in-out"
           )}
         />
-        <CartPopup />
       </div>
     </>
   );

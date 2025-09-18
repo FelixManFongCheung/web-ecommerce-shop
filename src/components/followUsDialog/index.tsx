@@ -31,7 +31,7 @@ export default function FollowUsDialog() {
         <div className="flex flex-col gap-4">
           <Link href="https://www.instagram.com/proxy__archive">
             <Image
-              src="/assets/white/insta(w).png"
+              src="/assets/white/insta.png"
               alt="Instagram"
               width={24}
               height={24}

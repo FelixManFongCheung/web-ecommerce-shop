@@ -88,7 +88,7 @@ export default async function DesktopLeftNav({
         />
       </div>
       {/* //TODO: implement this to other pages */}
-      <div className="md:hidden block after:content-[''] after:block after:h-1.5 after:w-[75%] after:bg-primary">
+      <div className="md:hidden block after:content-[''] after:block after:h-[3px] after:w-[75%] after:bg-primary">
         <h1 className="text-primary text-nowrap text-7xl">{headerName}</h1>
       </div>
     </>

@@ -29,7 +29,7 @@ export default async function Page(props: {
   return (
     <div
       className={cn(
-        "flex flex-col gap-4 h-screen md:flex-row md:mt-header-height mt-header-height-mobile md:pl-desktop-product-page-padding-left md:pr-desktop-product-page-padding-right md:py-[100px] items-center justify-center"
+        "flex flex-col gap-4 min-h-screen h-fit md:flex-row md:mt-header-height mt-header-height-mobile md:pl-desktop-product-page-padding-left md:pr-desktop-product-page-padding-right md:py-[100px] items-center justify-center"
       )}
     >
       <div className={cn("relative w-full max-w-md aspect-[3/4]")}>

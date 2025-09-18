@@ -1,4 +1,5 @@
 import {
+  CartPopup,
   CookieWrapper,
   DesktopRightNav,
   FollowUsDialog,
@@ -15,8 +16,9 @@ export default async function BehindHeroLayout({
   return (
     <CookieWrapper className="relative">
       <Nav />
-      <DesktopRightNav />
+      <CartPopup />
       <Header />
+      <DesktopRightNav />
       {children}
       <FollowUsDialog />
       <Footer />
