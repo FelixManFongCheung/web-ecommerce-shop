@@ -2,18 +2,21 @@
 
 import { CartPopup, Icon } from "@/components";
 import { cn } from "@/lib/cn/utils";
-import { useAppActions } from "@/stores/appStore";
+import { useAppActions, useIsCartOpen } from "@/stores/appStore";
 import Image from "next/image";
 
 export default function Header() {
   const { toggleOpen } = useAppActions();
+  const isCartOpen = useIsCartOpen();
 
   return (
     <>
+      {/* header z index 11 */}
       <div
         className={cn(
-          "fixed top-0 md:h-header-height h-header-height-mobile flex z-10 w-full justify-between px-5"
+          "fixed top-0 md:h-header-height h-header-height-mobile flex z-11 w-full justify-between px-5"
         )}
+        data-cart-open={isCartOpen}
       >
         <div className="block md:hidden">
           <button className="h-full cursor-pointer" onClick={toggleOpen}>

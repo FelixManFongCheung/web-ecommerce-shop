@@ -138,6 +138,14 @@ export default function CartPopup({ className }: { className?: string }) {
             height={24}
           />
         </button>
+        <div
+          className={cn(
+            "fixed top-0 h-full w-screen bg-primary p-8 transition-all duration-300 ease-in-out",
+            isCartOpen ? "right-full" : "right-0"
+          )}
+        >
+          <CartContent cartProducts={cartProducts} isLoading={isLoading} />
+        </div>
       </div>
 
       <div
