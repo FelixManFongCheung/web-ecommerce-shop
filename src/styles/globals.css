@@ -11,6 +11,7 @@
   --desktop-info-pages-padding-right: 150px;
   --desktop-product-page-padding-left: 200px;
   --desktop-product-page-padding-right: 300px;
+  --hero-line-padding: 4rem;
 }
 
 @theme inline {

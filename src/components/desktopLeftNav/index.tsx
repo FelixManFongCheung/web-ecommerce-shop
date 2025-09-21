@@ -31,7 +31,6 @@ export default async function DesktopLeftNav({
       <div
         className={`md:block hidden fixed z-12 left-0 top-0 h-full w-desktop-left-nav-width bg-transparent`}
       >
-        {/* TODO: to be abstracted */}
         {/* Navigation */}
         <div
           className={cn(
@@ -66,8 +65,8 @@ export default async function DesktopLeftNav({
           position="left"
           variant="thin"
           height={`${VERTICAL_LINE_HEIGHT_LEFT}rem`}
-          x={VERTICAL_LINE_OFFSET_X_LEFT}
-          y={VERTICAL_LINE_OFFSET_Y_LEFT}
+          left={VERTICAL_LINE_OFFSET_X_LEFT}
+          top={VERTICAL_LINE_OFFSET_Y_LEFT}
           className={cn("absolute bg-primary")}
         />
         {/* horizontal line */}
@@ -76,8 +75,8 @@ export default async function DesktopLeftNav({
           position="left"
           variant="thick"
           width={`${HORIZONTAL_LINE_WIDTH_LEFT}rem`}
-          x={HORIZONTAL_LINE_OFFSET_X_LEFT}
-          y={HORIZONTAL_LINE_OFFSET_Y_LEFT}
+          left={HORIZONTAL_LINE_OFFSET_X_LEFT}
+          top={HORIZONTAL_LINE_OFFSET_Y_LEFT}
           className={cn("absolute bg-primary")}
         />
         <Menu

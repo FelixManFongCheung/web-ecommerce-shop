@@ -49,7 +49,9 @@ export function NestedGroup({
           position="left"
           variant="medium"
           width={`${HORIZONTAL_LINE_WIDTH_LEFT / 2}rem`}
-          x={-(VERTICAL_LINE_OFFSET_X_LEFT * 2 - HORIZONTAL_LINE_OFFSET_X_LEFT)}
+          left={
+            -(VERTICAL_LINE_OFFSET_X_LEFT * 2 - HORIZONTAL_LINE_OFFSET_X_LEFT)
+          }
           className={cn("relative bg-primary")}
         />
       )}

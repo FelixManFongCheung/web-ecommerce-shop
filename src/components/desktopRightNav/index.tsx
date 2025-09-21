@@ -36,8 +36,8 @@ export default function DesktopRightNav() {
         variant="thick"
         position="right"
         height={`${VERTICAL_LINE_HEIGHT_RIGHT}rem`}
-        x={VERTICAL_LINE_OFFSET_X_RIGHT}
-        y={VERTICAL_LINE_OFFSET_Y_RIGHT}
+        right={VERTICAL_LINE_OFFSET_X_RIGHT}
+        top={VERTICAL_LINE_OFFSET_Y_RIGHT}
         className={cn(
           "absolute transition-all duration-300 ease-in-out peer-data-[cart-open=true]:bg-secondary bg-primary"
         )}
@@ -48,8 +48,8 @@ export default function DesktopRightNav() {
         variant="thin"
         position="right"
         width={`${HORIZONTAL_LINE_WIDTH_RIGHT}rem`}
-        x={HORIZONTAL_LINE_OFFSET_X_RIGHT}
-        y={HORIZONTAL_LINE_OFFSET_Y_RIGHT}
+        right={HORIZONTAL_LINE_OFFSET_X_RIGHT}
+        top={HORIZONTAL_LINE_OFFSET_Y_RIGHT}
         className={cn(
           "absolute transition-all duration-300 ease-in-out peer-data-[cart-open=true]:bg-secondary bg-primary"
         )}

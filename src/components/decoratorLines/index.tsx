@@ -7,8 +7,10 @@ export default function DecoratorLines({
   position,
   height: heightProp,
   width: widthProp,
-  x,
-  y,
+  top,
+  left,
+  bottom,
+  right,
   styles,
 }: {
   alignment: "horizontal" | "vertical";
@@ -17,8 +19,10 @@ export default function DecoratorLines({
   position?: "left" | "right";
   height?: string;
   width?: string;
-  x?: number;
-  y?: number;
+  top?: number;
+  left?: number;
+  bottom?: number;
+  right?: number;
   styles?: React.CSSProperties;
 }) {
   const getThickness = (variant: string) => {
@@ -45,16 +49,22 @@ export default function DecoratorLines({
           width: getThickness(variant),
         };
 
-  const positionStyle =
-    position === "left"
-      ? {
-          left: x + "rem",
-          top: y + "rem",
-        }
-      : {
-          right: x + "rem",
-          top: y + "rem",
-        };
+  const positionStyle = (() => {
+    if (position === "left") {
+      return {
+        ...(left !== undefined && { left: left + "rem" }),
+        ...(top !== undefined && { top: top + "rem" }),
+        ...(bottom !== undefined && { bottom: bottom + "rem" }),
+      };
+    } else if (position === "right") {
+      return {
+        ...(right !== undefined && { right: right + "rem" }),
+        ...(top !== undefined && { top: top + "rem" }),
+        ...(bottom !== undefined && { bottom: bottom + "rem" }),
+      };
+    }
+    return {};
+  })();
   return (
     <div
       className={cn("block", className)}
