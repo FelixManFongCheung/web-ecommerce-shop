@@ -37,7 +37,7 @@ export default function Pagination({
         </div>
       ))}
 
-      <div className="flex flex-row items-center justify-center gap-2">
+      <div className="flex flex-row items-center justify-center gap-2 py-4">
         <div
           onClick={() => setPage(page - 1)}
           className={cn(
