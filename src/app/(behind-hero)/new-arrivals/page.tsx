@@ -24,7 +24,7 @@ export default async function Page() {
               <ProductCard product={product} className="mb-6">
                 <Link
                   className={cn("relative block w-full aspect-[3/4]")}
-                  href={`/collections/all/products/${product.id}`}
+                  href={`/products/${product.id}`}
                 >
                   <Image
                     src={product.images[0]}

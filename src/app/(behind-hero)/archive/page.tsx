@@ -27,7 +27,7 @@ export default async function Page() {
               <Scaler scrollContainer={scrollContainer}>
                 <Link
                   className={cn("relative block w-32 aspect-[3/4]")}
-                  href={`/collections/all/products/${product.id}`}
+                  href={`/products/${product.id}`}
                 >
                   <Image
                     src={product.images[0]}
@@ -57,7 +57,7 @@ export default async function Page() {
             <ProductCard key={product.id} product={product} className="mb-6">
               <Link
                 className={cn("relative block w-full aspect-[3/4]")}
-                href={`/collections/all/products/${product.id}`}
+                href={`/products/${product.id}`}
               >
                 <Image src={product.images[0]} alt={product.name} fill />
                 {!product.active && (

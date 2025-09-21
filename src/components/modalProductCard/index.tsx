@@ -13,13 +13,10 @@ interface ModalProductCardProps {
   collection?: string;
 }
 
-export default function ModalProductCard({
-  product,
-  collection = "all",
-}: ModalProductCardProps) {
+export default function ModalProductCard({ product }: ModalProductCardProps) {
   return (
     <Link
-      href={`/collections/${collection}/products/${product.id}`}
+      href={`/products/${product.id}`}
       className="block text-inherit transition-transform duration-200 ease-in-out hover:-translate-y-0.5 rounded-lg overflow-hidden bg-white shadow-lg hover:shadow-xl"
     >
       <div className="relative w-full aspect-square overflow-hidden">
