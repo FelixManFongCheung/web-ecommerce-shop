@@ -16,10 +16,12 @@ export default async function DesktopLeftNav({
   headerName,
   children,
   hasFilter,
+  isProductPage,
 }: {
   headerName: string;
   children?: React.ReactNode;
   hasFilter?: boolean;
+  isProductPage?: boolean;
 }) {
   const productsAll = await getProductsAll();
   const groups = getRecursiveFolder(productsAll);
@@ -87,10 +89,11 @@ export default async function DesktopLeftNav({
           groups={groups}
         />
       </div>
-      {/* //TODO: implement this to other pages */}
-      <div className="md:hidden block after:content-[''] after:block after:h-[3px] after:w-[75%] after:bg-primary">
-        <h1 className="text-primary text-nowrap text-7xl">{headerName}</h1>
-      </div>
+      {!isProductPage && (
+        <div className="md:hidden block after:content-[''] after:block after:h-[3px] after:w-[75%] after:bg-primary">
+          <h1 className="text-primary text-nowrap text-7xl">{headerName}</h1>
+        </div>
+      )}
     </>
   );
 }
