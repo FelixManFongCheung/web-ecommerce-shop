@@ -2,13 +2,21 @@ import { Icon } from "@/components";
 import { cn } from "@/lib/cn/utils";
 import {
   HORIZONTAL_LINE_OFFSET_X_LEFT,
+  HORIZONTAL_LINE_OFFSET_X_LEFT_MOBILE,
   HORIZONTAL_LINE_OFFSET_X_RIGHT,
+  HORIZONTAL_LINE_OFFSET_X_RIGHT_MOBILE,
   VERTICAL_LINE_HEIGHT_LEFT,
+  VERTICAL_LINE_HEIGHT_LEFT_MOBILE,
   VERTICAL_LINE_HEIGHT_RIGHT,
+  VERTICAL_LINE_HEIGHT_RIGHT_MOBILE,
   VERTICAL_LINE_OFFSET_X_LEFT,
+  VERTICAL_LINE_OFFSET_X_LEFT_MOBILE,
   VERTICAL_LINE_OFFSET_X_RIGHT,
+  VERTICAL_LINE_OFFSET_X_RIGHT_MOBILE,
   VERTICAL_LINE_OFFSET_Y_LEFT,
+  VERTICAL_LINE_OFFSET_Y_LEFT_MOBILE,
   VERTICAL_LINE_OFFSET_Y_RIGHT,
+  VERTICAL_LINE_OFFSET_Y_RIGHT_MOBILE,
 } from "@/lib/constants";
 import Link from "next/link";
 import DecoratorLines from "../decoratorLines";
@@ -166,9 +174,9 @@ export function HeroMobile() {
   return (
     <div className="relative w-screen h-screen bg-primary md:hidden block">
       <div
-        className="absolute top-0 left-0 h-[60%] flex flex-col w-[60%] text-secondary"
+        className="absolute top-0 left-0 h-[60%] flex flex-col w-full text-secondary"
         style={{
-          paddingTop: `${VERTICAL_LINE_OFFSET_Y_LEFT}rem`,
+          paddingTop: `${VERTICAL_LINE_OFFSET_Y_LEFT_MOBILE}rem`,
         }}
       >
         <div className="flex-1 relative">
@@ -176,7 +184,7 @@ export function HeroMobile() {
             href="/collections/all"
             className="absolute bottom-[0.6rem] backdrop-blur-sm"
             style={{
-              paddingLeft: `${VERTICAL_LINE_OFFSET_X_LEFT * 1.2}rem`,
+              paddingLeft: `${VERTICAL_LINE_OFFSET_X_LEFT_MOBILE}rem`,
             }}
           >
             <h1 className="text-nowrap text-5xl">Shop</h1>
@@ -187,8 +195,8 @@ export function HeroMobile() {
             className={cn("absolute bg-secondary")}
             position="left"
             bottom={0}
-            left={HORIZONTAL_LINE_OFFSET_X_LEFT}
-            width="100%"
+            left={HORIZONTAL_LINE_OFFSET_X_LEFT_MOBILE}
+            width="70%"
           />
         </div>
         <div className="flex-1"></div>
@@ -197,7 +205,7 @@ export function HeroMobile() {
             href="/about"
             className="absolute bottom-[0.6rem] backdrop-blur-sm"
             style={{
-              paddingLeft: `${VERTICAL_LINE_OFFSET_X_LEFT * 1.2}rem`,
+              paddingLeft: `${VERTICAL_LINE_OFFSET_X_LEFT_MOBILE}rem`,
             }}
           >
             <h1 className="text-nowrap text-5xl">About</h1>
@@ -208,8 +216,8 @@ export function HeroMobile() {
             className={cn("absolute bg-secondary")}
             position="left"
             bottom={0}
-            left={HORIZONTAL_LINE_OFFSET_X_LEFT}
-            width="30%"
+            left={HORIZONTAL_LINE_OFFSET_X_LEFT_MOBILE}
+            width="42%"
           />
         </div>
         <div className="flex-1 relative">
@@ -217,7 +225,7 @@ export function HeroMobile() {
             href="/visit-us"
             className="absolute bottom-[0.6rem] backdrop-blur-sm"
             style={{
-              paddingLeft: `${VERTICAL_LINE_OFFSET_X_LEFT * 1.2}rem`,
+              paddingLeft: `${VERTICAL_LINE_OFFSET_X_LEFT_MOBILE}rem`,
             }}
           >
             <h1 className="text-nowrap text-5xl">Visit Us</h1>
@@ -228,8 +236,8 @@ export function HeroMobile() {
             className={cn("absolute bg-secondary")}
             position="left"
             bottom={0}
-            left={HORIZONTAL_LINE_OFFSET_X_LEFT}
-            width="60%"
+            left={HORIZONTAL_LINE_OFFSET_X_LEFT_MOBILE}
+            width="85%"
           />
         </div>
         <div className="flex-1"></div>
@@ -238,16 +246,16 @@ export function HeroMobile() {
           alignment="vertical"
           position="left"
           variant="thin"
-          left={VERTICAL_LINE_OFFSET_X_LEFT}
-          top={VERTICAL_LINE_OFFSET_Y_LEFT}
-          height={`${VERTICAL_LINE_HEIGHT_LEFT / 1.2}rem`}
+          left={VERTICAL_LINE_OFFSET_X_LEFT_MOBILE}
+          top={VERTICAL_LINE_OFFSET_Y_LEFT_MOBILE}
+          height={`${VERTICAL_LINE_HEIGHT_LEFT_MOBILE}rem`}
           className={cn("absolute bg-secondary")}
         />
       </div>
       <div
-        className="absolute bottom-0 right-0 h-[60%] flex flex-col w-[60%] text-secondary"
+        className="absolute bottom-0 right-0 h-[60%] flex flex-col w-full text-secondary"
         style={{
-          paddingBottom: `${VERTICAL_LINE_OFFSET_Y_RIGHT}rem`,
+          paddingBottom: `${VERTICAL_LINE_OFFSET_Y_RIGHT_MOBILE * 2}rem`,
         }}
       >
         <div className="flex-1"></div>
@@ -259,7 +267,7 @@ export function HeroMobile() {
             href="/new-arrivals"
             className="absolute bottom-[0.225rem] w-full text-right backdrop-blur-sm"
             style={{
-              paddingRight: `${VERTICAL_LINE_OFFSET_X_RIGHT * 1.2}rem`,
+              paddingRight: `${VERTICAL_LINE_OFFSET_X_RIGHT_MOBILE}rem`,
             }}
           >
             <h1 className="text-nowrap text-5xl">New Arrivals</h1>
@@ -269,8 +277,8 @@ export function HeroMobile() {
             position="right"
             variant="medium"
             bottom={0}
-            right={HORIZONTAL_LINE_OFFSET_X_RIGHT}
-            width="30%"
+            right={HORIZONTAL_LINE_OFFSET_X_RIGHT_MOBILE}
+            width="42%"
             className={cn("absolute bg-secondary")}
           />
         </div>
@@ -279,7 +287,7 @@ export function HeroMobile() {
             href="/archive"
             className="absolute bottom-[0.6rem] w-full text-right backdrop-blur-sm"
             style={{
-              paddingRight: `${VERTICAL_LINE_OFFSET_X_RIGHT * 1.2}rem`,
+              paddingRight: `${VERTICAL_LINE_OFFSET_X_RIGHT_MOBILE}rem`,
             }}
           >
             <h1 className="text-nowrap text-5xl">Archive</h1>
@@ -290,17 +298,17 @@ export function HeroMobile() {
             className={cn("absolute bg-secondary")}
             position="right"
             bottom={0}
-            right={HORIZONTAL_LINE_OFFSET_X_RIGHT}
-            width="60%"
+            right={HORIZONTAL_LINE_OFFSET_X_RIGHT_MOBILE}
+            width="85%"
           />
         </div>
         <DecoratorLines
           alignment="vertical"
           position="right"
           variant="medium"
-          right={VERTICAL_LINE_OFFSET_X_RIGHT}
-          bottom={VERTICAL_LINE_OFFSET_Y_RIGHT}
-          height={`${VERTICAL_LINE_HEIGHT_RIGHT / 1.2}rem`}
+          right={VERTICAL_LINE_OFFSET_X_RIGHT_MOBILE}
+          bottom={VERTICAL_LINE_OFFSET_Y_RIGHT_MOBILE}
+          height={`${VERTICAL_LINE_HEIGHT_RIGHT_MOBILE}rem`}
           className={cn("absolute bg-secondary")}
         />
       </div>
