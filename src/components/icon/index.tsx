@@ -3,12 +3,11 @@ import Link from "next/link";
 
 export default function Icon({ className }: { className?: string }) {
   return (
-    <div className={cn("relative flex items-center")}>
+    <div className={cn("relative flex items-center", className)}>
       <Link href="/">
         <div
           className={cn(
-            "text-3xl after:content-['*'] after:text-xl after:relative after:-top-2 !font-[Athelas_Regular]",
-            className
+            "text-3xl after:content-['*'] after:text-xl after:relative after:-top-2 !font-[Athelas_Regular]"
           )}
         >
           proxy archive

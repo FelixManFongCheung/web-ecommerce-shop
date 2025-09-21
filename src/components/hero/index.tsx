@@ -164,7 +164,7 @@ export function HeroDesktop() {
         />
       </div>
       <div className="flex flex-col absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] items-center justify-center text-secondary backdrop-blur-sm">
-        <Icon className="text-2xl" />
+        <Icon />
         <p className="text-xs">your gateway to an archival wardrobe</p>
       </div>
     </div>
@@ -313,7 +313,7 @@ export function HeroMobile() {
         />
       </div>
       <div className="flex flex-col absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] items-center justify-center text-secondary backdrop-blur-sm">
-        <Icon className="text-3xl" />
+        <Icon />
         <p className="text-sm">your gateway to an archival wardrobe</p>
       </div>
     </div>
