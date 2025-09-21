@@ -60,6 +60,7 @@ export async function addProductToCart(
       products: updatedProducts,
       createdAt: existingCart?.createdAt || new Date().toISOString(),
       expiresAt,
+      isExpired: false,
     };
 
     await setCartCookie(cartData);

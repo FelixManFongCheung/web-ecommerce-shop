@@ -22,7 +22,6 @@ export function NestedGroup({
   level?: number;
   path?: string;
 }) {
-  console.log(path);
   const initialOpenItems =
     level === 0 ? new Set(Object.keys(group)) : new Set([]);
   const [openItems, setOpenItems] = useState<Set<string>>(initialOpenItems);

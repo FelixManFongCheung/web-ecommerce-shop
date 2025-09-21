@@ -9,7 +9,6 @@ export default function CartBtn({ className }: { className?: string }) {
   const { openCart } = useAppActions();
   const cartProducts = useCartProducts();
   useEffect(() => {
-    console.log("cartProducts", cartProducts);
     setCartCount(cartProducts.length);
   }, [cartProducts]);
 

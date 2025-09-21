@@ -16,7 +16,6 @@ export default function CookieWrapper({
   useEffect(() => {
     const cartData = actions.getCartData();
     if (cartData) {
-      console.log("cartData", cartData);
       useCartStore.setState({
         products: cartData.products,
         createdAt: cartData.createdAt,

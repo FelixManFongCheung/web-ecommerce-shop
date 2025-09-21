@@ -12,9 +12,6 @@ export default async function Page() {
     "archive"
   );
 
-  const fakeProducts = [...products];
-  fakeProducts.push(...fakeProducts, ...fakeProducts, ...fakeProducts);
-
   const scrollContainer = "scroll-container";
 
   return (
@@ -25,7 +22,7 @@ export default async function Page() {
       >
         <div className="flex flex-row gap-10">
           <div className="w-[50vw] h-full" />
-          {fakeProducts.map((product) => (
+          {products.map((product) => (
             <ProductCard key={product.id} product={product}>
               <Scaler scrollContainer={scrollContainer}>
                 <Link
@@ -56,7 +53,7 @@ export default async function Page() {
       </div>
       <div className="md:hidden block">
         <div className="grid grid-cols-3 gap-2 auto-rows-max">
-          {fakeProducts.map((product) => (
+          {products.map((product) => (
             <ProductCard key={product.id} product={product} className="mb-6">
               <Link
                 className={cn("relative block w-full aspect-[3/4]")}

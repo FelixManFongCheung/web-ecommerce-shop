@@ -137,8 +137,6 @@ export default function CartPopup({ className }: { className?: string }) {
     showCartProducts();
   }, [isCartOpen, cartProductIds]);
 
-  console.log("isCartOpen", isCartOpen);
-
   return (
     <>
       <div className={cn("block md:hidden", className)}>
