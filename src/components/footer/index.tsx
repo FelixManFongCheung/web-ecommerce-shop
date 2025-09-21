@@ -9,7 +9,7 @@ export default function Footer() {
     <div
       className={cn(
         "relative",
-        "w-full px-14 flex justify-between items-end h-fit pb-10"
+        "w-full px-14 flex justify-between items-end h-fit pb-10 pt-20"
       )}
     >
       <div className="flex flex-col w-[200px]">
