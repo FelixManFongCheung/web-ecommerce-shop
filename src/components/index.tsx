@@ -6,7 +6,7 @@ import { Checkout, CheckoutButton } from "./checkout";
 import CookieWrapper from "./cookieWrapper";
 import Footer from "./footer";
 import Header from "./header";
-import Hero from "./hero";
+import { Hero, HeroDesktop, HeroMobile } from "./hero";
 import Menu from "./menu";
 import Nav from "./nav";
 
@@ -39,6 +39,8 @@ export {
   Footer,
   Header,
   Hero,
+  HeroDesktop,
+  HeroMobile,
   Icon,
   Menu,
   ModalProductCard,
