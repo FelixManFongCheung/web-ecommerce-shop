@@ -13,21 +13,19 @@ export async function getAllProductImages(productId: string) {
   }
 
   const imageUrls = await Promise.all(
-    data
-      .map(async (file) => {
-        const { data, error } = await supabase.storage
-          .from("Products")
-          .createSignedUrl(`${productId}/${file.name}`, 3600 * 24 * 30);
+    data.map(async (file) => {
+      const { data, error } = await supabase.storage
+        .from("Products")
+        .createSignedUrl(`${productId}/${file.name}`, 3600 * 24 * 30);
 
-        if (error) {
-          console.error(error);
-          return null;
-        }
+      if (error) {
+        console.error(error);
+        return null;
+      }
 
-        return data.signedUrl;
-      })
-      .filter((url) => url !== null)
+      return data.signedUrl;
+    })
   );
 
-  return imageUrls;
+  return imageUrls.filter((url) => url !== null);
 }

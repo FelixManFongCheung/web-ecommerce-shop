@@ -3,7 +3,7 @@ import { getAllProductImages } from "@/actions/getAllProductImages";
 import { getProduct } from "@/actions/stripe";
 import ATC from "@/components/atc";
 import { cn } from "@/lib/cn/utils";
-import Image from "next/image";
+import Pagination from "./components/Pagination";
 import { ProductPageMetaData } from "./type";
 
 export default async function Page(props: {
@@ -11,6 +11,7 @@ export default async function Page(props: {
 }) {
   const params = await props.params;
   const productId = params.product;
+  // TODO: remember to always store all of teh images including the thumbnail on supabase s3
   const images = await getAllProductImages(productId);
   const product = await getProduct(productId);
   // const priceID = await getPriceId(product.id);
@@ -32,20 +33,8 @@ export default async function Page(props: {
         "flex flex-col gap-4 min-h-screen h-fit md:flex-row md:mt-header-height mt-header-height-mobile md:pl-desktop-product-page-padding-left md:pr-desktop-product-page-padding-right md:py-[100px] items-center justify-center"
       )}
     >
-      <div className={cn("relative w-full max-w-md aspect-[3/4]")}>
-        {images.map((image, index) => (
-          <div key={index} className={cn("relative w-full h-full")}>
-            <Image
-              fill
-              sizes="(max-width: 768px) 80vw, (max-width: 1200px) 30vw, 25vw"
-              placeholder="blur"
-              blurDataURL={image ?? ""}
-              src={image ?? ""}
-              alt="product image"
-              style={{ objectFit: "cover" }}
-            />
-          </div>
-        ))}
+      <div className={cn("relative w-full")}>
+        <Pagination productImageUrls={images} />
       </div>
       <div className={cn("flex flex-col gap-4 items-start pr-4")}>
         <div>
