@@ -17,11 +17,19 @@ export function NestedGroup({
   group,
   level = 0,
   path = "",
+  onClickHandle,
 }: {
   group: Group;
   level?: number;
   path?: string;
+  onClickHandle?: () => void;
 }) {
+  if (group["categories"]) {
+    group.categories = {
+      "all items": {},
+      ...group.categories,
+    };
+  }
   const initialOpenItems =
     level === 0 ? new Set(Object.keys(group)) : new Set([]);
   const [openItems, setOpenItems] = useState<Set<string>>(initialOpenItems);
@@ -68,8 +76,16 @@ export function NestedGroup({
           )
         ) : null}
         <Link
-          href={`/collections/${path}-${key}`}
+          href={
+            key === "all items"
+              ? "/collections/all"
+              : `/collections/${path}-${key}`
+          }
           className={cn(level === 0 && "pointer-events-none", "inline-block")}
+          onClick={(e) => {
+            e.stopPropagation();
+            onClickHandle?.();
+          }}
         >
           <h1 style={{ cursor: "pointer" }}>
             <span>{key}</span>
@@ -85,6 +101,7 @@ export function NestedGroup({
               group={value as Group}
               level={level + 1}
               path={level === 0 ? key : `${path}-${key}`}
+              onClickHandle={onClickHandle}
             />
           </div>
         )}

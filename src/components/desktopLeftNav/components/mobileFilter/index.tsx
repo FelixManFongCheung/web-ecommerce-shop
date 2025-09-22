@@ -36,7 +36,14 @@ export default function MobileFilter({
         />
         <div className="relative w-[40%] h-full bg-secondary mx-auto flex flex-col gap-header-height-mobile">
           <Icon className="text-primary h-header-height-mobile w-full pointer-events-none justify-center" />
-          <Filter groups={groups} className="relative px-8" />
+          <Filter
+            groups={groups}
+            className="relative px-8"
+            onClickHandle={() => {
+              setIsFilterOpen(false);
+              console.log("clicked");
+            }}
+          />
         </div>
       </div>
     </div>

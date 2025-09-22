@@ -9,10 +9,12 @@ export default function Filter({
   groups,
   className,
   style,
+  onClickHandle,
 }: {
   groups: Group;
   className?: string;
   style?: React.CSSProperties;
+  onClickHandle?: () => void;
 }) {
   return (
     <div
@@ -22,7 +24,7 @@ export default function Filter({
       )}
       style={style}
     >
-      <NestedGroup group={groups} />
+      <NestedGroup group={groups} onClickHandle={onClickHandle} />
     </div>
   );
 }
