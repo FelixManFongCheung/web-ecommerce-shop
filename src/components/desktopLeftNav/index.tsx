@@ -10,6 +10,7 @@ import {
   VERTICAL_LINE_OFFSET_Y_LEFT,
 } from "@/lib/constants";
 import { MenuBtn } from "./components/menuBtn";
+import MobileFilter from "./components/mobileFilter";
 import { getRecursiveFolder } from "./hooks";
 
 export default async function DesktopLeftNav({
@@ -88,9 +89,15 @@ export default async function DesktopLeftNav({
           groups={groups}
         />
       </div>
+      {/* Mobile Header Name */}
       {!isProductPage && (
         <div className="md:hidden block after:content-[''] after:block after:h-[3px] after:w-[75%] after:bg-primary">
-          <h1 className="text-primary text-nowrap text-7xl">{headerName}</h1>
+          {headerName === "Shop" && hasFilter && (
+            <MobileFilter headerName={headerName} groups={groups} />
+          )}
+          <h1 className="hidden md:block text-primary text-nowrap text-7xl">
+            {headerName}
+          </h1>
         </div>
       )}
     </>

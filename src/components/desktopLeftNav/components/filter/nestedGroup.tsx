@@ -52,7 +52,7 @@ export function NestedGroup({
           left={
             -(VERTICAL_LINE_OFFSET_X_LEFT * 2 - HORIZONTAL_LINE_OFFSET_X_LEFT)
           }
-          className={cn("relative bg-primary")}
+          className={cn("relative bg-primary hidden md:block")}
         />
       )}
       <div style={{ marginLeft: `${level * 0.2}rem` }}>
