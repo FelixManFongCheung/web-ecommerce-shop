@@ -39,10 +39,7 @@ export default function MobileFilter({
           <Filter
             groups={groups}
             className="relative px-8"
-            onClickHandle={() => {
-              setIsFilterOpen(false);
-              console.log("clicked");
-            }}
+            onClickHandle={() => setIsFilterOpen(false)}
           />
         </div>
       </div>
