@@ -24,8 +24,10 @@ export default function MobileFilter({
       <div className="cursor-pointer" onClick={() => setIsFilterOpen(true)} />
       <div
         className={cn(
-          "fixed inset-0 h-screen w-screen",
-          isFilterOpen ? "block" : "hidden"
+          "fixed inset-0 h-screen w-screen transition-all duration-300 ease-in-out",
+          isFilterOpen
+            ? "opacity-100 pointer-events-auto"
+            : "opacity-0 pointer-events-none"
         )}
       >
         <div
