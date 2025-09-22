@@ -1,9 +1,9 @@
 // import Checkout from '@/components/checkout';
 import { getAllProductImages } from "@/actions/getAllProductImages";
 import { getPriceId, getProduct, retrievePrice } from "@/actions/stripe";
+import { Gallery, Pagination } from "@/components";
 import ATC from "@/components/atc";
 import { cn } from "@/lib/cn/utils";
-import Pagination from "./components/Pagination";
 import { ProductPageMetaData } from "./type";
 
 export default async function Page(props: {
@@ -30,14 +30,15 @@ export default async function Page(props: {
   return (
     <div
       className={cn(
-        "flex flex-col gap-4 min-h-screen h-fit md:flex-row md:mt-header-height mt-header-height-mobile md:pl-desktop-product-page-padding-left md:pr-desktop-product-page-padding-right md:py-[100px] items-center justify-center"
+        "flex flex-col w-full gap-8 min-h-screen h-fit md:flex-row md:mt-header-height mt-header-height-mobile md:py-[100px] items-center justify-center"
       )}
     >
-      <div className={cn("relative w-full")}>
+      <div className={cn("relative md:w-[50%] w-full")}>
         <Pagination productImageUrls={images} />
+        <Gallery productImageUrls={images} />
       </div>
       <div
-        className={cn("flex flex-col w-full md:w-auto gap-4 items-start pr-4")}
+        className={cn("flex flex-col md:w-[50%] w-full gap-4 items-start pr-4")}
       >
         <div className="w-full">
           <p>{product.name}</p>

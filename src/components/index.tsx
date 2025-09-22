@@ -23,7 +23,9 @@ import DesktopLeftNav from "./desktopLeftNav";
 import Filter from "./desktopLeftNav/components/filter";
 import DesktopRightNav from "./desktopRightNav";
 import FollowUsDialog from "./followUsDialog";
+import Gallery from "./gallery";
 import Icon from "./icon";
+import Pagination from "./pagination";
 
 export {
   ATC,
@@ -37,6 +39,7 @@ export {
   Filter,
   FollowUsDialog,
   Footer,
+  Gallery,
   Header,
   Hero,
   HeroDesktop,
@@ -46,6 +49,7 @@ export {
   ModalProductCard,
   ModalWrapper,
   Nav,
+  Pagination,
   ProductCard,
   ProductCardSkeleton,
   RemoveItem,

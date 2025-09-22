@@ -13,7 +13,7 @@ export default function Pagination({
   const [page, setPage] = useState(0);
   const pageCount = productImageUrls.length;
   return (
-    <>
+    <div className="block md:hidden">
       {productImageUrls.map((image, index) => (
         <div
           key={index}
@@ -80,6 +80,6 @@ export default function Pagination({
           <ChevronRightIcon className="w-8 h-8" />
         </div>
       </div>
-    </>
+    </div>
   );
 }
