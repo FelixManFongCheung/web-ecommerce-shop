@@ -16,10 +16,10 @@ export default async function BehindHeroLayout({
   return (
     <CookieWrapper className="relative">
       <Nav />
-      <CartPopup />
       <Header />
       <DesktopRightNav />
       {children}
+      <CartPopup />
       <FollowUsDialog />
       <Footer />
     </CookieWrapper>

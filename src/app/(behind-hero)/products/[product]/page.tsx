@@ -30,7 +30,7 @@ export default async function Page(props: {
   return (
     <div
       className={cn(
-        "flex flex-col w-full gap-8 min-h-screen h-fit md:flex-row md:mt-header-height mt-header-height-mobile md:py-[100px] items-center justify-center"
+        "flex flex-col w-full gap-8 min-h-screen h-fit md:flex-row justify-center md:pt-8 pt-0"
       )}
     >
       <div className={cn("relative md:w-[50%] w-full")}>
