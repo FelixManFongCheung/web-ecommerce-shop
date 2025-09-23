@@ -31,6 +31,7 @@ export function Checkout({ priceID }: CheckoutType) {
   const fetchClientSecret = useCallback(async () => {
     setError(null);
     setIsLoading(true);
+    console.log("fetching client secret");
     try {
       if (!priceID) {
         throw new Error("Price ID is required");
@@ -68,9 +69,46 @@ export function Checkout({ priceID }: CheckoutType) {
     setIsMouseOver(false);
   };
 
+  const appearance = {
+    theme: "stripe", // or 'night', 'flat'
+    variables: {
+      colorPrimary: "#0570de", // Your brand primary color
+      colorBackground: "#ffffff",
+      colorText: "#30313d",
+      colorDanger: "#df1b41",
+      fontFamily: "Ideal Sans, system-ui, sans-serif",
+      spacingUnit: "4px",
+      borderRadius: "8px",
+    },
+    rules: {
+      ".Input": {
+        border: "2px solid #e1e5e9",
+        borderRadius: "8px",
+        padding: "12px",
+      },
+      ".Input:focus": {
+        border: "2px solid #0570de",
+        boxShadow: "0 0 0 3px rgba(5, 112, 222, 0.1)",
+      },
+      ".Label": {
+        fontWeight: "600",
+        color: "#30313d",
+      },
+      ".Tab": {
+        borderRadius: "8px",
+        padding: "12px 16px",
+      },
+      ".Tab--selected": {
+        backgroundColor: "#0570de",
+        color: "#ffffff",
+      },
+    },
+  };
+
   const options = {
     clientSecret,
     onComplete: toggleCheckoutDialog,
+    appearance,
   };
 
   return (
