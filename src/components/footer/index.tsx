@@ -1,3 +1,5 @@
+"use client";
+
 import { Icon } from "@/components";
 import { cn } from "@/lib/cn/utils";
 import Link from "next/link";
@@ -5,6 +7,17 @@ import { PiInstagramLogoLight } from "react-icons/pi";
 import { TfiEmail } from "react-icons/tfi";
 
 export default function Footer() {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.target as HTMLFormElement);
+    const email = formData.get("email") as string;
+    const response = await fetch("/api/newsletter", {
+      method: "POST",
+      body: JSON.stringify({ email }),
+    });
+    const data = await response.json();
+    console.log(data);
+  };
   return (
     <div
       className={cn(
@@ -28,14 +41,20 @@ export default function Footer() {
           JOIN THE PROXY PAPER Sign up for exclusive restock updates, pre-sale
           access, and curated promotions.
         </span>
-        <input
-          type="email"
-          placeholder="enter your email address here"
-          className="w-full border-2 border-primary p-1"
-        />
-        <button className="bg-primary text-white max-w-fit p-1 self-end">
-          SUBSCRIBE
-        </button>
+        <form onSubmit={handleSubmit}>
+          <input
+            type="email"
+            name="email"
+            placeholder="enter your email address here"
+            className="w-full border-2 border-primary p-1"
+          />
+          <button
+            type="submit"
+            className="bg-primary text-white max-w-fit p-1 self-end"
+          >
+            SUBSCRIBE
+          </button>
+        </form>
       </div>
     </div>
   );
