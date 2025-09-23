@@ -25,7 +25,7 @@ import { HeroRandomImageScreen } from "./HeroRandomImageScreen";
 export function HeroDesktop({ images }: { images: string[] }) {
   return (
     <div className="relative w-screen h-screen md:block hidden bg-primary">
-      <HeroRandomImageScreen images={images} />
+      {images.length > 0 && <HeroRandomImageScreen images={images} />}
       <div
         className="absolute bottom-0 left-0 h-[80%] flex flex-col w-[40%] text-secondary"
         style={{
@@ -175,7 +175,7 @@ export function HeroDesktop({ images }: { images: string[] }) {
 export function HeroMobile({ images }: { images: string[] }) {
   return (
     <div className="relative w-screen h-screen bg-primary md:hidden block">
-      <HeroRandomImageScreen images={images} />
+      {images.length > 0 && <HeroRandomImageScreen images={images} />}
       <div
         className="absolute top-0 left-0 h-[60%] flex flex-col w-full text-secondary"
         style={{
