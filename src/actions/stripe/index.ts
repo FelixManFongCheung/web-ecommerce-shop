@@ -73,18 +73,14 @@ export async function retrieveSession(
   return session;
 }
 
-export const retrievePrice = unstable_cache(
-  async (priceId: string) => {
-    const price = await stripe.prices.retrieve(priceId);
-    return {
-      amount: price.unit_amount,
-      currency: price.currency,
-      type: price.type,
-    };
-  },
-  ["price"],
-  { revalidate: 3600 }
-);
+export const retrievePrice = async (priceId: string) => {
+  const price = await stripe.prices.retrieve(priceId);
+  return {
+    amount: price.unit_amount,
+    currency: price.currency,
+    type: price.type,
+  };
+};
 
 export async function updateProduct(
   productId: string,
