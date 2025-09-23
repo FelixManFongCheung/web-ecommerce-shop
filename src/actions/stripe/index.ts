@@ -101,51 +101,40 @@ export async function createCheckoutSession(params: CheckoutSessionParams) {
   return session;
 }
 
-export const retrieveCustomer = unstable_cache(
-  async (customerId: string) => {
-    const customer = await stripe.customers.retrieve(customerId);
-    return customer;
-  },
-  ["customer"],
-  { revalidate: 3600 }
-);
+export const retrieveCustomer = async (customerId: string) => {
+  const customer = await stripe.customers.retrieve(customerId);
+  return customer;
+};
 
-export const retrieveProductsByMetaDataKey = unstable_cache(
-  async (key: string) => {
+export const retrieveProductsByMetaDataKey = async (key: string) => {
+  const products = await stripe.products.search({
+    query: `metadata['${key}']:null`,
+  });
+  return products.data;
+};
+
+export const retrieveProductsByMetaDataKeyAndValue = async (
+  key: string,
+  value: string
+) => {
+  const query = `metadata['${key}']:'${value}'`;
+  try {
     const products = await stripe.products.search({
-      query: `metadata['${key}']:null`,
+      query: query,
     });
+
     return products.data;
-  },
-  ["products-by-meta-data-key"],
-  { revalidate: 3600 }
-);
+  } catch (error) {
+    console.error("Stripe search error:", error);
+    throw new Error("Search failed");
+  }
+};
 
-export const retrieveProductsByMetaDataKeyAndValue = unstable_cache(
-  async (key: string, value: string) => {
-    const query = `metadata['${key}']:'${value}'`;
-    try {
-      const products = await stripe.products.search({
-        query: query,
-      });
-
-      return products.data;
-    } catch (error) {
-      console.error("Stripe search error:", error);
-      throw new Error("Search failed");
-    }
-  },
-  ["products-by-meta-data-key-and-value"],
-  { revalidate: 3600 }
-);
-
-export const getShippingRates = unstable_cache(
-  async (): Promise<Stripe.Checkout.SessionCreateParams.ShippingOption[]> => {
-    const shippingRates = await stripe.shippingRates.list();
-    return shippingRates.data.map((rate) => ({
-      shipping_rate: rate.id,
-    }));
-  },
-  ["shipping-rates"],
-  { revalidate: 3600 }
-);
+export const getShippingRates = async (): Promise<
+  Stripe.Checkout.SessionCreateParams.ShippingOption[]
+> => {
+  const shippingRates = await stripe.shippingRates.list();
+  return shippingRates.data.map((rate) => ({
+    shipping_rate: rate.id,
+  }));
+};
