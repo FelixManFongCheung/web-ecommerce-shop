@@ -1,5 +1,8 @@
-import { Hero } from "@/components";
+import { getThreeRandomImages } from "@/actions/getThreeRandomImages";
+import { Hero } from "@/components/hero";
 
 export default async function Home() {
-  return <Hero />;
+  const images = await getThreeRandomImages();
+  console.log(images);
+  return <Hero images={images} />;
 }

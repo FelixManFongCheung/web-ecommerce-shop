@@ -20,10 +20,12 @@ import {
 } from "@/lib/constants";
 import Link from "next/link";
 import DecoratorLines from "../decoratorLines";
+import { HeroRandomImageScreen } from "./HeroRandomImageScreen";
 
-export function HeroDesktop() {
+export function HeroDesktop({ images }: { images: string[] }) {
   return (
     <div className="relative w-screen h-screen md:block hidden bg-primary">
+      <HeroRandomImageScreen images={images} />
       <div
         className="absolute bottom-0 left-0 h-[80%] flex flex-col w-[40%] text-secondary"
         style={{
@@ -170,9 +172,10 @@ export function HeroDesktop() {
     </div>
   );
 }
-export function HeroMobile() {
+export function HeroMobile({ images }: { images: string[] }) {
   return (
     <div className="relative w-screen h-screen bg-primary md:hidden block">
+      <HeroRandomImageScreen images={images} />
       <div
         className="absolute top-0 left-0 h-[60%] flex flex-col w-full text-secondary"
         style={{
@@ -320,11 +323,11 @@ export function HeroMobile() {
   );
 }
 
-export function Hero() {
+export function Hero({ images }: { images: string[] }) {
   return (
     <>
-      <HeroDesktop />
-      <HeroMobile />
+      <HeroDesktop images={images} />
+      <HeroMobile images={images} />
     </>
   );
 }
