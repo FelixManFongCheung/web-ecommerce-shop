@@ -22,7 +22,7 @@ const nextConfig = {
     ];
   },
 
-  serverExternalPackages: ['@tensorflow/tfjs-node'],
+  serverExternalPackages: ['@tensorflow/tfjs-node', 'sharp'],
 
   images: {
     remotePatterns: [

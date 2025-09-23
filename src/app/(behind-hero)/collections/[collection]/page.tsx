@@ -1,3 +1,4 @@
+import { getPlaceholderImage } from "@/actions/placeholder";
 import { getProductsAll } from "@/actions/stripe";
 import { ProductCard, ProductCardSkeleton } from "@/components";
 import { cn } from "@/lib/cn/utils";
@@ -52,13 +53,20 @@ export default async function Page({
     );
   }
 
+  const productImageWithPlaceholders = await Promise.all(
+    products.map(async (product) => {
+      const placeholder = await getPlaceholderImage(product.images[0]);
+      return { ...product, placeholder };
+    })
+  );
+
   //TODO: implement infinite scroll with lazy load or virtualisation
   // TODO: implement filter click to collections/[param] by using substring construction with ~ key for substring search with stripe metadata
   return (
     <div>
       <div className="grid grid-cols-2 lg:grid-cols-3 gap-2 auto-rows-max">
-        {products.length > 0 ? (
-          products.map((product) => (
+        {productImageWithPlaceholders.length > 0 ? (
+          productImageWithPlaceholders.map((product) => (
             <Suspense key={product.id} fallback={<ProductCardSkeleton />}>
               <ProductCard product={product} className="mb-6">
                 <Link
@@ -68,6 +76,9 @@ export default async function Page({
                   <Image
                     src={product.images[0]}
                     alt={product.name}
+                    placeholder="blur"
+                    blurDataURL={product.placeholder.placeholder}
+                    loading="lazy"
                     fill
                     sizes="(max-width: 768px) 60vw, (max-width: 1200px) 50vw, 33vw"
                   />
@@ -75,6 +86,9 @@ export default async function Page({
                     <Image
                       src="/assets/normal/x.png"
                       alt={product.name}
+                      placeholder="blur"
+                      blurDataURL={product.placeholder.placeholder}
+                      loading="lazy"
                       fill
                       sizes="(max-width: 768px) 60vw, (max-width: 1200px) 50vw, 33vw"
                       className="absolute top-0 left-0"

@@ -5,10 +5,15 @@ import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
 
+interface ProductImageWithPlaceholder {
+  imageUrl: string;
+  placeholder: { placeholder: string };
+}
+
 export default function Pagination({
   productImageUrls,
 }: {
-  productImageUrls: string[];
+  productImageUrls: ProductImageWithPlaceholder[];
 }) {
   const [page, setPage] = useState(0);
   const pageCount = productImageUrls.length;
@@ -29,8 +34,8 @@ export default function Pagination({
             fill
             sizes="(max-width: 768px) 80vw, (max-width: 1200px) 30vw, 25vw"
             placeholder="blur"
-            blurDataURL={image ?? ""}
-            src={image ?? ""}
+            blurDataURL={image.placeholder.placeholder ?? ""}
+            src={image.imageUrl ?? ""}
             alt="product image"
             style={{ objectFit: "cover" }}
           />

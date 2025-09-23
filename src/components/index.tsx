@@ -11,7 +11,6 @@ import Menu from "./menu";
 import Nav from "./nav";
 
 // UI units
-import ModalProductCard from "./modalProductCard";
 import ModalWrapper from "./modalWrapper";
 import ProductCard from "./productCard";
 import ProductCardSkeleton from "./productSkeleton";
@@ -46,7 +45,6 @@ export {
   HeroMobile,
   Icon,
   Menu,
-  ModalProductCard,
   ModalWrapper,
   Nav,
   Pagination,
