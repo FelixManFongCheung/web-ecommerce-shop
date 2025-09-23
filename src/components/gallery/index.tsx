@@ -3,28 +3,21 @@
 import Image from "next/image";
 import { useState } from "react";
 
-interface ProductImageWithPlaceholder {
-  imageUrl: string;
-  placeholder: { placeholder: string };
-}
-
 export default function Gallery({
   productImageUrls,
 }: {
-  productImageUrls: ProductImageWithPlaceholder[];
+  productImageUrls: string[];
 }) {
   const [thumbnail, setThumbnail] = useState(productImageUrls[0]);
-  const rest = productImageUrls.filter(
-    (image) => image.imageUrl !== thumbnail.imageUrl
-  );
+  const rest = productImageUrls.filter((image) => image !== thumbnail);
   return (
     <div className="hidden md:flex flex-col w-full gap-2">
       <div className="relative w-full aspect-[3/4]">
         <Image
           fill
           placeholder="blur"
-          src={thumbnail.imageUrl ?? ""}
-          blurDataURL={thumbnail.placeholder.placeholder ?? ""}
+          src={thumbnail ?? ""}
+          blurDataURL={`/_next/image?url=${thumbnail ?? ""}&w=16&q=1`}
           alt="product image"
           style={{ objectFit: "cover" }}
         />
@@ -37,9 +30,9 @@ export default function Gallery({
             onClick={() => setThumbnail(image)}
           >
             <Image
-              src={image.imageUrl}
+              src={image}
               placeholder="blur"
-              blurDataURL={image.placeholder.placeholder}
+              blurDataURL={`/_next/image?url=${image}&w=16&q=1`}
               alt="product image"
               fill
               style={{ objectFit: "cover" }}

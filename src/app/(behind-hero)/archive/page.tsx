@@ -1,4 +1,3 @@
-import { getPlaceholderImage } from "@/actions/placeholder";
 import { retrieveProductsByMetaDataKeyAndValue } from "@/actions/stripe";
 import ProductCard from "@/components/productCard";
 import Scaler from "@/components/productCard/Scaler";
@@ -15,13 +14,6 @@ export default async function Page() {
 
   const scrollContainer = "scroll-container";
 
-  const productImageWithPlaceholders = await Promise.all(
-    products.map(async (product) => {
-      const placeholder = await getPlaceholderImage(product.images[0]);
-      return { ...product, placeholder };
-    })
-  );
-
   return (
     <>
       <div
@@ -30,7 +22,7 @@ export default async function Page() {
       >
         <div className="flex flex-row gap-10">
           <div className="w-[50vw] h-full" />
-          {productImageWithPlaceholders.map((product) => (
+          {products.map((product) => (
             <ProductCard key={product.id} product={product}>
               <Scaler scrollContainer={scrollContainer}>
                 <Link
@@ -41,7 +33,7 @@ export default async function Page() {
                     src={product.images[0]}
                     alt={product.name}
                     placeholder="blur"
-                    blurDataURL={product.placeholder.placeholder}
+                    blurDataURL={`/_next/image?url=${product.images[0]}&w=16&q=1`}
                     loading="lazy"
                     fill
                     sizes="(max-width: 768px) 60vw, (max-width: 1200px) 50vw, 33vw"
@@ -51,7 +43,7 @@ export default async function Page() {
                       src="/assets/normal/x.png"
                       alt={product.name}
                       placeholder="blur"
-                      blurDataURL={product.placeholder.placeholder}
+                      blurDataURL={`/_next/image?url=${product.images[0]}&w=16&q=1`}
                       loading="lazy"
                       fill
                       sizes="(max-width: 768px) 60vw, (max-width: 1200px) 50vw, 33vw"
@@ -67,7 +59,7 @@ export default async function Page() {
       </div>
       <div className="md:hidden block">
         <div className="grid grid-cols-3 gap-2 auto-rows-max">
-          {productImageWithPlaceholders.map((product) => (
+          {products.map((product) => (
             <ProductCard key={product.id} product={product} className="mb-6">
               <Link
                 className={cn("relative block w-full aspect-[3/4]")}
@@ -77,7 +69,7 @@ export default async function Page() {
                   src={product.images[0]}
                   alt={product.name}
                   placeholder="blur"
-                  blurDataURL={product.placeholder.placeholder}
+                  blurDataURL={`/_next/image?url=${product.images[0]}&w=16&q=1`}
                   loading="lazy"
                   fill
                 />

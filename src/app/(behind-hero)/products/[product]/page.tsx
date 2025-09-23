@@ -1,6 +1,5 @@
 // import Checkout from '@/components/checkout';
 import { getAllProductImages } from "@/actions/getAllProductImages";
-import { getPlaceholderImage } from "@/actions/placeholder";
 import { getPriceId, getProduct, retrievePrice } from "@/actions/stripe";
 import { Gallery, Pagination } from "@/components";
 import ATC from "@/components/atc";
@@ -14,12 +13,6 @@ export default async function Page(props: {
   const productId = params.product;
   // TODO: remember to always store all of teh images including the thumbnail on supabase s3
   const images = await getAllProductImages(productId);
-  const productImageWithPlaceholders = await Promise.all(
-    images.map(async (imageUrl) => {
-      const placeholder = await getPlaceholderImage(imageUrl);
-      return { imageUrl, placeholder };
-    })
-  );
   const product = await getProduct(productId);
   const priceID = await getPriceId(product.id);
   const price = await retrievePrice(priceID);
@@ -41,8 +34,8 @@ export default async function Page(props: {
       )}
     >
       <div className={cn("relative md:w-[50%] w-full")}>
-        <Pagination productImageUrls={productImageWithPlaceholders} />
-        <Gallery productImageUrls={productImageWithPlaceholders} />
+        <Pagination productImageUrls={images} />
+        <Gallery productImageUrls={images} />
       </div>
       <div
         className={cn("flex flex-col md:w-[50%] w-full gap-4 items-start pr-4")}

@@ -1,4 +1,3 @@
-import { getPlaceholderImage } from "@/actions/placeholder";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -17,7 +16,6 @@ interface ModalProductCardProps {
 export default async function ModalProductCard({
   product,
 }: ModalProductCardProps) {
-  const placeholder = await getPlaceholderImage(product.images[0]);
   return (
     <Link
       href={`/products/${product.id}`}
@@ -29,7 +27,7 @@ export default async function ModalProductCard({
           alt={product.name}
           fill
           placeholder="blur"
-          blurDataURL={placeholder.placeholder}
+          blurDataURL={`/_next/image?url=${product.images[0]}&w=16&q=1`}
           loading="lazy"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           className="object-cover transition-transform duration-300 hover:scale-105"
