@@ -4,11 +4,7 @@ export async function getThreeRandomImages() {
   const supabase = await createClient();
   const { data, error } = await supabase.storage.from("CoverImages").list();
 
-  if (
-    error ||
-    data.length === 0 ||
-    data[0].name === ".emptyFolderPlaceholder"
-  ) {
+  if (error || data.length === 0) {
     console.error(error);
     return [];
   }
