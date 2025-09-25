@@ -42,7 +42,8 @@ export default function Header() {
           className={cn(
             "absolute top-0 left-1/2 h-full transform -translate-x-1/2 flex items-center justify-center",
             isCartOpen ? "text-secondary md:text-primary" : "text-primary",
-            "transition-all duration-300 ease-in-out"
+            "transition-all duration-300 ease-in-out",
+            "hover:text-primary/70"
           )}
         />
       </div>
