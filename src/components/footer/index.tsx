@@ -28,11 +28,11 @@ export default function Footer() {
       <div className="flex flex-col w-[200px] text-[12px]">
         <Icon className={cn("w-auto mb-4")} fontSize={18} />
         <Link className="flex flex-row items-center gap-2" href="/">
-          <TfiEmail className="w-4 h-4" />
+          <TfiEmail className="w-3 h-3" />
           <span>info@proxyarchive.com</span>
         </Link>
         <Link className="flex flex-row items-center gap-2" href="/">
-          <PiInstagramLogoLight className="w-4 h-4" />
+          <PiInstagramLogoLight className="w-3 h-3" />
           <span>@proxy__archive</span>
         </Link>
       </div>
