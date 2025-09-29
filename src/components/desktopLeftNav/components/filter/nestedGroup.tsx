@@ -48,9 +48,12 @@ export function NestedGroup({
   return Object.entries(group).map(([key, value]) => (
     <div
       key={key}
-      className={`text-[0.7rem] pt-[0.7rem] ${
-        level === 0 && metaDataKey.indexOf(key) === 0 && "h-64"
-      }`}
+      className={cn(
+        `text-[0.7rem] ${
+          level === 0 && metaDataKey.indexOf(key) === 0 && "h-64"
+        }`,
+        level === 0 && "pt-[0.7rem]"
+      )}
     >
       {level === 0 && metaDataKey.indexOf(key) !== 0 && (
         <DecoratorLines
