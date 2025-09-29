@@ -87,7 +87,7 @@ export function NestedGroup({
           onClick={onClickHandle}
         >
           <h1 style={{ cursor: "pointer" }}>
-            <span>{key}</span>
+            <span>{level === 0 ? key.toUpperCase() : key}</span>
           </h1>
         </Link>
         {value && Object.keys(value).length > 0 && (
