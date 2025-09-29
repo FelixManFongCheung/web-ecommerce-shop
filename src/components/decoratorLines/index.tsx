@@ -30,7 +30,7 @@ export default function DecoratorLines({
       case "thin":
         return "0.125rem"; // 2px
       case "medium":
-        return "0.5rem"; // 8px
+        return "0.4rem"; // 8px
       case "thick":
         return "0.7rem"; // 16px
       default:

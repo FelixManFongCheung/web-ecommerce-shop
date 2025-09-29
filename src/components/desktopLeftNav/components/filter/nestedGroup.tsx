@@ -6,7 +6,6 @@ import { cn } from "@/lib/cn/utils";
 import {
   HORIZONTAL_LINE_OFFSET_X_LEFT,
   HORIZONTAL_LINE_WIDTH_LEFT,
-  VERTICAL_LINE_OFFSET_X_LEFT,
 } from "@/lib/constants";
 import { Minus, Plus } from "lucide-react";
 import Link from "next/link";
@@ -49,7 +48,9 @@ export function NestedGroup({
   return Object.entries(group).map(([key, value]) => (
     <div
       key={key}
-      className={`${level === 0 && metaDataKey.indexOf(key) === 0 && "h-64"}`}
+      className={`text-[0.7rem] pt-[0.7rem] ${
+        level === 0 && metaDataKey.indexOf(key) === 0 && "h-64"
+      }`}
     >
       {level === 0 && metaDataKey.indexOf(key) !== 0 && (
         <DecoratorLines
@@ -57,10 +58,8 @@ export function NestedGroup({
           position="left"
           variant="medium"
           width={`${HORIZONTAL_LINE_WIDTH_LEFT / 2}rem`}
-          left={
-            -(VERTICAL_LINE_OFFSET_X_LEFT * 2 - HORIZONTAL_LINE_OFFSET_X_LEFT)
-          }
-          className={cn("relative bg-primary hidden md:block")}
+          left={-3.5 + HORIZONTAL_LINE_OFFSET_X_LEFT}
+          className={cn("relative bg-primary hidden md:block mb-[0.7rem]")}
         />
       )}
       <div style={{ marginLeft: `${level * 0.2}rem` }}>

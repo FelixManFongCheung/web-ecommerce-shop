@@ -56,8 +56,8 @@ export default async function DesktopLeftNav({
           <Filter
             groups={groups}
             style={{
-              top: `${HORIZONTAL_LINE_OFFSET_Y_LEFT + 1}rem`,
-              left: `${VERTICAL_LINE_OFFSET_X_LEFT * 2}rem`,
+              top: `${HORIZONTAL_LINE_OFFSET_Y_LEFT + 0.7}rem`,
+              left: "3.5rem",
             }}
           />
         )}
