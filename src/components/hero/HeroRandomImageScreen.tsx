@@ -40,7 +40,7 @@ export function HeroRandomImageScreen({
   }, [screenWidthMargin, screenHeightMargin, initialImages]);
 
   return (
-    <div ref={screenRef} className="absolute w-screen h-screen">
+    <div ref={screenRef} className="absolute w-screen h-screen overflow-hidden">
       <div className="absolute top-0 left-0 w-full h-full">
         {images.map((image) => (
           <div
