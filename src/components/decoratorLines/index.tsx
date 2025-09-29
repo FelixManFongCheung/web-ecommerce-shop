@@ -32,7 +32,7 @@ export default function DecoratorLines({
       case "medium":
         return "0.5rem"; // 8px
       case "thick":
-        return "1rem"; // 16px
+        return "0.7rem"; // 16px
       default:
         return "0.125rem";
     }

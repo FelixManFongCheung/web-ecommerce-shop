@@ -35,7 +35,7 @@ export default async function DesktopLeftNav({
         {/* Navigation */}
         <div
           className={cn(
-            "absolute flex flex-row justify-end items-center gap-2"
+            "absolute flex flex-row justify-end items-center gap-[3.2rem]"
           )}
           style={{
             top: `${VERTICAL_LINE_OFFSET_Y_LEFT}rem`,
@@ -45,8 +45,9 @@ export default async function DesktopLeftNav({
             }rem`,
           }}
         >
-          <h1 className="text-primary text-nowrap text-7xl">{headerName}</h1>
-          <span>|</span>
+          <h1 className="text-primary text-nowrap text-(length:--header-text-size)">
+            {headerName}
+          </h1>
           <MenuBtn />
         </div>
         {/* Desktop Left Nav displaying content for each page */}

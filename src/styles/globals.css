@@ -3,10 +3,12 @@
 :root {
   --primary: oklch(0.2407 0.0349 31.44);
   --secondary: oklch(100% 0 0);
-  --header-height: 8rem;
+  --header-height: 6.6rem;
   --header-height-mobile: 3rem;
-  --desktop-left-nav-width: 300px;
-  --desktop-right-nav-width: 200px;
+  --header-text-size: 4rem;
+  --desktop-left-nav-width: 17.18rem;
+  --desktop-right-nav-width: 10.625rem;
+  --desktop-collections-padding: 3.75rem;
   --desktop-info-pages-padding-left: 500px;
   --desktop-info-pages-padding-right: 150px;
   --desktop-product-page-padding-left: 200px;
@@ -33,6 +35,7 @@
   --spacing-desktop-product-page-padding-right: var(
     --desktop-product-page-padding-right
   );
+  --spacing-desktop-collections-padding: var(--desktop-collections-padding);
 }
 
 @font-face {
