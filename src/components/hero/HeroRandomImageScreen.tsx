@@ -37,7 +37,7 @@ export function HeroRandomImageScreen({
       );
     };
     fetchImages();
-  }, [screenWidthMargin, screenHeightMargin, initialImages]);
+  }, [screenWidthMargin, screenHeightMargin, images]);
 
   return (
     <div ref={screenRef} className="absolute w-screen h-screen overflow-hidden">
