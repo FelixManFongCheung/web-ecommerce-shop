@@ -106,7 +106,7 @@ function CartContent({
           ))}
         </div>
       )}
-      <div>
+      <div className="p-1 pb-4">
         {/* TODO: price in total */}
         <p className="text-secondary mb-4">
           shipping and taxes calculated at checkout
@@ -157,12 +157,12 @@ export default function CartPopup({ className }: { className?: string }) {
       <div className={cn("relative block md:hidden z-10", className)}>
         <div
           className={cn(
-            "fixed top-0 w-screen bg-primary p-8 pt-15 transition-all duration-300 ease-in-out",
+            "fixed top-0 w-screen bg-primary p-2 pt-15 transition-all duration-300 ease-in-out",
             isCartOpen ? "right-0" : "-right-full",
             "h-screen flex flex-col"
           )}
         >
-          <div className="relative mb-10 after:right-0 after:bottom-0 after:absolute md:hidden block after:content-[''] after:block after:h-[3px] after:w-[75%] after:bg-secondary">
+          <div className="relative mb-10 mr-3 after:right-0 after:bottom-0 after:absolute md:hidden block after:content-[''] after:block after:h-[3px] after:w-[75%] after:bg-secondary">
             <h1 className="text-secondary text-nowrap text-(length:--desktop-header-text-size) text-right">
               Cart
             </h1>

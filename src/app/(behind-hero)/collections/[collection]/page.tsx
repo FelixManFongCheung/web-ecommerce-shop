@@ -56,7 +56,7 @@ export default async function Page({
   // TODO: implement filter click to collections/[param] by using substring construction with ~ key for substring search with stripe metadata
   return (
     <div>
-      <div className="grid grid-cols-2 lg:grid-cols-3 gap-19 auto-rows-max">
+      <div className="grid grid-cols-2 lg:grid-cols-3 md:gap-19 gap-1 auto-rows-max">
         {products.length > 0 ? (
           products.map((product) => (
             <Suspense key={product.id} fallback={<ProductCardSkeleton />}>

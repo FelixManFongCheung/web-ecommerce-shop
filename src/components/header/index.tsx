@@ -24,15 +24,15 @@ export default function Header() {
               <Image
                 src="/assets/white/menu.png"
                 alt="menu"
-                width={24}
-                height={24}
+                width={27}
+                height={27}
               />
             ) : (
               <Image
                 src="/assets/normal/menu.png"
                 alt="menu"
-                width={24}
-                height={24}
+                width={27}
+                height={27}
               />
             )}
           </button>
@@ -54,15 +54,15 @@ export default function Header() {
             <Image
               src="/assets/white/cart.png"
               alt="cart"
-              width={24}
-              height={24}
+              width={27}
+              height={27}
             />
           ) : (
             <Image
               src="/assets/normal/cart.png"
               alt="cart"
-              width={24}
-              height={24}
+              width={27}
+              height={27}
             />
           )}
         </button>
