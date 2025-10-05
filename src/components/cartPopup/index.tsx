@@ -137,12 +137,26 @@ export default function CartPopup({ className }: { className?: string }) {
     showCartProducts();
   }, [isCartOpen, cartProductIds]);
 
+  // Manage body class for global styling
+  useEffect(() => {
+    if (isCartOpen) {
+      document.body.classList.add("cart-open");
+    } else {
+      document.body.classList.remove("cart-open");
+    }
+
+    // Cleanup on unmount
+    return () => {
+      document.body.classList.remove("cart-open");
+    };
+  }, [isCartOpen]);
+
   return (
     <>
-      <div className={cn("block md:hidden", className)}>
-        {/* cartpopup z index 12 */}
+      {/* cartpopup z index 12 */}
+      <div className={cn("block md:hidden z-14", className)}>
         <button
-          className="h-header-height-mobile fixed top-0 right-5 z-12 flex justify-center items-center cursor-pointer"
+          className="h-header-height-mobile fixed top-0 right-5 flex justify-center items-center cursor-pointer"
           onClick={toggleCart}
         >
           {isCartOpen ? (
@@ -163,8 +177,8 @@ export default function CartPopup({ className }: { className?: string }) {
         </button>
         <div
           className={cn(
-            "fixed z-10 top-0 w-screen bg-primary p-8 pt-15 transition-all duration-300 ease-in-out",
-            isCartOpen ? "right-0" : "-right-full",
+            "fixed top-0 w-screen bg-primary p-8 pt-15 transition-all duration-300 ease-in-out",
+            isCartOpen ? "right-0 z-11" : "-right-full z-10",
             "h-screen flex flex-col"
           )}
         >
@@ -183,7 +197,7 @@ export default function CartPopup({ className }: { className?: string }) {
 
       <div
         className={cn("fixed h-screen hidden md:block", className)}
-        data-cart-open={isCartOpen}
+        // data-cart-open={isCartOpen}
       >
         {isCartOpen && <div className="fixed inset-0" onClick={toggleCart} />}
         <div

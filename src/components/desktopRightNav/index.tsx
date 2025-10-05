@@ -13,12 +13,12 @@ import CartBtn from "./components/cartBtn";
 export default function DesktopRightNav() {
   return (
     <div
-      className={`md:block hidden fixed z-11 right-0 top-0 h-full w-desktop-right-nav-width bg-transparent`}
+      className={`md:block hidden fixed z-11 cart-open:z-20 cart-open:z-no-delayed-open z-delayed-close right-0 top-0 h-full w-desktop-right-nav-width bg-transparent`}
     >
-      <CartPopup className="peer" />
+      <CartPopup />
       <div
         className={cn(
-          "absolute flex flex-col justify-center items-center peer-data-[cart-open=true]:text-secondary"
+          "absolute flex flex-col justify-center items-center cart-open:text-secondary"
         )}
         style={{
           top: `${VERTICAL_LINE_OFFSET_Y_RIGHT}rem`,
@@ -39,7 +39,7 @@ export default function DesktopRightNav() {
         right={VERTICAL_LINE_OFFSET_X_RIGHT}
         top={VERTICAL_LINE_OFFSET_Y_RIGHT}
         className={cn(
-          "absolute transition-all duration-300 ease-in-out peer-data-[cart-open=true]:bg-secondary bg-primary"
+          "absolute transition-all duration-300 ease-in-out cart-open:bg-secondary bg-primary"
         )}
       />
       {/* horizontal line */}
@@ -51,7 +51,7 @@ export default function DesktopRightNav() {
         right={HORIZONTAL_LINE_OFFSET_X_RIGHT}
         top={HORIZONTAL_LINE_OFFSET_Y_RIGHT}
         className={cn(
-          "absolute transition-all duration-300 ease-in-out peer-data-[cart-open=true]:bg-secondary bg-primary"
+          "absolute transition-all duration-300 ease-in-out cart-open:bg-secondary bg-primary"
         )}
       />
     </div>

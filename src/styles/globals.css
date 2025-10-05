@@ -1,5 +1,59 @@
 @import "tailwindcss";
 
+/* 
+ * Z-INDEX HIERARCHY DOCUMENTATION
+ * ===============================
+ * 
+ * This section documents all z-index values used throughout the application
+ * to maintain proper layering and avoid conflicts.
+ * 
+ * Z-INDEX RANKING (from lowest to highest):
+ * 
+ * z-0  (0)     - Page content (children), Default/base level
+ * z-10 (10)    - Add to Cart button (mobile), Cart popup (mobile closed state)
+ * z-11 (11)    - Header, Desktop Right Nav (base state), Cart popup (mobile open state)
+ * z-12 (12)    - Desktop Left Nav, Menu component, Menu button overlay, Cart popup (mobile)
+ * z-13 (13)    - Footer
+ * z-20 (20)    - Navigation menu (mobile), Desktop Right Nav (cart open state)
+ * z-30 (30)    - Mobile Filter component
+ * z-50 (50)    - Dialog/Modal components (UI library)
+ * z-99 (99)    - Modal Wrapper (checkout dialog)
+ * 
+ * COMPONENT BREAKDOWN:
+ * 
+ * z-0:  Add to Cart button (desktop relative positioning)
+ * z-10: Add to Cart button (mobile fixed), Cart popup (mobile closed)
+ * z-11: Header, Desktop Right Nav (base), Cart popup (mobile open)
+ * z-12: Desktop Left Nav, Menu, Menu button overlay, Cart popup (mobile container)
+ * z-13: Footer
+ * z-20: Navigation menu (mobile), Desktop Right Nav (cart open)
+ * z-30: Mobile Filter
+ * z-50: Dialog components (shadcn/ui)
+ * z-99: Modal Wrapper (checkout)
+ * 
+ * SPECIAL CASES:
+ * - Cart open state: Desktop Right Nav jumps from z-11 to z-20
+ * - Mobile navigation: Uses z-20 for full-screen overlay
+ * - Footer: z-13 to stay above most content but below modals
+ * - Modal Wrapper: z-99 for checkout dialog (highest priority)
+ * 
+ * TRIGGER/MODAL STRATEGY:
+ * ======================
+ * 
+ * TRIGGERS (Base Layer):
+ * - Cart button: Inherits from parent (z-11)
+ * - Menu button: Inherits from parent (z-12)
+ * - Checkout button: Inherits from parent (z-0)
+ * 
+ * MODALS (Higher Layer):
+ * - Cart popup: z-20 (above trigger z-11)
+ * - Navigation: z-20 (above trigger z-12)
+ * - Checkout dialog: z-99 (above all triggers)
+ * 
+ * RULE: Modal z-index MUST be higher than its trigger
+ * This ensures proper layering and prevents visual conflicts
+ */
+
 :root {
   --primary: oklch(0.2407 0.0349 31.44);
   --secondary: oklch(100% 0 0);
@@ -68,6 +122,35 @@
   .no-scrollbar {
     -ms-overflow-style: none;
     scrollbar-width: none;
+  }
+
+  .z-delayed-close {
+    transition: z-index 0s 300ms;
+  }
+
+  .cart-open\:z-no-delayed-open:where(.cart-open *) {
+    transition: z-index 0s;
+  }
+
+  /* Cart open state utilities */
+  .cart-open\:text-secondary:where(.cart-open *) {
+    color: var(--secondary);
+  }
+
+  .cart-open\:bg-secondary:where(.cart-open *) {
+    background-color: var(--secondary);
+  }
+
+  .cart-open\:bg-primary:where(.cart-open *) {
+    @media (max-width: 768px) {
+      background-color: var(--primary);
+    }
+  }
+
+  .cart-open\:z-20:where(.cart-open *) {
+    @media (min-width: 768px) {
+      z-index: 20;
+    }
   }
 }
 

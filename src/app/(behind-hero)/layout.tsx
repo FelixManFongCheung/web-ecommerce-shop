@@ -18,10 +18,10 @@ export default async function BehindHeroLayout({
       <Nav />
       <Header />
       <DesktopRightNav />
-      {children}
+      <div className="relative z-0">{children}</div>
       <CartPopup />
-      <FollowUsDialog />
       <Footer />
+      <FollowUsDialog />
     </CookieWrapper>
   );
 }
