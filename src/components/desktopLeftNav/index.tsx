@@ -1,4 +1,3 @@
-import { getProductsAll } from "@/actions/stripe";
 import { DecoratorLines, Filter, Menu } from "@/components";
 import { cn } from "@/lib/cn/utils";
 import {
@@ -9,24 +8,23 @@ import {
   VERTICAL_LINE_OFFSET_X_LEFT,
   VERTICAL_LINE_OFFSET_Y_LEFT,
 } from "@/lib/constants";
+import { Group } from "../desktopLeftNav/components/filter";
 import { MenuBtn } from "./components/menuBtn";
 import MobileFilter from "./components/mobileFilter";
-import { getRecursiveFolder } from "./hooks";
 
 export default async function DesktopLeftNav({
   headerName,
   children,
   hasFilter,
   isProductPage,
+  groups,
 }: {
   headerName: string;
   children?: React.ReactNode;
   hasFilter?: boolean;
   isProductPage?: boolean;
+  groups: Group;
 }) {
-  const productsAll = await getProductsAll();
-  const groups = getRecursiveFolder(productsAll);
-
   return (
     <>
       <div

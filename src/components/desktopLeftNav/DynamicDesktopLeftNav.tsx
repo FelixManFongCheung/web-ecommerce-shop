@@ -1,25 +1,33 @@
+"use client";
+
 import { cn } from "@/lib/cn/utils";
 import {
   HORIZONTAL_LINE_OFFSET_Y_LEFT,
   VERTICAL_LINE_OFFSET_X_LEFT,
 } from "@/lib/constants";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import DesktopLeftNav from ".";
+import { Group } from "../desktopLeftNav/components/filter";
 
-export default async function DynamicDesktopLeftNav({
-  pathname,
-}: {
-  pathname: string;
-}) {
+export default function DynamicDesktopLeftNav({ groups }: { groups: Group }) {
+  const pathname = usePathname();
   const headerName = pathname.split("/")[1];
 
   if (headerName === "collections") {
-    return <DesktopLeftNav headerName="Shop" hasFilter={true} />;
+    return (
+      <DesktopLeftNav headerName="Shop" hasFilter={true} groups={groups} />
+    );
   }
 
   if (headerName === "products") {
     return (
-      <DesktopLeftNav headerName="Shop" isProductPage={true} hasFilter={true} />
+      <DesktopLeftNav
+        headerName="Shop"
+        isProductPage={true}
+        hasFilter={true}
+        groups={groups}
+      />
     );
   }
 
@@ -33,8 +41,24 @@ export default async function DynamicDesktopLeftNav({
       "/visit-us": "Visit Us",
       "/terms-and-conditions": "Terms&Conditions",
     };
+
+    let titleName = "";
+    switch (headerName) {
+      case "about":
+        titleName = "About";
+        break;
+      case "visit-us":
+        titleName = "Visit Us";
+        break;
+      case "terms-and-conditions":
+        titleName = "Terms&Conditions";
+        break;
+      default:
+        titleName = headerName;
+        break;
+    }
     return (
-      <DesktopLeftNav headerName={headerName}>
+      <DesktopLeftNav headerName={titleName} groups={groups}>
         <div
           className="absolute flex flex-col text-2xl"
           style={{
@@ -57,16 +81,16 @@ export default async function DynamicDesktopLeftNav({
   }
 
   if (headerName === "new-arrivals") {
-    return <DesktopLeftNav headerName="New Arrivals" />;
+    return <DesktopLeftNav headerName="New Arrivals" groups={groups} />;
   }
 
   if (headerName === "archive") {
-    return <DesktopLeftNav headerName="Archive" />;
+    return <DesktopLeftNav headerName="Archive" groups={groups} />;
   }
 
   if (headerName === "return") {
-    return <DesktopLeftNav headerName="Confirmation" />;
+    return <DesktopLeftNav headerName="Confirmation" groups={groups} />;
   }
 
-  return <DesktopLeftNav headerName={headerName} />;
+  return <DesktopLeftNav headerName={headerName} groups={groups} />;
 }

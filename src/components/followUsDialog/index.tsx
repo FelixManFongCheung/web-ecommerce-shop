@@ -16,7 +16,7 @@ export default function FollowUsDialog() {
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent
         className={cn(
-          "h-[75%] md:max-h-[50%] aspect-[4/3] px-24 flex flex-col justify-center items-center text-secondary bg-primary rounded-none sm:rounded-none border-none"
+          "w-[80vw] aspect-[4/3] container px-12! flex flex-col justify-center items-center text-secondary bg-primary rounded-none sm:rounded-none border-none"
         )}
       >
         <DialogHeader>

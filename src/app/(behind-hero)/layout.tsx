@@ -1,3 +1,4 @@
+import { getProductsAll } from "@/actions/stripe";
 import {
   CartPopup,
   CookieWrapper,
@@ -8,21 +9,21 @@ import {
   Nav,
 } from "@/components";
 import DynamicDesktopLeftNav from "@/components/desktopLeftNav/DynamicDesktopLeftNav";
-import { headers } from "next/headers";
+import { getRecursiveFolder } from "@/components/desktopLeftNav/hooks";
 
 export default async function BehindHeroLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const headersList = await headers();
-  const pathname = headersList.get("x-pathname") || "/";
+  const productsAll = await getProductsAll();
+  const groups = getRecursiveFolder(productsAll);
   return (
     <CookieWrapper className="relative">
       <Nav />
       <Header />
       <DesktopRightNav />
-      <DynamicDesktopLeftNav pathname={pathname} />
+      <DynamicDesktopLeftNav groups={groups} />
       <div className="relative z-0">{children}</div>
       <Footer />
       <CartPopup />
