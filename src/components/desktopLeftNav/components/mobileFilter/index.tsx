@@ -16,7 +16,9 @@ export default function MobileFilter({
   return (
     <div className="relative z-30 block md:hidden">
       <div className="flex flex-row justify-between items-center">
-        <h1 className="text-primary text-nowrap text-7xl">{headerName}</h1>
+        <h1 className="text-primary text-nowrap text-(length:--mobile-header-text-size)">
+          {headerName}
+        </h1>
         <div className="cursor-pointer" onClick={() => setIsFilterOpen(true)}>
           filters
         </div>

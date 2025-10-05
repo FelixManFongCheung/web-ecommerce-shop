@@ -30,7 +30,7 @@ export default async function DesktopLeftNav({
   return (
     <>
       <div
-        className={`md:block hidden fixed z-11 left-0 top-0 h-full w-desktop-left-nav-width bg-transparent`}
+        className={`md:block hidden fixed z-14 left-0 top-0 h-full w-desktop-left-nav-width bg-transparent`}
       >
         {/* Navigation */}
         <div
@@ -45,7 +45,7 @@ export default async function DesktopLeftNav({
             }rem`,
           }}
         >
-          <h1 className="text-primary text-nowrap text-(length:--header-text-size)">
+          <h1 className="text-primary text-nowrap text-(length:--desktop-header-text-size)">
             {headerName}
           </h1>
           <MenuBtn />
@@ -92,11 +92,13 @@ export default async function DesktopLeftNav({
       </div>
       {/* Mobile Header Name */}
       {!isProductPage && (
-        <div className="md:hidden block after:content-[''] after:block after:h-[3px] after:w-[75%] after:bg-primary">
+        <div className="md:hidden mt-header-height-mobile px-mobile-content-padding-horizontal block after:content-[''] after:block after:h-[3px] after:w-[75%] after:bg-primary">
           {headerName === "Shop" && hasFilter ? (
             <MobileFilter headerName={headerName} groups={groups} />
           ) : (
-            <h1 className="text-primary text-nowrap text-7xl">{headerName}</h1>
+            <h1 className="text-primary text-nowrap text-(length:--mobile-header-text-size)">
+              {headerName}
+            </h1>
           )}
         </div>
       )}

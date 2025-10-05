@@ -16,7 +16,7 @@ export default function CartBtn({ className }: { className?: string }) {
     <div onClick={openCart} className={cn("cursor-pointer", className)}>
       <h1
         className={cn(
-          "text-inherit text-wrap text-(length:--header-text-size)"
+          "text-inherit text-wrap text-(length:--desktop-header-text-size)"
         )}
       >
         Cart({cartCount || 0})

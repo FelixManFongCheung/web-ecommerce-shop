@@ -14,7 +14,7 @@ export default async function Page(props: {
   const products = await searchProducts(search);
 
   return (
-    <section className="text-left py-2 px-2 md:py-[100px] md:px-[200px]">
+    <section className="text-left px-2 md:py-[100px] md:px-[200px]">
       <h1>Search Results for &ldquo;{search}&rdquo;</h1>
       <br />
       <div className="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-8 auto-rows-max">

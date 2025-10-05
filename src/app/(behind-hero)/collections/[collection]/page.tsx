@@ -18,7 +18,7 @@ export default async function Page({
 
   if (!allProducts) {
     return (
-      <section className="text-left py-2 px-2 md:py-[100px] md:px-[200px]">
+      <section className="text-left px-2 md:py-[100px] md:px-[200px]">
         <div>No products found</div>
       </section>
     );
@@ -46,7 +46,7 @@ export default async function Page({
 
   if (!products) {
     return (
-      <section className="text-left py-2 px-2 md:py-[100px] md:px-[200px]">
+      <section className="text-left px-2 md:py-[100px] md:px-[200px]">
         <div>No products found in this collection</div>
       </section>
     );

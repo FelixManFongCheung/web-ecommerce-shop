@@ -183,7 +183,7 @@ export default function CartPopup({ className }: { className?: string }) {
           )}
         >
           <div className="relative mb-10 after:right-0 after:bottom-0 after:absolute md:hidden block after:content-[''] after:block after:h-[3px] after:w-[75%] after:bg-secondary">
-            <h1 className="text-secondary text-nowrap text-(length:--header-text-size) text-right">
+            <h1 className="text-secondary text-nowrap text-(length:--desktop-header-text-size) text-right">
               Cart
             </h1>
           </div>

@@ -24,8 +24,8 @@ export default async function BehindHeroLayout({
       <DesktopRightNav />
       <DynamicDesktopLeftNav pathname={pathname} />
       <div className="relative z-0">{children}</div>
-      <CartPopup />
       <Footer />
+      <CartPopup />
       <FollowUsDialog />
     </CookieWrapper>
   );

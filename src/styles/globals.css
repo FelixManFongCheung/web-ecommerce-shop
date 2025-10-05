@@ -58,8 +58,10 @@
   --primary: oklch(0.2407 0.0349 31.44);
   --secondary: oklch(100% 0 0);
   --header-height: 6.6rem;
-  --header-height-mobile: 3rem;
-  --header-text-size: 4rem;
+  --header-height-mobile: 4rem;
+  --desktop-header-text-size: 4rem;
+  --mobile-header-text-size: 3rem;
+  --mobile-content-padding-horizontal: 1.1rem;
   --desktop-left-nav-width: 17.18rem;
   --desktop-right-nav-width: 10.625rem;
   --desktop-collections-padding: 3.75rem;
@@ -75,6 +77,9 @@
   --color-secondary: var(--secondary);
   --spacing-header-height: var(--header-height);
   --spacing-header-height-mobile: var(--header-height-mobile);
+  --spacing-mobile-content-padding-horizontal: var(
+    --mobile-content-padding-horizontal
+  );
   --spacing-desktop-left-nav-width: var(--desktop-left-nav-width);
   --spacing-desktop-right-nav-width: var(--desktop-right-nav-width);
   --spacing-desktop-info-pages-padding-left: var(

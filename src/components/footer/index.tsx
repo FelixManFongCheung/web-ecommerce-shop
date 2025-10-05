@@ -19,6 +19,7 @@ export default function Footer() {
     console.log(data);
   };
   return (
+    // footer z-13
     <div
       className={cn(
         "relative z-13",
