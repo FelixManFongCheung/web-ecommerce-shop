@@ -153,32 +153,12 @@ export default function CartPopup({ className }: { className?: string }) {
 
   return (
     <>
-      {/* cartpopup z index 12 */}
-      <div className={cn("block md:hidden z-14", className)}>
-        <button
-          className="h-header-height-mobile fixed top-0 right-5 flex justify-center items-center cursor-pointer"
-          onClick={toggleCart}
-        >
-          {isCartOpen ? (
-            <Image
-              src="/assets/white/cart.png"
-              alt="cart"
-              width={24}
-              height={24}
-            />
-          ) : (
-            <Image
-              src="/assets/normal/cart.png"
-              alt="cart"
-              width={24}
-              height={24}
-            />
-          )}
-        </button>
+      {/* cartpopup z index 14 */}
+      <div className={cn("relative block md:hidden z-10", className)}>
         <div
           className={cn(
             "fixed top-0 w-screen bg-primary p-8 pt-15 transition-all duration-300 ease-in-out",
-            isCartOpen ? "right-0 z-11" : "-right-full z-10",
+            isCartOpen ? "right-0" : "-right-full",
             "h-screen flex flex-col"
           )}
         >
@@ -194,7 +174,6 @@ export default function CartPopup({ className }: { className?: string }) {
           />
         </div>
       </div>
-
       <div
         className={cn("fixed h-screen hidden md:block", className)}
         // data-cart-open={isCartOpen}

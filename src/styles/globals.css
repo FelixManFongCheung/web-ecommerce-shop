@@ -129,12 +129,8 @@
     scrollbar-width: none;
   }
 
-  .z-delayed-close {
-    transition: z-index 0s 300ms;
-  }
-
-  .cart-open\:z-no-delayed-open:where(.cart-open *) {
-    transition: z-index 0s;
+  .cart-open\:z-index-20:where(.cart-open *) {
+    z-index: 20;
   }
 
   /* Cart open state utilities */
@@ -149,12 +145,6 @@
   .cart-open\:bg-primary:where(.cart-open *) {
     @media (max-width: 768px) {
       background-color: var(--primary);
-    }
-  }
-
-  .cart-open\:z-20:where(.cart-open *) {
-    @media (min-width: 768px) {
-      z-index: 20;
     }
   }
 }

@@ -6,7 +6,7 @@ import { useAppActions, useIsCartOpen } from "@/stores/appStore";
 import Image from "next/image";
 
 export default function Header() {
-  const { toggleOpen } = useAppActions();
+  const { toggleOpen, toggleCart } = useAppActions();
   const isCartOpen = useIsCartOpen();
 
   return (
@@ -14,7 +14,8 @@ export default function Header() {
       {/* header z index 11 */}
       <div
         className={cn(
-          "fixed top-0 md:h-header-height h-header-height-mobile flex z-11 w-full justify-between px-5 bg-white"
+          "fixed top-0 md:h-header-height h-header-height-mobile flex z-11 w-full justify-between px-5",
+          "bg-white cart-open:bg-primary"
         )}
       >
         <div className="block md:hidden">
@@ -45,6 +46,26 @@ export default function Header() {
             "hover:text-primary/70"
           )}
         />
+        <button
+          className="md:hidden h-header-height-mobile fixed top-0 right-5 flex justify-center items-center cursor-pointer"
+          onClick={toggleCart}
+        >
+          {isCartOpen ? (
+            <Image
+              src="/assets/white/cart.png"
+              alt="cart"
+              width={24}
+              height={24}
+            />
+          ) : (
+            <Image
+              src="/assets/normal/cart.png"
+              alt="cart"
+              width={24}
+              height={24}
+            />
+          )}
+        </button>
       </div>
     </>
   );

@@ -22,7 +22,7 @@ export default function Footer() {
     // footer z-13
     <div
       className={cn(
-        "relative z-13",
+        "relative z-10",
         "w-full px-14 flex justify-between items-start h-fit pb-10 pt-20"
       )}
     >
