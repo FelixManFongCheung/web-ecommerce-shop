@@ -39,9 +39,22 @@ export async function middleware(request: NextRequest) {
     }
   }
 
-  return NextResponse.next();
+  // Pass pathname through headers for server components
+  const response = NextResponse.next();
+  response.headers.set("x-pathname", pathname);
+
+  return response;
 }
 
 export const config = {
-  matcher: ["/return/:path*"],
+  matcher: [
+    "/return/:path*",
+    "/products/:path*",
+    "/collections/:path*",
+    "/about/:path*",
+    "/visit-us/:path*",
+    "/terms-and-conditions/:path*",
+    "/new-arrivals/:path*",
+    "/archive/:path*",
+  ],
 };

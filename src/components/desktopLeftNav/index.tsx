@@ -30,7 +30,7 @@ export default async function DesktopLeftNav({
   return (
     <>
       <div
-        className={`md:block hidden fixed z-12 left-0 top-0 h-full w-desktop-left-nav-width bg-transparent`}
+        className={`md:block hidden fixed z-11 left-0 top-0 h-full w-desktop-left-nav-width bg-transparent`}
       >
         {/* Navigation */}
         <div

@@ -14,7 +14,7 @@ export default function Header() {
       {/* header z index 11 */}
       <div
         className={cn(
-          "fixed top-0 md:h-header-height h-header-height-mobile flex z-14 w-full justify-between px-5 bg-white"
+          "fixed top-0 md:h-header-height h-header-height-mobile flex z-11 w-full justify-between px-5 bg-white"
         )}
       >
         <div className="block md:hidden">

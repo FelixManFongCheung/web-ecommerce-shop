@@ -4,6 +4,7 @@ import { Checkout, CheckoutButton } from "./checkout";
 
 // main UI components
 import CookieWrapper from "./cookieWrapper";
+import DynamicDesktopLeftNav from "./desktopLeftNav/DynamicDesktopLeftNav";
 import Footer from "./footer";
 import Header from "./header";
 import { Hero, HeroDesktop, HeroMobile } from "./hero";
@@ -35,6 +36,7 @@ export {
   DecoratorLines,
   DesktopLeftNav,
   DesktopRightNav,
+  DynamicDesktopLeftNav,
   Filter,
   FollowUsDialog,
   Footer,
