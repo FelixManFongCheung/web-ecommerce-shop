@@ -15,7 +15,8 @@ export default function Header() {
       <div
         className={cn(
           "fixed top-0 md:h-header-height h-header-height-mobile flex z-11 w-full justify-between px-5",
-          "bg-white cart-open:bg-primary"
+          "bg-white cart-open:bg-primary",
+          "cart-open:z-20"
         )}
       >
         <div className="block md:hidden">

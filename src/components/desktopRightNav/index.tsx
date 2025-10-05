@@ -13,7 +13,7 @@ import CartBtn from "./components/cartBtn";
 export default function DesktopRightNav() {
   return (
     <div
-      className={`md:block hidden fixed z-11 right-0 top-0 h-full w-desktop-right-nav-width bg-transparent`}
+      className={`md:block hidden fixed z-11 cart-open:z-20 right-0 top-0 h-full w-desktop-right-nav-width bg-transparent`}
     >
       <CartPopup />
       <div
@@ -23,9 +23,9 @@ export default function DesktopRightNav() {
         style={{
           top: `${VERTICAL_LINE_OFFSET_Y_RIGHT}rem`,
           right: `${VERTICAL_LINE_OFFSET_X_RIGHT * 2 - 0.8}rem`,
-          height: `${
+          height: `min(${
             HORIZONTAL_LINE_OFFSET_Y_RIGHT - VERTICAL_LINE_OFFSET_Y_RIGHT
-          }rem`,
+          }rem, calc(100vh - var(--footer-height)))`,
         }}
       >
         <CartBtn />

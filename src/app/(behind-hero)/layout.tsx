@@ -24,7 +24,7 @@ export default async function BehindHeroLayout({
       <Header />
       <DesktopRightNav />
       <DynamicDesktopLeftNav groups={groups} />
-      <div className="relative z-0">{children}</div>
+      <div>{children}</div>
       <Footer />
       <CartPopup />
       <FollowUsDialog />

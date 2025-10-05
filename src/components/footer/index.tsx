@@ -22,11 +22,11 @@ export default function Footer() {
     // footer z-13
     <div
       className={cn(
-        "relative z-10",
-        "w-full px-14 flex justify-between items-start h-fit pb-10 pt-20"
+        "relative z-11",
+        "w-full px-14 flex justify-between items-end h-footer-height pb-2 pt-2"
       )}
     >
-      <div className="flex flex-col w-[200px] text-[12px]">
+      <div className="flex flex-col w-[200px] text-[0.75rem]">
         <Icon className={cn("w-auto mb-4")} fontSize={18} />
         <Link className="flex flex-row items-center gap-2" href="/">
           <TfiEmail className="w-3 h-3" />
@@ -37,7 +37,7 @@ export default function Footer() {
           <span>@proxy__archive</span>
         </Link>
       </div>
-      <div className="flex flex-col gap-2 w-[200px] text-[12px]">
+      <div className="flex flex-col gap-2 w-[200px] text-[0.75rem]">
         <p className="text-primary text-right text-wrap">
           JOIN THE PROXY PAPER
         </p>

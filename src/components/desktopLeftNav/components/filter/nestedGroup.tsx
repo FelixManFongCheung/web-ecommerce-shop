@@ -50,9 +50,8 @@ export function NestedGroup({
       key={key}
       className={cn(
         `text-[0.7rem] ${
-          level === 0 && metaDataKey.indexOf(key) === 0 && "h-64"
-        }`,
-        level === 0 && "pt-[0.7rem]"
+          level === 0 && metaDataKey.indexOf(key) === 0 && "h-fit pt-[0.7rem]"
+        }`
       )}
     >
       {level === 0 && metaDataKey.indexOf(key) !== 0 && (
@@ -92,9 +91,12 @@ export function NestedGroup({
         </Link>
         {value && Object.keys(value).length > 0 && (
           <div
-            className={`${
-              openItems.has(key) ? "max-h-64" : "max-h-0"
-            } overflow-hidden transition-all duration-300 ease-in-out`}
+            className={cn(
+              `${
+                openItems.has(key) ? "max-h-64" : "max-h-0"
+              } overflow-hidden transition-all duration-300 ease-in-out`,
+              level === 1 && "max-h-64 overflow-y-auto"
+            )}
           >
             <NestedGroup
               group={value as Group}

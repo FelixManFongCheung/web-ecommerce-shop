@@ -11,8 +11,8 @@
  * 
  * z-0  (0)     - Page content (children), Default/base level
  * z-10 (10)    - Add to Cart button (mobile), Cart popup (mobile closed state)
- * z-11 (11)    - Header, Desktop Right Nav (base state), Cart popup (mobile open state)
- * z-12 (12)    - Desktop Left Nav, Menu component, Menu button overlay, Cart popup (mobile)
+ * z-11 (11)    - Header, Desktop Right Nav (base state), Cart popup (mobile open state), Menu button overlay
+ * z-12 (12)    - Desktop Left Nav, Menu component, Cart popup (mobile)
  * z-13 (13)    - Footer
  * z-20 (20)    - Navigation menu (mobile), Desktop Right Nav (cart open state)
  * z-30 (30)    - Mobile Filter component
@@ -23,11 +23,10 @@
  * 
  * z-0:  Add to Cart button (desktop relative positioning)
  * z-10: Add to Cart button (mobile fixed), Cart popup (mobile closed)
- * z-11: Header, Desktop Right Nav (base), Cart popup (mobile open)
+ * z-11: Header, Desktop Right Nav (base), Desktop Left Nav, Cart popup (mobile open) Mobile Filter
  * z-12: Desktop Left Nav, Menu, Menu button overlay, Cart popup (mobile container)
  * z-13: Footer
  * z-20: Navigation menu (mobile), Desktop Right Nav (cart open)
- * z-30: Mobile Filter
  * z-50: Dialog components (shadcn/ui)
  * z-99: Modal Wrapper (checkout)
  * 
@@ -54,6 +53,20 @@
  * This ensures proper layering and prevents visual conflicts
  */
 
+/* (in order of appearance)
+ normal:
+ header, cartpopup
+ desktoprightnav header desktopleftnav 
+ children
+ footer
+
+ when cart open (mobile): 
+ header cartpopup (yes)
+
+ when menu open (mobile): 
+ header (yes)
+ desktopleftnav (yes) */
+
 :root {
   --primary: oklch(0.2407 0.0349 31.44);
   --secondary: oklch(100% 0 0);
@@ -70,6 +83,7 @@
   --desktop-product-page-padding-left: 200px;
   --desktop-product-page-padding-right: 300px;
   --hero-line-padding: 4rem;
+  --footer-height: 8rem;
 }
 
 @theme inline {
@@ -95,6 +109,7 @@
     --desktop-product-page-padding-right
   );
   --spacing-desktop-collections-padding: var(--desktop-collections-padding);
+  --spacing-footer-height: var(--footer-height);
 }
 
 @font-face {
@@ -129,8 +144,12 @@
     scrollbar-width: none;
   }
 
-  .cart-open\:z-index-20:where(.cart-open *) {
+  .cart-open\:z-20:where(.cart-open *) {
     z-index: 20;
+  }
+  /* temp solution: will come up with dynamic z-index solution */
+  .cart-open\:z-10:where(.cart-open *) {
+    z-index: 10;
   }
 
   /* Cart open state utilities */

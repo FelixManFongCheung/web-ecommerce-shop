@@ -10,7 +10,7 @@ export function MenuBtn() {
       <button onClick={toggleOpen}>MENU</button>
       <div
         onClick={toggleOpen}
-        className={cn("fixed inset-0 z-12", isOpen ? "block" : "hidden")}
+        className={cn("fixed inset-0", isOpen ? "block" : "hidden")}
       ></div>
     </>
   );

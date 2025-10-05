@@ -28,7 +28,7 @@ export default async function DesktopLeftNav({
   return (
     <>
       <div
-        className={`md:block hidden fixed z-14 left-0 top-0 h-full w-desktop-left-nav-width bg-transparent`}
+        className={`md:block hidden fixed z-11 cart-open:z-20 left-0 top-0 h-full w-desktop-left-nav-width bg-transparent`}
       >
         {/* Navigation */}
         <div
@@ -64,7 +64,7 @@ export default async function DesktopLeftNav({
           alignment="vertical"
           position="left"
           variant="thin"
-          height={`${VERTICAL_LINE_HEIGHT_LEFT}rem`}
+          height={`min(${VERTICAL_LINE_HEIGHT_LEFT}rem, calc(100vh - var(--footer-height)))`}
           left={VERTICAL_LINE_OFFSET_X_LEFT}
           top={VERTICAL_LINE_OFFSET_Y_LEFT}
           className={cn("absolute bg-primary")}
@@ -90,7 +90,7 @@ export default async function DesktopLeftNav({
       </div>
       {/* Mobile Header Name */}
       {!isProductPage && (
-        <div className="relative z-10 md:hidden mt-header-height-mobile px-mobile-content-padding-horizontal block after:content-[''] after:block after:h-[3px] after:w-[75%] after:bg-primary">
+        <div className="relative z-11 md:hidden mt-header-height-mobile px-mobile-content-padding-horizontal block after:content-[''] after:block after:h-[3px] after:w-[75%] after:bg-primary">
           {headerName === "Shop" && hasFilter ? (
             <MobileFilter headerName={headerName} groups={groups} />
           ) : (
