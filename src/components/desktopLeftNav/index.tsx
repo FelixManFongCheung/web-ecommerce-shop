@@ -94,7 +94,13 @@ export default async function DesktopLeftNav({
           {headerName === "Shop" && hasFilter ? (
             <MobileFilter headerName={headerName} groups={groups} />
           ) : (
-            <h1 className="text-primary text-nowrap text-(length:--mobile-header-text-size)">
+            <h1
+              className={cn(
+                `text-primary text-nowrap text-(length:--mobile-header-text-size) ${
+                  headerName === "Terms&Conditions" ? "truncate" : ""
+                }`
+              )}
+            >
               {headerName}
             </h1>
           )}
