@@ -46,7 +46,7 @@ export default function MobileFilter({
           className={cn("fixed inset-0 h-full w-full bg-primary/30")}
           onClick={() => setIsFilterOpen(false)}
         />
-        <div className="relative w-[40%] h-full bg-secondary mx-auto flex flex-col gap-header-height-mobile">
+        <div className="relative w-[57%] h-full bg-secondary mx-auto flex flex-col gap-header-height-mobile">
           <Icon className="text-primary h-header-height-mobile w-full pointer-events-none justify-center" />
           <Filter
             groups={groups}
