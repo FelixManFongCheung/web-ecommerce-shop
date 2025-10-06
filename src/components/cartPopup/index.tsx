@@ -7,7 +7,6 @@ import {
   HORIZONTAL_LINE_OFFSET_X_RIGHT,
   HORIZONTAL_LINE_OFFSET_Y_RIGHT,
   HORIZONTAL_LINE_WIDTH_RIGHT,
-  VERTICAL_LINE_OFFSET_X_RIGHT,
 } from "@/lib/constants";
 import { useAppActions, useIsCartOpen } from "@/stores/appStore";
 import { useCartProducts } from "@/stores/cartStore";
@@ -70,12 +69,12 @@ function CartContent({
           className="flex flex-col flex-1 gap-5 w-full text-secondary overflow-y-auto no-scrollbar"
           {...(!isMobile && {
             style: {
-              paddingRight: `${VERTICAL_LINE_OFFSET_X_RIGHT + 1}rem`,
+              paddingRight: "0.4rem",
             },
           })}
         >
           {cartProducts.map((product) => (
-            <div key={product.id} className="flex flex-row gap-1 w-full">
+            <div key={product.id} className="flex flex-row w-full">
               <div
                 className={cn(
                   "relative flex flex-col gap-2 text-secondary w-[50%] aspect-[3/4]"
@@ -92,7 +91,7 @@ function CartContent({
               </div>
               <div
                 className={cn(
-                  "relative flex flex-col gap-2 text-secondary flex-1"
+                  "relative flex flex-col gap-2 text-secondary flex-1 px-[0.5rem]"
                 )}
               >
                 <RemoveItem
@@ -106,9 +105,9 @@ function CartContent({
           ))}
         </div>
       )}
-      <div className="p-1 pb-4">
+      <div className="p-1 pb-4 md:p-0">
         {/* TODO: price in total */}
-        <p className="text-secondary mb-4">
+        <p className="text-secondary mb-4 text-[0.57rem]">
           shipping and taxes calculated at checkout
         </p>
         <CheckoutButton
@@ -181,12 +180,10 @@ export default function CartPopup({ className }: { className?: string }) {
         {isCartOpen && <div className="fixed inset-0" onClick={toggleCart} />}
         <div
           className={cn(
-            "fixed top-0 h-full bg-primary p-8 transition-all duration-300 ease-in-out"
+            "fixed top-0 h-full bg-primary p-8 md:p-[1.5rem] md:pr-[2.3rem] transition-all duration-300 ease-in-out"
           )}
           style={{
-            width: `${
-              HORIZONTAL_LINE_WIDTH_RIGHT + HORIZONTAL_LINE_OFFSET_X_RIGHT + 1.5
-            }rem`,
+            width: "21rem",
             right: isCartOpen
               ? "0"
               : `-${

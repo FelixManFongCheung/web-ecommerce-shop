@@ -28,7 +28,7 @@ export default function RemoveItem({
     <div className={cn(className)}>
       {children}
       <button onClick={handleRemoveFromCart} className="cursor-pointer ml-2">
-        <X className="w-4 h-4" />
+        <X className="w-2 h-2" />
       </button>
     </div>
   );
