@@ -9,13 +9,12 @@ import { TfiEmail } from "react-icons/tfi";
 export default function Footer() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const formData = new FormData(e.target as HTMLFormElement);
-    const email = formData.get("email") as string;
-    const response = await fetch("/api/newsletter", {
-      method: "POST",
-      body: JSON.stringify({ email }),
-    });
-    const data = await response.json();
+    // const formData = new FormData(e.target as HTMLFormElement);
+    // const email = formData.get("email") as string;
+    // const response = await fetch("/api/newsletter", {
+    //   method: "POST",
+    //   body: JSON.stringify({ email }),
+    // });
   };
   return (
     // footer z-13

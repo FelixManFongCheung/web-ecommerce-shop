@@ -17,10 +17,7 @@ export default function MobileFilter({
     setIsFilterOpen(true);
     document.body.classList.add("filter-open");
   };
-  const handleFilterClose = () => {
-    setIsFilterOpen(false);
-    document.body.classList.remove("filter-open");
-  };
+
   useEffect(() => {
     return () => {
       document.body.classList.remove("filter-open");

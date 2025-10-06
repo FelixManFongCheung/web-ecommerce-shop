@@ -16,10 +16,6 @@ export default function Nav() {
     toggleOpen();
     document.body.classList.add("nav-open");
   };
-  const handlNavClose = () => {
-    toggleOpen();
-    document.body.classList.remove("nav-open");
-  };
 
   useEffect(() => {
     return () => {
