@@ -2,7 +2,7 @@
 
 import { Filter, Icon } from "@/components";
 import { cn } from "@/lib/cn/utils";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Group } from "../filter";
 
 export default function MobileFilter({
@@ -13,17 +13,30 @@ export default function MobileFilter({
   groups: Group;
 }) {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const handleFilterOpen = () => {
+    setIsFilterOpen(true);
+    document.body.classList.add("filter-open");
+  };
+  const handleFilterClose = () => {
+    setIsFilterOpen(false);
+    document.body.classList.remove("filter-open");
+  };
+  useEffect(() => {
+    return () => {
+      document.body.classList.remove("filter-open");
+    };
+  }, []);
   return (
     <div className="relative z-30 block md:hidden">
       <div className="flex flex-row justify-between items-center">
         <h1 className="text-primary text-nowrap text-(length:--mobile-header-text-size)">
           {headerName}
         </h1>
-        <div className="cursor-pointer" onClick={() => setIsFilterOpen(true)}>
+        <div className="cursor-pointer" onClick={handleFilterOpen}>
           filters
         </div>
       </div>
-      <div className="cursor-pointer" onClick={() => setIsFilterOpen(true)} />
+      <div className="cursor-pointer" onClick={handleFilterOpen} />
       <div
         className={cn(
           "fixed inset-0 h-screen w-screen transition-all duration-300 ease-in-out",

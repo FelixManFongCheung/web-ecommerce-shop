@@ -13,7 +13,7 @@ import CartBtn from "./components/cartBtn";
 export default function DesktopRightNav() {
   return (
     <div
-      className={`md:block hidden fixed z-11 cart-open:z-20 right-0 top-0 h-full w-desktop-right-nav-width bg-transparent`}
+      className={`md:block hidden fixed z-11 cart-open:z-20 cart-popup right-0 top-0 h-full w-desktop-right-nav-width bg-transparent`}
     >
       <CartPopup />
       <div

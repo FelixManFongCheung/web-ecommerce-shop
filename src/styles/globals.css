@@ -144,8 +144,28 @@
     scrollbar-width: none;
   }
 
+  .filter-open\:z-40:where(.filter-open *) {
+    z-index: 40;
+  }
+
+  .nav-open\:z-30:where(.nav-open *) {
+    z-index: 30;
+  }
+
+  .cart-open\:z-19:where(.cart-open *) {
+    z-index: 19;
+  }
+
   .cart-open\:z-20:where(.cart-open *) {
     z-index: 20;
+  }
+
+  .cart-popup {
+    transition-delay: 200ms;
+  }
+
+  .cart-open .cart-popup {
+    transition-delay: 0s;
   }
   /* temp solution: will come up with dynamic z-index solution */
   .cart-open\:z-10:where(.cart-open *) {

@@ -3,11 +3,7 @@
 import { getCartProductsClient } from "@/actions/getCart/client";
 import { getPriceId, retrievePrice } from "@/actions/stripe";
 import { cn } from "@/lib/cn/utils";
-import {
-  HORIZONTAL_LINE_OFFSET_X_RIGHT,
-  HORIZONTAL_LINE_OFFSET_Y_RIGHT,
-  HORIZONTAL_LINE_WIDTH_RIGHT,
-} from "@/lib/constants";
+import { HORIZONTAL_LINE_OFFSET_Y_RIGHT } from "@/lib/constants";
 import { useAppActions, useIsCartOpen } from "@/stores/appStore";
 import { useCartProducts } from "@/stores/cartStore";
 import Image from "next/image";
@@ -153,7 +149,12 @@ export default function CartPopup({ className }: { className?: string }) {
   return (
     <>
       {/* cartpopup z index 14 */}
-      <div className={cn("relative block md:hidden z-10", className)}>
+      <div
+        className={cn(
+          "relative block md:hidden z-10 cart-open:z-19",
+          className
+        )}
+      >
         <div
           className={cn(
             "fixed top-0 w-screen bg-primary p-2 pt-15 transition-all duration-300 ease-in-out",
@@ -173,10 +174,7 @@ export default function CartPopup({ className }: { className?: string }) {
           />
         </div>
       </div>
-      <div
-        className={cn("fixed h-screen hidden md:block", className)}
-        // data-cart-open={isCartOpen}
-      >
+      <div className={cn("fixed h-screen hidden md:block", className)}>
         {isCartOpen && <div className="fixed inset-0" onClick={toggleCart} />}
         <div
           className={cn(
@@ -184,13 +182,7 @@ export default function CartPopup({ className }: { className?: string }) {
           )}
           style={{
             width: "21rem",
-            right: isCartOpen
-              ? "0"
-              : `-${
-                  HORIZONTAL_LINE_WIDTH_RIGHT +
-                  HORIZONTAL_LINE_OFFSET_X_RIGHT +
-                  1.5
-                }rem`,
+            right: isCartOpen ? "0" : "-21rem",
           }}
         >
           <CartContent cartProducts={cartProducts} isLoading={isLoading} />

@@ -4,6 +4,7 @@ import { cn } from "@/lib/cn/utils";
 import { useAppActions, useIsOpen } from "@/stores/appStore";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useEffect } from "react";
 import { menuConfig } from "../menu/menuConfig";
 
 export default function Nav() {
@@ -11,20 +12,36 @@ export default function Nav() {
   const { toggleOpen } = useAppActions();
   const pathname = usePathname();
 
+  const handlNavOpen = () => {
+    toggleOpen();
+    document.body.classList.add("nav-open");
+  };
+  const handlNavClose = () => {
+    toggleOpen();
+    document.body.classList.remove("nav-open");
+  };
+
+  useEffect(() => {
+    return () => {
+      document.body.classList.remove("nav-open");
+    };
+  }, []);
+
   return (
     <>
       <div
         className={cn(
           "block opacity-0 fixed mt-header-height-mobile inset-0 w-full h-screen overflow-hidden transition-opacity duration-500 ease-in-out z-20 pointer-events-none",
           isOpen && "opacity-100 pointer-events-auto",
-          "md:hidden"
+          "md:hidden",
+          "nav-open:z-20"
         )}
       >
         <div
           className={cn(
             "fixed inset-0 w-full h-screen transition-colors duration-500 ease-in-out"
           )}
-          onClick={toggleOpen}
+          onClick={handlNavOpen}
         ></div>
         <div
           className={cn(
@@ -41,7 +58,7 @@ export default function Nav() {
             <div className="flex flex-col gap-2 mb-8">
               {menuConfig.shops.map((item) => (
                 <Link
-                  onClick={() => toggleOpen()}
+                  onClick={handlNavOpen}
                   key={`menu-${item.label}`}
                   href={item.href}
                   className={cn(
@@ -58,7 +75,7 @@ export default function Nav() {
             <div className="flex flex-col gap-2">
               {menuConfig.info.map((item) => (
                 <Link
-                  onClick={() => toggleOpen()}
+                  onClick={handlNavOpen}
                   key={`menu-${item.label}`}
                   href={item.href}
                   className={cn(
