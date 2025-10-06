@@ -101,7 +101,7 @@ export function HeroDesktop({ images }: { images: string[] }) {
           variant="thin"
           left={VERTICAL_LINE_OFFSET_X_LEFT}
           bottom={VERTICAL_LINE_OFFSET_Y_LEFT}
-          height={`${VERTICAL_LINE_HEIGHT_LEFT}rem`}
+          height={`max(${VERTICAL_LINE_HEIGHT_LEFT}rem, 40vh)`}
           className={cn("absolute bg-secondary")}
         />
       </div>
@@ -161,7 +161,7 @@ export function HeroDesktop({ images }: { images: string[] }) {
           variant="medium"
           right={VERTICAL_LINE_OFFSET_X_RIGHT}
           top={VERTICAL_LINE_OFFSET_Y_RIGHT}
-          height={`${VERTICAL_LINE_HEIGHT_RIGHT}rem`}
+          height={`max(${VERTICAL_LINE_HEIGHT_RIGHT}rem, 40vh)`}
           className={cn("absolute bg-secondary")}
         />
       </div>
@@ -251,7 +251,7 @@ export function HeroMobile({ images }: { images: string[] }) {
           variant="thin"
           left={VERTICAL_LINE_OFFSET_X_LEFT_MOBILE}
           top={VERTICAL_LINE_OFFSET_Y_LEFT_MOBILE}
-          height={`${VERTICAL_LINE_HEIGHT_LEFT_MOBILE}rem`}
+          height={`max(${VERTICAL_LINE_HEIGHT_LEFT_MOBILE}rem, 40vh)`}
           className={cn("absolute bg-secondary")}
         />
       </div>
@@ -311,7 +311,7 @@ export function HeroMobile({ images }: { images: string[] }) {
           variant="medium"
           right={VERTICAL_LINE_OFFSET_X_RIGHT_MOBILE}
           bottom={VERTICAL_LINE_OFFSET_Y_RIGHT_MOBILE}
-          height={`${VERTICAL_LINE_HEIGHT_RIGHT_MOBILE}rem`}
+          height={`max(${VERTICAL_LINE_HEIGHT_RIGHT_MOBILE}rem, 40vh)`}
           className={cn("absolute bg-secondary")}
         />
       </div>
