@@ -16,14 +16,13 @@ export default function Footer() {
       body: JSON.stringify({ email }),
     });
     const data = await response.json();
-    console.log(data);
   };
   return (
     // footer z-13
     <div
       className={cn(
         "relative z-11",
-        "w-full px-14 flex justify-between items-end h-footer-height pb-2 pt-2"
+        "w-full px-7 flex justify-between items-end h-footer-height pb-2 pt-2"
       )}
     >
       <div className="flex flex-col w-[200px] text-[0.75rem]">

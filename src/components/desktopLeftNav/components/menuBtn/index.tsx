@@ -7,7 +7,9 @@ export function MenuBtn() {
   const isOpen = useIsOpen();
   return (
     <>
-      <button onClick={toggleOpen}>MENU</button>
+      <button onClick={toggleOpen}>
+        <span className="text-[0.8rem]">MENU</span>
+      </button>
       <div
         onClick={toggleOpen}
         className={cn("fixed inset-0", isOpen ? "block" : "hidden")}

@@ -33,17 +33,22 @@ export default async function DesktopLeftNav({
         {/* Navigation */}
         <div
           className={cn(
-            "absolute flex flex-row justify-end items-center gap-[3.2rem]"
+            "absolute flex flex-row justify-end items-center gap-[2.7rem]"
           )}
           style={{
             top: `${VERTICAL_LINE_OFFSET_Y_LEFT}rem`,
-            left: `${VERTICAL_LINE_OFFSET_X_LEFT * 1.5}rem`,
+            left: "3.3rem",
             height: `${
               HORIZONTAL_LINE_OFFSET_Y_LEFT - VERTICAL_LINE_OFFSET_Y_LEFT
             }rem`,
           }}
         >
-          <h1 className="text-primary text-nowrap text-(length:--desktop-header-text-size)">
+          <h1
+            className={cn(
+              "text-primary text-nowrap text-(length:--desktop-header-text-size) max-w-[10rem]",
+              headerName === "Terms&Conditions" && "truncate"
+            )}
+          >
             {headerName}
           </h1>
           <MenuBtn />
