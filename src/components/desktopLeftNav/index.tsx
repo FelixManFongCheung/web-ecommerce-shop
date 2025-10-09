@@ -95,7 +95,7 @@ export default async function DesktopLeftNav({
       </div>
       {/* Mobile Header Name */}
       {!isProductPage && (
-        <div className="relative z-11 filter-open:z-40 md:hidden mt-header-height-mobile px-mobile-content-padding-horizontal block after:content-[''] after:block after:h-[3px] after:w-[75%] after:bg-primary">
+        <div className="relative z-11 filter-open:z-40 md:hidden mt-header-height-mobile px-mobile-content-padding-horizontal block after:content-[''] after:block after:h-[3px] after:w-[75%] after:bg-primary after:mt-[-0.8rem]">
           {headerName === "Shop" && hasFilter ? (
             <MobileFilter headerName={headerName} groups={groups} />
           ) : (

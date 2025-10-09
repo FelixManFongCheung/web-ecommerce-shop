@@ -162,7 +162,7 @@ export default function CartPopup({ className }: { className?: string }) {
             "h-screen flex flex-col"
           )}
         >
-          <div className="relative mb-10 mr-3 after:right-0 after:bottom-0 after:absolute md:hidden block after:content-[''] after:block after:h-[3px] after:w-[75%] after:bg-secondary">
+          <div className="relative mb-10 mr-3 after:right-0 after:bottom-3 after:absolute md:hidden block after:content-[''] after:block after:h-[3px] after:w-[75%] after:bg-secondary after:mt-[-0.8rem]">
             <h1 className="text-secondary text-nowrap text-(length:--desktop-header-text-size) text-right">
               Cart
             </h1>
