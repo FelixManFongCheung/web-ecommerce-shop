@@ -60,7 +60,7 @@ export default async function DesktopLeftNav({
             groups={groups}
             style={{
               top: `${HORIZONTAL_LINE_OFFSET_Y_LEFT + 0.7}rem`,
-              left: "3.5rem",
+              left: "2.8rem",
             }}
           />
         )}
@@ -86,9 +86,9 @@ export default async function DesktopLeftNav({
         />
         <Menu
           style={{
-            top: `${HORIZONTAL_LINE_OFFSET_Y_LEFT + 2}rem`,
-            paddingLeft: `${VERTICAL_LINE_OFFSET_X_LEFT}rem`,
-            paddingRight: `${VERTICAL_LINE_OFFSET_X_LEFT}rem`,
+            top: "6.7rem",
+            paddingLeft: "2.3rem",
+            paddingRight: "2.3rem",
           }}
           groups={groups}
         />

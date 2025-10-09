@@ -17,11 +17,13 @@ export function NestedGroup({
   level = 0,
   path = "",
   onClickHandle,
+  menuStyle,
 }: {
   group: Group;
   level?: number;
   path?: string;
   onClickHandle?: () => void;
+  menuStyle?: React.CSSProperties;
 }) {
   if (group["categories"]) {
     group.categories = {
@@ -45,68 +47,77 @@ export function NestedGroup({
     });
   };
 
-  return Object.entries(group).map(([key, value]) => (
-    <div
-      key={key}
-      className={cn(
-        `text-[0.7rem] ${
-          level === 0 && metaDataKey.indexOf(key) === 0 && "h-fit pt-[0.7rem]"
-        }`
-      )}
-    >
-      {level === 0 && metaDataKey.indexOf(key) !== 0 && (
-        <DecoratorLines
-          alignment="horizontal"
-          position="left"
-          variant="medium"
-          width={`${HORIZONTAL_LINE_WIDTH_LEFT / 2}rem`}
-          left={-3.5 + HORIZONTAL_LINE_OFFSET_X_LEFT}
-          className={cn("relative bg-primary hidden md:block mb-[0.7rem]")}
-        />
-      )}
-      <div style={{ marginLeft: `${level * 0.2}rem` }}>
-        {Object.keys(value).length > 0 && level > 0 ? (
-          openItems.has(key) ? (
-            <button className="inline-block" onClick={() => handleClick(key)}>
-              <Minus className="w-2 h-2" />
-            </button>
-          ) : (
-            <button className="inline-block" onClick={() => handleClick(key)}>
-              <Plus className="w-2 h-2" />
-            </button>
-          )
-        ) : null}
-        <Link
-          href={
-            key === "all items"
-              ? "/collections/all"
-              : `/collections/${path}-${key}`
-          }
-          className={cn(level === 0 && "pointer-events-none", "inline-block")}
-          onClick={onClickHandle}
-        >
-          <h1 style={{ cursor: "pointer" }}>
-            <span>{level === 0 ? key.toUpperCase() : key}</span>
-          </h1>
-        </Link>
-        {value && Object.keys(value).length > 0 && (
-          <div
-            className={cn(
-              `${
-                openItems.has(key) ? "max-h-64" : "max-h-0"
-              } overflow-hidden transition-all duration-300 ease-in-out`,
-              level === 1 && "max-h-64 overflow-y-auto"
-            )}
-          >
-            <NestedGroup
-              group={value as Group}
-              level={level + 1}
-              path={level === 0 ? key : `${path}-${key}`}
-              onClickHandle={onClickHandle}
-            />
-          </div>
+  return Object.entries(group).map(([key, value]) => {
+    if (metaDataKey.indexOf(key) !== 0 && menuStyle) return null;
+
+    return (
+      <div
+        key={key}
+        className={cn(
+          `text-[0.7rem] ${
+            level === 0 && metaDataKey.indexOf(key) === 0 && "h-fit pt-[0.7rem]"
+          }`
         )}
+        style={
+          level === 0 && metaDataKey.indexOf(key) === 0 && menuStyle
+            ? menuStyle
+            : {}
+        }
+      >
+        {level === 0 && metaDataKey.indexOf(key) !== 0 && (
+          <DecoratorLines
+            alignment="horizontal"
+            position="left"
+            variant="medium"
+            width={`${HORIZONTAL_LINE_WIDTH_LEFT / 2}rem`}
+            left={-3.5 + HORIZONTAL_LINE_OFFSET_X_LEFT}
+            className={cn("relative bg-primary hidden md:block mb-[0.7rem]")}
+          />
+        )}
+        <div style={{ marginLeft: `${level * 0.2}rem` }}>
+          {Object.keys(value).length > 0 && level > 0 ? (
+            openItems.has(key) ? (
+              <button className="inline-block" onClick={() => handleClick(key)}>
+                <Minus className="w-2 h-2" />
+              </button>
+            ) : (
+              <button className="inline-block" onClick={() => handleClick(key)}>
+                <Plus className="w-2 h-2" />
+              </button>
+            )
+          ) : null}
+          <Link
+            href={
+              key === "all items"
+                ? "/collections/all"
+                : `/collections/${path}-${key}`
+            }
+            className={cn(level === 0 && "pointer-events-none", "inline-block")}
+            onClick={onClickHandle}
+          >
+            <h1 style={{ cursor: "pointer" }}>
+              <span>{level === 0 ? key.toUpperCase() : key}</span>
+            </h1>
+          </Link>
+          {value && Object.keys(value).length > 0 && (
+            <div
+              className={cn(
+                `${
+                  openItems.has(key) ? "max-h-64" : "max-h-0"
+                } overflow-hidden transition-all duration-300 ease-in-out`,
+                level === 1 && "max-h-64 overflow-y-auto"
+              )}
+            >
+              <NestedGroup
+                group={value as Group}
+                level={level + 1}
+                path={level === 0 ? key : `${path}-${key}`}
+                onClickHandle={onClickHandle}
+              />
+            </div>
+          )}
+        </div>
       </div>
-    </div>
-  ));
+    );
+  });
 }
