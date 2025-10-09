@@ -3,18 +3,40 @@
 import { Icon } from "@/components";
 import { cn } from "@/lib/cn/utils";
 import Link from "next/link";
+import { useState } from "react";
 import { PiInstagramLogoLight } from "react-icons/pi";
 import { TfiEmail } from "react-icons/tfi";
 
 export default function Footer() {
+  const [email, setEmail] = useState("");
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // const formData = new FormData(e.target as HTMLFormElement);
-    // const email = formData.get("email") as string;
-    // const response = await fetch("/api/newsletter", {
-    //   method: "POST",
-    //   body: JSON.stringify({ email }),
-    // });
+    setStatus("loading");
+    
+    try {
+      const response = await fetch("/api/newsletter", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      });
+      
+      if (response.ok) {
+        setStatus("success");
+        setEmail("");
+        setTimeout(() => setStatus("idle"), 3000);
+      } else {
+        setStatus("error");
+        setTimeout(() => setStatus("idle"), 3000);
+      }
+    } catch (error) {
+      setStatus("error");
+      console.error("Newsletter error:", error);
+      setTimeout(() => setStatus("idle"), 3000);
+    }
   };
   return (
     // footer z-13
@@ -47,15 +69,20 @@ export default function Footer() {
           <input
             type="email"
             name="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             placeholder="enter your email address here"
             className="w-full border-1 border-primary p-1 text-center italic mb-1 placeholder:text-primary"
+            required
+            disabled={status === "loading"}
           />
           <div className="flex w-full justify-end">
             <button
               type="submit"
-              className="bg-primary text-white max-w-fit p-1 self-end"
+              className="bg-primary text-white max-w-fit p-1 self-end disabled:opacity-50"
+              disabled={status === "loading"}
             >
-              SUBSCRIBE
+              {status === "loading" ? "..." : status === "success" ? "✓ SUBSCRIBED" : "SUBSCRIBE"}
             </button>
           </div>
         </form>

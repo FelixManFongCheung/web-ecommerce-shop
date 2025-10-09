@@ -52,5 +52,6 @@ export {
   Pagination,
   ProductCard,
   ProductCardSkeleton,
-  RemoveItem,
+  RemoveItem
 };
+
