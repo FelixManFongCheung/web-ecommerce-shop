@@ -73,19 +73,12 @@ export default async function Page({
                     loading="lazy"
                     fill
                     sizes="(max-width: 768px) 60vw, (max-width: 1200px) 50vw, 33vw"
+                    className={
+                      !product.active
+                        ? "opacity-80 hover:opacity-100"
+                        : "opacity-100"
+                    }
                   />
-                  {!product.active && (
-                    <Image
-                      src="/assets/normal/x.png"
-                      alt={product.name}
-                      placeholder="blur"
-                      blurDataURL={`/_next/image?url=${product.images[0]}&w=16&q=1`}
-                      loading="lazy"
-                      fill
-                      sizes="(max-width: 768px) 60vw, (max-width: 1200px) 50vw, 33vw"
-                      className="absolute top-0 left-0"
-                    />
-                  )}
                 </Link>
               </ProductCard>
             </Suspense>
