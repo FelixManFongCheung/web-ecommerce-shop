@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import { getProductsAll } from "@/actions/stripe";
 import {
   CartPopup,
