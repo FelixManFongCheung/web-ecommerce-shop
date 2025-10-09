@@ -32,7 +32,7 @@ export async function POST(request: NextRequest) {
   
   try {
     const { data, error } = await resend.emails.send({
-      from: "Proxy Archive <onboarding@resend.dev>",
+      from: "Proxy Archive <info@proxy-archive.com>",
       to: email,
       subject: "Welcome to Proxy Archive Newsletter",
       html: emailHtml,
