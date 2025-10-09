@@ -37,7 +37,7 @@ export default function Pagination({
         </div>
       ))}
 
-      <div className="flex flex-row items-center justify-center gap-2 py-4">
+      <div className="flex flex-row items-center justify-center gap-1 py-4 w-full">
         <div
           onClick={() => setPage(page - 1)}
           className={cn(
@@ -45,10 +45,10 @@ export default function Pagination({
             {
               "opacity-50 cursor-not-allowed pointer-events-none": page === 0,
             },
-            "mr-10"
+            "mr-4"
           )}
         >
-          <ChevronLeftIcon className="w-8 h-8" />
+          <ChevronLeftIcon className="w-4 h-4" />
         </div>
         {Array.from({ length: pageCount }).map((_, index) => (
           <div
@@ -58,10 +58,10 @@ export default function Pagination({
           >
             <div
               className={cn(
-                "w-8 h-[1px] bg-primary transition duration-300 ease-in-out"
+                "w-[1.2rem] h-[1px] md:w-8 md:h-[1px] bg-primary transition duration-300 ease-in-out"
               )}
               style={{
-                height: index === page ? "4px" : "1px",
+                height: index === page ? "3px" : "1px",
               }}
             ></div>
           </div>
@@ -74,10 +74,10 @@ export default function Pagination({
               "opacity-50 cursor-not-allowed pointer-events-none":
                 page === pageCount - 1,
             },
-            "ml-10"
+            "ml-4"
           )}
         >
-          <ChevronRightIcon className="w-8 h-8" />
+          <ChevronRightIcon className="w-4 h-4" />
         </div>
       </div>
     </div>
