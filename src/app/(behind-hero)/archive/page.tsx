@@ -18,7 +18,7 @@ export default async function Page() {
     <>
       <div
         id={scrollContainer}
-        className="relative hidden md:flex h-screen w-screen overflow-x-auto flex-col justify-center items-start"
+        className="relative hidden md:flex py-20 w-screen overflow-x-auto no-scrollbar flex-col justify-center items-start"
       >
         <div className="flex flex-row gap-10">
           <div className="w-[50vw] h-full" />
@@ -36,7 +36,7 @@ export default async function Page() {
                     blurDataURL={`/_next/image?url=${product.images[0]}&w=16&q=1`}
                     loading="lazy"
                     fill
-                    sizes="(max-width: 768px) 60vw, (max-width: 1200px) 50vw, 33vw"
+                    sizes="(max-width: 768px) 60vw, (max-width: 1200px) 50vw, 25vw"
                   />
                   {!product.active && (
                     <Image

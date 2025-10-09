@@ -23,10 +23,20 @@ export default function Scaler({
 
     if (productRight > threshold && productLeft < threshold) {
       productRef.current.style.transform = `scale(1.5)`;
+      const nextSibling = productRef.current.nextSibling;
+      if (nextSibling instanceof HTMLElement) {
+        nextSibling.style.marginTop = "3rem";
+        nextSibling.style.transition = `margin-top 0.5s ease-in-out`;
+      }
       productRef.current.style.transition = `transform 0.5s ease-in-out`;
       productRef.current.style.zIndex = `10`;
     } else {
       productRef.current.style.transform = `scale(1)`;
+      const nextSibling = productRef.current.nextSibling;
+      if (nextSibling instanceof HTMLElement) {
+        nextSibling.style.marginTop = "0";
+        nextSibling.style.transition = `margin-top 0.5s ease-in-out`;
+      }
       productRef.current.style.transition = `transform 0.5s ease-in-out`;
       productRef.current.style.zIndex = `0`;
     }
