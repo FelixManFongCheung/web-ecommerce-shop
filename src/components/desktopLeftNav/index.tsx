@@ -45,8 +45,7 @@ export default async function DesktopLeftNav({
         >
           <h1
             className={cn(
-              "text-primary text-nowrap text-(length:--desktop-header-text-size) max-w-[10rem]",
-              headerName === "Terms&Conditions" && "truncate"
+              "text-primary text-nowrap text-(length:--desktop-header-text-size) max-w-[10rem] truncate"
             )}
           >
             {headerName}
@@ -101,9 +100,7 @@ export default async function DesktopLeftNav({
           ) : (
             <h1
               className={cn(
-                `text-primary text-nowrap text-(length:--mobile-header-text-size) ${
-                  headerName === "Terms&Conditions" ? "truncate" : ""
-                }`
+                `text-primary text-nowrap text-(length:--mobile-header-text-size) truncate`
               )}
             >
               {headerName}
