@@ -74,11 +74,14 @@ export async function retrieveSession(
 }
 
 export const retrievePrice = async (priceId: string) => {
-  const price = await stripe.prices.retrieve(priceId);
+  const price = await stripe.prices.retrieve(priceId, {
+    expand: ["currency_options"],
+  });
   return {
     amount: price.unit_amount,
     currency: price.currency,
     type: price.type,
+    currency_options: price.currency_options,
   };
 };
 
