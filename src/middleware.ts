@@ -1,9 +1,32 @@
 import { cancelOrder, completeOrder } from "@/actions/order";
 import { retrieveSession } from "@/actions/stripe";
+import { geolocation } from "@vercel/functions";
 import { NextRequest, NextResponse } from "next/server";
+
+const COUNTRY_TO_CURRENCY: Record<string, string> = {
+  US: "USD",
+  GB: "GBP",
+  CA: "CAD",
+  AU: "AUD",
+  FR: "EUR",
+  DE: "EUR",
+  ES: "EUR",
+  IT: "EUR",
+  NL: "EUR",
+  DK: "DKK",
+};
 
 export async function middleware(request: NextRequest) {
   const { pathname, searchParams } = request.nextUrl;
+
+  const geo = geolocation(request);
+  const country = geo.country || "DK";
+
+  const detectedCurrency = COUNTRY_TO_CURRENCY[country] || "DKK";
+  const activeCurrency =
+    request.cookies.get("user-currency")?.value || detectedCurrency;
+
+  console.log("activeCurrency", activeCurrency, geo);
 
   // if (request.nextUrl.pathname === "/coming-soon") {
   //   return NextResponse.next();
@@ -48,6 +71,7 @@ export async function middleware(request: NextRequest) {
   // Pass pathname through headers for server components
   const response = NextResponse.next();
   response.headers.set("x-pathname", pathname);
+  response.headers.set("x-user-currency", activeCurrency);
 
   return response;
 }
