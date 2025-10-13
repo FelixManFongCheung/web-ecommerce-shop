@@ -77,11 +77,11 @@ export function NestedGroup({
           {Object.keys(value).length > 0 && level > 0 ? (
             <button
               className={cn(
-                "inline-block relative w-4 h-4",
+                "inline-block relative w-2 h-2 mr-1",
                 //vertical line
-                "before:content-[''] before:bg-black before:block before:w-[1px] before:h-4 before:absolute before:top-1/2 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2 before:transition-all before:duration-300 before:ease-in-out",
+                "before:content-[''] before:bg-black before:block before:w-[1px] before:h-2 before:absolute before:top-1/2 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2 before:transition-all before:duration-300 before:ease-in-out",
                 //horizontal line
-                "after:content-[''] after:bg-black after:block after:h-[1px] after:w-4 after:absolute after:top-1/2 after:left-1/2 after:-translate-x-1/2 after:-translate-y-1/2 after:transition-all after:duration-300 after:ease-in-out",
+                "after:content-[''] after:bg-black after:block after:h-[1px] after:w-2 after:absolute after:top-1/2 after:left-1/2 after:-translate-x-1/2 after:-translate-y-1/2 after:transition-all after:duration-300 after:ease-in-out",
                 openItems.has(key)
                   ? "after:rotate-90 after:opacity-0 before:rotate-90"
                   : "after:rotate-0 after:opacity-100 before:rotate-0"
