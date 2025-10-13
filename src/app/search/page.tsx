@@ -17,9 +17,9 @@ export default async function Page(props: {
     <section className="text-left px-2 md:py-[100px] md:px-[200px]">
       <h1>Search Results for &ldquo;{search}&rdquo;</h1>
       <br />
-      <div className="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-8 auto-rows-max">
-        {products.products && products.products.length > 0 ? (
-          products.products.map((product) => (
+      {products.products && products.products.length > 0 ? (
+        <div className="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-8 auto-rows-max">
+          {products.products.map((product) => (
             <Suspense key={product.id} fallback={<ProductCardSkeleton />}>
               <ProductCard product={product}>
                 <Link
@@ -44,11 +44,13 @@ export default async function Page(props: {
                 </Link>
               </ProductCard>
             </Suspense>
-          ))
-        ) : (
+          ))}
+        </div>
+      ) : (
+        <div className="flex flex-col items-center justify-center w-full h-full mt-header-height-mobile md:mt-header-height">
           <div>No products found</div>
-        )}
-      </div>
+        </div>
+      )}
     </section>
   );
 }

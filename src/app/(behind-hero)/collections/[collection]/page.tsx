@@ -18,7 +18,7 @@ export default async function Page({
 
   if (!allProducts) {
     return (
-      <section className="text-left px-2 md:py-[100px] md:px-[200px]">
+      <section className="text-left px-2 md:py-[100px] md:px-[200px] mt-header-height-mobile md:mt-header-height flex flex-col items-center justify-center">
         <div>No products found</div>
       </section>
     );
@@ -47,7 +47,9 @@ export default async function Page({
   if (!products) {
     return (
       <section className="text-left px-2 min-h-screen md:py-[100px] md:px-[200px]">
-        <div>No products found in this collection</div>
+        <div className="text-center mt-header-height-mobile">
+          No products found in this collection
+        </div>
       </section>
     );
   }
@@ -56,9 +58,9 @@ export default async function Page({
   // TODO: implement filter click to collections/[param] by using substring construction with ~ key for substring search with stripe metadata
   return (
     <div>
-      <div className="grid grid-cols-2 lg:grid-cols-3 md:gap-19 gap-1 auto-rows-max">
-        {products.length > 0 ? (
-          products.map((product) => (
+      {products.length > 0 ? (
+        <div className="grid grid-cols-2 lg:grid-cols-3 md:gap-19 gap-1 auto-rows-max">
+          {products.map((product) => (
             <Suspense key={product.id} fallback={<ProductCardSkeleton />}>
               <ProductCard product={product} className="mb-6">
                 <Link
@@ -82,11 +84,13 @@ export default async function Page({
                 </Link>
               </ProductCard>
             </Suspense>
-          ))
-        ) : (
+          ))}
+        </div>
+      ) : (
+        <div className="flex flex-col items-center justify-center w-full h-full mt-header-height-mobile md:mt-header-height">
           <div>No products found</div>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 }
