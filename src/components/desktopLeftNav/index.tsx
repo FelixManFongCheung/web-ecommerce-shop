@@ -12,7 +12,7 @@ import { Group } from "../desktopLeftNav/components/filter";
 import { MenuBtn } from "./components/menuBtn";
 import MobileFilter from "./components/mobileFilter";
 
-export default async function DesktopLeftNav({
+export default function DesktopLeftNav({
   headerName,
   children,
   hasFilter,
