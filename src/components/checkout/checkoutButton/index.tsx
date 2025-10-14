@@ -5,9 +5,11 @@ import { createCheckout } from "@/actions/checkout";
 export default function CheckoutButton({
   totalPrice,
   disabled,
+  currency,
 }: {
   totalPrice: number;
   disabled: boolean;
+  currency: string;
 }) {
   const handleCheckout = async () => {
     try {
@@ -31,7 +33,7 @@ export default function CheckoutButton({
       className="w-full bg-secondary text-primary py-[0.4rem] text-[0.5rem]"
       disabled={disabled}
     >
-      CHECKOUT &mdash; {totalPrice}dkk
+      CHECKOUT &mdash; {totalPrice} {currency}
     </button>
   );
 }

@@ -26,7 +26,6 @@ export default async function Page(props: {
 
   const condition = productMetadata.condition ?? "";
   const composition = productMetadata.composition ?? "";
-
   return (
     <div
       className={cn(
@@ -46,7 +45,9 @@ export default async function Page(props: {
         </div>
         {product && (
           <div className="w-full text-right">
-            <p className="text-bold">{price?.amount}</p>
+            <p className="text-bold">
+              {price?.amount} {price?.currency}
+            </p>
           </div>
         )}
         <div className="w-full">

@@ -32,6 +32,7 @@ export default function Menu({
               onClick={() => toggleOpen()}
               key={`menu-${item.label}`}
               href={item.href}
+              className={cn("hover:underline")}
             >
               {item.label}
             </Link>
@@ -53,6 +54,7 @@ export default function Menu({
               onClick={() => toggleOpen()}
               key={`menu-${item.label}`}
               href={item.href}
+              className={cn("hover:underline")}
             >
               {item.label}
             </Link>

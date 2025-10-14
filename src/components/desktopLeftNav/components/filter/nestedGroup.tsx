@@ -95,7 +95,11 @@ export function NestedGroup({
                 ? "/collections/all"
                 : `/collections/${path}-${key}`
             }
-            className={cn(level === 0 && "pointer-events-none", "inline-block")}
+            className={cn(
+              level === 0 && "pointer-events-none",
+              "inline-block",
+              "hover:underline"
+            )}
             onClick={onClickHandle}
           >
             <h1 style={{ cursor: "pointer" }}>

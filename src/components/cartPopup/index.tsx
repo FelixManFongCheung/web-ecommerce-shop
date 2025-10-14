@@ -25,6 +25,7 @@ function CartContent({
   isMobile?: boolean;
 }) {
   const [totalPrice, setTotalPrice] = useState(0);
+  const [currency, setCurrency] = useState("");
   const isEmpty = cartProducts.length === 0;
   useEffect(() => {
     const getTotalPrice = async () => {
@@ -33,6 +34,7 @@ function CartContent({
         const priceId = await getPriceId(product.id);
         const price = await retrievePrice(priceId);
         totalPrice += price.amount ?? 0;
+        setCurrency(price.currency);
       }
       setTotalPrice(totalPrice);
     };
@@ -106,6 +108,7 @@ function CartContent({
         </p>
         <CheckoutButton
           totalPrice={totalPrice}
+          currency={currency}
           disabled={isLoading || isEmpty}
         />
       </div>
