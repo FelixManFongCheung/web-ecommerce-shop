@@ -1,8 +1,5 @@
 export interface ProductPageMetaData {
-  size?: string;
-  chest?: string;
-  length?: string;
-  sleeve_length?: string;
+  measurements?: string;
   condition?: string;
   composition?: string;
   color?: string;

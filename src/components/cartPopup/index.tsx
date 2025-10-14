@@ -57,9 +57,7 @@ function CartContent({
               marginTop: `${HORIZONTAL_LINE_OFFSET_Y_RIGHT}rem`,
             },
           })}
-        >
-          Loading...
-        </div>
+        ></div>
       ) : (
         <div
           className="flex flex-col flex-1 gap-5 w-full text-secondary overflow-y-auto no-scrollbar"

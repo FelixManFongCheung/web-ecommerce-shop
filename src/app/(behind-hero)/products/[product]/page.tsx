@@ -17,12 +17,12 @@ export default async function Page(props: {
   const priceID = await getPriceId(product.id);
   const price = await retrievePrice(priceID);
   const productMetadata: ProductPageMetaData = product.metadata;
-  const measurements = [
-    { key: "size", value: productMetadata.size },
-    { key: "chest", value: productMetadata.chest },
-    { key: "length", value: productMetadata.length },
-    { key: "sleeve_length", value: productMetadata.sleeve_length },
-  ].filter((measurement) => measurement.value !== "");
+  const measurements: { key: string; value: string }[] | null =
+    productMetadata.measurements?.split("&&").map((measurement) => {
+      const set = measurement.trim();
+      const [key, value] = set.split(":");
+      return { key, value };
+    }) ?? null;
 
   const condition = productMetadata.condition ?? "";
   const composition = productMetadata.composition ?? "";
@@ -54,11 +54,11 @@ export default async function Page(props: {
         </div>
         <div className="w-full">
           <p>Measurements</p>
-          {measurements.length > 0 &&
+          {measurements &&
             measurements.map((measurement) => (
               <div key={measurement.key}>
                 <p>{measurement.key}</p>
-                <div>{measurement.value}</div>
+                <p>{measurement.value}</p>
               </div>
             ))}
         </div>
