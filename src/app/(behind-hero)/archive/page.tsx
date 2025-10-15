@@ -15,7 +15,6 @@ export default async function Page() {
 
   const scrollContainer = "scroll-container";
 
-  // Create 3 copies for infinite scroll effect
   const infiniteProducts = [...products, ...products, ...products];
 
   const ProductItem = ({

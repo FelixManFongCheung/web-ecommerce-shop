@@ -11,7 +11,7 @@ const data = {
     title: "Contact",
     paragraphs: [
       "For any further inquiries, feel free to reach out at info@proxyarchive.com.",
-      "Instagram @proxy__archive",
+      "instagram @proxy__archive",
     ],
   },
 };
