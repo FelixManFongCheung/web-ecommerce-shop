@@ -18,11 +18,11 @@ export default function FollowUsDialog() {
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent
         className={cn(
-          "w-[80vw] max-w-4xl aspect-[3/2] container px-12! flex flex-col justify-center items-center text-secondary bg-primary rounded-none sm:rounded-none border-none"
+          "w-[80vw] max-w-4xl container px-12! flex flex-col justify-center items-center text-secondary bg-primary rounded-none sm:rounded-none border-none pt-10 pb-0"
         )}
       >
         <DialogHeader>
-          <DialogTitle>Follow Us</DialogTitle>
+          <DialogTitle className="text-[2rem]">FOLLOW US</DialogTitle>
         </DialogHeader>
         <div>
           <p>
@@ -38,21 +38,20 @@ export default function FollowUsDialog() {
             height={24}
           />
         </div>
-        {/* Image container - 80% of dialog width */}
-        <Link
-          href="https://www.instagram.com/proxy__archive"
-          className="block w-full aspect-[1.48] mt-4"
-        >
-          <div className="relative w-full h-full">
+        <div className="w-full aspect-[4457/3220] mt-4">
+          <Link
+            href="https://www.instagram.com/proxy__archive"
+            className="block w-full h-full"
+          >
             <Image
-              src="/assets/popup.png"
+              src="/assets/popup.webp"
               alt="Instagram"
               fill
-              className="object-cover"
+              className="w-full h-full object-contain"
               priority
             />
-          </div>
-        </Link>
+          </Link>
+        </div>
       </DialogContent>
     </Dialog>
   );
