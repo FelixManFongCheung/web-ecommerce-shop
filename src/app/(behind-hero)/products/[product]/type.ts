@@ -4,4 +4,5 @@ export interface ProductPageMetaData {
   composition?: string;
   color?: string;
   material?: string;
+  subTitle?: string;
 }

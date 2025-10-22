@@ -26,6 +26,7 @@ export default async function Page(props: {
 
   const condition = productMetadata.condition ?? "";
   const composition = productMetadata.composition ?? "";
+  const subTitle = productMetadata.subTitle ?? "";
   return (
     <div
       className={cn(
@@ -41,6 +42,7 @@ export default async function Page(props: {
       >
         <div className="w-full">
           <p>{product.name}</p>
+          {subTitle && <p>{subTitle}</p>}
           {product.description && <p>{product.description}</p>}
         </div>
         {product && (
