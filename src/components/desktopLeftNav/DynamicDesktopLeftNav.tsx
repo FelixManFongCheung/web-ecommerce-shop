@@ -1,10 +1,6 @@
 "use client";
 
 import { cn } from "@/lib/cn/utils";
-import {
-  HORIZONTAL_LINE_OFFSET_Y_LEFT,
-  VERTICAL_LINE_OFFSET_X_LEFT,
-} from "@/lib/constants";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import DesktopLeftNav from ".";
@@ -62,8 +58,8 @@ export default function DynamicDesktopLeftNav({ groups }: { groups: Group }) {
         <div
           className="absolute flex flex-col text-2xl"
           style={{
-            left: `${VERTICAL_LINE_OFFSET_X_LEFT * 2}rem`,
-            top: `${HORIZONTAL_LINE_OFFSET_Y_LEFT * 1.5}rem`,
+            left: "var(--desktop-left-nav-info-left)",
+            top: "var(--desktop-left-nav-info-top)",
           }}
         >
           {Object.entries(links).map(([href, label]) => (

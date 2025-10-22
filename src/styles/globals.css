@@ -78,12 +78,15 @@
   --desktop-left-nav-width: 17rem;
   --desktop-right-nav-width: 10.5rem;
   --desktop-collections-padding: 3.75rem;
-  --desktop-info-pages-padding-left: 500px;
-  --desktop-info-pages-padding-right: 150px;
+  --desktop-info-pages-padding-top: 3.9rem;
+  --desktop-info-pages-padding-left: 25rem;
+  --desktop-info-pages-padding-right: 11rem;
   --desktop-product-page-padding-left: 200px;
   --desktop-product-page-padding-right: 300px;
   --hero-line-padding: 4rem;
   --footer-height: 8rem;
+  --desktop-left-nav-info-top: 10.5rem;
+  --desktop-left-nav-info-left: 5.6rem;
 }
 
 @theme inline {
@@ -201,6 +204,7 @@ body,
 * {
   box-sizing: border-box;
   font-family: "Optima", serif;
+  letter-spacing: -0.15px;
 }
 
 a,
