@@ -1,6 +1,6 @@
 export default function TermsAndConditionsPage() {
   return (
-    <div className="flex flex-col md:flex-row gap-4">
+    <div className="flex flex-col md:flex-row gap-20">
       <div className="flex-1">
         <h2 className="text-2xl mb-4">Shipping</h2>
         <p className="mb-4">

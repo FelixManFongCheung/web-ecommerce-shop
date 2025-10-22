@@ -45,7 +45,7 @@ export default function DesktopLeftNav({
         >
           <h1
             className={cn(
-              "text-primary text-nowrap text-(length:--desktop-header-text-size) max-w-[10rem] truncate"
+              "text-primary text-nowrap text-(length:--desktop-header-text-size)"
             )}
           >
             {headerName}

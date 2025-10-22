@@ -47,7 +47,7 @@ export default function DynamicDesktopLeftNav({ groups }: { groups: Group }) {
         titleName = "Visit Us";
         break;
       case "terms-and-conditions":
-        titleName = "Terms&Conditions";
+        titleName = "T&C";
         break;
       default:
         titleName = headerName;
