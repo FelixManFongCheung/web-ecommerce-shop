@@ -22,7 +22,7 @@ export default function DesktopRightNav() {
         )}
         style={{
           top: `${VERTICAL_LINE_OFFSET_Y_RIGHT}rem`,
-          right: "3.5rem",
+          right: "4.3rem",
           height: `min(${
             HORIZONTAL_LINE_OFFSET_Y_RIGHT - VERTICAL_LINE_OFFSET_Y_RIGHT
           }rem, calc(100vh - var(--footer-height)))`,

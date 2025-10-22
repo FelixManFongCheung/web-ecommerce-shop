@@ -8,7 +8,7 @@ export function MenuBtn() {
   return (
     <>
       <button onClick={toggleOpen}>
-        <span className="text-[0.8rem]">MENU</span>
+        <span className="text-[1rem]">MENU</span>
       </button>
       <div
         onClick={toggleOpen}

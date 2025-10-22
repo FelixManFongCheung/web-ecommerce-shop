@@ -33,7 +33,7 @@ export default function DesktopLeftNav({
         {/* Navigation */}
         <div
           className={cn(
-            "absolute flex flex-row justify-end items-center gap-[2.7rem]"
+            "absolute flex flex-row justify-end items-center gap-[3rem]"
           )}
           style={{
             top: `${VERTICAL_LINE_OFFSET_Y_LEFT}rem`,
@@ -59,7 +59,7 @@ export default function DesktopLeftNav({
             groups={groups}
             style={{
               top: `${HORIZONTAL_LINE_OFFSET_Y_LEFT + 0.7}rem`,
-              left: "2.8rem",
+              left: "3.5rem",
             }}
           />
         )}
