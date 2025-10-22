@@ -41,7 +41,7 @@ export default function Nav() {
         ></div>
         <div
           className={cn(
-            "fixed bg-primary left-[50%] translate-x-[-50%] p-8 w-full h-1/2 flex flex-col gap-5 transition-all duration-500 ease-in-out overflow-y-auto",
+            "fixed bg-primary left-[50%] translate-x-[-50%] py-5 px-6 w-full h-96 flex flex-col gap-5 transition-all duration-500 ease-in-out overflow-y-auto",
             isOpen ? "block" : "hidden pointer-events-none"
           )}
         >
@@ -62,7 +62,7 @@ export default function Nav() {
                       "underline decoration-secondary decoration-[2px] underline-offset-2"
                   )}
                 >
-                  <h3 className="text-[4rem] text-secondary truncate">
+                  <h3 className="text-[2rem] text-secondary truncate">
                     {item.label}
                   </h3>
                 </Link>
@@ -79,7 +79,7 @@ export default function Nav() {
                       "underline decoration-secondary decoration-[2px] underline-offset-2"
                   )}
                 >
-                  <h3 className="text-[4rem] text-secondary truncate">
+                  <h3 className="text-[2rem] text-secondary truncate">
                     {item.label}
                   </h3>
                 </Link>
