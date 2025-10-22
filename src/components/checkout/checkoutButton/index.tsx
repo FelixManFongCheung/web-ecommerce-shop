@@ -30,7 +30,7 @@ export default function CheckoutButton({
   return (
     <button
       onClick={handleCheckout}
-      className="w-full bg-secondary text-primary py-[0.4rem] text-[0.5rem]"
+      className="w-full bg-secondary text-primary py-[0.4rem] md:py-[0.7rem] text-[0.5rem] md:text-[0.7rem]"
       disabled={disabled}
     >
       CHECKOUT &mdash; {totalPrice} {currency}
