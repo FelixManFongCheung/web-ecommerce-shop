@@ -204,7 +204,7 @@ body,
 * {
   box-sizing: border-box;
   font-family: "Optima", serif;
-  letter-spacing: -0.15px;
+  letter-spacing: -0.04rem;
 }
 
 a,

@@ -19,12 +19,12 @@ export default function Menu({
   return (
     <div
       className={cn(
-        "w-screen bg-primary text-secondary fixed z-12 py-4 block transition-all duration-300 ease-in-out",
+        "w-screen bg-primary text-secondary text-[1.4rem] fixed z-12 py-5 block transition-all duration-300 ease-in-out",
         isOpen ? "h-52 opacity-100" : "h-0 opacity-0 pointer-events-none"
       )}
       style={style}
     >
-      <div className="relative w-full grid grid-cols-1 md:grid-cols-4">
+      <div className="relative w-full grid grid-cols-1 md:grid-cols-[1fr_1fr_1fr_1.4fr]">
         {/* format */}
         <div className="flex flex-col">
           {menuConfig.shops.map((item) => (
@@ -45,6 +45,7 @@ export default function Menu({
             menuStyle={{
               paddingTop: "0",
             }}
+            secondaryColor={true}
           />
         </div>
         {/* info */}

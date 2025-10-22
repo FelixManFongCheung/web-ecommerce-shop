@@ -11,12 +11,14 @@ export default function Filter({
   style,
   onClickHandle,
   menuStyle,
+  secondaryColor,
 }: {
   groups: Group;
   className?: string;
   style?: React.CSSProperties;
   onClickHandle?: () => void;
   menuStyle?: React.CSSProperties;
+  secondaryColor?: boolean;
 }) {
   return (
     <div
@@ -30,6 +32,7 @@ export default function Filter({
         menuStyle={menuStyle}
         group={groups}
         onClickHandle={onClickHandle}
+        secondaryColor={secondaryColor}
       />
     </div>
   );

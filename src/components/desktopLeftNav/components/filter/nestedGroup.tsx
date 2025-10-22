@@ -17,12 +17,14 @@ export function NestedGroup({
   path = "",
   onClickHandle,
   menuStyle,
+  secondaryColor,
 }: {
   group: Group;
   level?: number;
   path?: string;
   onClickHandle?: () => void;
   menuStyle?: React.CSSProperties;
+  secondaryColor?: boolean;
 }) {
   if (group["categories"]) {
     group.categories = {
@@ -81,7 +83,10 @@ export function NestedGroup({
                 //vertical line
                 "before:content-[''] before:bg-black before:block before:w-[1px] before:h-2 before:absolute before:top-1/2 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2 before:transition-all before:duration-300 before:ease-in-out",
                 //horizontal line
-                "after:content-[''] after:bg-black after:block after:h-[1px] after:w-2 after:absolute after:top-1/2 after:left-1/2 after:-translate-x-1/2 after:-translate-y-1/2 after:transition-all after:duration-300 after:ease-in-out",
+                "after:content-[''] after:block after:h-[1px] after:w-2 after:absolute after:top-1/2 after:left-1/2 after:-translate-x-1/2 after:-translate-y-1/2 after:transition-all after:duration-300 after:ease-in-out",
+                secondaryColor
+                  ? "before:bg-secondary after:bg-secondary"
+                  : "before:bg-primary after:bg-primary",
                 openItems.has(key)
                   ? "after:rotate-90 after:opacity-0 before:rotate-90"
                   : "after:rotate-0 after:opacity-100 before:rotate-0"
@@ -120,6 +125,7 @@ export function NestedGroup({
                 level={level + 1}
                 path={level === 0 ? key : `${path}-${key}`}
                 onClickHandle={onClickHandle}
+                secondaryColor={secondaryColor}
               />
             </div>
           )}

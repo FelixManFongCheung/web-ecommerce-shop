@@ -85,9 +85,9 @@ export default function DesktopLeftNav({
         />
         <Menu
           style={{
-            top: "6.7rem",
-            paddingLeft: "2.3rem",
-            paddingRight: "2.3rem",
+            top: "8.2rem",
+            paddingLeft: "2.9rem",
+            paddingRight: "2.9rem",
           }}
           groups={groups}
         />
