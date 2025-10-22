@@ -37,7 +37,7 @@ export default function DesktopLeftNav({
           )}
           style={{
             top: `${VERTICAL_LINE_OFFSET_Y_LEFT}rem`,
-            left: "3.3rem",
+            left: "4rem",
             height: `${
               HORIZONTAL_LINE_OFFSET_Y_LEFT - VERTICAL_LINE_OFFSET_Y_LEFT
             }rem`,
