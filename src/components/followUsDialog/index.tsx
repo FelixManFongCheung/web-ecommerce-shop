@@ -18,19 +18,19 @@ export default function FollowUsDialog() {
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent
         className={cn(
-          "w-[80vw] max-w-4xl container px-12! flex flex-col justify-center items-center text-secondary bg-primary rounded-none sm:rounded-none border-none pt-10 pb-0"
+          "w-[80vw] md:w-[30vw] max-w-4xl container px-12! flex flex-col justify-center items-center text-secondary bg-primary rounded-none sm:rounded-none border-none pt-10 pb-0"
         )}
       >
-        <DialogHeader>
+        <DialogHeader className="mb-4">
           <DialogTitle className="text-[2rem]">FOLLOW US</DialogTitle>
         </DialogHeader>
-        <div>
-          <p>
+        <div className="mb-4 text-center">
+          <p className="text-sm">
             Follow @proxy.archive on Instagram to get the first look at our
             newest stock.
           </p>
         </div>
-        <div className="flex flex-col gap-4">
+        <div className="mb-4">
           <Image
             src="/assets/white/insta.png"
             alt="Instagram"
