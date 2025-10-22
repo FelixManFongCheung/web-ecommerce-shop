@@ -9,14 +9,16 @@ import { DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
 
 export default function FollowUsDialog() {
   const [open, setOpen] = useState(false);
+
   useEffect(() => {
     setOpen(true);
   }, []);
+
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent
         className={cn(
-          "w-[80vw] aspect-[4/3] container px-12! flex flex-col justify-center items-center text-secondary bg-primary rounded-none sm:rounded-none border-none"
+          "w-[80vw] max-w-4xl aspect-[3/2] container px-12! flex flex-col justify-center items-center text-secondary bg-primary rounded-none sm:rounded-none border-none"
         )}
       >
         <DialogHeader>
@@ -24,20 +26,33 @@ export default function FollowUsDialog() {
         </DialogHeader>
         <div>
           <p>
-            Follow @proxy__archive to get JEAN PAUL GAULTIER the first look at
-            our latest arrivals. MIU MI
+            Follow @proxy.archive on Instagram to get the first look at our
+            newest stock.
           </p>
         </div>
         <div className="flex flex-col gap-4">
-          <Link href="https://www.instagram.com/proxy__archive">
-            <Image
-              src="/assets/white/insta.png"
-              alt="Instagram"
-              width={24}
-              height={24}
-            />
-          </Link>
+          <Image
+            src="/assets/white/insta.png"
+            alt="Instagram"
+            width={24}
+            height={24}
+          />
         </div>
+        {/* Image container - 80% of dialog width */}
+        <Link
+          href="https://www.instagram.com/proxy__archive"
+          className="block w-full aspect-[1.48] mt-4"
+        >
+          <div className="relative w-full h-full">
+            <Image
+              src="/assets/popup.png"
+              alt="Instagram"
+              fill
+              className="object-cover"
+              priority
+            />
+          </div>
+        </Link>
       </DialogContent>
     </Dialog>
   );
