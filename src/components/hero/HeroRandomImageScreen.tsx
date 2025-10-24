@@ -54,8 +54,6 @@ export function HeroRandomImageScreen({
           >
             <Image
               src={image.url}
-              placeholder="blur"
-              blurDataURL={`/_next/image?url=${image}&w=16&q=1`}
               alt="Hero Random Image"
               onLoad={() => {
                 setLoaded(true);
@@ -65,6 +63,7 @@ export function HeroRandomImageScreen({
                 transition: "opacity 0.3s ease-in-out",
               }}
               fill
+              className="object-contain"
             />
           </div>
         ))}
