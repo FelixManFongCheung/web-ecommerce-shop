@@ -103,7 +103,7 @@ function CartContent({
       )}
       <div className="p-1 pb-4 md:p-0">
         {/* TODO: price in total */}
-        <p className="text-secondary mb-4 md:mb-2 text-[0.57rem]">
+        <p className="text-secondary mb-4 md:mb-2 text-[0.7rem]">
           shipping and taxes calculated at checkout
         </p>
         <CheckoutButton
