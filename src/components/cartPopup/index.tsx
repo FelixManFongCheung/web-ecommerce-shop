@@ -182,8 +182,8 @@ export default function CartPopup({ className }: { className?: string }) {
             "fixed top-0 h-full bg-primary p-8 md:p-[1.5rem] md:pr-[2.3rem] transition-all duration-300 ease-in-out"
           )}
           style={{
-            width: "21rem",
-            right: isCartOpen ? "0" : "-21rem",
+            width: "26rem",
+            right: isCartOpen ? "0" : "-26rem",
           }}
         >
           <CartContent cartProducts={cartProducts} isLoading={isLoading} />
