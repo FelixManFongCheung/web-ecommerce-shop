@@ -63,7 +63,6 @@ export default async function Page() {
     <>
       <InfiniteCarousel scrollContainer={scrollContainer}>
         <div className="flex flex-row gap-10">
-          <div className="w-[50vw] h-full" />
           {infiniteProducts.map((product, index) => (
             <ProductItem
               key={`${product.id}-${index}`}
@@ -71,7 +70,6 @@ export default async function Page() {
               index={index}
             />
           ))}
-          <div className="w-[50vw] h-full" />
         </div>
       </InfiniteCarousel>
       <div className="md:hidden block">
