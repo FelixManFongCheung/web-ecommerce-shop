@@ -116,34 +116,35 @@
 }
 
 @font-face {
-  src: url("../../public/fonts/FontsFree-Net-Athelas-BoldItalic.ttf")
-    format("truetype");
+  src: url("/fonts/FontsFree-Net-Athelas-BoldItalic.ttf") format("truetype");
   font-family: "Athelas Bold Italic";
   font-weight: 600;
   font-style: italic;
+  font-display: swap;
 }
 
 @font-face {
-  src: url("../../public/fonts/FontsFree-Net-Athelas-Italic.ttf")
-    format("truetype");
+  src: url("/fonts/FontsFree-Net-Athelas-Italic.ttf") format("truetype");
   font-family: "Athelas Regular";
   font-weight: 400;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-  src: url("../../public/fonts/OptimaLTStd.otf") format("opentype");
+  src: url("/fonts/OptimaLTStd.otf") format("opentype");
   font-family: "Optima";
   font-weight: 400;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-  src: url("../../public/fonts/happy-times-NG_italic_master_web.ttf")
-    format("truetype");
+  src: url("/fonts/happy-times-NG_italic_master_web.ttf") format("truetype");
   font-family: "Happy Times Italic";
   font-weight: 400;
   font-style: italic;
+  font-display: swap;
 }
 
 @layer utilities {
