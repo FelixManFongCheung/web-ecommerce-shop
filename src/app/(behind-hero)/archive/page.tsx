@@ -2,6 +2,7 @@ import { retrieveProductsByMetaDataKeyAndValue } from "@/actions/stripe";
 import InfiniteCarousel from "@/components/infiniteCarousel";
 import ProductCard from "@/components/productCard";
 import Scaler from "@/components/productCard/Scaler";
+import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/cn/utils";
 import Image from "next/image";
 import Link from "next/link";
@@ -63,13 +64,25 @@ export default async function Page() {
     <>
       <InfiniteCarousel scrollContainer={scrollContainer}>
         <div className="flex flex-row gap-10">
-          {infiniteProducts.map((product, index) => (
+          {infiniteProducts.length > 0 ? (infiniteProducts.map((product, index) => (
             <ProductItem
               key={`${product.id}-${index}`}
               product={product}
               index={index}
             />
-          ))}
+          ))): (
+            <div className="flex flex-col gap-4 min-h-[500px] justify-center items-center">
+              <div>No archive</div>
+              <Button
+                variant="outline"
+                className={cn(
+                  "w-2xs bg-transparent border-primary text-primary rounded-none"
+                )}
+              >
+                <Link href="/collections/all">View all</Link>
+              </Button>
+            </div>
+          )}
         </div>
       </InfiniteCarousel>
       <div className="md:hidden block">

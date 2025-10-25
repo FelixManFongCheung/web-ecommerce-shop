@@ -54,7 +54,7 @@ export default async function Page() {
           ))}
         </div>
       ) : (
-        <div className="flex flex-col gap-4 min-h-screen justify-center items-center">
+        <div className="flex flex-col gap-4 min-h-[500px] justify-center items-center">
           <div>No new arrivals</div>
           <Button
             variant="outline"
