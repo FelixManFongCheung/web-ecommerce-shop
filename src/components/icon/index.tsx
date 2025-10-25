@@ -13,14 +13,19 @@ export default function Icon({
       <Link href="/">
         <div
           className={cn(
-            "text-[1.2rem] md:text-[1.5rem] after:content-['*'] after:text-xl after:relative after:-top-1 md:after:-top-2 !font-[Happy_Times_Italic]",
-            fontSize &&
-              `text-[${fontSize}px] md:text-[${fontSize}px] after:text-[${
-                fontSize - 8
-              }px] md:after:text-[${
-                fontSize - 8
-              }px] after:-top-1 md:after:-top-1`
+            "after:content-['*'] relative !font-[Happy_Times_Italic]",
+            !fontSize && "text-[1.2rem] md:text-[1.5rem] after:text-xl",
+            // "after:absolute after:left-2 after:-top-1 md:after:-top-2",
+            className
           )}
+          style={
+            fontSize
+              ? {
+                  fontSize: `${fontSize}px`,
+                  ["--after-font-size" as string]: `${fontSize - 8}px`,
+                }
+              : undefined
+          }
         >
           proxy archive
         </div>

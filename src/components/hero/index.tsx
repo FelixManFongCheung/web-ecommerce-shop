@@ -48,7 +48,7 @@ export function HeroDesktop({ images }: { images: string[] }) {
             href="/collections/all"
             className="absolute bottom-[0.6rem] backdrop-blur-sm"
             style={{
-              paddingLeft: `${VERTICAL_LINE_OFFSET_X_LEFT * 1.2}rem`,
+              paddingLeft: "4rem",
             }}
           >
             <h1 className="text-nowrap text-6xl">Shop</h1>
@@ -69,7 +69,7 @@ export function HeroDesktop({ images }: { images: string[] }) {
             href="/about"
             className="absolute bottom-[0.6rem] backdrop-blur-sm"
             style={{
-              paddingLeft: `${VERTICAL_LINE_OFFSET_X_LEFT * 1.2}rem`,
+              paddingLeft: "4rem",
             }}
           >
             <h1 className="text-nowrap text-6xl">About</h1>
@@ -89,7 +89,7 @@ export function HeroDesktop({ images }: { images: string[] }) {
             href="/visit-us"
             className="absolute bottom-[0.6rem] backdrop-blur-sm"
             style={{
-              paddingLeft: `${VERTICAL_LINE_OFFSET_X_LEFT * 1.2}rem`,
+              paddingLeft: "4rem",
             }}
           >
             <h1 className="text-nowrap text-6xl">Visit Us</h1>
@@ -116,7 +116,7 @@ export function HeroDesktop({ images }: { images: string[] }) {
             href="/new-arrivals"
             className="absolute bottom-[0.225rem] w-full text-right backdrop-blur-sm"
             style={{
-              paddingRight: `${VERTICAL_LINE_OFFSET_X_RIGHT * 1.2}rem`,
+              paddingRight: "4.275rem",
             }}
           >
             <h1 className="text-nowrap text-6xl">New Arrivals</h1>
@@ -137,7 +137,7 @@ export function HeroDesktop({ images }: { images: string[] }) {
             href="/archive"
             className="absolute bottom-[0.6rem] w-full text-right backdrop-blur-sm"
             style={{
-              paddingRight: `${VERTICAL_LINE_OFFSET_X_RIGHT * 1.2}rem`,
+              paddingRight: "4.275rem",
             }}
           >
             <h1 className="text-nowrap text-6xl">Archive</h1>
@@ -166,7 +166,7 @@ export function HeroDesktop({ images }: { images: string[] }) {
         />
       </div>
       <div className="flex flex-col absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] items-center justify-center text-secondary backdrop-blur-sm">
-        <Icon />
+        <Icon fontSize={25} />
         <p className="text-xs">your gateway to an archival wardrobe</p>
       </div>
     </div>
@@ -187,7 +187,7 @@ export function HeroMobile({ images }: { images: string[] }) {
             href="/collections/all"
             className="absolute bottom-[0.6rem] backdrop-blur-sm"
             style={{
-              paddingLeft: `${VERTICAL_LINE_OFFSET_X_LEFT_MOBILE}rem`,
+              paddingLeft: "4rem",
             }}
           >
             <h1 className="text-nowrap text-5xl">Shop</h1>
@@ -208,7 +208,7 @@ export function HeroMobile({ images }: { images: string[] }) {
             href="/about"
             className="absolute bottom-[0.6rem] backdrop-blur-sm"
             style={{
-              paddingLeft: `${VERTICAL_LINE_OFFSET_X_LEFT_MOBILE}rem`,
+              paddingLeft: "4rem",
             }}
           >
             <h1 className="text-nowrap text-5xl">About</h1>
@@ -228,7 +228,7 @@ export function HeroMobile({ images }: { images: string[] }) {
             href="/visit-us"
             className="absolute bottom-[0.6rem] backdrop-blur-sm"
             style={{
-              paddingLeft: `${VERTICAL_LINE_OFFSET_X_LEFT_MOBILE}rem`,
+              paddingLeft: "4rem",
             }}
           >
             <h1 className="text-nowrap text-5xl">Visit Us</h1>
