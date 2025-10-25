@@ -10,13 +10,10 @@ export default function Icon({
 }) {
   return (
     <div className={cn("relative flex items-center", className)}>
-      <Link href="/">
-        <div
-          className={cn(
-            "after:content-['*'] relative !font-[Happy_Times_Italic]",
+        <Link href="/">
+          <p className={cn(
+            "!font-[Happy_Times_Italic] after:content-['*']",
             !fontSize && "text-[1.2rem] md:text-[1.5rem] after:text-xl",
-            // "after:absolute after:left-2 after:-top-1 md:after:-top-2",
-            className
           )}
           style={
             fontSize
@@ -25,11 +22,9 @@ export default function Icon({
                   ["--after-font-size" as string]: `${fontSize - 8}px`,
                 }
               : undefined
-          }
-        >
-          proxy archive
-        </div>
-      </Link>
+          }>proxy archive</p>
+        </Link>
+          
     </div>
   );
 }

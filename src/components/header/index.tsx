@@ -41,11 +41,12 @@ export default function Header() {
 
         <Icon
           className={cn(
-            "absolute top-0 left-1/2 h-full transform -translate-x-1/2 flex items-center justify-center",
+            "absolute top-0 left-1/2 h-full transform -translate-x-1/2",
             isCartOpen ? "text-secondary md:text-primary" : "text-primary",
             "transition-all duration-300 ease-in-out",
             "hover:text-primary/70"
           )}
+          fontSize={20}
         />
         <button
           className="md:hidden h-header-height-mobile fixed top-0 right-5 flex justify-center items-center cursor-pointer"
