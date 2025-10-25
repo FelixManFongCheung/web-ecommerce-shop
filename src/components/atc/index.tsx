@@ -14,10 +14,10 @@ export default function ATC({ productId, isSoldOut }: ATCProp) {
   const cartProductIds = cartProducts || [];
 
   const ATCState = isSoldOut
-    ? "Sold Out"
+    ? "SOLD OUT"
     : cartProductIds.includes(productId)
-    ? "Added to cart"
-    : "Add to cart";
+    ? "IN CART"
+    : "ADD TO CART";
   const { addProduct } = useCartActions();
 
   const { openCart } = useAppActions();
@@ -29,12 +29,13 @@ export default function ATC({ productId, isSoldOut }: ATCProp) {
 
   return (
     <button
-      disabled={ATCState !== "Add to cart"}
+      disabled={ATCState !== "ADD TO CART"}
       className={cn(
         "fixed bottom-0 left-0 h-header-height-mobile w-full block z-12 cart-open:z-10 bg-primary text-secondary",
         "md:md:relative md:h-auto md:w-full md:z-0 py-2 px-4",
-        ATCState !== "Add to cart" &&
-          "border border-primary text-primary bg-secondary"
+        ATCState !== "ADD TO CART" &&
+          "border border-primary text-primary bg-secondary",
+        ATCState === "IN CART" && "italic"
       )}
       onClick={addToCartAction}
     >
