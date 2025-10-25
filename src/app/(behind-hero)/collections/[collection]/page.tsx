@@ -59,7 +59,7 @@ export default async function Page({
   return (
     <div>
       {products.length > 0 ? (
-        <div className="grid grid-cols-2 lg:grid-cols-3 md:gap-19 gap-1 auto-rows-max">
+        <div className="grid grid-cols-2 lg:grid-cols-3 md:gap-14 gap-1 auto-rows-max">
           {products.map((product) => (
             <Suspense key={product.id} fallback={<ProductCardSkeleton />}>
               <ProductCard product={product} className="mb-6">
