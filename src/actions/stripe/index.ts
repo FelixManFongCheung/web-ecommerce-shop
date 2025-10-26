@@ -56,8 +56,25 @@ export const getActiveProducts = async () => {
 };
 
 export const getProductsAll = async () => {
-  const products = await stripe.products.list();
-  return products.data;
+  const allProducts: Stripe.Product[] = [];
+  let hasMore = true;
+  let startingAfter: string | undefined;
+  
+  while (hasMore) {
+    const response = await stripe.products.list({
+      limit: 100, // Stripe's max per request
+      starting_after: startingAfter,
+    });
+    
+    allProducts.push(...response.data);
+    hasMore = response.has_more;
+    
+    if (response.data.length > 0) {
+      startingAfter = response.data[response.data.length - 1].id;
+    }
+  }
+  
+  return allProducts;
 };
 
 export const getProduct = async (productId: string) => {
@@ -179,3 +196,20 @@ export const searchProductsByMetaDataKeyAndValuePaginated = async (
     throw new Error("Search failed");
   }
 };
+
+// Cached navigation groups for sidebar
+export const getNavigationGroups = unstable_cache(
+  async () => {
+    const productsAll = await getProductsAll();
+    
+    const { getRecursiveFolder } = await import("@/components/desktopLeftNav/hooks");
+    const groups = getRecursiveFolder(productsAll);
+    
+    return groups;
+  },
+  ['navigation-groups'],
+  { 
+    revalidate: 3600, // Cache for 1 hour
+    tags: ['navigation']
+  }
+);

@@ -1,6 +1,6 @@
 export const dynamic = "force-dynamic";
 
-import { getProductsAll } from "@/actions/stripe";
+import { getNavigationGroups } from "@/actions/stripe";
 import {
   CartPopup,
   CookieWrapper,
@@ -11,15 +11,13 @@ import {
   Nav,
 } from "@/components";
 import DynamicDesktopLeftNav from "@/components/desktopLeftNav/DynamicDesktopLeftNav";
-import { getRecursiveFolder } from "@/components/desktopLeftNav/hooks";
 
 export default async function BehindHeroLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const productsAll = await getProductsAll();
-  const groups = getRecursiveFolder(productsAll);
+  const groups = await getNavigationGroups();
   return (
     <CookieWrapper className="relative">
       <Nav />

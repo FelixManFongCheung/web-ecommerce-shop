@@ -53,6 +53,7 @@ export default function InfiniteCollectionGrid({
     estimateSize: () => 450,
     scrollMargin: parentRef.current?.offsetTop ?? 0,
     gap: 16,
+    overscan: 2
   });
 
   // Column virtualizer for horizontal scrolling
