@@ -6,8 +6,10 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 import { menuConfig } from "../menu/menuConfig";
+import { Filter } from "@/components";
+import { Group } from "../desktopLeftNav/components/filter";
 
-export default function Nav() {
+export default function Nav({ groups }: { groups: Group }) {
   const isOpen = useIsOpen();
   const { toggleOpen } = useAppActions();
   const pathname = usePathname();
@@ -53,19 +55,32 @@ export default function Nav() {
           <div className="flex flex-col gap-5 justify-center">
             <div className="flex flex-col gap-2 mb-8">
               {menuConfig.shops.map((item) => (
-                <Link
-                  onClick={handlNavOpen}
-                  key={`menu-${item.label}`}
-                  href={item.href}
-                  className={cn(
-                    pathname === item.href &&
-                      "underline decoration-secondary decoration-[2px] underline-offset-2"
+                <div key={`menu-${item.label}`}>
+                  <Link
+                    onClick={handlNavOpen}
+                    href={item.href}
+                    className={cn(
+                      pathname === item.href &&
+                        "underline decoration-secondary decoration-[2px] underline-offset-2"
+                    )}
+                  >
+                    <h3 className="text-[2rem] leading-[2rem] text-secondary truncate">
+                      {item.label}
+                    </h3>
+                  </Link>
+                  {item.label === "Shop" && (
+                    <div className="flex flex-col gap-2 text-secondary mt-2">
+                      <Filter
+                        groups={groups}
+                        menuStyle={{
+                          paddingTop: "0",
+                        }}
+                        secondaryColor={true}
+                        className="relative"
+                      />
+                    </div>
                   )}
-                >
-                  <h3 className="text-[2rem] text-secondary truncate">
-                    {item.label}
-                  </h3>
-                </Link>
+                </div>
               ))}
             </div>
             <div className="flex flex-col gap-2">
@@ -79,7 +94,7 @@ export default function Nav() {
                       "underline decoration-secondary decoration-[2px] underline-offset-2"
                   )}
                 >
-                  <h3 className="text-[2rem] text-secondary truncate">
+                  <h3 className="text-[2rem] leading-[2rem] text-secondary truncate">
                     {item.label}
                   </h3>
                 </Link>

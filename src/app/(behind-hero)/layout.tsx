@@ -20,7 +20,7 @@ export default async function BehindHeroLayout({
   const groups = await getNavigationGroups();
   return (
     <CookieWrapper className="relative">
-      <Nav />
+      <Nav groups={groups} />
       <Header />
       <DesktopRightNav />
       <DynamicDesktopLeftNav groups={groups} />

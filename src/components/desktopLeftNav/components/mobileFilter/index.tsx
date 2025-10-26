@@ -13,9 +13,15 @@ export default function MobileFilter({
   groups: Group;
 }) {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
+  
   const handleFilterOpen = () => {
     setIsFilterOpen(true);
     document.body.classList.add("filter-open");
+  };
+
+  const handleFilterClose = () => {
+    setIsFilterOpen(false);
+    document.body.classList.remove("filter-open");
   };
 
   useEffect(() => {
@@ -44,15 +50,16 @@ export default function MobileFilter({
       >
         <div
           className={cn("fixed inset-0 h-full w-full bg-primary/30")}
-          onClick={() => setIsFilterOpen(false)}
+          onClick={handleFilterClose}
         />
         <div className="relative w-[57%] h-full bg-secondary mx-auto flex flex-col gap-header-height-mobile">
           <Icon className="text-primary h-header-height-mobile w-full pointer-events-none justify-center" />
           <Filter
             groups={groups}
             className="relative px-8"
-            onClickHandle={() => setIsFilterOpen(false)}
+            onClickHandle={handleFilterClose}
           />
+          
         </div>
       </div>
     </div>
