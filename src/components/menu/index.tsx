@@ -19,7 +19,7 @@ export default function Menu({
   return (
     <div
       className={cn(
-        "w-screen bg-primary text-secondary text-[1.4rem] fixed z-12 py-5 block transition-all duration-300 ease-in-out",
+        "w-screen bg-primary text-secondary text-[1.5rem] fixed z-12 py-5 block transition-all duration-300 ease-in-out",
         isOpen ? "h-52 opacity-100" : "h-0 opacity-0 pointer-events-none"
       )}
       style={style}

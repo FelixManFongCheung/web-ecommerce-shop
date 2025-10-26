@@ -55,8 +55,8 @@ export function NestedGroup({
       <div
         key={key}
         className={cn(
-          `text-[0.7rem] ${
-            level === 0 && metaDataKey.indexOf(key) === 0 && "h-50 pt-[0.7rem]"
+          `text-[0.9rem] ${
+            level === 0 && metaDataKey.indexOf(key) === 0 && "h-50 pt-[0.9rem]"
           }`
         )}
         style={

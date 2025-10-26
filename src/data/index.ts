@@ -1,7 +1,7 @@
 export const dataAbout = {
   section_1: {
     title:
-      "Proxy Archive is your gatewayto rare vintage and archive designer pieces — a bridge between eras, aesthetics, and cultural legacy, created to foster lasting emotional connection.",
+      "Proxy Archive is your gateway to rare vintage and archive designer pieces — a bridge between eras, aesthetics, and cultural legacy, created to foster lasting emotional connection.",
     paragraphs: [
       "Each item is handpicked for its unique design, exceptional craftsmanship, and cultural relevance — from overlooked rarities to iconic moments in fashion history.",
       "Our aim is to curate a wardrobe that resonates — one that lingers in your sentimental hard drive for years to come.",

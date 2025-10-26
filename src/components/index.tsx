@@ -15,6 +15,7 @@ import Nav from "./nav";
 import ModalWrapper from "./modalWrapper";
 import ProductCard from "./productCard";
 import ProductCardSkeleton from "./productSkeleton";
+import GridProductSkeletonCards from "./collections/GridProductSkeletonCards";
 import RemoveItem from "./removeItem";
 
 // custom UI units
@@ -52,6 +53,7 @@ export {
   Pagination,
   ProductCard,
   ProductCardSkeleton,
-  RemoveItem
+  RemoveItem,
+  GridProductSkeletonCards
 };
 

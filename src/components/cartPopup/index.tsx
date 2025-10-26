@@ -179,7 +179,7 @@ export default function CartPopup({ className }: { className?: string }) {
         {isCartOpen && <div className="fixed inset-0" onClick={toggleCart} />}
         <div
           className={cn(
-            "fixed top-0 h-full bg-primary p-8 md:p-[1.5rem] md:pr-[2.3rem] transition-all duration-300 ease-in-out"
+            "fixed top-0 h-full bg-primary p-8 md:p-[1.5rem] md:pr-[3rem] transition-all duration-300 ease-in-out"
           )}
           style={{
             width: "26rem",

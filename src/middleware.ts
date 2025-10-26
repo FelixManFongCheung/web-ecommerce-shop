@@ -26,8 +26,6 @@ export async function middleware(request: NextRequest) {
   const activeCurrency =
     request.cookies.get("user-currency")?.value || detectedCurrency;
 
-  console.log("activeCurrency", activeCurrency, geo);
-
   // if (request.nextUrl.pathname === "/coming-soon") {
   //   return NextResponse.next();
   // }

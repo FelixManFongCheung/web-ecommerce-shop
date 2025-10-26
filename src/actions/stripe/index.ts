@@ -137,3 +137,45 @@ export const getShippingRates = async (): Promise<
     shipping_rate: rate.id,
   }));
 };
+
+// New paginated functions for infinite scroll
+export const getProductsPaginated = async (
+  limit: number = 10,
+  startingAfter?: string
+) => {
+  const products = await stripe.products.list({
+    limit,
+    starting_after: startingAfter,
+  });
+  return {
+    data: products.data,
+    hasMore: products.has_more,
+    lastProductId: products.data[products.data.length - 1]?.id,
+  };
+};
+
+export const searchProductsByMetaDataKeyAndValuePaginated = async (
+  key: string,
+  value: string,
+  limit: number = 10,
+  page?: string
+) => {
+  const query = `metadata['${key}']:'${value}'`;
+  try {
+    const products = await stripe.products.search({
+      query: query,
+      limit,
+      page: page,
+    });
+
+    return {
+      data: products.data,
+      hasMore: products.has_more,
+      lastProductId: products.data[products.data.length - 1]?.id,
+      nextPage: products.next_page,
+    };
+  } catch (error) {
+    console.error("Stripe search error:", error);
+    throw new Error("Search failed");
+  }
+};
