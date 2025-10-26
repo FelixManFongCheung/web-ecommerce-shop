@@ -73,7 +73,7 @@ export default function InfiniteCollectionGrid({
     } else if (window.matchMedia(`(min-width: ${MediaQuerySizes.SM}px)`).matches) {
       setColumns(2);
     } else {
-      setColumns(1);
+      setColumns(2);
     }
   };
 
