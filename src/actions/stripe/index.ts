@@ -48,34 +48,64 @@ export const searchProducts = async (query: string) => {
   }
 };
 
-export const getActiveProducts = async () => {
-  const products = await stripe.products.list({
-    active: true,
-  });
-  return products.data;
-};
-
-export const getProductsAll = async () => {
-  const allProducts: Stripe.Product[] = [];
-  let hasMore = true;
-  let startingAfter: string | undefined;
-  
-  while (hasMore) {
-    const response = await stripe.products.list({
-      limit: 100, // Stripe's max per request
-      starting_after: startingAfter,
-    });
+export const getActiveProducts = unstable_cache(
+  async () => {
+    const allProducts: Stripe.Product[] = [];
+    let hasMore = true;
+    let startingAfter: string | undefined;
     
-    allProducts.push(...response.data);
-    hasMore = response.has_more;
-    
-    if (response.data.length > 0) {
-      startingAfter = response.data[response.data.length - 1].id;
+    while (hasMore) {
+      const response = await stripe.products.list({
+        limit: 100, // Stripe's max per request
+        active: true, // Filter for active products only
+        starting_after: startingAfter,
+      });
+      
+      allProducts.push(...response.data);
+      hasMore = response.has_more;
+      
+      if (response.data.length > 0) {
+        startingAfter = response.data[response.data.length - 1].id;
+      }
     }
+    
+    return allProducts;
+  },
+  ['active-products'],
+  { 
+    revalidate: 3600, // Cache for 1 hour
+    tags: ['products']
   }
-  
-  return allProducts;
-};
+);
+
+export const getProductsAll = unstable_cache(
+  async () => {
+    const allProducts: Stripe.Product[] = [];
+    let hasMore = true;
+    let startingAfter: string | undefined;
+    
+    while (hasMore) {
+      const response = await stripe.products.list({
+        limit: 100, // Stripe's max per request
+        starting_after: startingAfter,
+      });
+      
+      allProducts.push(...response.data);
+      hasMore = response.has_more;
+      
+      if (response.data.length > 0) {
+        startingAfter = response.data[response.data.length - 1].id;
+      }
+    }
+    
+    return allProducts;
+  },
+  ['all-products'],
+  { 
+    revalidate: 3600, // Cache for 1 hour
+    tags: ['products']
+  }
+);
 
 export const getProduct = async (productId: string) => {
   const product = await stripe.products.retrieve(productId);
@@ -146,14 +176,19 @@ export const retrieveProductsByMetaDataKeyAndValue = async (
   }
 };
 
-export const getShippingRates = async (): Promise<
-  Stripe.Checkout.SessionCreateParams.ShippingOption[]
-> => {
-  const shippingRates = await stripe.shippingRates.list();
-  return shippingRates.data.map((rate) => ({
-    shipping_rate: rate.id,
-  }));
-};
+export const getShippingRates = unstable_cache(
+  async (): Promise<Stripe.Checkout.SessionCreateParams.ShippingOption[]> => {
+    const shippingRates = await stripe.shippingRates.list();
+    return shippingRates.data.map((rate) => ({
+      shipping_rate: rate.id,
+    }));
+  },
+  ['shipping-rates'],
+  { 
+    revalidate: 86400, // Cache for 24 hours (shipping rates change less frequently)
+    tags: ['shipping']
+  }
+);
 
 // New paginated functions for infinite scroll
 export const getProductsPaginated = async (
