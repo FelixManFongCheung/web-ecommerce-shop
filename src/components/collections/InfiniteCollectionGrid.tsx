@@ -5,9 +5,8 @@ import ClientProductCard from "@/components/productCard/ClientProductCard";
 import { cn } from "@/lib/cn/utils";
 import Image from "next/image";
 import Link from "next/link";
-import { Suspense, useEffect, useRef } from "react";
-import { useState } from "react";
-import { useVirtualizer } from "@tanstack/react-virtual";
+import { Suspense, useEffect, useRef, useState } from "react";
+import { useWindowVirtualizer } from "@tanstack/react-virtual";
 import useProductsPaginatedQuery from "./queries/useProductsPaginated";
 
 interface InfiniteCollectionGridProps {
@@ -16,6 +15,15 @@ interface InfiniteCollectionGridProps {
   collectionMetaValue?: string;
 }
 
+// Media query breakpoints
+const MediaQuerySizes = {
+  SM: 640,
+  MD: 840,
+  LG: 1024,
+  XL: 1280,
+  '2XL': 1536
+} as const;
+
 export default function InfiniteCollectionGrid({
   collection,
   collectionMetaKey,
@@ -23,7 +31,8 @@ export default function InfiniteCollectionGrid({
 }: InfiniteCollectionGridProps) {
 
   const [imagesLoading, setImagesLoading] = useState<Record<string, boolean>>({});
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const [columns, setColumns] = useState<number>(2);
+  const parentRef = useRef<HTMLDivElement>(null);
   
   const {data, isFetchingNextPage, hasNextPage, fetchNextPage, error, isFetching} = useProductsPaginatedQuery({
     limit: 10,
@@ -34,34 +43,57 @@ export default function InfiniteCollectionGrid({
   });
 
   const products = data?.pages.flatMap((page) => page.data) ?? [];
-  console.log(products);
 
-  // Group products into rows of 2 (mobile) or 3 (desktop)
-  const itemsPerRow = 3; // desktop columns
-  const rowCount = Math.ceil(products.length / itemsPerRow);
-  
-  const rows = Array.from({ length: rowCount }, (_, i) => ({
-    index: i,
-    items: products.slice(i * itemsPerRow, (i + 1) * itemsPerRow)
-  }));
+  // Calculate number of rows needed
+  const rowsLength = Math.ceil(products.length / columns);
 
-  const virtualiser = useVirtualizer({
-    count: rowCount,
-    getScrollElement: () => scrollContainerRef.current,
-    estimateSize: () => 450, 
-    overscan: 5,
+  // Row virtualizer for vertical scrolling
+  const rowVirtualizer = useWindowVirtualizer({
+    count: rowsLength,
+    estimateSize: () => 450,
+    scrollMargin: parentRef.current?.offsetTop ?? 0,
+    gap: 16,
   });
 
-  const virtualItems = virtualiser.getVirtualItems();
+  // Column virtualizer for horizontal scrolling
+  const columnVirtualizer = useWindowVirtualizer({
+    horizontal: true,
+    count: columns,
+    estimateSize: () => 250,
+    gap: 16
+  });
 
+  // Update columns based on viewport size
+  const updateColumns = () => {
+    if (window.matchMedia(`(min-width: ${MediaQuerySizes.LG}px)`).matches) {
+      setColumns(3);
+    } else if (window.matchMedia(`(min-width: ${MediaQuerySizes.MD}px)`).matches) {
+      setColumns(3);
+    } else if (window.matchMedia(`(min-width: ${MediaQuerySizes.SM}px)`).matches) {
+      setColumns(2);
+    } else {
+      setColumns(1);
+    }
+  };
+
+  // Set up responsive columns
+  useEffect(() => {
+    updateColumns();
+    window.addEventListener('resize', updateColumns);
+    return () => window.removeEventListener('resize', updateColumns);
+  }, []);
+
+  const virtualItems = rowVirtualizer.getVirtualItems();
+
+  // Infinite scroll detection
   useEffect(() => {
     const lastItem = virtualItems[virtualItems.length - 1];
     if (!hasNextPage || isFetchingNextPage || !lastItem) return;
-    const lastRowIndex = rowCount - 1;
-    if (lastItem.index === lastRowIndex) {
+    const lastRowIndex = Math.ceil(products.length / columns) - 1;
+    if (lastItem.index >= lastRowIndex) {
       fetchNextPage();
     }
-  }, [hasNextPage, isFetchingNextPage, virtualItems, rowCount, fetchNextPage]);
+  }, [hasNextPage, isFetchingNextPage, virtualItems]);
 
   if (error) {
     return (
@@ -85,28 +117,38 @@ export default function InfiniteCollectionGrid({
 
   return (
     <>
-      <div ref={scrollContainerRef} className="h-full w-full overflow-y-auto">
-        <div 
-          style={{ height: `${virtualiser.getTotalSize()}px`, width: '100%', position: 'relative' }}
+      <div ref={parentRef} className="w-full">
+        <div
+          className="w-full relative will-change-transform"
+          style={{
+            height: `${rowVirtualizer.getTotalSize()}px`
+          }}
         >
           {virtualItems.map((virtualRow) => {
-            const row = rows[virtualRow.index];
             return (
               <div
-                key={`row-${row.index}`}
-                ref={virtualiser.measureElement}
+                key={virtualRow.key}
                 data-index={virtualRow.index}
+                ref={rowVirtualizer.measureElement}
+                className="grid gap-4 w-full absolute top-0 left-0 grid-cols-2 lg:grid-cols-3"
                 style={{
-                  position: 'absolute',
-                  top: 0,
-                  left: 0,
-                  width: '100%',
-                  transform: `translateY(${virtualRow.start}px)`,
+                  transform: `translateY(${virtualRow.start - rowVirtualizer.options.scrollMargin}px)`
                 }}
               >
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-1 md:gap-14">
-                  {row.items.map((product, idx) => (
-                    <div key={`${product.id}-${idx}`}>
+                {columnVirtualizer.getVirtualItems().map((virtualColumn) => {
+                  const itemIndex = virtualRow.index * columns + virtualColumn.index;
+                  const product = products[itemIndex];
+                  
+                  if (!product) {
+                    return null;
+                  }
+
+                  return (
+                    <div 
+                      key={virtualColumn.key} 
+                      data-index={virtualColumn.index} 
+                      ref={columnVirtualizer.measureElement}
+                    >
                       <Suspense fallback={<ProductCardSkeleton />}>
                         <ClientProductCard  
                           product={product} 
@@ -139,8 +181,8 @@ export default function InfiniteCollectionGrid({
                         </ClientProductCard>
                       </Suspense>
                     </div>
-                  ))}
-                </div>
+                  );
+                })}
               </div>
             );
           })}
