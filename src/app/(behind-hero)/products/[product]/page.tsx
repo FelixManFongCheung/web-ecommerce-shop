@@ -48,7 +48,7 @@ export default async function Page(props: {
         {product && (
           <div className="w-full text-right">
             <p className="text-bold">
-              {price?.amount} {price?.currency}
+              {price?.amount} {price?.currency.toUpperCase()}
             </p>
           </div>
         )}

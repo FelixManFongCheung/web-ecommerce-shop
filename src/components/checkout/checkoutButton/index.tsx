@@ -33,7 +33,7 @@ export default function CheckoutButton({
       className="w-full bg-secondary text-primary py-[0.4rem] md:py-[0.5rem] text-[0.5rem] md:text-[0.7rem]"
       disabled={disabled}
     >
-      CHECKOUT &mdash; {totalPrice} {currency.toUpperCase()}
+      CHECKOUT &mdash; <span className="text-[0.8rem] md:text-[1rem]">{totalPrice} {currency.toUpperCase()}</span>
     </button>
   );
 }
