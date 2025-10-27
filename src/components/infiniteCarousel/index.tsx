@@ -15,26 +15,28 @@ export default function InfiniteCarousel({
   const handleScroll = useCallback(() => {
     const container = containerRef.current;
     if (!container || isTransitioningRef.current) return;
-
+  
     const scrollLeft = container.scrollLeft;
     const scrollWidth = container.scrollWidth;
+    const clientWidth = container.clientWidth;
+    
+    // Only apply infinite scroll if there's actual overflow
+    if (scrollWidth <= clientWidth) return;
+    
     const itemSetWidth = scrollWidth / 3;
-
-    // Add buffer to prevent flickering
     const buffer = 50;
-
-    if (scrollLeft >= itemSetWidth * 2 - buffer) {
+  
+    // Forward scroll - when we're near the end of scrollable area
+    if (scrollLeft >= scrollWidth - clientWidth - buffer) {
       isTransitioningRef.current = true;
-      // Calculate the exact position within the middle section
       const positionWithinSection = scrollLeft - itemSetWidth * 2;
-      // Jump to the equivalent position in the middle section
       container.scrollLeft = itemSetWidth + positionWithinSection;
       isTransitioningRef.current = false;
-    } else if (scrollLeft <= buffer) {
+    } 
+    // Backward scroll - when we're at the beginning
+    else if (scrollLeft <= buffer) {
       isTransitioningRef.current = true;
-      // Calculate the exact position within the current section
       const positionWithinSection = scrollLeft;
-      // Jump to the equivalent position in the middle section
       container.scrollLeft = itemSetWidth + positionWithinSection;
       isTransitioningRef.current = false;
     }
