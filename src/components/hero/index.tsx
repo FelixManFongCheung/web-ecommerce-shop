@@ -185,10 +185,7 @@ export function HeroMobile({ images }: { images: string[] }) {
         <div className="flex-1 relative">
           <Link
             href="/collections/all"
-            className="absolute bottom-[0.6rem] backdrop-blur-sm"
-            style={{
-              paddingLeft: "4rem",
-            }}
+            className="absolute bottom-[0.6rem] backdrop-blur-sm pl-8 md:pl-16"
           >
             <h1 className="text-nowrap text-5xl">Shop</h1>
           </Link>
@@ -206,10 +203,7 @@ export function HeroMobile({ images }: { images: string[] }) {
         <div className="flex-1 relative">
           <Link
             href="/about"
-            className="absolute bottom-[0.6rem] backdrop-blur-sm"
-            style={{
-              paddingLeft: "4rem",
-            }}
+            className="absolute bottom-[0.6rem] backdrop-blur-sm pl-8 md:pl-16"
           >
             <h1 className="text-nowrap text-5xl">About</h1>
           </Link>
@@ -220,16 +214,13 @@ export function HeroMobile({ images }: { images: string[] }) {
             position="left"
             bottom={0}
             left={HORIZONTAL_LINE_OFFSET_X_LEFT_MOBILE}
-            width="42%"
+            width="22%"
           />
         </div>
         <div className="flex-1 relative">
           <Link
             href="/visit-us"
-            className="absolute bottom-[0.6rem] backdrop-blur-sm"
-            style={{
-              paddingLeft: "4rem",
-            }}
+            className="absolute bottom-[0.6rem] backdrop-blur-sm pl-8 md:pl-16"
           >
             <h1 className="text-nowrap text-5xl">Visit Us</h1>
           </Link>
@@ -240,7 +231,7 @@ export function HeroMobile({ images }: { images: string[] }) {
             position="left"
             bottom={0}
             left={HORIZONTAL_LINE_OFFSET_X_LEFT_MOBILE}
-            width="85%"
+            width="46%"
           />
         </div>
         <div className="flex-1"></div>
@@ -268,10 +259,7 @@ export function HeroMobile({ images }: { images: string[] }) {
         <div className="flex-1 relative">
           <Link
             href="/new-arrivals"
-            className="absolute bottom-[0.225rem] w-full text-right backdrop-blur-sm"
-            style={{
-              paddingRight: `${VERTICAL_LINE_OFFSET_X_RIGHT_MOBILE}rem`,
-            }}
+            className="absolute bottom-[0.225rem] w-full text-right backdrop-blur-sm pr-8 md:pr-16"
           >
             <h1 className="text-nowrap text-5xl">New Arrivals</h1>
           </Link>
@@ -281,17 +269,14 @@ export function HeroMobile({ images }: { images: string[] }) {
             variant="medium"
             bottom={0}
             right={HORIZONTAL_LINE_OFFSET_X_RIGHT_MOBILE}
-            width="42%"
+            width="22%"
             className={cn("absolute bg-secondary")}
           />
         </div>
         <div className="flex-1 relative">
           <Link
             href="/archive"
-            className="absolute bottom-[0.6rem] w-full text-right backdrop-blur-sm"
-            style={{
-              paddingRight: `${VERTICAL_LINE_OFFSET_X_RIGHT_MOBILE}rem`,
-            }}
+            className="absolute bottom-[0.6rem] w-full text-right backdrop-blur-sm pr-8 md:pr-16"
           >
             <h1 className="text-nowrap text-5xl">Archive</h1>
           </Link>
@@ -302,7 +287,7 @@ export function HeroMobile({ images }: { images: string[] }) {
             position="right"
             bottom={0}
             right={HORIZONTAL_LINE_OFFSET_X_RIGHT_MOBILE}
-            width="85%"
+            width="40%"
           />
         </div>
         <DecoratorLines
