@@ -43,7 +43,7 @@ function CartContent({
 
   return (
     <div
-      className={cn("h-full flex flex-col", className)}
+      className={cn("flex-1 flex flex-col min-h-0", className)}
       style={{
         ...(!isMobile && {
           marginTop: `${HORIZONTAL_LINE_OFFSET_Y_RIGHT}rem`,
