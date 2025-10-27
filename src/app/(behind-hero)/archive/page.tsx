@@ -86,9 +86,9 @@ export default async function Page() {
         </div>
       </InfiniteCarousel>
       <div className="md:hidden block">
-        <div className="grid grid-cols-3 gap-2 auto-rows-max">
+        <div className="grid grid-cols-3 gap-1 auto-rows-max">
           {products.map((product) => (
-            <ProductCard key={product.id} product={product} className="mb-6">
+            <ProductCard noInfo={true} key={product.id} product={product}>
               <Link
                 className={cn(
                   "relative block w-full aspect-[3/4] before:content-[''] before:absolute before:inset-0 before:border-2 before:border-t-primary before:border-transparent before:rounded-full before:w-8 before:h-8 before:m-auto before:animate-spin before:z-0"
