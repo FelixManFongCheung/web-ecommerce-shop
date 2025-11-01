@@ -10,7 +10,7 @@ import Link from "next/link";
 export default async function Page() {
   // category: archive, value: archive
   const products = await retrieveProductsByMetaDataKeyAndValue(
-    "mode",
+    "Mode",
     "archive"
   );
 
@@ -64,13 +64,15 @@ export default async function Page() {
     <>
       <InfiniteCarousel scrollContainer={scrollContainer}>
         <div className="flex flex-row gap-10">
-          {infiniteProducts.length > 0 ? (infiniteProducts.map((product, index) => (
-            <ProductItem
-              key={`${product.id}-${index}`}
-              product={product}
-              index={index}
-            />
-          ))): (
+          {infiniteProducts.length > 0 ? (
+            infiniteProducts.map((product, index) => (
+              <ProductItem
+                key={`${product.id}-${index}`}
+                product={product}
+                index={index}
+              />
+            ))
+          ) : (
             <div className="flex flex-col gap-4 min-h-[500px] justify-center items-center">
               <div>No archive</div>
               <Button

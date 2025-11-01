@@ -68,4 +68,4 @@ export const dataTerms = {
   },
 };
 
-export const metaDataKey = ["categories", "designers"];
+export const metaDataKey = ["Categories", "Designers"];
