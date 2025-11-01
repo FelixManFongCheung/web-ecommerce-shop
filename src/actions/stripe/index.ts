@@ -1,4 +1,5 @@
 "use server";
+import { getRecursiveFolder } from "@/components/desktopLeftNav/hooks";
 import { unstable_cache } from "next/cache";
 import Stripe from "stripe";
 
@@ -236,8 +237,7 @@ export const searchProductsByMetaDataKeyAndValuePaginated = async (
 export const getNavigationGroups = unstable_cache(
   async () => {
     const productsAll = await getProductsAll();
-    
-    const { getRecursiveFolder } = await import("@/components/desktopLeftNav/hooks");
+    console.log(productsAll)
     const groups = getRecursiveFolder(productsAll);
     
     return groups;

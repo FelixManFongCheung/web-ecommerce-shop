@@ -28,9 +28,6 @@ export default function InfiniteCollectionGrid({
   collectionMetaKey,
   collectionMetaValue,
 }: InfiniteCollectionGridProps) {
-  const [imagesLoading, setImagesLoading] = useState<Record<string, boolean>>(
-    {}
-  );
   const [columns, setColumns] = useState<number>(2);
   const parentRef = useRef<HTMLDivElement>(null);
 
@@ -170,6 +167,7 @@ export default function InfiniteCollectionGrid({
                           >
                             <Image
                               src={product.images[0]}
+                              quality={60}
                               alt={product.name}
                               placeholder="blur"
                               blurDataURL={`/_next/image?url=${product.images[0]}&w=16&q=1`}
@@ -180,26 +178,10 @@ export default function InfiniteCollectionGrid({
                                 virtualRow.index === 0 &&
                                 virtualColumn.index === 0
                               }
-                              onLoad={() =>
-                                setImagesLoading((prev) => ({
-                                  ...prev,
-                                  [product.id]: true,
-                                }))
-                              }
-                              onLoadingComplete={() =>
-                                setImagesLoading((prev) => {
-                                  const current = { ...prev };
-                                  delete current[product.id];
-                                  return current;
-                                })
-                              }
                               className={cn(
                                 !product.active
                                   ? "opacity-80 hover:opacity-100"
-                                  : "opacity-100",
-                                imagesLoading[product.id]
-                                  ? "bg-gray-200 animate-pulse"
-                                  : "bg-none animate-none"
+                                  : "opacity-100"
                               )}
                             />
                           </Link>

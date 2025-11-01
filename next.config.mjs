@@ -35,6 +35,7 @@ const nextConfig = {
         hostname: 'fzrfwqlezkhlwztbmubd.supabase.co'
       },
     ],
+    qualities: [1, 60, 75, 90, 100],
   },
 
   webpack: (config, { isServer }) => {

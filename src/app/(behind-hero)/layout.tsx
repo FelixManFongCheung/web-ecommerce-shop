@@ -22,8 +22,8 @@ export default async function BehindHeroLayout({
     <CookieWrapper className="relative">
       <Nav groups={groups} />
       <Header />
-      <DesktopRightNav />
       <DynamicDesktopLeftNav groups={groups} />
+      <DesktopRightNav />
       <div>{children}</div>
       <Footer />
       <CartPopup />
