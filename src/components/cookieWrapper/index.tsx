@@ -19,7 +19,6 @@ export default function CookieWrapper({
   useEffect(() => {
     async function fetchCartData() {
       const activeProductIds = await fetchActiveProductIds();
-      console.log(activeProductIds);
       const cartData = getCartData(activeProductIds);
       if (cartData) {
         useCartStore.setState({
