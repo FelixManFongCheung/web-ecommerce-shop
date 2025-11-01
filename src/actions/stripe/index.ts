@@ -56,8 +56,8 @@ export const getActiveProducts = unstable_cache(
     
     while (hasMore) {
       const response = await stripe.products.list({
-        limit: 100, // Stripe's max per request
-        active: true, // Filter for active products only
+        limit: 100,
+        active: true,
         starting_after: startingAfter,
       });
       

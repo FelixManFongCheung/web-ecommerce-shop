@@ -2,13 +2,9 @@ import { getActiveProducts } from "../stripe";
 
 export async function getCartProductsClient(productIds: string[]) {
   const activeProducts = await getActiveProducts();
+  const productMap = new Map(activeProducts.map((product) => [product.id, product]));
 
-  console.log(`Active products: ${activeProducts.length}`);
-
-  const cartProducts = productIds.flatMap((id) => {
-    const product = activeProducts.find((product) => product.id === id);
-    return product ? [product] : [];
-  });
+  const cartProducts = productIds.map((id) => productMap.get(id)).filter((product) => product !== undefined);
 
   return cartProducts;
 }

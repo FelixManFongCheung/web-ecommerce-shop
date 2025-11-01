@@ -15,7 +15,7 @@ export interface CartActions {
   removeProduct: (productId: string) => void;
   clearCart: () => void;
   checkExpiry: () => void;
-  getCartData: () => CartData | null;
+  getCartData: (activeProductIds: string[]) => CartData | null;
 }
 
 const ONE_MONTH = 60 * 60 * 24 * 30; // 30 days in seconds
@@ -110,7 +110,7 @@ export const useCartStore = create<CartState & { actions: CartActions }>()(
         return isExpired;
       },
 
-      getCartData: () => {
+      getCartData: (activeProductIds: string[]) => {
         const state = get();
         const cookieStorage = getCookie("cart-storage");
 
@@ -119,6 +119,15 @@ export const useCartStore = create<CartState & { actions: CartActions }>()(
         }
 
         const cartData = JSON.parse(cookieStorage);
+        const freshProductIds = activeProductIds.filter((id) => cartData.state.products.includes(id));
+
+        if (freshProductIds.length > 0) {
+          return {
+            products: freshProductIds,
+            createdAt: new Date().toISOString(),
+            expiresAt: new Date(Date.now() + CART_EXPIRY_TIME).toISOString(),
+          };
+        }
         return cartData.state;
       },
     },
